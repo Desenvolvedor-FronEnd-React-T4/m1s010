@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercício — Flexbox: faixa de cards de métrica</title>
+<link rel="stylesheet" href="1-flexbox-cards-responsivos.css">
+</head>
+<body>
+
+  <h1>Bikcraft em números</h1>
+
+  <div class="faixa-metricas">
+    <div class="card-metrica">
+      <span class="numero">1200+</span>
+      <span>bikes entregues</span>
+    </div>
+    <div class="card-metrica">
+      <span class="numero">98%</span>
+      <span>clientes satisfeitos</span>
+    </div>
+    <div class="card-metrica">
+      <span class="numero">15</span>
+      <span>lojas físicas</span>
+    </div>
+  </div>
+
+  <!--
+    GABARITO (só olhe depois de tentar!):
+
+    .faixa-metricas {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    @media (min-width: 64em) {
+      .faixa-metricas { flex-direction: row; }
+    }
+    .card-metrica { flex: 1; ... }
+  -->
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5f5; padding: 24px 16px; }
+
+.titulo-pagina { font-size: 1.3rem; }
+
+.rodape-teste { background:#161616; padding: 20px; border-radius: 8px; }
+
+/*
+  EXERCÍCIO (Parte 2 — 10 min)
+  O link do rodapé deveria ficar BRANCO (#fff), mas está saindo azul
+  padrão do navegador. Antes de mudar qualquer coisa, calcule a
+  especificidade de cada regra abaixo (lembrando: inline > id >
+  classe/atributo/pseudo-classe > tag) e descubra qual delas está
+  "vencendo" e por quê.
+
+  Dica: NÃO é permitido usar !important para resolver — a solução é
+  escrever uma regra com especificidade suficiente (ou remover a
+  concorrente, se ela estiver realmente errada).
+*/
+
+a { color: blue; }                    /* especificidade: 1 (tag) */
+.rodape-teste a { color: yellow; }     /* especificidade: 11 (classe + tag) */
+
+/* COMPLETE AQUI: escreva a regra que faz o link ficar branco (#fff)
+   de verdade, com especificidade maior que ".rodape-teste a".
+   Pense: um id no <footer>? Uma classe extra no <a>? */

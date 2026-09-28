@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Da Semana 07 à Semana 10 — Ponte de Conteúdo</title>
+<style>
+  :root{
+    --navy:#1b4f72; --navy-dark:#123049; --zebra:#eef4f8;
+    --code-bg:#1e1e1e; --antes:#fdecea; --depois:#eef7f2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:Arial,Helvetica,sans-serif;color:#263238;line-height:1.55;font-size:13.5px}
+  .wrap{max-width:980px;margin:auto;padding:28px 34px}
+  h1{color:var(--navy);text-align:center;font-size:26px;margin-bottom:4px}
+  h1 + .subtitle{text-align:center;color:#37474f;font-size:15px;font-weight:bold;margin-top:0;margin-bottom:18px}
+  .meta{font-size:12.5px;color:#455a64;border-bottom:1px solid #cfd8dc;padding-bottom:16px;margin-bottom:16px}
+  h2.conexao{background:var(--navy);color:#fff;padding:11px 16px;border-radius:4px;font-size:17px;margin-top:34px;letter-spacing:.2px}
+  h3.bloco{color:var(--navy-dark);border-bottom:2px solid var(--navy);padding-bottom:4px;font-size:14.5px;margin-top:22px}
+  table{width:100%;border-collapse:collapse;margin:10px 0 20px;font-size:12.6px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px}
+  td{padding:8px 10px;border-bottom:1px solid #e3e9ec;vertical-align:top}
+  tr:nth-child(even) td{background:var(--zebra)}
+  code{font-family:Consolas,Menlo,monospace}
+  :not(pre) > code{background:#eef4f8;color:var(--navy);padding:1px 5px;border-radius:3px;font-size:12px}
+  pre{background:var(--code-bg);color:#f8f8f2;padding:11px 13px;border-radius:6px;overflow:auto;font-size:11.6px;line-height:1.5;margin:8px 0}
+  .comparacao{display:flex;gap:16px;margin:12px 0;flex-wrap:wrap}
+  .comparacao .lado{flex:1;min-width:280px}
+  .rotulo-antes{display:inline-block;background:#d9534f;color:#fff;font-size:11px;font-weight:bold;padding:3px 10px;border-radius:3px 3px 0 0}
+  .rotulo-depois{display:inline-block;background:#2a9d8f;color:#fff;font-size:11px;font-weight:bold;padding:3px 10px;border-radius:3px 3px 0 0}
+  .caixa-antes{border:2px solid #d9534f;border-top:none;border-radius:0 0 6px 6px;padding:0}
+  .caixa-antes pre{margin:0;border-radius:0}
+  .caixa-depois{border:2px solid #2a9d8f;border-top:none;border-radius:0 0 6px 6px;padding:0}
+  .caixa-depois pre{margin:0;border-radius:0}
+  .fio{background:var(--zebra);border-left:4px solid var(--navy);border-radius:4px;padding:10px 14px;margin:12px 0;font-size:12.8px}
+  .fio .titulo{font-weight:bold;color:var(--navy);display:block;margin-bottom:3px}
+  .observacao{background:#fff3cd;border-left:4px solid #e08e00;border-radius:4px;padding:10px 14px;margin:12px 0;font-size:12.6px}
+  .observacao .titulo{font-weight:bold;color:#8a5c00;display:block;margin-bottom:3px}
+  .checklist li{list-style:none;margin-bottom:7px;padding-left:24px;position:relative;font-size:13px}
+  .checklist li::before{content:"✓";position:absolute;left:0;color:#2a9d8f;font-weight:bold}
+  ul{margin-top:6px}
+  li{margin-bottom:5px}
+  .pagebreak{break-before:page}
+  footer{margin-top:40px;padding-top:14px;border-top:1px solid #e3e9ec;color:#78909c;font-size:11px;text-align:center}
+  @media print{ .wrap{padding:0} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Da Semana 07 à Semana 10</h1>
+  <p class="subtitle">Conectando os fundamentos de CSS ao CSS Avançado — Flexbox, Especificidade e Responsividade</p>
+  <p class="meta">
+    Desenvolvimento Front-End [React] T4 | Módulo 1 &nbsp;|&nbsp;
+    Este material não traz conteúdo novo — ele mostra, ponto a ponto, como cada coisa que você já
+    aprendeu na Semana 07 é a base literal do que vamos praticar a fundo esta semana. A ideia é
+    simples: <b>nada aqui é assunto desconhecido, é o mesmo conhecimento crescendo.</b>
+  </p>
+
+  <h3 class="bloco" style="border:none;margin-top:0">Como ler este material</h3>
+  <p>
+    Cada seção abaixo segue o mesmo formato: primeiro, <b>o que você já sabe</b> (com o código
+    exatamente como apareceu na Semana 07); depois, <b>o que a Semana 10 acrescenta</b>; e por
+    fim, uma comparação lado a lado entre a versão "básica" e a versão "avançada" do mesmo problema.
+  </p>
+
+  <div class="fio"><span class="titulo">O fio condutor: o mesmo projeto, aprofundado</span>
+  Você talvez não tenha notado, mas o exercício final da Semana 07 (HTML + CSS, construir a tela com
+  variáveis de cor e fonte) já era a primeira versão da página inicial da <b>Bikcraft</b> — o mesmo
+  projeto que você evolui desde então. A tabela abaixo mostra a linha do tempo completa.</div>
+
+  <table>
+    <tr><th>Semana</th><th>O que a Bikcraft ganhou</th><th>Ferramenta usada</th></tr>
+    <tr><td>07</td><td>Nasce a home e a página de catálogo: estrutura HTML, cores/fontes em variáveis, Flexbox básico, Box Model</td><td>HTML, CSS, <code>display: flex</code></td></tr>
+    <tr><td>08</td><td><code>id</code>/<code>class</code> em cada bicicleta + captura dos dados via JavaScript</td><td>DOM, <code>getElementById</code>, <code>querySelectorAll</code></td></tr>
+    <tr><td>09</td><td>Página de contato: formulário completo, captura no <code>submit</code>, confirmação na tela</td><td>Formulários HTML, JavaScript</td></tr>
+    <tr><td>10</td><td>A mesma página de contato ganha responsividade, layout em duas colunas e acabamento com bibliotecas</td><td><b>Assunto desta semana</b></td></tr>
+  </table>
+
+  <h2 class="conexao pagebreak">CONEXÃO 1 — De "display: flex" ao Flexbox de produção</h2>
+
+  <h3 class="bloco">O que você já sabe (Semana 07)</h3>
+  <p>
+    Você já monta um flex container, já conhece os dois eixos, já usa <code>justify-content</code>,
+    <code>align-items</code>, <code>flex-direction</code>, o atalho <code>flex</code> e o <code>gap</code>.
+    É exatamente o menu vertical e as colunas que você construiu no exercício da aula:
+  </p>
+  <pre><code>.menu-vertical {
+  display: flex;
+  flex-direction: column; /* organiza os itens verticalmente */
+  gap: 8px;
+}
+
+.flex-column {
+  flex: 1; /* cresce e divide o espaço igualmente com os vizinhos */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}</code></pre>
+
+  <h3 class="bloco">O que a Semana 10 acrescenta</h3>
+  <ul>
+    <li><b><code>flex-wrap</code> em layout real:</b> na Semana 07 você viu o conceito ("itens quebram linha"); agora ele resolve um problema de verdade — os cards da página de contato do Bikcraft, que precisam quebrar linha sozinhos em telas estreitas.</li>
+    <li><b><code>flex-direction</code> responsivo:</b> a mesma propriedade que você usou para fixar <code>column</code> no menu vertical agora troca de valor dentro de uma <code>media query</code> — <code>column</code> no celular, <code>row</code> no desktop.</li>
+    <li><b><code>flex</code> em proporções desiguais:</b> você já viu <code>flex: 2</code> vs <code>flex: 1</code> (a coluna A com o dobro do espaço). Na Semana 10, essa mesma ideia monta as duas colunas do contato: <code>flex: 5</code> e <code>flex: 7</code>.</li>
+  </ul>
+
+  <h3 class="bloco">Comparando o código: o mesmo Flexbox, antes e depois</h3>
+  <div class="comparacao">
+    <div class="lado">
+      <span class="rotulo-antes">SEMANA 07 — fixo</span>
+      <div class="caixa-antes"><pre><code>.container {
+  display: flex;
+}
+.item-grande { flex: 2; }
+.item-pequeno { flex: 1; }
+
+/* sempre em linha, em
+   qualquer tamanho de tela */</code></pre></div>
+    </div>
+    <div class="lado">
+      <span class="rotulo-depois">SEMANA 10 — responsivo</span>
+      <div class="caixa-depois"><pre><code>.secao-contato {
+  display: flex;
+  flex-direction: column; /* celular */
+  gap: 40px;
+}
+@media (min-width: 64em) {
+  .secao-contato { flex-direction: row; }
+  .coluna-dados      { flex: 5; }
+  .coluna-formulario { flex: 7; }
+}</code></pre></div>
+    </div>
+  </div>
+  <div class="observacao"><span class="titulo">O que realmente mudou?</span>Nada na essência do Flexbox — o que muda é que agora o valor de <code>flex-direction</code> depende do tamanho da tela, dentro de uma <code>@media</code>. É a mesma propriedade que você já sabia usar, só que agora "condicionada" à largura da tela.</div>
+
+  <h2 class="conexao pagebreak">CONEXÃO 2 — De "unidades de medida" à responsividade de verdade</h2>
+
+  <h3 class="bloco">O que você já sabe (Semana 07)</h3>
+  <p>Você já viu a comparação entre <code>px</code>, <code>%</code>, <code>em</code>, <code>rem</code> e <code>vh</code>/<code>vw</code>, e já sabe a regra: <code>rem</code> é a preferida para fonte porque respeita a configuração de acessibilidade do usuário. Também já conhece o Box Model e o <code>box-sizing</code>.</p>
+  <table>
+    <tr><th>Unidade</th><th>O que você aprendeu na S07</th></tr>
+    <tr><td><code>px</code></td><td>Valor absoluto — nunca muda, em nenhuma tela</td></tr>
+    <tr><td><code>%</code></td><td>Relativa ao elemento pai</td></tr>
+    <tr><td><code>rem</code></td><td>Relativa ao <code>font-size</code> do <code>&lt;html&gt;</code> — preferida para fontes/acessibilidade</td></tr>
+    <tr><td><code>vh</code> / <code>vw</code></td><td>Percentual da altura/largura da tela (viewport)</td></tr>
+  </table>
+
+  <h3 class="bloco">O que a Semana 10 acrescenta</h3>
+  <ul>
+    <li><b>A <code>meta viewport</code>:</b> a peça que faltava para essas unidades relativas (<code>%</code>, <code>vh</code>, <code>vw</code>) funcionarem de verdade no celular — sem ela, o navegador mobile simula uma tela larga e todo o cálculo de <code>%</code>/<code>vw</code> fica errado na prática.</li>
+    <li><b>Mobile-first + <code>@media (min-width: ...)</code>:</b> a estratégia de escrever o CSS base para o celular e usar media queries só para acrescentar o que telas maiores permitem.</li>
+    <li><b><code>clamp(mínimo, ideal, máximo)</code>:</b> uma função nova, que combina exatamente as unidades que você já conhece — normalmente um <code>rem</code> (mínimo/máximo) com um <code>vw</code> (o ideal, que acompanha a tela).</li>
+  </ul>
+
+  <h3 class="bloco">Comparando o código: as mesmas unidades, agora combinadas</h3>
+  <div class="comparacao">
+    <div class="lado">
+      <span class="rotulo-antes">SEMANA 07 — isoladas</span>
+      <div class="caixa-antes"><pre><code>.titulo {
+  font-size: 2rem; /* fixo,
+    não acompanha a tela */
+}
+.banner {
+  padding: 20px; /* fixo em px */
+}</code></pre></div>
+    </div>
+    <div class="lado">
+      <span class="rotulo-depois">SEMANA 10 — combinadas</span>
+      <div class="caixa-depois"><pre><code>.hero-titulo {
+  /* rem no mínimo/máximo,
+     vw no meio do caminho */
+  font-size: clamp(2.5rem, 6vw, 4rem);
+}
+@media (min-width: 64em) {
+  .cabecalho { padding: 16px 100px; }
+}</code></pre></div>
+    </div>
+  </div>
+  <div class="observacao"><span class="titulo">O que realmente mudou?</span><code>rem</code> e <code>vw</code> continuam sendo exatamente o que eram na Semana 07. A novidade é <code>clamp()</code>, que usa as duas ao mesmo tempo — e a <code>media query</code>, que aplica uma regra só a partir de certo tamanho de tela.</div>
+
+  <h2 class="conexao pagebreak">CONEXÃO 3 — De "ID tem alta especificidade, use com moderação" ao cálculo completo</h2>
+
+  <h3 class="bloco">O que você já sabe (Semana 07)</h3>
+  <p>Na revisão relâmpago de seletores, você já viu os três tipos e uma dica direta sobre cada um:</p>
+  <table>
+    <tr><th>Seletor</th><th>O que você já ouviu na S07</th></tr>
+    <tr><td>Tipo (<code>p</code>)</td><td>"Atinge todos os elementos daquela tag. Baixa especificidade."</td></tr>
+    <tr><td>Classe (<code>.card</code>)</td><td>"Reutilizável em vários elementos. O mais usado no dia a dia."</td></tr>
+    <tr><td>ID (<code>#header</code>)</td><td>"Único na página. Alta especificidade — <b>use com moderação</b>."</td></tr>
+  </table>
+  <p>E, nas boas práticas de estilização, você já ouviu para "preferir classes reutilizáveis a IDs para estilo" e "evitar estilizar direto no HTML com o atributo <code>style</code>".</p>
+
+  <h3 class="bloco">O que a Semana 10 acrescenta</h3>
+  <p>
+    A Semana 10 pega essas três frases — "baixa especificidade", "alta especificidade, use com
+    moderação", "evite estilo inline" — e transforma cada uma em um <b>número</b>, para você parar
+    de decidir "no feeling" e passar a calcular:
+  </p>
+  <table>
+    <tr><th>O que a S07 disse</th><th>O número que a S10 dá pra isso</th></tr>
+    <tr><td>Estilo inline (<code>style="..."</code>)</td><td>O mais forte de todos — por isso a S07 já dizia para evitar</td></tr>
+    <tr><td>ID — "alta especificidade"</td><td>Peso <b>100</b></td></tr>
+    <tr><td>Classe — "o mais usado no dia a dia"</td><td>Peso <b>10</b></td></tr>
+    <tr><td>Tipo/tag — "baixa especificidade"</td><td>Peso <b>1</b></td></tr>
+  </table>
+  <p>Com esses números, quando duas regras miram o mesmo elemento, você soma os pesos de cada seletor e compara — a maior soma vence. Em caso de empate, vence a <b>cascata</b> (a última regra escrita no arquivo). E propriedades como <code>color</code>/<code>font-family</code> se propagam por <b>herança</b> do pai para o filho — mas <code>margin</code>/<code>padding</code>, não.</p>
+
+  <h3 class="bloco">Comparando o código: da dica solta ao cálculo</h3>
+  <div class="comparacao">
+    <div class="lado">
+      <span class="rotulo-antes">SEMANA 07 — a dica</span>
+      <div class="caixa-antes"><pre><code>/* seletor de tipo */
+p { color: #333; }        /* baixa especificidade */
+
+/* seletor de id */
+#header { height: 80px; } /* alta — use com moderação */</code></pre></div>
+    </div>
+    <div class="lado">
+      <span class="rotulo-depois">SEMANA 10 — o cálculo</span>
+      <div class="caixa-depois"><pre><code>a { color: #fff; }              /* peso 1 (tag) */
+.cabecalho a { color: #000; }   /* peso 10+1=11 → vence */
+#logo { color: red; }           /* peso 100 → venceria as duas */
+
+/* nunca resolva empate com !important —
+   resolva aumentando a especificidade certa */</code></pre></div>
+    </div>
+  </div>
+  <div class="observacao"><span class="titulo">O que realmente mudou?</span>Você já sabia QUE um ID é mais forte que uma classe. Agora você sabe QUANTO (100 contra 10) — e isso é o que permite prever, com certeza, qual regra vai vencer antes mesmo de testar no navegador.</div>
+
+  <h2 class="conexao pagebreak">CONEXÃO 4 — Das boas práticas isoladas a um sistema de decisão</h2>
+  <p>
+    Veja como cada aviso solto que você recebeu na Semana 07 ganha uma explicação técnica completa
+    na Semana 10 — não são regras novas, são as mesmas regras, agora com o "porquê" por trás:
+  </p>
+  <table>
+    <tr><th>Aviso da Semana 07</th><th>A teoria que a Semana 10 dá pra ele</th></tr>
+    <tr><td>"Evite estilizar direto no HTML com o atributo <code>style</code>"</td><td>Estilo inline tem a maior especificidade de todas — vence quase tudo, dificultando qualquer ajuste futuro por CSS</td></tr>
+    <tr><td>"Prefira classes reutilizáveis a IDs para estilo"</td><td>Classe = peso 10; ID = peso 100. Usar ID para estilo deixa a especificidade alta demais, difícil de sobrescrever depois</td></tr>
+    <tr><td>"Abusar de <code>!important</code> para forçar um estilo" (na lista de "evite isso")</td><td><code>!important</code> atropela a especificidade normal e cria uma escalada — só outro <code>!important</code> consegue vencer o anterior</td></tr>
+    <tr><td>"Use <code>rem</code> para fontes — respeita a configuração do usuário"</td><td>É a mesma unidade usada dentro do <code>clamp()</code> para criar tipografia fluida sem quebrar a acessibilidade</td></tr>
+    <tr><td>O uso do arquivo <code>.css</code> externo é preferido (separar responsabilidades)</td><td>É o que garante que a <b>ordem</b> dos <code>&lt;link&gt;</code> no <code>&lt;head&gt;</code> controle a cascata — por isso o CSS do Bikcraft sempre entra depois do Bootstrap</td></tr>
+  </table>
+
+  <h2 class="conexao">Checklist: você já está pronto para a Semana 10 se...</h2>
+  <ul class="checklist">
+    <li>Sabe abrir um flex container com <code>display: flex</code> e diferenciar <code>flex-direction: row</code> de <code>column</code>.</li>
+    <li>Sabe o que <code>flex: 1</code> faz e como mudar a proporção entre itens com números diferentes.</li>
+    <li>Sabe diferenciar <code>px</code> (absoluto) de <code>%</code>/<code>rem</code>/<code>vh</code>/<code>vw</code> (relativos).</li>
+    <li>Entende o Box Model (<code>content</code> → <code>padding</code> → <code>border</code> → <code>margin</code>).</li>
+    <li>Sabe que um seletor de <code>id</code> "pesa" mais que um de <code>classe</code>, que pesa mais que um de tag.</li>
+    <li>Já ouviu que <code>!important</code> e estilo inline são práticas a evitar.</li>
+  </ul>
+  <p>
+    Se todos esses pontos fazem sentido, a Semana 10 não vai apresentar nada desconhecido — ela vai
+    dar nome, número e ferramenta profissional para instintos que você já está desenvolvendo desde
+    a Semana 07.
+  </p>
+
+  <footer>
+    Desenvolvimento Front-End [React] T4 — SENAI/SC — Material de conexão Semana 07 → Semana 10<br>
+    Professor Lisandro Faria Pinheiro
+  </footer>
+
+</div>
+</body>
+</html>

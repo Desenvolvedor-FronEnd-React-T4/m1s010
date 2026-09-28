@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ferramentas de Apoio — Semana 10</title>
+<style>
+  :root{ --navy:#1b4f72; --navy-dark:#123049; --zebra:#eef4f8; --yt:#c4302b; }
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:Arial,Helvetica,sans-serif;color:#263238;line-height:1.55;font-size:13.5px}
+  .wrap{max-width:980px;margin:auto;padding:28px 34px}
+  h1{color:var(--navy);text-align:center;font-size:26px;margin-bottom:4px}
+  h1 + .subtitle{text-align:center;color:#37474f;font-size:15px;font-weight:bold;margin-top:0;margin-bottom:18px}
+  .meta{font-size:12.5px;color:#455a64;border-bottom:1px solid #cfd8dc;padding-bottom:16px;margin-bottom:16px}
+  h2.section{background:var(--navy);color:#fff;padding:10px 16px;border-radius:4px;font-size:17px;margin-top:32px;margin-bottom:14px}
+  h3.dia{background:var(--navy-dark);color:#fff;padding:8px 14px;border-radius:4px;font-size:14.5px;margin-top:22px;margin-bottom:10px}
+  table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:12.6px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px}
+  td{padding:8px 10px;border-bottom:1px solid #e3e9ec;vertical-align:top}
+  tr:nth-child(even) td{background:var(--zebra)}
+  code{font-family:Consolas,Menlo,monospace;background:#eef4f8;color:var(--navy);padding:1px 5px;border-radius:3px;font-size:11.8px}
+  ul{margin-top:6px}
+  li{margin-bottom:8px}
+  .video-item{border:1px solid #e3e9ec;border-radius:6px;padding:10px 14px;margin-bottom:10px}
+  .video-item .titulo-video{font-weight:bold;color:var(--navy-dark);display:block;margin-bottom:2px}
+  .video-item .canal{color:#607d8b;font-size:12px}
+  .video-item .desc{margin:4px 0 0;font-size:12.6px}
+  a{color:var(--navy)}
+  .dica{background:#eaf2f8;border-left:4px solid var(--navy);border-radius:4px;padding:10px 14px;margin:12px 0;font-size:12.6px}
+  .dica .titulo{font-weight:bold;color:var(--navy);display:block;margin-bottom:3px}
+  .pagebreak{break-before:page}
+  footer{margin-top:40px;padding-top:14px;border-top:1px solid #e3e9ec;color:#78909c;font-size:11px;text-align:center}
+  @media print{ .wrap{padding:0} a{color:var(--navy) !important; text-decoration:underline} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Ferramentas de Apoio — Semana 10</h1>
+  <p class="subtitle">Extensões do VS Code e vídeo-aulas recomendadas para Responsividade, Flexbox, Especificidade e Bibliotecas</p>
+  <p class="meta">
+    Desenvolvimento Front-End [React] T4 | Módulo 1 | Semana 10 &nbsp;|&nbsp;
+    Este material reúne extensões do VS Code que facilitam o trabalho da semana e vídeo-aulas curtas e
+    objetivas (a maioria com 10 minutos ou menos) para reforçar cada tema fora do horário de aula. Nenhum
+    vídeo substitui a aula — use-os para revisar antes ou depois do encontro.
+  </p>
+
+  <h2 class="section">1. Extensões do VS Code</h2>
+  <p>Instale pela aba de Extensões do VS Code (<code>Ctrl+Shift+X</code>), buscando pelo nome ou colando o identificador na busca.</p>
+
+  <table>
+    <tr><th>Extensão</th><th>Identificador</th><th>O que faz</th><th>Por que ajuda nesta semana</th></tr>
+    <tr>
+      <td><b>Live Server</b></td>
+      <td><code>ritwickdey.LiveServer</code></td>
+      <td>Abre a página num servidor local, com recarregamento automático a cada salvamento</td>
+      <td>Essencial para testar a responsividade — necessário para os links entre páginas do Bikcraft funcionarem de verdade</td>
+    </tr>
+    <tr>
+      <td><b>HTML CSS Support</b></td>
+      <td><code>ecmel.vscode-html-css</code></td>
+      <td>Autocomplete de classes/ids do seu CSS direto no HTML</td>
+      <td>Agiliza escrever as classes de Flexbox e das seções responsivas sem erro de digitação</td>
+    </tr>
+    <tr>
+      <td><b>IntelliSense for CSS class names in HTML</b></td>
+      <td><code>Zignd.html-css-class-completion</code></td>
+      <td>Sugestão de classes já definidas no projeto (inclusive as do Bootstrap, se estiver linkado)</td>
+      <td>Ajuda a lembrar as classes do Bootstrap (<code>col-md-6</code>, <code>btn-warning</code>...) sem precisar consultar a documentação toda hora</td>
+    </tr>
+    <tr>
+      <td><b>CSS Peek</b></td>
+      <td><code>pranaygp.vscode-css-peek</code></td>
+      <td>Mostra a definição de uma classe/id sem trocar de arquivo (Ctrl+clique ou hover)</td>
+      <td>Ótimo para investigar especificidade: você vê rapidinho todas as regras que miram o mesmo elemento</td>
+    </tr>
+    <tr>
+      <td><b>Auto Rename Tag</b></td>
+      <td><code>formulahendry.auto-rename-tag</code></td>
+      <td>Renomeia a tag de abertura e a de fechamento juntas</td>
+      <td>Evita HTML quebrado ao editar a estrutura das seções da página de contato</td>
+    </tr>
+    <tr>
+      <td><b>Color Highlight</b></td>
+      <td><code>naumovs.color-highlight</code></td>
+      <td>Mostra a cor real ao lado de qualquer valor hexadecimal/RGB no CSS</td>
+      <td>Facilita visualizar a paleta da marca (<code>#0a0a0a</code>, <code>#ffbf00</code>...) sem precisar copiar o código para um site externo</td>
+    </tr>
+    <tr>
+      <td><b>Prettier - Code formatter</b></td>
+      <td><code>esbenp.prettier-vscode</code></td>
+      <td>Formata automaticamente HTML/CSS/JS ao salvar, com indentação e espaçamento consistentes</td>
+      <td>Mantém o código organizado enquanto o projeto cresce com media queries e várias seções</td>
+    </tr>
+    <tr>
+      <td><b>Bootstrap 5 &amp; Font Awesome Snippets</b></td>
+      <td><code>HansUXdev.bootstrap5-snippets</code></td>
+      <td>Atalhos de digitação para componentes do Bootstrap e ícones do Font Awesome</td>
+      <td>As duas bibliotecas usadas no Encontro 3 da semana — digite menos, acerte mais na sintaxe das classes</td>
+    </tr>
+  </table>
+
+  <div class="dica"><span class="titulo">Dica</span>Você não precisa instalar todas de uma vez. Se for escolher só uma para começar, escolha o <b>Live Server</b> — é a mais usada em toda a trilha, não só nesta semana.</div>
+
+  <h2 class="section pagebreak">2. Vídeo-aulas recomendadas</h2>
+  <p>Organizadas pelos três encontros da semana. Todas em português, com foco direto no assunto — sem enrolação.</p>
+
+  <h3 class="dia">29/09 — Responsividade na prática</h3>
+
+  <div class="video-item">
+    <span class="titulo-video">Design Responsivo: CSS Media Queries Explicado!</span>
+    <span class="canal">YouTube</span>
+    <p class="desc">Explica de forma direta o que são media queries e como usá-las para adaptar o layout a diferentes telas.</p>
+    <a href="https://www.youtube.com/watch?v=fKk_GFjNfJc">youtube.com/watch?v=fKk_GFjNfJc</a>
+  </div>
+
+  <div class="video-item">
+    <span class="titulo-video">Responsividade com CSS pelo método Mobile First — Curso CSS, Aula 12</span>
+    <span class="canal">YouTube</span>
+    <p class="desc">Aula curta e objetiva de um curso estruturado, focada exatamente na estratégia mobile-first usada em sala.</p>
+    <a href="https://www.youtube.com/watch?v=qawlf-3tatc">youtube.com/watch?v=qawlf-3tatc</a>
+  </div>
+
+  <div class="video-item">
+    <span class="titulo-video">Texto Responsivo com 1 Linha de Código: CSS clamp()</span>
+    <span class="canal">YouTube</span>
+    <p class="desc">Direto ao ponto sobre o <code>clamp()</code> — a função usada no título do hero da página de contato do Bikcraft.</p>
+    <a href="https://www.youtube.com/watch?v=PTc7DPizD0M">youtube.com/watch?v=PTc7DPizD0M</a>
+  </div>
+
+  <h3 class="dia">01/10 — Flexbox aprofundado + especificidade</h3>
+
+  <div class="video-item">
+    <span class="titulo-video">CSS Flexbox! Aprenda Flexbox em 10 Minutos</span>
+    <span class="canal">Enzo Feijó — YouTube</span>
+    <p class="desc">Revisão rápida (10 minutos) de todo o Flexbox básico — container, itens, eixos e as propriedades principais.</p>
+    <a href="https://www.youtube.com/watch?v=97MA0274Fn0">youtube.com/watch?v=97MA0274Fn0</a>
+  </div>
+
+  <div class="video-item">
+    <span class="titulo-video">Primeiros passos com Flexbox CSS</span>
+    <span class="canal">Curso em Vídeo (Gustavo Guanabara) — YouTube</span>
+    <p class="desc">Aula de um dos canais mais respeitados de programação em português, com exemplo prático de container e itens.</p>
+    <a href="https://www.youtube.com/watch?v=YeGn9nGies0">youtube.com/watch?v=YeGn9nGies0</a>
+  </div>
+
+  <div class="video-item">
+    <span class="titulo-video">Especificidade CSS: Qual regra será aplicada? — Curso de HTML e CSS, Aula 21</span>
+    <span class="canal">YouTube</span>
+    <p class="desc">Explica exatamente o cálculo de especificidade (inline/id/classe/tag) usado no exercício da quinta-feira.</p>
+    <a href="https://www.youtube.com/watch?v=oI-pz5K2V0o">youtube.com/watch?v=oI-pz5K2V0o</a>
+  </div>
+
+  <div class="video-item">
+    <span class="titulo-video">Curso de CSS: Modelo de cascata — Aula 3</span>
+    <span class="canal">YouTube</span>
+    <p class="desc">Complementa o vídeo de especificidade explicando a cascata — o que decide o empate entre regras de mesmo peso.</p>
+    <a href="https://www.youtube.com/watch?v=Nin4Ou1y8DQ">youtube.com/watch?v=Nin4Ou1y8DQ</a>
+  </div>
+
+  <h3 class="dia">02/10 — Bibliotecas de componentes e ícones</h3>
+
+  <div class="video-item">
+    <span class="titulo-video">Bootstrap 5 — Aula #04 | Linhas e colunas no Bootstrap</span>
+    <span class="canal">YouTube</span>
+    <p class="desc">Mostra o grid de 12 colunas do Bootstrap na prática — a mesma técnica usada na seção de lojas do Bikcraft.</p>
+    <a href="https://www.youtube.com/watch?v=jdJ9nCg7Al0">youtube.com/watch?v=jdJ9nCg7Al0</a>
+  </div>
+
+  <div class="video-item">
+    <span class="titulo-video">Aprenda a grid do Bootstrap e tire suas dúvidas</span>
+    <span class="canal">YouTube</span>
+    <p class="desc">Reforço prático sobre o sistema de grid, incluindo os breakpoints (<code>col-md-</code>, <code>col-lg-</code>...).</p>
+    <a href="https://www.youtube.com/watch?v=OIUW5ZTJgJ8">youtube.com/watch?v=OIUW5ZTJgJ8</a>
+  </div>
+
+  <div class="video-item">
+    <span class="titulo-video">Como adicionar ícones do Font Awesome ao HTML de forma simples e rápida</span>
+    <span class="canal">YouTube</span>
+    <p class="desc">Passo a passo objetivo de como incluir o Font Awesome via CDN e usar os ícones — igual ao que fazemos no rodapé do Bikcraft.</p>
+    <a href="https://www.youtube.com/watch?v=DrTAQRPB_iQ">youtube.com/watch?v=DrTAQRPB_iQ</a>
+  </div>
+
+  <div class="video-item">
+    <span class="titulo-video">Como usar o Font Awesome para mostrar ícones no seu site</span>
+    <span class="canal">YouTube</span>
+    <p class="desc">Reforço com exemplos comuns de ícones (telefone, e-mail, carrinho) — os mesmos usados nos dados de contato.</p>
+    <a href="https://www.youtube.com/watch?v=6Wtzmb-f85E">youtube.com/watch?v=6Wtzmb-f85E</a>
+  </div>
+
+  <div class="dica"><span class="titulo">Como usar estes vídeos</span>Assista ANTES da aula se quiser chegar com uma primeira impressão do assunto, ou DEPOIS se quiser reforçar um ponto específico que não ficou claro. Eles são um complemento — o conteúdo oficial e completo da semana está nos slides e no Guia do Professor.</div>
+
+  <footer>
+    Desenvolvimento Front-End [React] T4 — SENAI/SC — Material de apoio, Semana 10<br>
+    Professor Lisandro Faria Pinheiro
+  </footer>
+
+</div>
+</body>
+</html>

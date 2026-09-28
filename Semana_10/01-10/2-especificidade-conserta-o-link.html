@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercício — Especificidade: por que o link não fica branco?</title>
+<link rel="stylesheet" href="2-especificidade-conserta-o-link.css">
+</head>
+<body>
+
+  <h1 class="titulo-pagina">Especificidade na prática</h1>
+
+  <footer class="rodape-teste" id="rodape-principal">
+    <a href="#" id="link-institucional">Fale conosco pelo WhatsApp</a>
+  </footer>
+
+  <!--
+    GABARITO (só olhe depois de tentar!)
+
+    Opção 1 — usando o id do footer (especificidade 100, maior que 11):
+      #rodape-principal a { color: #fff; }
+
+    Opção 2 — usando o id do próprio link (especificidade 100):
+      #link-institucional { color: #fff; }
+
+    As duas funcionam SEM !important porque a especificidade delas (100)
+    é maior que a de ".rodape-teste a" (11). Lembre-se: em empate de
+    especificidade, vence a ÚLTIMA regra escrita no arquivo (cascata) —
+    mas aqui não é empate, é uma regra genuinamente mais específica.
+  -->
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exemplo aplicado — as 2 colunas do contato</title>
+<link rel="stylesheet" href="3-duas-colunas-contato.css">
+</head>
+<body>
+
+  <h1 class="titulo-pagina">As 2 colunas do contato</h1>
+
+  <div class="duas-colunas">
+    <div class="coluna-dados">
+      <h2>Loja Online</h2>
+      <p>Rua das Engrenagens, 123 — Florianópolis/SC</p>
+      <p>contato@bikcraft.com.br</p>
+    </div>
+
+    <div class="coluna-formulario">
+      <h2>Fale com a gente</h2>
+      <div class="linha-formulario">
+        <div class="campo">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome">
+        </div>
+        <div class="campo">
+          <label for="telefone">Telefone</label>
+          <input type="tel" id="telefone">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    Teste no DevTools: em 375px, "Loja Online" fica acima do formulário.
+    Em 1280px, os dois ficam lado a lado, na proporção 5:7 (a coluna do
+    formulário é visivelmente mais larga). O mesmo padrão se repete na
+    seção de lojas (RJ/SP) do Bikcraft, só que com flex-wrap + flex-basis
+    em vez de flex: 5/7 — porque lá as 2 lojas têm o mesmo peso.
+  -->
+
+</body>
+</html>

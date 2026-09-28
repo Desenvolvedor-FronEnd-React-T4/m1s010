@@ -1,0 +1,38 @@
+body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5f5; }
+
+/*
+  PASSO 2 — mobile-first: a regra "base" (fora de qualquer @media) é
+  sempre a versão do CELULAR. Aqui o padding lateral começa pequeno.
+*/
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 16px; /* base = celular */
+}
+
+.logo { font-weight: bold; font-size: 1.4rem; }
+nav { display: flex; gap: 20px; }
+nav a { color: #f5f5f5; text-decoration: none; }
+
+/*
+  PASSO 3 — clamp(mínimo, ideal, máximo): o título nunca fica menor que
+  2.5rem, nunca maior que 4rem, e no meio do caminho acompanha a largura
+  da tela (6vw = 6% da viewport width) sem precisar de media query.
+*/
+.hero-titulo {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.1;
+  padding: 40px 16px;
+  margin: 0;
+}
+
+/*
+  PASSO 4 — media query com min-width: só a partir de 64em (~1024px,
+  ou seja, "desktop") é que o cabeçalho ganha o respiro lateral de
+  100px. Em telas menores, a regra base (16px) continua valendo.
+*/
+@media (min-width: 64em) {
+  .cabecalho { padding: 16px 100px; }
+  .hero-titulo { padding: 56px 100px; }
+}

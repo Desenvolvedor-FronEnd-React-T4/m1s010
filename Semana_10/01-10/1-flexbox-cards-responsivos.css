@@ -1,0 +1,37 @@
+body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5f5; padding: 24px 16px; }
+h1 { font-size: 1.4rem; }
+
+/*
+  EXERCÍCIO (Parte 1 — 10 min)
+  Objetivo: os 3 cards de métrica abaixo devem ficar LADO A LADO no
+  desktop e EMPILHADOS no celular — exatamente como a faixa de recursos
+  do slide "EXERCÍCIO (FLEXBOX + ESPECIFICIDADE)".
+
+  Estado atual: os cards já são um container flex, mas sem flex-wrap,
+  sem gap e sem a regra que os empilha no celular. Complete o CSS
+  marcado com "// COMPLETE AQUI" seguindo os comentários.
+*/
+.faixa-metricas {
+  display: flex;
+  flex-direction: column; /* base = celular: empilhado */
+  /* COMPLETE AQUI: adicione um "gap" para separar os cards (ex.: 16px) */
+}
+
+/* COMPLETE AQUI: crie uma media query (min-width: 64em) que troque
+   .faixa-metricas para flex-direction: row (lado a lado no desktop) */
+
+.card-metrica {
+  background:#161616;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  /* COMPLETE AQUI: adicione "flex: 1" para os 3 cards dividirem o
+     espaço igualmente quando estiverem em linha */
+}
+
+.card-metrica .numero {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffbf00;
+}

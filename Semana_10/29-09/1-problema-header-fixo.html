@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<!--
+  ATENÇÃO — esta página NÃO tem a meta viewport de propósito.
+  É o ponto de partida do exercício de hoje: reproduzir o problema que
+  vimos no slide "...E NO CELULAR?" antes de resolvê-lo no arquivo
+  2-solucao-mobile-first.html.
+
+  Abra esta página no DevTools (F12 → ícone de celular, 375px de largura)
+  e observe: o cabeçalho fica espremido e o título do hero estoura a tela.
+-->
+<title>Bikcraft (problema) — sem responsividade</title>
+<link rel="stylesheet" href="1-problema-header-fixo.css">
+</head>
+<body>
+
+  <header class="cabecalho">
+    <span class="logo">bikcraft</span>
+    <nav>
+      <a href="#">Bicicletas</a>
+      <a href="#">Seguros</a>
+      <a href="#">Contato</a>
+    </nav>
+  </header>
+
+  <h1 class="hero-titulo">nosso contato.</h1>
+
+  <!--
+    EXERCÍCIO (20 min) — conserte esta página SEM apagar nada, seguindo os
+    passos vistos em aula:
+      1) adicione a <meta name="viewport" ...> que falta no <head>;
+      2) troque o padding fixo do cabeçalho por mobile-first + media query
+         (min-width: 64em) para os 100px só aparecerem no desktop;
+      3) troque o font-size fixo do título por clamp(2.5rem, 6vw, 4rem);
+      4) teste em 375px e depois em 1280px no DevTools.
+    Quando terminar, compare com 2-solucao-mobile-first.html.
+  -->
+
+</body>
+</html>

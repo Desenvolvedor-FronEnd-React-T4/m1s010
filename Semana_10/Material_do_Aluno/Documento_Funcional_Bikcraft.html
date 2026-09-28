@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Documento Funcional — Projeto Bikcraft</title>
+<style>
+  :root{ --navy:#1b4f72; --navy-dark:#123049; --zebra:#eef4f8; --gold:#cc9900; }
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:Arial,Helvetica,sans-serif;color:#263238;line-height:1.55;font-size:13.5px}
+  .wrap{max-width:980px;margin:auto;padding:28px 34px}
+  h1{color:var(--navy);text-align:center;font-size:27px;margin-bottom:4px}
+  h1 + .subtitle{text-align:center;color:#37474f;font-size:15px;font-weight:bold;margin-top:0;margin-bottom:18px}
+  .meta{font-size:12.5px;color:#455a64;border-bottom:1px solid #cfd8dc;padding-bottom:16px;margin-bottom:16px}
+  h2.section{background:var(--navy);color:#fff;padding:10px 16px;border-radius:4px;font-size:17px;margin-top:32px;margin-bottom:14px}
+  h3.pagina{background:var(--navy-dark);color:#fff;padding:8px 14px;border-radius:4px;font-size:15px;margin-top:22px;margin-bottom:10px}
+  .objetivo{background:var(--zebra);border-left:4px solid var(--navy);padding:9px 14px;font-size:13px;margin-bottom:12px}
+  table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:12.8px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px}
+  td{padding:7px 10px;border-bottom:1px solid #e3e9ec;vertical-align:top}
+  tr:nth-child(even) td{background:var(--zebra)}
+  code{font-family:Consolas,Menlo,monospace;background:#eef4f8;color:var(--navy);padding:1px 5px;border-radius:3px;font-size:12px}
+  ul{margin-top:6px}
+  li{margin-bottom:5px}
+  .checklist li{list-style:none;margin-bottom:8px;padding-left:26px;position:relative}
+  .checklist li::before{content:"☐";position:absolute;left:0;font-size:15px;color:var(--navy)}
+  .paleta{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+  .cor{width:120px;border-radius:6px;overflow:hidden;font-size:11px;border:1px solid #e3e9ec}
+  .cor .amostra{height:44px}
+  .cor .legenda{padding:6px 8px;background:#fff}
+  .pagebreak{break-before:page}
+  footer{margin-top:40px;padding-top:14px;border-top:1px solid #e3e9ec;color:#78909c;font-size:11px;text-align:center}
+  @media print{ .wrap{padding:0} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Documento Funcional — Projeto Bikcraft</h1>
+  <p class="subtitle">O que o site precisa ter, página por página</p>
+  <p class="meta">
+    Desenvolvimento Front-End [React] T4 | Módulo 1 | Semanas 07 a 10 &nbsp;|&nbsp;
+    Este documento descreve <b>o que</b> o site da Bikcraft precisa ter — não o código em si.
+    Use-o como referência de requisitos enquanto constrói o projeto. O <b>como construir</b>
+    (estrutura de pastas, tags, exemplos de código e passo a passo) está no documento
+    <b>Refinamento Técnico — Guia Passo a Passo</b>, que acompanha este material.
+  </p>
+
+  <h2 class="section">1. Sobre o projeto</h2>
+  <p>
+    A <b>Bikcraft</b> é uma marca fictícia de bicicletas elétricas sob medida. Ao longo do
+    módulo, você vai construir o site institucional dela em três páginas, evoluindo o mesmo
+    projeto semana a semana — exatamente como acontece numa empresa de verdade, onde um site
+    nunca "nasce pronto": ele cresce em versões.
+  </p>
+  <p>
+    O resultado final precisa ser um site com <b>tema escuro</b>, identidade visual consistente
+    entre as páginas, e <b>responsivo</b> — funcionando bem tanto no celular quanto no computador.
+  </p>
+
+  <h2 class="section">2. Páginas do site</h2>
+  <table>
+    <tr><th>Página</th><th>Arquivo</th><th>Função</th></tr>
+    <tr><td>Home</td><td><code>index.html</code></td><td>Apresentar a marca e levar o visitante ao catálogo</td></tr>
+    <tr><td>Catálogo</td><td><code>bicicletas.html</code></td><td>Mostrar os modelos disponíveis, com nome, preço e imagem</td></tr>
+    <tr><td>Contato</td><td><code>contato.html</code></td><td>Permitir que o cliente envie uma mensagem e veja os dados das lojas</td></tr>
+  </table>
+
+  <h3 class="pagina pagebreak">2.1 — Home (index.html)</h3>
+  <div class="objetivo"><b>Objetivo da página:</b> em poucos segundos, o visitante entende o que a Bikcraft vende e sabe para onde clicar.</div>
+  <p><b>Requisitos funcionais:</b></p>
+  <ul>
+    <li>Cabeçalho com a logo <code>bikcraft</code> (texto) e um menu com os links: Bicicletas, Seguros, Contato.</li>
+    <li>Um título principal de impacto (ex.: "Bicicletas feitas sob medida.").</li>
+    <li>Um parágrafo curto de apoio, explicando a proposta da marca.</li>
+    <li>Um botão de destaque ("ESCOLHA A SUA") que leva até a página de catálogo.</li>
+    <li>Uma imagem ilustrativa de bicicleta ao lado do texto.</li>
+    <li>No celular: texto e imagem empilhados. No desktop: lado a lado.</li>
+  </ul>
+
+  <h3 class="pagina">2.2 — Catálogo "escolha a sua" (bicicletas.html)</h3>
+  <div class="objetivo"><b>Objetivo da página:</b> apresentar os modelos disponíveis de forma organizada, para o cliente comparar e escolher.</div>
+  <p><b>Requisitos funcionais:</b></p>
+  <ul>
+    <li>Reaproveitar o mesmo cabeçalho da Home.</li>
+    <li>Um título de seção: "escolha a sua".</li>
+    <li>Uma grade com pelo menos 3 bicicletas, cada uma exibindo: imagem, nome e preço.</li>
+    <li>Cada bicicleta precisa de uma identificação própria (para ser localizada individualmente) e de uma identificação compartilhada com as demais (para serem tratadas todas juntas).</li>
+    <li>Ao carregar a página, o navegador deve exibir no console: o nome e o preço de <u>todas</u> as bicicletas, e o nome, o preço e a imagem <u>somente da primeira</u> bicicleta.</li>
+    <li>No celular: cards empilhados. No desktop: lado a lado, quebrando linha sozinhos se não houver espaço.</li>
+  </ul>
+
+  <h3 class="pagina">2.3 — Contato (contato.html)</h3>
+  <div class="objetivo"><b>Objetivo da página:</b> dar ao cliente um jeito rápido de falar com a loja e ver onde ela funciona — sem precisar de e-mail.</div>
+  <p><b>Requisitos funcionais:</b></p>
+  <ul>
+    <li>Cabeçalho reaproveitado, respirando bem tanto no celular quanto no desktop.</li>
+    <li>Um destaque no topo (ex.: "RESPOSTAS EM ATÉ 24H") e um título principal (ex.: "nosso contato."), com tamanho de fonte que se adapta suavemente à largura da tela.</li>
+    <li>Duas áreas de conteúdo lado a lado no desktop (empilhadas no celular): <b>dados da loja online</b> (endereço, e-mail, telefone, cada um com um ícone) e o <b>formulário de contato</b>.</li>
+    <li>Formulário com os campos: nome, telefone, e-mail e mensagem — cada um com o rótulo (<code>label</code>) corretamente ligado ao campo.</li>
+    <li>Nome e telefone podem ficar na mesma linha quando houver espaço.</li>
+    <li>Ao clicar em "Enviar mensagem": a página <u>não</u> pode recarregar; se algum campo estiver vazio, avisar em vermelho; se tudo estiver preenchido, mostrar uma confirmação com o nome e o e-mail informados.</li>
+    <li>Uma seção com pelo menos 2 lojas físicas, cada uma com nome, horário de funcionamento, endereço e ícones.</li>
+    <li>Um rodapé com ícones de redes sociais, que mudam de cor ao passar o mouse.</li>
+    <li>O botão de envio deve seguir a identidade visual da marca (fundo escuro, texto dourado) mesmo usando uma biblioteca de componentes pronta.</li>
+  </ul>
+
+  <h2 class="section pagebreak">3. Identidade visual</h2>
+  <p>Use estas referências de cor e tipografia em todas as páginas, para o site parecer um site único, não três páginas soltas.</p>
+  <div class="paleta">
+    <div class="cor"><div class="amostra" style="background:#0a0a0a"></div><div class="legenda">Fundo escuro<br><code>#0a0a0a</code></div></div>
+    <div class="cor"><div class="amostra" style="background:#161616"></div><div class="legenda">Fundo de card<br><code>#161616</code></div></div>
+    <div class="cor"><div class="amostra" style="background:#ffbf00"></div><div class="legenda">Destaque (dourado)<br><code>#ffbf00</code></div></div>
+    <div class="cor"><div class="amostra" style="background:#f5f5f5;border-bottom:1px solid #ddd"></div><div class="legenda">Texto claro<br><code>#f5f5f5</code></div></div>
+    <div class="cor"><div class="amostra" style="background:#ffffff;border-bottom:1px solid #ddd"></div><div class="legenda">Fundo claro (catálogo)<br><code>#ffffff</code></div></div>
+  </div>
+  <ul>
+    <li><b>Títulos:</b> fonte Poppins (peso 600/700), importada do Google Fonts.</li>
+    <li><b>Corpo de texto:</b> fonte Roboto (peso 400/500), importada do Google Fonts.</li>
+    <li><b>Ícones:</b> Font Awesome (redes sociais, telefone, e-mail, localização, relógio).</li>
+    <li><b>Componentes prontos:</b> Bootstrap 5, usado com moderação (ex.: botão de envio, grid de colunas) e sempre customizado com a cor da marca.</li>
+  </ul>
+
+  <h2 class="section">4. Critérios de aceite (quando considerar a página "pronta")</h2>
+  <ul class="checklist">
+    <li>As três páginas abrem sem nenhum erro no console do navegador.</li>
+    <li>Todas as páginas têm a tag <code>meta viewport</code> no <code>&lt;head&gt;</code>.</li>
+    <li>O site foi testado no DevTools em pelo menos duas larguras: 375px (celular) e 1280px (desktop).</li>
+    <li>O menu de navegação leva corretamente de uma página para outra.</li>
+    <li>O formulário de contato valida campos vazios e mostra a confirmação corretamente.</li>
+    <li>Os quatro <code>console.log</code> pedidos no catálogo aparecem certos, na ordem certa.</li>
+    <li>As cores e fontes da marca estão aplicadas nas três páginas.</li>
+    <li>Nenhuma regra CSS usa <code>!important</code> para resolver conflitos.</li>
+  </ul>
+
+  <footer>
+    Desenvolvimento Front-End [React] T4 — SENAI/SC — Projeto Bikcraft (Semanas 07 a 10)<br>
+    Material de apoio ao aluno
+  </footer>
+
+</div>
+</body>
+</html>

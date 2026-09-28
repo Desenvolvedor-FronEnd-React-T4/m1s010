@@ -1,0 +1,19 @@
+.pagina-bootstrap-demo {
+  background: #0a0a0a;
+  color: #f5f5f5;
+  padding: 24px 16px;
+  font-family: Arial, sans-serif;
+}
+
+.titulo-demo { font-size: 1.4rem; }
+.subtitulo-demo { font-size: 1.1rem; margin-top: 32px; }
+
+/* Card do Bootstrap com uma largura máxima própria do nosso exemplo. */
+.card-exemplo { max-width: 320px; }
+
+/* Cada "loja" do grid usa o mesmo fundo escuro e bordas arredondadas. */
+.col-loja {
+  background: #161616;
+  padding: 16px;
+  border-radius: 6px;
+}

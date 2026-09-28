@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<!--
+  PASSO 1 — meta viewport: diz ao celular para usar a largura real do
+  dispositivo (device-width) em vez de fingir ser uma tela larga.
+  Sem esta linha, nada do CSS responsivo abaixo funciona de verdade.
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bikcraft (solução) — mobile-first</title>
+<link rel="stylesheet" href="2-solucao-mobile-first.css">
+</head>
+<body>
+
+  <header class="cabecalho">
+    <span class="logo">bikcraft</span>
+    <nav>
+      <a href="#">Bicicletas</a>
+      <a href="#">Seguros</a>
+      <a href="#">Contato</a>
+    </nav>
+  </header>
+
+  <h1 class="hero-titulo">nosso contato.</h1>
+
+  <!--
+    Compare com 1-problema-header-fixo.html no DevTools:
+      - em 375px, o cabeçalho agora respira e o título não estoura;
+      - em 1280px, o resultado visual é o mesmo de antes.
+    Essa é a ideia central do mobile-first: escrever para o celular
+    primeiro, e usar media queries só para ACRESCENTAR o que telas
+    maiores permitem — nunca o contrário.
+  -->
+
+</body>
+</html>

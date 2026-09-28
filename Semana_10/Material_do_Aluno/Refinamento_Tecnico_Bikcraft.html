@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Refinamento Técnico — Guia Passo a Passo — Projeto Bikcraft</title>
+<style>
+  :root{ --navy:#1b4f72; --navy-dark:#123049; --zebra:#eef4f8; --code-bg:#1e1e1e; }
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:Arial,Helvetica,sans-serif;color:#263238;line-height:1.55;font-size:13.3px}
+  .wrap{max-width:980px;margin:auto;padding:28px 34px}
+  h1{color:var(--navy);text-align:center;font-size:26px;margin-bottom:4px}
+  h1 + .subtitle{text-align:center;color:#37474f;font-size:14.5px;font-weight:bold;margin-top:0;margin-bottom:18px}
+  .meta{font-size:12.3px;color:#455a64;border-bottom:1px solid #cfd8dc;padding-bottom:16px;margin-bottom:16px}
+  h2.section{background:var(--navy);color:#fff;padding:10px 16px;border-radius:4px;font-size:16.5px;margin-top:30px;margin-bottom:12px}
+  h3.passo{background:var(--navy-dark);color:#fff;padding:8px 14px;border-radius:4px;font-size:14.5px;margin-top:20px;margin-bottom:8px}
+  .objetivo-passo{background:var(--zebra);border-left:4px solid var(--navy);padding:8px 13px;font-size:12.6px;margin-bottom:10px}
+  pre{background:var(--code-bg);color:#f8f8f2;padding:11px 13px;border-radius:6px;overflow:auto;font-size:11.5px;line-height:1.5;margin:8px 0}
+  code{font-family:Consolas,Menlo,monospace}
+  :not(pre) > code{background:#eef4f8;color:var(--navy);padding:1px 5px;border-radius:3px;font-size:11.8px}
+  table{width:100%;border-collapse:collapse;margin:8px 0 16px;font-size:12px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:7px 9px}
+  td{padding:7px 9px;border-bottom:1px solid #e3e9ec;vertical-align:top}
+  tr:nth-child(even) td{background:var(--zebra)}
+  ul{margin-top:6px}
+  li{margin-bottom:5px}
+  .dica{background:#eaf2f8;border-left:4px solid var(--navy);border-radius:4px;padding:9px 13px;margin:10px 0;font-size:12.3px}
+  .dica .titulo{font-weight:bold;color:var(--navy);display:block;margin-bottom:3px}
+  .atencao{background:#fff3cd;border-left:4px solid #e08e00;border-radius:4px;padding:9px 13px;margin:10px 0;font-size:12.3px}
+  .atencao .titulo{font-weight:bold;color:#8a5c00;display:block;margin-bottom:3px}
+  .arvore{background:var(--code-bg);color:#dcdcdc;padding:14px 16px;border-radius:6px;font-family:Consolas,Menlo,monospace;font-size:12px;line-height:1.6}
+  .pagebreak{break-before:page}
+  footer{margin-top:40px;padding-top:14px;border-top:1px solid #e3e9ec;color:#78909c;font-size:11px;text-align:center}
+  @media print{ .wrap{padding:0} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Refinamento Técnico — Guia Passo a Passo</h1>
+  <p class="subtitle">Como construir o projeto Bikcraft: pastas, tags, código-modelo e ordem de execução</p>
+  <p class="meta">
+    Desenvolvimento Front-End [React] T4 | Módulo 1 | Semanas 07 a 10 &nbsp;|&nbsp;
+    Este documento é o complemento técnico do <b>Documento Funcional — Projeto Bikcraft</b>.
+    Enquanto aquele descreve <b>o que</b> cada página precisa ter, este mostra <b>como</b>
+    construir: a organização de arquivos, os recursos de HTML/CSS/JS envolvidos, modelos de
+    código para cada etapa e a ordem recomendada de construção.
+  </p>
+
+  <h2 class="section">1. Estrutura de pastas e arquivos</h2>
+  <p>Crie uma única pasta de projeto com os arquivos abaixo. Todas as páginas compartilham o
+  mesmo CSS e o mesmo JavaScript — evite criar um arquivo de estilo por página.</p>
+  <div class="arvore">bikcraft/<br>
+  ├── index.html&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8a8a8a">// página inicial</span><br>
+  ├── bicicletas.html&nbsp;<span style="color:#8a8a8a">// catálogo "escolha a sua"</span><br>
+  ├── contato.html&nbsp;&nbsp;&nbsp;<span style="color:#8a8a8a">// formulário + lojas</span><br>
+  ├── style.css&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8a8a8a">// uma única folha de estilos para as 3 páginas</span><br>
+  ├── script.js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#8a8a8a">// um único script para as 3 páginas</span><br>
+  └── assets/<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;├── bike-1.svg (ou .png/.jpg)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;├── bike-2.svg<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;└── bike-3.svg</div>
+  <div class="dica"><span class="titulo">Por que um único CSS e um único JS?</span>Porque as 3 páginas compartilham cabeçalho, cores, fontes e alguns comportamentos. Um arquivo por página duplicaria código e criaria inconsistência visual entre elas — a mesma razão pela qual sites profissionais usam uma folha de estilos "global".</div>
+
+  <h2 class="section">2. Como abrir e testar o projeto</h2>
+  <ul>
+    <li>Abra a pasta <code>bikcraft/</code> inteira no VS Code (File → Open Folder).</li>
+    <li>Instale a extensão <b>Live Server</b>, se ainda não tiver.</li>
+    <li>Clique com o botão direito em <code>index.html</code> → <b>"Open with Live Server"</b> (ou clique em "Go Live" na barra inferior).</li>
+    <li>Nunca abra as páginas com duplo clique direto no arquivo — os links entre páginas e alguns recursos podem não funcionar do mesmo jeito sem um servidor local.</li>
+    <li>Para testar a responsividade: abra o DevTools (F12), ative o "modo dispositivo" (ícone de celular/tablet) e teste em 375px e em 1280px.</li>
+  </ul>
+
+  <h2 class="section pagebreak">3. Tags e recursos que você vai usar</h2>
+  <table>
+    <tr><th>Tag / recurso</th><th>Para que serve</th></tr>
+    <tr><td><code>&lt;meta name="viewport"&gt;</code></td><td>Faz o celular usar a largura real da tela, em vez de simular um desktop</td></tr>
+    <tr><td><code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;a&gt;</code></td><td>Cabeçalho e menu de navegação entre páginas</td></tr>
+    <tr><td><code>&lt;section&gt;</code>, <code>&lt;div&gt;</code>, <code>&lt;article&gt;</code></td><td>Blocos de conteúdo (hero, colunas, cards de bicicleta/loja)</td></tr>
+    <tr><td><code>&lt;h1&gt;</code>/<code>&lt;h2&gt;</code>/<code>&lt;h3&gt;</code></td><td>Títulos e subtítulos, na ordem hierárquica correta</td></tr>
+    <tr><td><code>&lt;img&gt;</code> + <code>max-width:100%; height:auto;</code></td><td>Imagens que nunca ultrapassam a largura do container</td></tr>
+    <tr><td><code>&lt;form&gt;</code>, <code>&lt;label for&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;button&gt;</code></td><td>Formulário de contato, com rótulos ligados aos campos</td></tr>
+    <tr><td><code>id</code> × <code>class</code></td><td><code>id</code> identifica UM elemento; <code>class</code> agrupa VÁRIOS que compartilham estilo/comportamento</td></tr>
+    <tr><td><code>display: flex</code>, <code>flex-wrap</code>, <code>gap</code>, <code>flex</code>, <code>flex-direction</code></td><td>Organizar itens em linha/coluna, com quebra e espaçamento controlados</td></tr>
+    <tr><td><code>@media (min-width: ...)</code></td><td>Aplicar regras de CSS só a partir de determinada largura de tela (mobile-first)</td></tr>
+    <tr><td><code>clamp(mín, ideal, máx)</code></td><td>Tamanho de fonte que se adapta à tela sem media query</td></tr>
+    <tr><td>Font Awesome — <code>&lt;i class="fa-solid ..."&gt;</code></td><td>Ícones (telefone, e-mail, localização, redes sociais), via CDN</td></tr>
+    <tr><td>Bootstrap — <code>.btn</code>, <code>.card</code>, <code>.row</code>, <code>.col-md-6</code></td><td>Componentes prontos, via CDN, customizados com uma classe própria por cima</td></tr>
+    <tr><td>Especificidade CSS</td><td>Decide qual regra "vence" quando duas miram o mesmo elemento — nunca resolva um conflito com <code>!important</code></td></tr>
+    <tr><td><code>getElementById</code>, <code>querySelectorAll</code></td><td>Selecionar um elemento específico ou um grupo de elementos, em JavaScript</td></tr>
+    <tr><td><code>addEventListener('submit', ...)</code> + <code>evento.preventDefault()</code></td><td>Capturar o envio do formulário sem recarregar a página</td></tr>
+    <tr><td><code>.value</code>, <code>.checked</code></td><td>Ler o que o usuário digitou/marcou em cada campo</td></tr>
+    <tr><td><code>classList.add/remove</code></td><td>Ligar/desligar uma classe CSS via JavaScript (ex.: aviso de campo vazio)</td></tr>
+  </table>
+
+  <h2 class="section pagebreak">4. Passo a passo de construção</h2>
+  <p>Siga esta ordem — cada passo reaproveita o que já foi construído no anterior. Não pule etapas.</p>
+
+  <h3 class="passo">Passo 1 — Esqueleto HTML e cabeçalho compartilhado</h3>
+  <div class="objetivo-passo"><b>O que fazer:</b> criar os três arquivos HTML com a estrutura básica e o mesmo cabeçalho nos três.</div>
+  <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Bikcraft&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header class="cabecalho"&gt;
+    &lt;span class="logo"&gt;bikcraft&lt;/span&gt;
+    &lt;nav&gt;
+      &lt;a href="bicicletas.html"&gt;Bicicletas&lt;/a&gt;
+      &lt;a href="#seguros"&gt;Seguros&lt;/a&gt;
+      &lt;a href="contato.html"&gt;Contato&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;!-- o conteúdo de cada página entra aqui --&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  <div class="dica"><span class="titulo">Dica</span>Copie exatamente o mesmo <code>&lt;header&gt;</code> nos três arquivos — é assim que o menu funciona igual em todas as páginas.</div>
+
+  <h3 class="passo">Passo 2 — Home: o hero</h3>
+  <div class="objetivo-passo"><b>O que fazer:</b> dentro de <code>index.html</code>, montar a seção de apresentação com título, texto, botão e imagem.</div>
+  <pre><code>&lt;section class="hero"&gt;
+  &lt;div class="hero-texto"&gt;
+    &lt;h1 class="hero-titulo"&gt;Bicicletas feitas sob medida&lt;span class="ponto-destaque"&gt;.&lt;/span&gt;&lt;/h1&gt;
+    &lt;p class="hero-paragrafo"&gt;
+      Bicicletas elétricas de alta precisão e qualidade, feitas sob medida para você.
+    &lt;/p&gt;
+    &lt;a class="botao-destaque" href="bicicletas.html"&gt;ESCOLHA A SUA&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="hero-imagem"&gt;
+    &lt;img src="assets/bike-1.svg" alt="Bicicleta Bikcraft"&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  <div class="atencao"><span class="titulo">Atenção</span>O botão "ESCOLHA A SUA" é um link (<code>&lt;a&gt;</code>), não um <code>&lt;button&gt;</code> — porque a ação dele é <u>navegar</u> para outra página, e navegação é sempre trabalho do <code>&lt;a&gt;</code>.</div>
+
+  <h3 class="passo">Passo 3 — Catálogo: grade de bicicletas com id e class</h3>
+  <div class="objetivo-passo"><b>O que fazer:</b> em <code>bicicletas.html</code>, montar os cards de bicicleta com identificação individual e compartilhada.</div>
+  <pre><code>&lt;div class="grade-bicicletas"&gt;
+
+  &lt;article id="bike-1" class="card-bicicleta"&gt;
+    &lt;img class="imagem-bike" src="assets/bike-1.svg" alt="Bicicleta Magic Might"&gt;
+    &lt;div class="info-card"&gt;
+      &lt;p class="nome-bike"&gt;Magic Might&lt;/p&gt;
+      &lt;p class="preco-bike"&gt;R$ 2499&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/article&gt;
+
+  &lt;!-- repita a estrutura para bike-2 e bike-3, mudando id, imagem, nome e preço --&gt;
+
+&lt;/div&gt;</code></pre>
+  <div class="dica"><span class="titulo">Por que id E class ao mesmo tempo?</span><code>id="bike-1"</code> permite pegar SÓ a primeira bicicleta em JavaScript; <code>class="card-bicicleta"</code> permite pegar TODAS de uma vez com <code>querySelectorAll</code>. Os dois papéis são diferentes e os dois são exigidos no requisito da página.</div>
+
+  <h3 class="passo">Passo 4 — Script: mostrando os dados no console</h3>
+  <div class="objetivo-passo"><b>O que fazer:</b> em <code>script.js</code>, selecionar os elementos do catálogo e exibir as informações pedidas.</div>
+  <pre><code>// Pega TODOS os cards que compartilham a classe.
+const cardsBicicletas = document.querySelectorAll(".card-bicicleta");
+
+// console.log 1 — nome e preço de TODAS as bicicletas.
+cardsBicicletas.forEach((card) => {
+  const nome = card.querySelector(".nome-bike").textContent;
+  const preco = card.querySelector(".preco-bike").textContent;
+  console.log(`${nome} — ${preco}`);
+});
+
+// A Bicicleta 1 tem um id próprio.
+const bike1 = document.getElementById("bike-1");
+
+// console.log 2, 3 e 4 — nome, preço e imagem SÓ da Bicicleta 1.
+console.log(bike1.querySelector(".nome-bike").textContent);
+console.log(bike1.querySelector(".preco-bike").textContent);
+console.log(bike1.querySelector(".imagem-bike").src);</code></pre>
+  <p>Não esqueça de importar o script no final do <code>&lt;body&gt;</code> de <code>bicicletas.html</code>: <code>&lt;script src="script.js"&gt;&lt;/script&gt;</code>.</p>
+
+  <h3 class="passo pagebreak">Passo 5 — Contato: estrutura do formulário</h3>
+  <div class="objetivo-passo"><b>O que fazer:</b> em <code>contato.html</code>, montar o formulário com todos os campos exigidos, sem <code>required</code> (a validação é nossa, via JS).</div>
+  <pre><code>&lt;form id="form-contato" class="formulario-contato" novalidate&gt;
+
+  &lt;div class="campo" id="grupo-nome"&gt;
+    &lt;label for="nome"&gt;Nome&lt;/label&gt;
+    &lt;input type="text" id="nome" name="nome"&gt;
+    &lt;p class="mensagem-erro escondida" id="erro-nome"&gt;Preencha o nome.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- repita o padrão para telefone (type="tel"), email (type="email")
+       e mensagem (&lt;textarea&gt;) --&gt;
+
+  &lt;button type="submit"&gt;Enviar mensagem&lt;/button&gt;
+  &lt;p class="mensagem-confirmacao escondida" id="mensagem-confirmacao"&gt;&lt;/p&gt;
+&lt;/form&gt;</code></pre>
+
+  <h3 class="passo">Passo 6 — Script: captura, validação e confirmação</h3>
+  <div class="objetivo-passo"><b>O que fazer:</b> escutar o envio do formulário, impedir o recarregamento, validar os campos e mostrar a confirmação.</div>
+  <pre><code>const formContato = document.getElementById("form-contato");
+const mensagemConfirmacao = document.getElementById("mensagem-confirmacao");
+
+formContato.addEventListener("submit", (evento) => {
+  evento.preventDefault(); // impede o recarregamento da página
+
+  const nome = document.getElementById("nome");
+  let valido = true;
+
+  if (nome.value.trim() === "") {
+    document.getElementById("grupo-nome").classList.add("campo-invalido");
+    document.getElementById("erro-nome").classList.remove("escondida");
+    valido = false;
+  }
+
+  // repita a verificação para telefone, e-mail e mensagem...
+
+  if (!valido) return; // para aqui se algum campo estiver vazio
+
+  const email = document.getElementById("email").value;
+  mensagemConfirmacao.textContent =
+    `Recebemos seu contato, ${nome.value}! Retornaremos no e-mail ${email}.`;
+  mensagemConfirmacao.classList.remove("escondida");
+});</code></pre>
+  <div class="atencao"><span class="titulo">Atenção ao return</span>O <code>return</code> depois do <code>if (!valido)</code> é o que impede a mensagem de sucesso de aparecer junto com o erro. Sem ele, as duas mensagens ficariam visíveis ao mesmo tempo.</div>
+
+  <h3 class="passo">Passo 7 — Responsividade: mobile-first</h3>
+  <div class="objetivo-passo"><b>O que fazer:</b> ajustar o cabeçalho e os títulos para funcionarem bem do celular ao desktop.</div>
+  <pre><code>/* base = celular */
+.cabecalho { padding: 16px 16px; }
+
+.hero-titulo {
+  font-size: clamp(2.25rem, 6vw, 3.75rem);
+}
+
+/* só a partir do desktop (~1024px) */
+@media (min-width: 64em) {
+  .cabecalho { padding: 16px 100px; }
+}
+
+img { max-width: 100%; height: auto; }</code></pre>
+  <p>Teste arrastando a largura da janela do navegador (ou pelo DevTools) em 375px e em 1280px.</p>
+
+  <h3 class="passo">Passo 8 — Layout em 2 colunas com Flexbox</h3>
+  <div class="objetivo-passo"><b>O que fazer:</b> organizar a página de contato em duas colunas (dados e formulário), empilhadas no celular.</div>
+  <pre><code>.secao-contato {
+  display: flex;
+  flex-direction: column; /* celular: empilhado */
+  gap: 40px;
+}
+
+@media (min-width: 64em) {
+  .secao-contato { flex-direction: row; gap: 56px; }
+  .coluna-dados      { flex: 5; }
+  .coluna-formulario { flex: 7; }
+}
+
+/* nome e telefone na mesma linha, com quebra automática */
+.linha-formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.linha-formulario .campo { flex: 1 1 200px; }</code></pre>
+
+  <h3 class="passo">Passo 9 — Bibliotecas prontas: Bootstrap e Font Awesome</h3>
+  <div class="objetivo-passo"><b>O que fazer:</b> incluir as bibliotecas via CDN e usá-las com moderação, sem perder a identidade visual da marca.</div>
+  <pre><code>&lt;!-- no &lt;head&gt;, DEPOIS do link do style.css NÃO — o Bootstrap vem ANTES: --&gt;
+&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"&gt;
+&lt;link rel="stylesheet" href="style.css"&gt;&lt;!-- o nosso vem por último --&gt;</code></pre>
+  <pre><code>&lt;!-- ícone --&gt;
+&lt;i class="fa-solid fa-phone"&gt;&lt;/i&gt;
+
+&lt;!-- botão do Bootstrap customizado com uma classe própria --&gt;
+&lt;button type="submit" class="btn btn-bikcraft"&gt;Enviar mensagem&lt;/button&gt;</code></pre>
+  <pre><code>/* style.css — vence o .btn do Bootstrap por vir depois no HTML,
+   com a mesma especificidade (uma classe), sem !important */
+.btn-bikcraft {
+  background-color: #ffbf00;
+  color: #1a1300;
+  border: none;
+}</code></pre>
+  <div class="dica"><span class="titulo">Por que a ordem dos &lt;link&gt; importa?</span>Quando duas regras têm a mesma especificidade (uma classe contra uma classe), vence a que foi carregada por último. Por isso o <code>style.css</code> do projeto sempre entra depois do Bootstrap.</div>
+
+  <h3 class="passo">Passo 10 — Acabamento: transições e :hover</h3>
+  <div class="objetivo-passo"><b>O que fazer:</b> adicionar o toque final de suavidade nos cards e nos ícones do rodapé.</div>
+  <pre><code>.card-loja {
+  transition: transform 0.2s ease; /* fica no estado normal, não só no :hover */
+}
+.card-loja:hover {
+  transform: scale(1.03);
+}
+
+.redes-sociais a {
+  color: #f5f5f5;
+  transition: color 0.2s ease;
+}
+.redes-sociais a:hover {
+  color: #ffbf00;
+}</code></pre>
+
+  <h2 class="section pagebreak">5. Checklist de testes antes de entregar</h2>
+  <ul>
+    <li>Abra as 3 páginas com o Live Server e navegue pelo menu — todos os links funcionam?</li>
+    <li>Abra o DevTools (F12 → Console) em cada página — nenhum erro em vermelho?</li>
+    <li>Modo dispositivo: teste em 375px e em 1280px — nada quebra, nada estoura a tela?</li>
+    <li>No catálogo: os 4 <code>console.log</code> aparecem certos, na ordem certa?</li>
+    <li>No contato: enviar o formulário vazio mostra o aviso vermelho? Enviar preenchido mostra a confirmação com o nome e o e-mail certos?</li>
+    <li>O botão de envio está com a cor da marca (não a cor padrão azul do Bootstrap)?</li>
+    <li>Alguma regra do seu CSS usa <code>!important</code>? Se sim, revise a especificidade em vez disso.</li>
+  </ul>
+
+  <footer>
+    Desenvolvimento Front-End [React] T4 — SENAI/SC — Projeto Bikcraft (Semanas 07 a 10)<br>
+    Material de apoio ao aluno
+  </footer>
+
+</div>
+</body>
+</html>

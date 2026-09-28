@@ -1,0 +1,25 @@
+body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5f5; }
+
+/* Cabeçalho com padding lateral FIXO: 100px dos dois lados, sempre,
+   não importa o tamanho da tela. No monitor fica ótimo. No celular,
+   100px de cada lado sobra pouquíssimo espaço para o logo e o menu. */
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 100px; /* <- o problema está aqui */
+}
+
+.logo { font-weight: bold; font-size: 1.4rem; }
+nav { display: flex; gap: 20px; }
+nav a { color: #f5f5f5; text-decoration: none; }
+
+/* Título do hero com tamanho FIXO em rem: 4rem = 64px sempre,
+   não importa o tamanho da tela. No celular ele estoura a largura
+   e provavelmente força scroll horizontal. */
+.hero-titulo {
+  font-size: 4rem; /* <- o outro problema */
+  line-height: 1.1;
+  padding: 40px 100px;
+  margin: 0;
+}

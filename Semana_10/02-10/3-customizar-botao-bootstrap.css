@@ -1,0 +1,29 @@
+body { background:#0a0a0a; color:#f5f5f5; padding:24px 16px; font-family:Arial,sans-serif; }
+
+.titulo-demo { font-size: 1.4rem; }
+.texto-legenda { color: #a8a8a8; margin-top: 16px; }
+
+/*
+  EXERCÍCIO (10 min) — o botão abaixo usa a classe ".btn" do Bootstrap
+  (fundo azul padrão). Queremos a cor da marca Bikcraft: fundo preto,
+  texto dourado — SEM usar !important.
+
+  Pergunta para responder antes de programar: por que uma cor definida
+  aqui, numa classe só nossa, ainda perde para ".btn" do Bootstrap se
+  ela tiver a MESMA especificidade e vier ANTES no arquivo?
+  (Resposta: cascata — em empate de especificidade, vence a ÚLTIMA
+  regra declarada. O <link> do Bootstrap é carregado ANTES do nosso
+  próprio arquivo CSS (veja o <head> do HTML), então, em empate, nós
+  venceríamos de qualquer forma — mas apostar apenas na cascata é
+  arriscado (basta alguém importar o Bootstrap depois do nosso CSS
+  para inverter tudo). Ter uma classe própria, com a mesma
+  especificidade de ".btn", é a forma mais segura e explícita de
+  garantir a cor da marca.)
+*/
+.btn-bikcraft {
+  background-color: #000;
+  color: #ffbf00;
+  border: none;
+}
+/* COMPLETE AQUI: adicione um ":hover" para o botão escurecer levemente
+   ao passar o mouse (ex.: background-color: #1a1a1a) */

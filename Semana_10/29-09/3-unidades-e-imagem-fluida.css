@@ -1,0 +1,38 @@
+body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5f5; padding: 16px; }
+
+h2 {
+  font-size: 2rem; /* rem = relativo à raiz (html), 1rem = 16px por padrão.
+    É a unidade preferida para fonte: cresce/diminui junto se o usuário
+    mudar o tamanho de fonte padrão do navegador. */
+}
+
+.titulo-secundario { margin-top: 32px; }
+
+/*
+  px  → unidade ABSOLUTA. 10px são sempre 10px, não importa a tela.
+  %   → RELATIVA ao elemento pai (largura do pai, no caso de width).
+  rem → RELATIVA à raiz do documento (o <html>), boa para fontes.
+  vw  → 1vw = 1% da LARGURA da tela (viewport width) — bom para banners
+        e espaçamentos que devem "respirar" com a tela.
+*/
+.caixa-px    { width: 300px; }              /* sempre 300px */
+.caixa-pct   { width: 50%; }                 /* metade do elemento pai */
+.banner-vw   { padding: 5vw; background:#161616; border-radius:6px; }
+
+.caixa-px, .caixa-pct {
+  background:#161616;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+}
+
+/*
+  Imagem fluida: sem isso, uma foto grande estoura o layout no celular.
+  max-width: 100% garante que a imagem nunca passa da largura do
+  elemento pai; height: auto mantém a proporção original (sem esticar).
+*/
+.foto-fluida img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
