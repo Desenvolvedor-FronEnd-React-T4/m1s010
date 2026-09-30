@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Media Queries e Responsividade</title>
+<style>
+  :root { --cor:#0b5cff; --fundo:#f6f8fc; --texto:#1a1f2b; --borda:#d9e0ee; --dest:#fff7d6; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: "Segoe UI", Arial, sans-serif; color:var(--texto); background:var(--fundo); line-height:1.6; }
+  main { max-width: 960px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height:1.15; margin:0 0 8px; }
+  h2 { margin-top: 48px; padding-bottom: 6px; border-bottom: 3px solid var(--cor); }
+  h3 { margin-top: 28px; }
+  .sub { color:#556; margin-bottom: 24px; }
+  table { border-collapse: collapse; width:100%; background:#fff; margin: 12px 0 20px; font-size: .95rem; }
+  th, td { border:1px solid var(--borda); padding: 8px 10px; text-align:left; vertical-align: top; }
+  th { background:#e8eefc; }
+  .scroll { overflow-x:auto; }
+  code, pre { font-family: Consolas, monospace; }
+  code { background:#eef1f8; padding: 1px 5px; border-radius:4px; }
+  pre { background:#111827; color:#e5e7eb; padding:14px; border-radius:8px; overflow-x:auto; font-size:.9rem; }
+  pre code { background:none; padding:0; }
+  .dica, .alerta, .ok { padding: 12px 16px; border-radius: 8px; margin: 16px 0; }
+  .dica { background: var(--dest); border-left: 5px solid #e6b800; }
+  .alerta { background:#ffe8e8; border-left:5px solid #d33; }
+  .ok { background:#e5f7ea; border-left:5px solid #17a34a; }
+  .lado { display:grid; gap:12px; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .lado { grid-template-columns: 1fr 1fr; } }
+  .ex { border:2px dashed var(--borda); background:#fff; border-radius:8px; padding:12px 16px; }
+  .passo { counter-increment: p; background:#fff; border:1px solid var(--borda); border-radius:10px; padding:12px 16px 12px 56px; margin:12px 0; position:relative; }
+  .passo::before { content: counter(p); position:absolute; left:14px; top:12px; width:30px; height:30px; border-radius:50%; background:var(--cor); color:#fff; text-align:center; line-height:30px; font-weight:700; }
+  .passos { counter-reset: p; }
+  @media print { body { background:#fff; } h2 { break-after: avoid; } table, pre { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Guia de Media Queries e Responsividade</h1>
+<p class="sub">M1S10 — Desenvolvimento Front-End [React] T4 · Do conceito à prática, com exemplos no projeto Bikcraft · Complementa o <strong>Guia_Tamanhos_Padrao_Responsivo.html</strong></p>
+
+<h2>1. O que é responsividade?</h2>
+<p><strong>Design responsivo</strong> é a técnica de construir <em>uma única página</em> que se adapta ao tamanho da tela em que está sendo exibida (celular, tablet, notebook, TV), em vez de criar um site diferente para cada aparelho.</p>
+<div class="dica"><strong>Analogia:</strong> a água. Ela assume o formato do copo, da garrafa ou do balde onde é colocada, mas continua sendo a mesma água. Uma página responsiva é o conteúdo (a água) e o CSS decide o formato do recipiente.</div>
+
+<h3>Por que isso importa?</h3>
+<ul>
+  <li>Mais de <strong>60% dos acessos</strong> à web no Brasil vêm de celular. Uma página que só funciona no computador perde a maior parte do público.</li>
+  <li>Você mantém <strong>um só código</strong>, e não três sites para atualizar.</li>
+  <li>O Google prioriza sites otimizados para celular (<em>mobile-first indexing</em>).</li>
+  <li>É requisito básico em qualquer vaga de front-end.</li>
+</ul>
+
+<h3>Os três pilares da responsividade</h3>
+<div class="scroll"><table>
+<tr><th>Pilar</th><th>O que é</th><th>Como se faz</th></tr>
+<tr><td><strong>1. Meta viewport</strong></td><td>Avisa ao celular para usar a largura real da tela</td><td><code>&lt;meta name="viewport" ...&gt;</code></td></tr>
+<tr><td><strong>2. Layout e mídia fluidos</strong></td><td>Tamanhos relativos, que crescem e encolhem com a tela</td><td><code>%</code>, <code>rem</code>, <code>vw</code>, <code>clamp()</code>, Flexbox, <code>max-width:100%</code></td></tr>
+<tr><td><strong>3. Media queries</strong></td><td>Regras de CSS que só valem em certos tamanhos de tela</td><td><code>@media (min-width: 768px) { ... }</code></td></tr>
+</table></div>
+
+<h2>2. Passo 0: o meta viewport</h2>
+<p>Sem ele, o celular <strong>finge ser uma tela de desktop (≈ 980px)</strong> e encolhe a página para caber. O resultado: letras minúsculas e nenhuma media query funcionando de verdade. Coloque no <code>&lt;head&gt;</code> de <strong>toda</strong> página:</p>
+<pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+<ul>
+  <li><code>width=device-width</code>: a largura da página é a largura real do aparelho.</li>
+  <li><code>initial-scale=1.0</code>: sem zoom inicial.</li>
+</ul>
+<div class="alerta"><strong>Erro nº 1 dos alunos:</strong> escrever um CSS responsivo perfeito e esquecer o meta viewport. No DevTools funciona, e no celular de verdade não. Confira sempre.</div>
+
+<h2>3. O que é uma media query?</h2>
+<p>Uma <strong>media query</strong> (consulta de mídia) é uma <strong>pergunta</strong> que o CSS faz ao navegador: <em>"a tela tem no mínimo 768px de largura?"</em>. Se a resposta for <strong>sim</strong>, as regras dentro do bloco passam a valer. Se for <strong>não</strong>, são ignoradas.</p>
+
+<h3>3.1 Anatomia</h3>
+<pre><code>@media (min-width: 768px) {
+  .cartao { width: 50%; }      /* estas regras só valem se a tela for ≥ 768px */
+  .titulo { font-size: 2.5rem; }
+}</code></pre>
+<div class="scroll"><table>
+<tr><th>Parte</th><th>Significado</th></tr>
+<tr><td><code>@media</code></td><td>Palavra-chave que abre a consulta</td></tr>
+<tr><td><code>(min-width: 768px)</code></td><td>A condição: largura da viewport <strong>maior ou igual</strong> a 768px</td></tr>
+<tr><td><code>{ ... }</code></td><td>Regras CSS normais, escritas <em>dentro</em> do bloco</td></tr>
+</table></div>
+
+<h3>3.2 As condições mais usadas</h3>
+<div class="scroll"><table>
+<tr><th>Condição</th><th>Lê-se como</th><th>Quando usar</th></tr>
+<tr><td><code>(min-width: 768px)</code></td><td>"a partir de 768px, para cima"</td><td><strong>Mobile-first</strong> (o padrão desta aula)</td></tr>
+<tr><td><code>(max-width: 767px)</code></td><td>"até 767px, para baixo"</td><td>Desktop-first (evitar em projeto novo)</td></tr>
+<tr><td><code>(min-width: 768px) and (max-width: 1023px)</code></td><td>"apenas entre 768 e 1023px"</td><td>Ajuste só para tablet (raro)</td></tr>
+<tr><td><code>(orientation: landscape)</code></td><td>Tela deitada</td><td>Celular na horizontal</td></tr>
+<tr><td><code>(prefers-color-scheme: dark)</code></td><td>Usuário usa tema escuro</td><td>Modo escuro automático</td></tr>
+<tr><td><code>(prefers-reduced-motion: reduce)</code></td><td>Usuário pediu menos animação</td><td>Acessibilidade</td></tr>
+<tr><td><code>print</code></td><td>Na impressão</td><td>Esconder menu/anúncios ao imprimir</td></tr>
+</table></div>
+
+<h2>4. Mobile-first: a regra que guia tudo</h2>
+<p><strong>Mobile-first</strong> significa escrever o CSS <strong>primeiro para o celular</strong> e ir <em>acrescentando</em> regras para telas maiores com <code>min-width</code>.</p>
+<div class="lado">
+  <div class="ex"><strong>Mobile-first (recomendado)</strong>
+<pre><code>.menu { flex-direction: column; }
+
+@media (min-width: 768px) {
+  .menu { flex-direction: row; }
+}</code></pre>
+  O celular usa só a regra base (leve e simples). Telas maiores <em>acrescentam</em>.</div>
+  <div class="ex"><strong>Desktop-first (evitar)</strong>
+<pre><code>.menu { flex-direction: row; }
+
+@media (max-width: 767px) {
+  .menu { flex-direction: column; }
+}</code></pre>
+  O celular precisa <em>desfazer</em> o que o desktop definiu. Mais código e mais bugs.</div>
+</div>
+
+<h3>Por que mobile-first?</h3>
+<ol>
+  <li><strong>Começa pelo mais difícil:</strong> uma tela pequena obriga você a decidir o que é realmente importante.</li>
+  <li><strong>Menos código:</strong> o celular (aparelho mais fraco) carrega só as regras base.</li>
+  <li><strong>Menos "desfazer":</strong> você adiciona, e não cancela regras anteriores.</li>
+  <li><strong>Espelha o mercado:</strong> a maior parte do público está no celular.</li>
+</ol>
+
+<h3>A cascata cuida do resto</h3>
+<p>As media queries <strong>não substituem</strong> o CSS base: elas se somam a ele. A regra que vem <em>depois</em> e tem o mesmo peso de especificidade vence. Por isso, <strong>as media queries ficam depois</strong> das regras base do mesmo seletor.</p>
+<pre><code>.card { padding: 16px; }                     /* 1. base (celular) */
+
+@media (min-width: 768px)  { .card { padding: 24px; } }   /* 2. tablet+ sobrescreve */
+@media (min-width: 1024px) { .card { padding: 32px; } }   /* 3. desktop sobrescreve */</code></pre>
+<div class="alerta"><strong>Ordem importa:</strong> em <code>min-width</code>, escreva do <strong>menor para o maior</strong> (768 → 1024 → 1440). Se você inverter, a de 768px sobrescreve a de 1024px em telas grandes, porque vem depois e vale também nelas.</div>
+
+<h2>5. Onde escrever a media query</h2>
+<h3>5.1 No mesmo arquivo CSS (recomendado)</h3>
+<pre><code>/* style.css */
+.cartao { ... }
+
+@media (min-width: 768px) { ... }</code></pre>
+
+<h3>5.2 Em arquivos separados por tela (opcional, projetos grandes)</h3>
+<pre><code>&lt;link rel="stylesheet" href="base.css"&gt;
+&lt;link rel="stylesheet" href="tablet.css"  media="(min-width: 768px)"&gt;
+&lt;link rel="stylesheet" href="desktop.css" media="(min-width: 1024px)"&gt;</code></pre>
+<p>Para a turma, fique com a opção 5.1 (um arquivo, com blocos <code>@media</code> ao final ou logo abaixo de cada componente).</p>
+
+<h2>6. Unidades que tornam o layout fluido</h2>
+<p>Media queries resolvem os "saltos" de layout. As <strong>unidades relativas</strong> resolvem a transição suave entre os saltos.</p>
+<div class="scroll"><table>
+<tr><th>Unidade</th><th>Relativa a…</th><th>Exemplo</th><th>Bom para</th></tr>
+<tr><td><code>px</code></td><td>Nada (absoluta)</td><td><code>border: 1px</code></td><td>Bordas, sombras, detalhes finos</td></tr>
+<tr><td><code>%</code></td><td>Elemento pai</td><td><code>width: 50%</code></td><td>Larguras de colunas</td></tr>
+<tr><td><code>rem</code></td><td>Fonte da raiz (<code>html</code>, normalmente 16px)</td><td><code>font-size: 1.5rem</code> (24px)</td><td><strong>Fontes e espaçamentos</strong></td></tr>
+<tr><td><code>em</code></td><td>Fonte do próprio elemento</td><td><code>padding: 1em</code></td><td>Botões que escalam com o texto; <strong>breakpoints</strong></td></tr>
+<tr><td><code>vw</code> / <code>vh</code></td><td>1% da largura / altura da tela</td><td><code>padding: 5vw</code></td><td>Banners e respiros</td></tr>
+<tr><td><code>ch</code></td><td>Largura do caractere "0"</td><td><code>max-width: 65ch</code></td><td>Limitar linha de texto</td></tr>
+<tr><td><code>fr</code></td><td>Fração do espaço livre (Grid)</td><td><code>grid-template-columns: 1fr 1fr</code></td><td>Colunas iguais</td></tr>
+</table></div>
+
+<h3>6.1 A função <code>clamp()</code> — responsividade sem media query</h3>
+<pre><code>font-size: clamp(2rem, 5vw, 4rem);
+/*              mín   ideal  máx  */</code></pre>
+<p>O título <strong>nunca</strong> é menor que 2rem, <strong>nunca</strong> é maior que 4rem, e entre um e outro acompanha 5% da largura da tela. Uma linha substitui duas ou três media queries.</p>
+
+<h3>6.2 Imagem fluida (obrigatória)</h3>
+<pre><code>img { max-width: 100%; height: auto; }</code></pre>
+<p><code>max-width: 100%</code> impede a imagem de passar da largura do pai. <code>height: auto</code> mantém a proporção.</p>
+
+<h2>7. Layouts que se adaptam quase sozinhos (Flexbox)</h2>
+<p>Com Flexbox, muitas vezes você resolve a responsividade sem escrever nenhuma media query:</p>
+<pre><code>.lista {
+  display: flex;
+  flex-wrap: wrap;        /* quebra de linha se não couber */
+  gap: 16px;
+}
+.cartao {
+  flex: 1 1 280px;        /* cresce, encolhe, base de 280px */
+}</code></pre>
+<p>Cada card tenta ter 280px. Se não couberem dois lado a lado, o Flexbox quebra a linha automaticamente. Em 375px há 1 por linha, em 768px há 2, em 1200px há 3 ou 4. <em>Sem media query.</em></p>
+<div class="dica"><strong>Regra prática:</strong> primeiro tente resolver com unidades fluidas + Flexbox (<code>wrap</code>, <code>flex</code>). Use media queries quando o <strong>layout mudar de estrutura</strong> (coluna vira linha, menu muda de formato, muda o número de colunas de forma controlada).</div>
+
+<h2>8. Passo a passo: transformando uma página em responsiva</h2>
+<div class="passos">
+  <div class="passo"><strong>Esboce no Excalidraw.</strong> Desenhe 3 versões da página (celular, tablet, desktop). Decida o que muda de um para o outro.</div>
+  <div class="passo"><strong>Meta viewport no HTML.</strong> Uma linha no <code>&lt;head&gt;</code>.</div>
+  <div class="passo"><strong>Escreva o CSS base para o celular.</strong> Coluna única, fontes de 16px, padding de 16px, imagens com <code>max-width:100%</code>. Sem nenhuma media query ainda.</div>
+  <div class="passo"><strong>Teste em 320px, 360px e 390px</strong> no DevTools. Nada pode gerar rolagem horizontal.</div>
+  <div class="passo"><strong>Alargue a janela devagar.</strong> No ponto em que o layout começar a ficar estranho (texto muito esticado, muito espaço vazio), <em>anote a largura</em>. É o seu breakpoint.</div>
+  <div class="passo"><strong>Adicione <code>@media (min-width: …)</code></strong> com só o que muda: número de colunas, direção do menu, tamanho de título, paddings.</div>
+  <div class="passo"><strong>Repita</strong> para o próximo breakpoint (1024px) e teste tudo de novo, do menor ao maior.</div>
+</div>
+
+<h2>9. Exemplo completo: o cabeçalho do Bikcraft</h2>
+<h3>HTML</h3>
+<pre><code>&lt;header class="cabecalho"&gt;
+  &lt;span class="logo"&gt;bikcraft&lt;/span&gt;
+  &lt;nav class="menu"&gt;
+    &lt;a href="#"&gt;Bicicletas&lt;/a&gt;
+    &lt;a href="#"&gt;Seguros&lt;/a&gt;
+    &lt;a href="#"&gt;Contato&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+
+<h3>CSS mobile-first</h3>
+<pre><code>/* ===== BASE: celular ===== */
+.cabecalho {
+  display: flex;
+  flex-direction: column;   /* logo em cima, menu embaixo */
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+.menu { display: flex; gap: 8px; }
+.menu a { padding: 12px; }      /* área de toque ≥ 44px */
+
+/* ===== TABLET: a partir de 768px ===== */
+@media (min-width: 768px) {
+  .cabecalho {
+    flex-direction: row;          /* logo e menu na mesma linha */
+    justify-content: space-between;
+    padding: 16px 32px;
+  }
+}
+
+/* ===== DESKTOP: a partir de 1024px ===== */
+@media (min-width: 1024px) {
+  .cabecalho { padding: 16px 100px; }
+  .menu { gap: 24px; }
+}</code></pre>
+<p>Repare que cada bloco <strong>só declara o que mudou</strong>. Nada é repetido, nada é desfeito.</p>
+
+<h2>10. Exemplo: grade de cards em 1, 2 e 3 colunas</h2>
+<pre><code>.grade {
+  display: grid;
+  grid-template-columns: 1fr;      /* celular: 1 coluna */
+  gap: 16px;
+}
+@media (min-width: 768px)  { .grade { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+@media (min-width: 1024px) { .grade { grid-template-columns: repeat(3, 1fr); gap: 32px; } }</code></pre>
+<p>Versão com Flexbox e sem media query, para comparar:</p>
+<pre><code>.grade { display:flex; flex-wrap:wrap; gap:16px; }
+.grade &gt; * { flex: 1 1 280px; }</code></pre>
+
+<h2>11. Erros comuns (e como evitar)</h2>
+<div class="scroll"><table>
+<tr><th>Sintoma</th><th>Causa provável</th><th>Solução</th></tr>
+<tr><td>Página minúscula no celular, media query "não pega"</td><td>Faltou o meta viewport</td><td>Adicionar a linha ao <code>&lt;head&gt;</code></td></tr>
+<tr><td>Rolagem horizontal no celular</td><td>Elemento com <code>width</code> fixo em px maior que a tela, ou imagem sem <code>max-width:100%</code></td><td>Trocar por <code>%</code>/<code>max-width</code>; procurar o culpado no DevTools</td></tr>
+<tr><td>Media query de 1024px é "ignorada"</td><td>Está <em>antes</em> da regra base no arquivo, e a base a sobrescreve</td><td>Colocar o <code>@media</code> depois da regra base</td></tr>
+<tr><td>Layout de tablet aparece no desktop</td><td>Media queries em ordem invertida</td><td>Sempre menor → maior com <code>min-width</code></td></tr>
+<tr><td>Nada acontece ao editar</td><td>Chave <code>{ }</code> sem fechar, ou <code>;</code> faltando</td><td>Verificar no editor; o VS Code destaca pares de chaves</td></tr>
+<tr><td>Texto muito pequeno no celular</td><td>Fonte em <code>px</code> pequenos (&lt;16px)</td><td>Usar <code>rem</code> e corpo de 1rem no mínimo</td></tr>
+<tr><td>Botões difíceis de tocar</td><td>Área de toque &lt; 44px</td><td><code>padding</code> maior, <code>min-height: 44px</code></td></tr>
+<tr><td>Misturar <code>min-width</code> e <code>max-width</code> sem querer</td><td>Falta de padrão no projeto</td><td>Escolher uma direção (mobile-first = só <code>min-width</code>)</td></tr>
+</table></div>
+
+<h2>12. Ferramentas de trabalho</h2>
+<ul>
+  <li><strong>Excalidraw</strong> (excalidraw.com): esboço de layout em modo "rascunho" antes de codar. Veja o roteiro de uso no enunciado do exercício do dia 29/09.</li>
+  <li><strong>Chrome DevTools, modo dispositivo</strong> (<code>F12</code> → <code>Ctrl+Shift+M</code>): simular celulares, tablets e larguras livres.</li>
+  <li><strong>Live Server</strong> (VS Code): recarrega a página a cada salvamento.</li>
+  <li><strong>Google Fonts:</strong> tipografia profissional (Poppins, Inter, Roboto), como no guia de tamanhos padrão.</li>
+</ul>
+
+<h2>13. Resumo em 8 regras</h2>
+<div class="ok">
+<ol>
+  <li>Toda página começa com o <strong>meta viewport</strong>.</li>
+  <li>Escreva o CSS base para o <strong>celular</strong>.</li>
+  <li>Use <code>@media (min-width: …)</code> para <strong>acrescentar</strong> regras em telas maiores.</li>
+  <li>Ordene as media queries do <strong>menor para o maior</strong>, depois das regras base.</li>
+  <li>Prefira unidades <strong>relativas</strong> (<code>rem</code>, <code>%</code>, <code>vw</code>, <code>clamp()</code>).</li>
+  <li>Imagens: <code>max-width:100%; height:auto;</code></li>
+  <li>Use poucos breakpoints (<strong>768px</strong> e <strong>1024px</strong> resolvem quase tudo) e escolha-os pelo <strong>conteúdo</strong>.</li>
+  <li>Teste no DevTools do <strong>menor ao maior</strong>, sempre sem rolagem horizontal.</li>
+</ol>
+</div>
+
+<h2>14. Para praticar e aprofundar</h2>
+<ul>
+  <li>Exercício em aula: <code>Semana_10/29-09/4-exercicio-catalogo-responsivo.html</code></li>
+  <li>MDN — <em>Using media queries</em> e <em>Beginner's guide to media queries</em></li>
+  <li>web.dev — curso <em>Learn Responsive Design</em> (Google)</li>
+  <li>Bootstrap 5 (02/10): o mesmo conceito, com breakpoints prontos como <code>col-md-6</code> e <code>col-lg-4</code></li>
+</ul>
+
+</main>
+</body>
+</html>

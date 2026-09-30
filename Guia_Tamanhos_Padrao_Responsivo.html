@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Tamanhos Padrão — Celular, Tablet, Notebook e Desktop</title>
+<style>
+  :root { --cor:#0b5cff; --fundo:#f6f8fc; --texto:#1a1f2b; --borda:#d9e0ee; --dest:#fff7d6; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: "Segoe UI", Arial, sans-serif; color:var(--texto); background:var(--fundo); line-height:1.6; }
+  main { max-width: 960px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height:1.15; margin:0 0 8px; }
+  h2 { margin-top: 48px; padding-bottom: 6px; border-bottom: 3px solid var(--cor); }
+  h3 { margin-top: 28px; }
+  .sub { color:#556; margin-bottom: 24px; }
+  table { border-collapse: collapse; width:100%; background:#fff; margin: 12px 0 20px; font-size: .95rem; }
+  th, td { border:1px solid var(--borda); padding: 8px 10px; text-align:left; vertical-align: top; }
+  th { background:#e8eefc; }
+  .scroll { overflow-x:auto; }
+  code, pre { font-family: Consolas, monospace; }
+  code { background:#eef1f8; padding: 1px 5px; border-radius:4px; }
+  pre { background:#111827; color:#e5e7eb; padding:14px; border-radius:8px; overflow-x:auto; font-size:.9rem; }
+  pre code { background:none; padding:0; }
+  .dica, .alerta { padding: 12px 16px; border-radius: 8px; margin: 16px 0; }
+  .dica { background: var(--dest); border-left: 5px solid #e6b800; }
+  .alerta { background:#ffe8e8; border-left:5px solid #d33; }
+  .cartoes { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); }
+  .cartao { background:#fff; border:1px solid var(--borda); border-radius:10px; padding:12px 16px; }
+  .cartao strong { color: var(--cor); }
+  .regua { display:flex; flex-direction:column; gap:6px; margin:16px 0; }
+  .faixa { background:var(--cor); color:#fff; padding:6px 10px; border-radius:6px; font-size:.85rem; }
+  .f1 { width:35%; min-width:150px; background:#e5484d; }
+  .f2 { width:55%; background:#f5a524; }
+  .f3 { width:70%; background:#17a34a; }
+  .f4 { width:85%; background:#0b5cff; }
+  .f5 { width:100%; background:#7c3aed; }
+  @media print { body { background:#fff; } h2 { break-after: avoid; } table, pre { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Guia de Tamanhos Padrão para Layout Responsivo</h1>
+<p class="sub">M1S10 — Desenvolvimento Front-End [React] T4 · Material de apoio ao exercício de mobile-first · Complementa o <strong>Guia_Media_Queries_e_Responsividade.html</strong></p>
+
+<h2>1. A ideia mais importante: pixel CSS não é pixel da tela</h2>
+<p>Quando você escreve <code>width: 375px</code>, o navegador <strong>não</strong> está falando de pixels físicos do aparelho. Ele usa o <strong>pixel CSS</strong> (também chamado de <em>pixel independente de dispositivo</em>). Um iPhone 15 tem 1179 × 2556 pixels físicos, mas o navegador o enxerga como <strong>393 × 852</strong> pixels CSS. A razão entre os dois é o <strong>device pixel ratio (DPR)</strong>, aqui igual a 3.</p>
+<div class="cartoes">
+  <div class="cartao"><strong>Pixel físico</strong><br>O ponto real de luz na tela. Você quase nunca usa no CSS.</div>
+  <div class="cartao"><strong>Pixel CSS</strong><br>A unidade que o navegador usa para <code>width</code>, media queries e DevTools.</div>
+  <div class="cartao"><strong>DPR</strong><br>Quantos pixels físicos cabem em 1 pixel CSS (1x, 2x, 3x). Telas "retina" têm 2x ou mais.</div>
+</div>
+<div class="dica"><strong>Por isso</strong> as media queries usam a <em>largura da viewport em pixels CSS</em>. Um celular de tela 4K continua sendo "uns 400px" para o CSS. É o que faz o mesmo site funcionar em qualquer aparelho.</div>
+
+<h2>2. Tamanhos de tela que o navegador considera (viewport em px CSS)</h2>
+<p>Valores aproximados da <strong>largura × altura da viewport</strong> em modo retrato (celular/tablet) ou paisagem (notebook/desktop). São os que aparecem nas listas de dispositivos do DevTools do Chrome.</p>
+
+<h3>2.1 Celular (smartphone)</h3>
+<div class="scroll"><table>
+<tr><th>Dispositivo (exemplo)</th><th>Largura × Altura (px CSS)</th><th>DPR</th></tr>
+<tr><td>iPhone SE (2ª/3ª ger.)</td><td>375 × 667</td><td>2</td></tr>
+<tr><td>Galaxy S8+ / celular Android pequeno</td><td>360 × 740</td><td>4</td></tr>
+<tr><td>Samsung Galaxy S20/S21/S23, Android médio</td><td>360 × 800</td><td>3</td></tr>
+<tr><td>iPhone 12/13/14</td><td>390 × 844</td><td>3</td></tr>
+<tr><td>iPhone 15 / 15 Pro</td><td>393 × 852</td><td>3</td></tr>
+<tr><td>Pixel 7 / Android grande</td><td>412 × 915</td><td>2,6</td></tr>
+<tr><td>iPhone 14/15 Pro Max</td><td>430 × 932</td><td>3</td></tr>
+</table></div>
+<p><strong>Faixa prática:</strong> <strong>320px a 480px</strong>. Projete sempre para <strong>360px</strong> (o Android mais comum) e teste em <strong>320px</strong> (o menor caso real). Abaixo disso quase não existe aparelho.</p>
+
+<h3>2.2 Tablet</h3>
+<div class="scroll"><table>
+<tr><th>Dispositivo (exemplo)</th><th>Retrato</th><th>Paisagem</th></tr>
+<tr><td>iPad mini</td><td>744 × 1133</td><td>1133 × 744</td></tr>
+<tr><td>iPad / iPad Air 10,9"</td><td>768 a 820 × 1024 a 1180</td><td>1024 a 1180 × 768 a 820</td></tr>
+<tr><td>iPad Pro 11"</td><td>834 × 1194</td><td>1194 × 834</td></tr>
+<tr><td>iPad Pro 12,9"</td><td>1024 × 1366</td><td>1366 × 1024</td></tr>
+<tr><td>Galaxy Tab / Android 10"</td><td>800 × 1280</td><td>1280 × 800</td></tr>
+</table></div>
+<p><strong>Faixa prática:</strong> <strong>768px a 1023px</strong> em retrato. Em paisagem o tablet já "vira" notebook pequeno, e é por isso que <code>1024px</code> é o breakpoint clássico de desktop.</p>
+
+<h3>2.3 Notebook (laptop)</h3>
+<div class="scroll"><table>
+<tr><th>Resolução física comum</th><th>Viewport típica do navegador</th><th>Observação</th></tr>
+<tr><td>1366 × 768</td><td>≈ 1366 × 650</td><td>O notebook de entrada mais vendido no Brasil</td></tr>
+<tr><td>1440 × 900 (MacBook Air 13")</td><td>≈ 1440 × 790</td><td>DPR 2</td></tr>
+<tr><td>1536 × 864 (1920×1080 com zoom 125%)</td><td>≈ 1536 × 730</td><td>Muito comum no Windows</td></tr>
+<tr><td>1920 × 1080 (notebook Full HD)</td><td>≈ 1920 × 950</td><td>Se a escala do Windows for 100%</td></tr>
+</table></div>
+<p><strong>Faixa prática:</strong> <strong>1024px a 1439px</strong>. O alvo mais seguro de teste é <strong>1366px</strong>. A altura útil é menor que a da tela porque a barra de abas, endereço e a barra de tarefas consomem espaço.</p>
+
+<h3>2.4 Desktop (monitor)</h3>
+<div class="scroll"><table>
+<tr><th>Resolução</th><th>Nome comum</th></tr>
+<tr><td>1920 × 1080</td><td>Full HD (o mais comum)</td></tr>
+<tr><td>2560 × 1440</td><td>QHD / 2K</td></tr>
+<tr><td>3840 × 2160</td><td>4K (geralmente com escala 150% a 200%, virando ≈ 1920 a 2560 px CSS)</td></tr>
+</table></div>
+<p><strong>Faixa prática:</strong> <strong>1440px em diante</strong>. Em monitores grandes <em>não</em> se estica o conteúdo até as bordas: limita-se com <code>max-width</code> (ver seção 6).</p>
+
+<h3>2.5 Resumo visual</h3>
+<div class="regua">
+  <div class="faixa f1">Celular · 320 – 479px</div>
+  <div class="faixa f2">Celular grande / tablet pequeno · 480 – 767px</div>
+  <div class="faixa f3">Tablet · 768 – 1023px</div>
+  <div class="faixa f4">Notebook · 1024 – 1439px</div>
+  <div class="faixa f5">Desktop / monitor grande · 1440px +</div>
+</div>
+
+<h2>3. Breakpoints: onde o layout "quebra"</h2>
+<p><strong>Breakpoint</strong> é a largura de tela em que o layout muda. Não existe padrão oficial da W3C: cada framework escolheu os seus, mas todos ficam bem próximos.</p>
+
+<h3>3.1 Conjunto recomendado para a nossa turma (mobile-first)</h3>
+<div class="scroll"><table>
+<tr><th>Nome</th><th>Media query (<code>min-width</code>)</th><th>Em <code>em</code></th><th>Alvo</th></tr>
+<tr><td>Base (sem media query)</td><td>—</td><td>—</td><td>Celular, de 320px em diante</td></tr>
+<tr><td>Tablet</td><td><code>@media (min-width: 768px)</code></td><td>48em</td><td>Tablet em retrato</td></tr>
+<tr><td>Notebook / Desktop</td><td><code>@media (min-width: 1024px)</code></td><td>64em</td><td>Notebook e desktop</td></tr>
+<tr><td>Tela grande (opcional)</td><td><code>@media (min-width: 1440px)</code></td><td>90em</td><td>Monitores Full HD e maiores</td></tr>
+</table></div>
+<div class="dica"><strong>Regra de ouro:</strong> use poucos breakpoints. Três "faixas" (celular, tablet, desktop) resolvem 90% dos casos. Se precisar de um quarto, é porque o <em>conteúdo</em> quebrou, e não porque existe um aparelho novo.</div>
+
+<h3>3.2 Comparação com os frameworks</h3>
+<div class="scroll"><table>
+<tr><th>Framework</th><th>Breakpoints (min-width)</th></tr>
+<tr><td><strong>Bootstrap 5</strong></td><td>sm 576 · md 768 · lg 992 · xl 1200 · xxl 1400</td></tr>
+<tr><td><strong>Tailwind CSS</strong></td><td>sm 640 · md 768 · lg 1024 · xl 1280 · 2xl 1536</td></tr>
+<tr><td><strong>Material Design</strong></td><td>compact &lt;600 · medium 600–839 · expanded 840+</td></tr>
+<tr><td><strong>Nosso conjunto</strong></td><td>768 · 1024 · (1440)</td></tr>
+</table></div>
+<p>O ponto em comum: <strong>768px</strong> é praticamente universal para "tablet" e <strong>1024px (ou 992px)</strong> para "desktop". Como usamos Bootstrap na quinta-feira (02/10), vale lembrar que lá o "desktop" começa em <code>992px</code>.</p>
+
+<h3>3.3 Como escolher o valor do breakpoint</h3>
+<ul>
+  <li><strong>Não mire em aparelhos</strong> (iPhone X, Galaxy S9). Eles mudam todo ano.</li>
+  <li><strong>Mire no conteúdo</strong>: arraste a janela até o layout ficar feio, e é ali que entra o breakpoint.</li>
+  <li>Prefira <code>min-width</code> (mobile-first) a <code>max-width</code>. Ver o guia de media queries.</li>
+  <li>Pode usar <code>px</code> ou <code>em</code>. Em <code>em</code>, o breakpoint respeita o zoom de fonte do usuário (1em = 16px no padrão do navegador).</li>
+</ul>
+
+<h2>4. Tipografia: padrões de fonte</h2>
+
+<h3>4.1 O que o navegador já traz de fábrica</h3>
+<div class="scroll"><table>
+<tr><th>Elemento</th><th>Tamanho padrão</th><th>Em px</th></tr>
+<tr><td><code>body</code>, <code>p</code></td><td>1rem (medium)</td><td>16px</td></tr>
+<tr><td><code>h1</code></td><td>2em</td><td>32px</td></tr>
+<tr><td><code>h2</code></td><td>1.5em</td><td>24px</td></tr>
+<tr><td><code>h3</code></td><td>1.17em</td><td>18,72px</td></tr>
+<tr><td><code>h4</code></td><td>1em</td><td>16px</td></tr>
+<tr><td><code>h5</code></td><td>0.83em</td><td>13,28px</td></tr>
+<tr><td><code>h6</code></td><td>0.67em</td><td>10,72px</td></tr>
+</table></div>
+<p>Fonte padrão (serifada, tipo Times) e <code>line-height: normal</code> (≈ 1,2). É por isso que se troca a fonte e o espaçamento em todo projeto.</p>
+
+<h3>4.2 Escala tipográfica recomendada (celular → desktop)</h3>
+<div class="scroll"><table>
+<tr><th>Uso</th><th>Celular</th><th>Tablet</th><th>Desktop</th><th>Line-height</th><th>Peso</th></tr>
+<tr><td>Texto de corpo (<code>p</code>)</td><td>1rem (16px)</td><td>1rem (16px)</td><td>1.125rem (18px)</td><td>1.5 – 1.7</td><td>400</td></tr>
+<tr><td>Texto pequeno / legenda</td><td>0.875rem (14px)</td><td>0.875rem</td><td>0.875rem</td><td>1.4</td><td>400</td></tr>
+<tr><td><code>h1</code> / título hero</td><td>2 – 2.5rem (32–40px)</td><td>2.75 – 3rem</td><td>3.5 – 4rem (56–64px)</td><td>1.1 – 1.2</td><td>700</td></tr>
+<tr><td><code>h2</code></td><td>1.5 – 1.75rem (24–28px)</td><td>2rem</td><td>2.25 – 2.5rem</td><td>1.2</td><td>600 – 700</td></tr>
+<tr><td><code>h3</code></td><td>1.25rem (20px)</td><td>1.375rem</td><td>1.5rem (24px)</td><td>1.3</td><td>600</td></tr>
+<tr><td>Botão / link de menu</td><td>1rem (16px)</td><td>1rem</td><td>1rem</td><td>1.2</td><td>500 – 600</td></tr>
+</table></div>
+
+<div class="alerta"><strong>Nunca use menos de 16px no corpo do texto em celular.</strong> Além de difícil de ler, o iOS dá <em>zoom automático</em> em campos de formulário (<code>input</code>) com fonte menor que 16px.</div>
+
+<h3>4.3 Regras que valem para qualquer tela</h3>
+<ul>
+  <li><strong>Unidade:</strong> use <code>rem</code> para fonte (respeita a configuração de acessibilidade do usuário). Evite <code>px</code> em <code>font-size</code>.</li>
+  <li><strong>Comprimento da linha:</strong> entre <strong>45 e 75 caracteres</strong> (≈ <code>max-width: 65ch</code>). Linhas muito longas cansam a leitura em telas grandes.</li>
+  <li><strong>Contraste:</strong> mínimo <strong>4,5:1</strong> para texto normal (WCAG AA). Texto cinza claro sobre fundo branco reprova.</li>
+  <li><strong>Fonte fluida:</strong> <code>clamp(mín, ideal, máx)</code> faz o título crescer suavemente sem media query. Exemplo: <code>font-size: clamp(2rem, 5vw, 4rem);</code></li>
+  <li><strong>No máximo 2 famílias</strong> de fonte por projeto (uma para títulos, outra para texto, ou uma só).</li>
+</ul>
+
+<h3>4.4 Fontes recomendadas (Google Fonts)</h3>
+<div class="scroll"><table>
+<tr><th>Fonte</th><th>Personalidade</th><th>Pesos úteis</th></tr>
+<tr><td><strong>Poppins</strong></td><td>Geométrica, moderna, arredondada. Ótima para títulos e marcas jovens.</td><td>400, 500, 600, 700</td></tr>
+<tr><td><strong>Inter</strong></td><td>Feita para telas. Muito legível em textos pequenos e interfaces.</td><td>400, 500, 600, 700</td></tr>
+<tr><td><strong>Roboto</strong></td><td>Neutra e versátil, padrão do Android.</td><td>400, 500, 700</td></tr>
+</table></div>
+<p><strong>Como incluir</strong> (no <code>&lt;head&gt;</code> do HTML, antes do seu CSS):</p>
+<pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet"&gt;</code></pre>
+<p><strong>Como usar</strong> (no CSS), sempre com uma fonte de reserva (<em>fallback</em>):</p>
+<pre><code>body { font-family: "Poppins", Arial, sans-serif; }</code></pre>
+<div class="dica"><strong>Dica de desempenho:</strong> carregue só os pesos que você usa. Cada peso extra é mais um download. <code>display=swap</code> mostra o texto imediatamente com a fonte reserva enquanto a fonte real carrega.</div>
+
+<h2>5. Espaçamento</h2>
+
+<h3>5.1 A grade de 8 pontos</h3>
+<p>Designers e desenvolvedores profissionais usam <strong>múltiplos de 8px</strong> (com 4px para ajustes finos) para margens, paddings e gaps. Isso deixa o layout consistente, e a decisão fica rápida: em vez de pensar "13px ou 15px?", você escolhe da escala.</p>
+<div class="scroll"><table>
+<tr><th>Token</th><th>px</th><th>rem</th><th>Uso típico</th></tr>
+<tr><td>xs</td><td>4px</td><td>0.25rem</td><td>Espaço entre ícone e texto</td></tr>
+<tr><td>sm</td><td>8px</td><td>0.5rem</td><td>Espaço entre itens pequenos, padding de badge</td></tr>
+<tr><td>md</td><td>16px</td><td>1rem</td><td><strong>Padding lateral no celular</strong>, gap entre cards, padding de botão</td></tr>
+<tr><td>lg</td><td>24px</td><td>1.5rem</td><td>Padding interno de card, gap em tablet</td></tr>
+<tr><td>xl</td><td>32px</td><td>2rem</td><td>Margem entre blocos de conteúdo</td></tr>
+<tr><td>2xl</td><td>48px</td><td>3rem</td><td>Espaço entre seções no celular</td></tr>
+<tr><td>3xl</td><td>64px</td><td>4rem</td><td>Espaço entre seções no desktop</td></tr>
+<tr><td>4xl</td><td>96px</td><td>6rem</td><td>Hero e grandes respiros no desktop</td></tr>
+</table></div>
+<p>Dá para transformar essa escala em <strong>variáveis CSS</strong>, o que combina com o que vimos na Semana 07:</p>
+<pre><code>:root {
+  --esp-xs: 0.25rem;  --esp-sm: 0.5rem;  --esp-md: 1rem;   --esp-lg: 1.5rem;
+  --esp-xl: 2rem;     --esp-2xl: 3rem;   --esp-3xl: 4rem;  --esp-4xl: 6rem;
+}</code></pre>
+
+<h3>5.2 Margens laterais da página (gutter) por dispositivo</h3>
+<div class="scroll"><table>
+<tr><th>Dispositivo</th><th>Padding lateral</th><th>Gap entre cards/colunas</th></tr>
+<tr><td>Celular</td><td>16px (1rem)</td><td>16px</td></tr>
+<tr><td>Tablet</td><td>24 a 32px</td><td>24px</td></tr>
+<tr><td>Notebook</td><td>40 a 64px</td><td>24 a 32px</td></tr>
+<tr><td>Desktop</td><td>centralizado com <code>max-width</code> (ver 6)</td><td>32px</td></tr>
+</table></div>
+<p>Repare no exemplo do dia 29/09: o cabeçalho do Bikcraft começa com <code>padding: 16px</code> no celular e só ganha <code>100px</code> nas laterais a partir de 1024px. Isso é exatamente o padrão da tabela.</p>
+
+<h3>5.3 Área de toque (touch target)</h3>
+<p>O dedo é bem menos preciso que o mouse. Os guias de acessibilidade e das plataformas pedem:</p>
+<ul>
+  <li><strong>Mínimo 44 × 44px</strong> (Apple Human Interface Guidelines / WCAG 2.5.5 nível AAA)</li>
+  <li><strong>48 × 48px</strong> (Material Design / Android)</li>
+  <li><strong>Pelo menos 8px</strong> de distância entre dois alvos de toque</li>
+</ul>
+<pre><code>nav a { display: inline-block; padding: 12px 16px; min-height: 44px; }</code></pre>
+
+<h2>6. Larguras de conteúdo (container)</h2>
+<p>Em telas grandes, o conteúdo não deve ocupar 100% da largura. Padrão de mercado: um <strong>container centralizado</strong> com largura máxima.</p>
+<div class="scroll"><table>
+<tr><th>Tipo de conteúdo</th><th>max-width comum</th></tr>
+<tr><td>Texto corrido (artigo, blog)</td><td>65ch ou 680–720px</td></tr>
+<tr><td>Site institucional / e-commerce</td><td><strong>1140 – 1200px</strong></td></tr>
+<tr><td>Dashboards / sistemas</td><td>1400px ou 100%</td></tr>
+</table></div>
+<pre><code>.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;     /* centraliza */
+  padding-inline: 16px;    /* respiro no celular */
+}</code></pre>
+
+<h2>7. Colunas por tela (grid de referência)</h2>
+<div class="scroll"><table>
+<tr><th>Tela</th><th>Colunas típicas</th><th>Exemplo: lista de bicicletas</th></tr>
+<tr><td>Celular</td><td>4 (ou 1 coluna de conteúdo)</td><td>1 card por linha</td></tr>
+<tr><td>Tablet</td><td>8</td><td>2 cards por linha</td></tr>
+<tr><td>Notebook / Desktop</td><td>12</td><td>3 ou 4 cards por linha</td></tr>
+</table></div>
+
+<h2>8. Imagens e mídia</h2>
+<ul>
+  <li><strong>Imagem fluida:</strong> <code>img { max-width:100%; height:auto; }</code>. É a primeira regra de qualquer CSS responsivo.</li>
+  <li><strong>Proporções comuns:</strong> 16:9 (vídeo/banner), 4:3 (foto), 1:1 (avatar/produto). Use <code>aspect-ratio: 16 / 9;</code> para reservar o espaço e evitar "pulos" no carregamento.</li>
+  <li><strong>Largura de imagem de banner (hero):</strong> 1600 a 1920px de largura é suficiente para desktop; em celular carregue versão menor (<code>srcset</code>).</li>
+  <li><strong>Formatos:</strong> WebP/AVIF para fotos, SVG para ícones e ilustrações (como as <code>bike-*.svg</code> do exercício).</li>
+</ul>
+
+<h2>9. Como o navegador decide a largura: o <code>meta viewport</code></h2>
+<p>Sem esta linha no <code>&lt;head&gt;</code>, o celular finge ter uma tela de <strong>980px</strong> e encolhe a página inteira para caber. Nenhuma media query funciona de verdade:</p>
+<pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+
+<h2>10. Como conferir tudo isso na prática</h2>
+<ol>
+  <li>Abra a página no Chrome e pressione <strong>F12</strong>.</li>
+  <li>Clique no ícone de <strong>dispositivo</strong> (ou <code>Ctrl + Shift + M</code>) para ativar o modo responsivo.</li>
+  <li>No topo, escolha um aparelho da lista (iPhone SE, iPad Air…) ou <strong>Responsive</strong> e digite a largura manualmente.</li>
+  <li>Arraste a borda direita devagar: observe onde o layout "quebra".</li>
+  <li>Use o menu de três pontinhos → <strong>Show media queries</strong> para ver as barras coloridas dos breakpoints acima da tela.</li>
+</ol>
+
+<h2>11. Folha de cola (imprima!)</h2>
+<div class="scroll"><table>
+<tr><th></th><th>Celular</th><th>Tablet</th><th>Notebook</th><th>Desktop</th></tr>
+<tr><td><strong>Largura (px CSS)</strong></td><td>320 – 479</td><td>768 – 1023</td><td>1024 – 1439</td><td>1440+</td></tr>
+<tr><td><strong>Teste com</strong></td><td>360 e 390</td><td>768</td><td>1366</td><td>1920</td></tr>
+<tr><td><strong>Breakpoint</strong></td><td>base</td><td>min-width: 768px</td><td>min-width: 1024px</td><td>min-width: 1440px</td></tr>
+<tr><td><strong>Padding lateral</strong></td><td>16px</td><td>24–32px</td><td>40–64px</td><td>container 1200px</td></tr>
+<tr><td><strong>Corpo de texto</strong></td><td>16px</td><td>16px</td><td>16–18px</td><td>18px</td></tr>
+<tr><td><strong>Título h1</strong></td><td>32–40px</td><td>44–48px</td><td>56–64px</td><td>56–64px</td></tr>
+<tr><td><strong>Colunas de cards</strong></td><td>1</td><td>2</td><td>3</td><td>3–4</td></tr>
+<tr><td><strong>Alvo de toque</strong></td><td>≥ 44px</td><td>≥ 44px</td><td>mouse</td><td>mouse</td></tr>
+</table></div>
+
+<div class="dica"><strong>Lembrete:</strong> estes números são <em>referências</em> de mercado, e não regras da linguagem. O que decide de verdade é o conteúdo da sua página. Use a tabela para começar rápido e ajuste olhando o resultado no navegador.</div>
+
+<h2>12. Fontes e para ir além</h2>
+<ul>
+  <li>MDN — <em>Responsive design</em> e <em>Using media queries</em> (developer.mozilla.org)</li>
+  <li>Google Fonts (fonts.google.com) — Poppins, Inter, Roboto</li>
+  <li>Bootstrap 5 — <em>Breakpoints</em> (getbootstrap.com/docs/5.3/layout/breakpoints)</li>
+  <li>Material Design 3 — <em>Window size classes</em> (m3.material.io)</li>
+  <li>Chrome DevTools — <em>Device Mode</em> (developer.chrome.com/docs/devtools)</li>
+</ul>
+
+</main>
+</body>
+</html>

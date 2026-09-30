@@ -37,6 +37,9 @@ m1s010/
 ├── Plano_de_Aula_M1S09_Formularios_JS_T4.html/.pdf
 ├── Perguntas_Kahoot_M1S09_Formularios_JS_T4.pdf
 │
+├── Guia_Tamanhos_Padrao_Responsivo.html                  (tamanhos de tela, breakpoints, fontes e espaçamentos padrão)
+├── Guia_Media_Queries_e_Responsividade.html              (o que é responsividade/media query e como aplicar no CSS)
+│
 ├── Semana_10/                                            ← material didático da Semana 10
 │   ├── Guia_Professor_M1S10_CSS_Avancado_T4.html/.pdf     (roteiro completo dos 3 encontros)
 │   ├── Plano_de_Aula_M1S10_CSS_Avancado_T4.html/.pdf      (cronograma detalhado por horário)

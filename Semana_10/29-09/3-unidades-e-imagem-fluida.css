@@ -17,10 +17,10 @@ h2 {
 */
 .caixa-px    { width: 300px; }              /* sempre 300px */
 .caixa-pct   { width: 50%; }                 /* metade do elemento pai */
-.banner-vw   { padding: 5vw; background:#161616; border-radius:6px; }
+.banner-vw   { padding: 5vw; background:red; border-radius:6px; }
 
 .caixa-px, .caixa-pct {
-  background:#161616;
+  background:red;
   padding: 12px;
   margin-bottom: 12px;
   border-radius: 6px;
