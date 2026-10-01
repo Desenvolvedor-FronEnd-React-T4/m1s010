@@ -1,0 +1,61 @@
+* { box-sizing: border-box; }
+body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5f5; }
+
+.conteudo { padding: 16px; max-width: 640px; margin: 0 auto; }
+.titulo-pagina { font-size: 1.4rem; }
+
+.cabecalho {
+  background:#202336;
+  padding: 16px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  /* COMPLETE AQUI (parte 3): faça o header GRUDAR no topo ao rolar a página
+     (position: sticky + top: 0) e ficar na frente do conteúdo (z-index). */
+}
+
+.card {
+  background:#161616;
+  border-radius: 12px;
+  padding: 24px 16px;
+  margin-bottom: 16px;
+  min-height: 140px;
+  /* COMPLETE AQUI (parte 1): o card precisa ser a REFERÊNCIA de
+     posicionamento do selo. Que valor de position faz isso? */
+}
+
+.card h2 { margin-top: 0; }
+
+/*
+  EXERCÍCIO (10 min)
+  Parte 1 — o selo "NOVO" deve ficar no canto superior direito DO CARD.
+  Hoje ele está solto no fluxo. Posicione-o com position: absolute
+  (top: 8px; right: 8px) e depois resolva: em relação a quê ele se
+  posiciona? Teste e observe onde ele vai parar sem o passo do card.
+*/
+.selo {
+  background:#ffbf00;
+  color:#0a0a0a;
+  font-weight: bold;
+  font-size: .75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  /* COMPLETE AQUI (parte 1) */
+}
+
+/*
+  Parte 2 — o botão "↑" deve ficar SEMPRE visível no canto inferior
+  direito da janela, mesmo com a rolagem (position: fixed; right: 16px;
+  bottom: 16px).
+*/
+.topo {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background:#ffbf00;
+  color:#0a0a0a;
+  font-size: 1.4rem;
+  text-decoration: none;
+  /* COMPLETE AQUI (parte 2) */
+}

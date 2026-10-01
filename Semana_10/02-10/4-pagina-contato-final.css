@@ -1,0 +1,111 @@
+/*
+  EXERCÍCIO FINAL (30 min) — página de contato Bikcraft completa
+
+  Tudo mobile-first: o CSS base é o CELULAR; as media queries
+  (768px e 64em = 1024px) só ACRESCENTAM. Sem bibliotecas e sem
+  !important. Teste em 375px, 768px e 1280px no DevTools.
+
+  Já vem pronto (passos de terça e de quinta): variáveis, reset, fontes,
+  campos do formulário e botão. Faltam as partes marcadas com TODO.
+*/
+
+/* ═══ RESET E VARIÁVEIS (pronto) ═══ */
+:root {
+  --fundo: #141414;
+  --superficie: #202336;
+  --destaque: #ffbf00;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body { margin: 0; font-family: 'Roboto', sans-serif; background: var(--fundo); color: #fff; }
+h1, h2, h3, button { font-family: 'Poppins', sans-serif; }
+
+.logo { font-weight: 700; font-size: 1.4rem; color: var(--destaque); }
+.menu a { color: #fff; text-decoration: none; }
+.hero-chamada { color: var(--destaque); font-weight: 500; margin: 0; }
+
+.coluna-dados, .coluna-formulario { background: var(--superficie); border-radius: 12px; padding: 20px; }
+.campo { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+input, textarea { width: 100%; padding: 12px; border: 1px solid #555; border-radius: 8px; background: var(--fundo); color: #fff; }
+textarea { min-height: 120px; }
+.botao { padding: 14px 32px; border: 0; border-radius: 8px; background: var(--destaque); color: var(--fundo); font-weight: 700; cursor: pointer; }
+.card-loja { background: var(--superficie); border-radius: 12px; padding: 20px; }
+.card-loja h3 { margin-top: 0; }
+
+/* ═══ TODO 1 — CABEÇALHO (Flexbox + position) ═══
+   .cabecalho: container flex com logo à esquerda e menu à direita
+   (justify-content: space-between), alinhados pelo meio (align-items),
+   flex-wrap: wrap e gap: 8px; padding: 16px; e grudado no topo ao rolar
+   (position: sticky; top: 0; z-index: 10; background: var(--fundo)).
+   .menu: container flex com gap: 16px.
+   .menu a:hover: cor de destaque. */
+.cabecalho {
+
+}
+
+/* ═══ TODO 2 — HERO (clamp) ═══
+   .hero: padding: 48px 16px 24px.
+   .hero-titulo: font-size com clamp(2.5rem, 6vw, 4rem); margin: 8px 0 0. */
+.hero { }
+.hero-titulo { }
+
+/* ═══ TODO 3 — 2 COLUNAS EM FLEXBOX (mobile-first) ═══
+   .secao-contato: display: flex; flex-direction: COLUMN no celular;
+   gap: 24px; padding: 24px 16px.
+   (O desktop vira ROW na media query lá embaixo.) */
+.secao-contato {
+
+}
+
+/* ═══ TODO 4 — LINHA NOME | TELEFONE (flex-wrap) ═══
+   .linha-formulario: display: flex; flex-wrap: wrap; gap: 16px.
+   Cada .campo dentro dela: flex: 1 1 160px (nunca menor que 160px,
+   crescendo para preencher). */
+.linha-formulario {
+
+}
+.linha-formulario .campo { }
+
+/* ═══ TODO 5 — LOJAS (flex-wrap + flex-basis) ═══
+   .lojas: display: flex; flex-wrap: wrap; gap: 16px; padding: 0 16px 24px.
+   .card-loja: flex: 1 1 320px; e transition: transform .2s ease.
+   .card-loja:hover: transform: scale(1.03). */
+.lojas {
+
+}
+.card-loja { }
+
+/* ═══ TODO 6 — RODAPÉ COM REDES (Flexbox + gap + hover) ═══
+   .rodape: display: flex; flex-direction: column; align-items: center;
+   gap: 12px; padding: 24px 16px; border-top: 1px solid #333.
+   .redes: display: flex; gap: 18px.
+   .redes a: cor branca, sem sublinhado, transition: color .2s ease;
+   .redes a:hover: cor de destaque. */
+.rodape {
+
+}
+.redes {
+
+}
+.redes a { }
+
+/* ═══ TODO 7 — BOTÃO VOLTAR AO TOPO (position: fixed) ═══
+   .topo: position: fixed; right: 16px; bottom: 16px; z-index: 20;
+   círculo de 48x48 (display: grid; place-items: center; border-radius: 50%),
+   fundo var(--destaque), cor var(--fundo), sem sublinhado, font-size 1.4rem. */
+.topo {
+
+}
+
+/* ═══ TODO 8 — MEDIA QUERIES (só ACRESCENTAM) ═══
+   a) min-width: 768px — padding lateral de 32px em
+      .cabecalho, .hero, .secao-contato, .lojas e .rodape;
+      .rodape vira flex-direction: row com justify-content: space-between.
+   b) min-width: 64em (escreva DEPOIS da de 768px) — padding lateral de 100px
+      nos mesmos elementos; .secao-contato vira flex-direction: ROW;
+      .coluna-dados { flex: 5 } e .coluna-formulario { flex: 7 }. */
+
+
+/* DESAFIO (se sobrar tempo): em @media (min-width: 1440px), limite o conteúdo
+   com um container (max-width: 1200px; margin-inline: auto). */

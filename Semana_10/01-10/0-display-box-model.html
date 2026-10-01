@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercício — display e box-sizing</title>
+<link rel="stylesheet" href="0-display-box-model.css">
+</head>
+<body>
+
+  <h1 class="titulo-pagina">display e box-sizing na prática</h1>
+
+  <h2 class="subtitulo">Parte 1 — block, inline e inline-block</h2>
+  <div class="demo">
+    <span class="etiqueta">Sport</span>
+    <span class="etiqueta">Urban</span>
+    <span class="etiqueta">Cargo</span>
+  </div>
+  <p class="legenda">As três etiquetas são &lt;span&gt; (inline): o width e o padding vertical são ignorados.</p>
+
+  <h2 class="subtitulo">Parte 2 — a conta da largura</h2>
+  <div class="caixa caixa-a">content-box (padrão)</div>
+  <div class="caixa caixa-b">border-box</div>
+  <p class="legenda">Largura declarada nas duas: 300px. Medir no DevTools: aba Computed, quadro do box model.</p>
+
+  <!--
+    GABARITO (só olhe depois de tentar!)
+
+    Parte 1:
+      .etiqueta { display: inline-block; }
+
+    Parte 2 (conta da largura):
+      .caixa-a  (content-box): 300 + 2×20 (padding) + 2×2 (borda) = 344px ocupados
+      .caixa-b  (border-box):  300px ocupados — o padding e a borda entram na conta
+      Reset de projeto:  *, *::before, *::after { box-sizing: border-box; }
+  -->
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+/* ═══ RESET E VARIÁVEIS ═══ */
+:root {
+  --fundo: #141414;
+  --superficie: #202336;
+  --destaque: #ffbf00;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: var(--fundo);
+  color: #fff;
+}
+
+h1, h2, h3, button { font-family: 'Poppins', sans-serif; }
+
+/* ═══ BASE = CELULAR (mobile-first) ═══ */
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--fundo);
+}
+
+.logo { font-weight: 700; font-size: 1.4rem; color: var(--destaque); }
+.menu { display: flex; gap: 16px; }
+.menu a { color: #fff; text-decoration: none; }
+.menu a:hover { color: var(--destaque); }
+
+.hero { padding: 48px 16px 24px; }
+.hero-chamada { color: var(--destaque); font-weight: 500; margin: 0; }
+.hero-titulo { font-size: clamp(2.5rem, 6vw, 4rem); margin: 8px 0 0; line-height: 1.1; }
+
+/* 2 colunas: empilhadas no celular */
+.secao-contato {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 16px;
+}
+
+.coluna-dados, .coluna-formulario {
+  background: var(--superficie);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.linha-formulario { display: flex; flex-wrap: wrap; gap: 16px; }
+.linha-formulario .campo { flex: 1 1 160px; }
+
+.campo { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  background: var(--fundo);
+  color: #fff;
+}
+textarea { min-height: 120px; }
+
+.botao {
+  padding: 14px 32px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--destaque);
+  color: var(--fundo);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .2s ease, background-color .2s ease;
+}
+.botao:hover { transform: scale(1.03); background-color: #ffd24d; }
+
+/* Lojas: quebram de linha sozinhas (número variável de itens) */
+.lojas { display: flex; flex-wrap: wrap; gap: 16px; padding: 0 16px 24px; }
+.card-loja {
+  flex: 1 1 320px;
+  background: var(--superficie);
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform .2s ease;
+}
+.card-loja:hover { transform: scale(1.03); }
+.card-loja h3 { margin-top: 0; }
+
+/* Rodapé com redes: Flexbox + gap */
+.rodape {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  padding: 24px 16px;
+  border-top: 1px solid #333;
+}
+.redes { display: flex; gap: 18px; }
+.redes a { color: #fff; text-decoration: none; transition: color .2s ease; }
+.redes a:hover { color: var(--destaque); }
+
+/* Botão voltar ao topo: fixo na janela */
+.topo {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--destaque);
+  color: var(--fundo);
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+/* ═══ TABLET (a partir de 768px) ═══ */
+@media (min-width: 768px) {
+  .cabecalho, .hero, .secao-contato, .lojas, .rodape { padding-left: 32px; padding-right: 32px; }
+  .rodape { flex-direction: row; justify-content: space-between; }
+}
+
+/* ═══ DESKTOP (a partir de 1024px = 64em) ═══ */
+@media (min-width: 64em) {
+  .cabecalho, .hero, .secao-contato, .lojas, .rodape { padding-left: 100px; padding-right: 100px; }
+
+  .secao-contato { flex-direction: row; }
+  /* flex: 5 e flex: 7 → proporção 5:7 do espaço disponível */
+  .coluna-dados { flex: 5; }
+  .coluna-formulario { flex: 7; }
+}

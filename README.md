@@ -4,15 +4,15 @@ Material didático do **Módulo 1, Semana 10** do curso Desenvolvimento Front-En
 
 ## Ementa da semana
 
-**CSS Avançado: Flexbox, Especificidade e Responsividade**
+**CSS Avançado: Display, Flexbox, Especificidade, Responsividade e Bibliotecas (teoria)**
 
 | Data | Tema central | O que é trabalhado |
 |---|---|---|
 | 29/09 | Responsividade na prática | `meta viewport`, mobile-first, unidades (`px`/`%`/`rem`/`vw`), `clamp()`, media queries, imagens fluidas |
-| 01/10 | Flexbox aprofundado + especificidade | `flex-wrap`, `gap`, propriedade `flex` (grow/shrink/basis), `flex-direction` responsivo, cálculo de especificidade, cascata, herança, por que evitar `!important` |
-| 02/10 | Bibliotecas de componentes e ícones | Bootstrap 5 e Font Awesome via CDN, customização com especificidade (sem `!important`), transições e `:hover` |
+| 01/10 | Display, Flexbox completo, paginação e cascata | `display` e box model, container, eixos, `justify-content`/`align-items`/`align-content`, `flex-wrap`, `gap`, propriedade `flex`, 2 colunas, paginação, cálculo de especificidade, cascata, herança, por que evitar `!important` |
+| 02/10 | Acabamento, responsividade aprofundada e bibliotecas (teoria) | `position`/`sticky`/`z-index`, variáveis CSS, pseudo-classes e transições; mobile-first (didático), tamanhos nativos de tela (DevTools, DPR), breakpoints, unidades modernas, imagens responsivas, Grid sem media query; bibliotecas só em teoria (o que são, o que fazem, mercado, quando escolher). **Sem implementar Bootstrap/Tailwind: fica para outro módulo.** |
 
-A sequência didática da semana é **adaptar a tela → organizar o layout com Flexbox → equipar com bibliotecas prontas**, sempre em cima da mesma página: a página de contato do projeto Bikcraft, herdada pronta da Semana 09.
+A sequência didática da semana é **adaptar a tela → organizar o layout com Flexbox → acabar a página e conhecer, em teoria, as bibliotecas do mercado**, sempre em cima da mesma página: a página de contato do projeto Bikcraft, herdada pronta da Semana 09.
 
 ## Projeto condutor: Bikcraft
 
@@ -23,7 +23,7 @@ A **Bikcraft** é o e-commerce fictício de bicicletas elétricas usado como fio
 | 07 | Estrutura das páginas (home + catálogo), cabeçalho, hero, variáveis de cor/fonte, Flexbox básico, Box Model |
 | 08 | `id`/`class` em cada bicicleta do catálogo + captura de dados via JavaScript (`console.log`) |
 | 09 | Página de contato: formulário completo, captura no `submit`, confirmação na tela |
-| 10 | A mesma página de contato ganha responsividade, layout em 2 colunas com Flexbox e acabamento com Bootstrap/Font Awesome |
+| 10 | A mesma página de contato ganha responsividade, layout em 2 colunas com Flexbox, paginação e acabamento em CSS puro |
 
 O gabarito completo e funcional do projeto está em [`Bikcraft_Gabarito/`](Bikcraft_Gabarito/), com comentários no código marcando exatamente o que cada semana adicionou.
 
@@ -41,14 +41,14 @@ m1s010/
 ├── Guia_Media_Queries_e_Responsividade.html              (o que é responsividade/media query e como aplicar no CSS)
 │
 ├── Semana_10/                                            ← material didático da Semana 10
-│   ├── Guia_Professor_M1S10_CSS_Avancado_T4.html/.pdf     (roteiro completo dos 3 encontros)
+│   ├── Guia_Professor_M1S10_CSS_Avancado_T4.html/.pdf     (roteiro dos encontros de 01/10 e 02/10; 29/09 como registro)
 │   ├── Plano_de_Aula_M1S10_CSS_Avancado_T4.html/.pdf      (cronograma detalhado por horário)
-│   ├── Perguntas_Kahoot_M1S10_CSS_Avancado_T4.html/.pdf   (15 questões, 5 por encontro)
+│   ├── Perguntas_Kahoot_M1S10_CSS_Avancado_T4.html/.pdf   (12 questões novas, 6 por encontro, + anexo da aula de 29/09)
 │   ├── Ponte_Semana07_para_Semana10.html/.pdf             (conecta os fundamentos da S07 ao CSS avançado)
 │   ├── Ferramentas_de_Apoio_M1S10.html/.pdf               (extensões VS Code + vídeo-aulas recomendadas)
 │   ├── 29-09/                                             (exercícios de responsividade)
-│   ├── 01-10/                                             (exercícios de Flexbox + especificidade)
-│   └── 02-10/                                             (exercícios de bibliotecas/ícones)
+│   ├── 01-10/                                             (exercícios de display/box model, Flexbox, especificidade e paginação)
+│   └── 02-10/                                             (exercícios de tamanhos de tela, Grid, position, página final e escolha de biblioteca)
 │
 └── Bikcraft_Gabarito/                                     ← gabarito completo do projeto (Semanas 07 a 10)
     ├── index.html, bicicletas.html, contato.html

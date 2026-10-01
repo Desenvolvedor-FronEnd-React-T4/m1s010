@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercício — Tamanhos nativos de tela (DevTools)</title>
+<link rel="stylesheet" href="1-tamanhos-nativos-viewport.css">
+</head>
+<body>
+
+  <main class="painel">
+    <h1 class="titulo-pagina">Que tela é esta?</h1>
+
+    <p class="medida" id="medida">carregando…</p>
+    <p class="faixa" id="faixa">—</p>
+    <p class="dpr" id="dpr"></p>
+
+    <h2 class="subtitulo">Roteiro (10 min)</h2>
+    <ol class="roteiro">
+      <li>Abra o DevTools (F12) e ative o modo dispositivo (Ctrl+Shift+M).</li>
+      <li>Escolha, na lista "Dimensions", cada aparelho abaixo e anote o que a página mostra:
+        iPhone SE (375×667), iPhone 12 Pro (390×844), Pixel 7 (412×915),
+        iPad Mini (768×1024), iPad Pro (1024×1366), Nest Hub Max (1280×800).</li>
+      <li>Em "Responsive", arraste a borda e descubra a largura exata em que a cor de fundo muda.</li>
+      <li>Pergunta: por que o iPhone SE (750×1334 pixels físicos) aparece como 375×667? (DPR)</li>
+    </ol>
+  </main>
+
+  <script src="1-tamanhos-nativos-viewport.js"></script>
+
+  <!--
+    GABARITO (só olhe depois de tentar!)
+
+    Faixas desta página (mobile-first):
+      até 767px   → celular   (fundo verde-escuro, é a regra base)
+      768–1023px  → tablet    (fundo azul-escuro, @media min-width: 768px)
+      1024px ou + → desktop   (fundo roxo-escuro, @media min-width: 1024px)
+
+    Desafio extra (no CSS): acrescente uma quarta faixa em
+    @media (min-width: 1440px) com outra cor e escreva "monitor grande" em #faixa (JS).
+  -->
+
+</body>
+</html>

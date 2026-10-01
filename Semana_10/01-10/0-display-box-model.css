@@ -1,0 +1,47 @@
+body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5f5; padding: 24px 16px; }
+
+.titulo-pagina { font-size: 1.4rem; }
+.subtitulo { font-size: 1.1rem; margin-top: 28px; }
+.legenda { color:#a8a8a8; font-size: .9rem; }
+
+.demo { background:#161616; padding: 16px; border-radius: 8px; }
+
+/*
+  EXERCÍCIO (Parte 1 — 5 min)
+  As etiquetas abaixo são <span> (display: inline por padrão) e por isso
+  ignoram width, height e margin vertical. Queremos que continuem lado a
+  lado, no fluxo do texto, mas COM tamanho próprio.
+
+  COMPLETE AQUI: dê a .etiqueta o valor de display que flui como texto
+  e aceita width/height (dica: o nome mistura os dois mundos).
+*/
+.etiqueta {
+  background:#ffbf00;
+  color:#0a0a0a;
+  font-weight:bold;
+  padding: 12px 20px;
+  width: 120px;
+  text-align: center;
+  margin-right: 8px;
+  /* COMPLETE AQUI */
+}
+
+/*
+  EXERCÍCIO (Parte 2 — 5 min)
+  As duas caixas declaram width: 300px, padding: 20px e borda de 2px.
+  Abra o DevTools (aba Computed) e meça a largura TOTAL de cada uma.
+
+  COMPLETE AQUI: faça .caixa-b ocupar exatamente 300px no total, sem
+  mexer no width. Depois, mova a regra para um reset geral com
+  *, *::before, *::after.
+*/
+.caixa {
+  width: 300px;
+  padding: 20px;
+  border: 2px solid #ffbf00;
+  background:#161616;
+  margin-bottom: 12px;
+}
+
+.caixa-a { /* content-box: o padrão do navegador */ }
+.caixa-b { /* COMPLETE AQUI */ }

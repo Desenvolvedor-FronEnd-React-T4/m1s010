@@ -9,6 +9,13 @@ body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5
 
   Mobile-first: as colunas ficam empilhadas por padrão (column) e viram
   duas colunas lado a lado (row) só a partir do desktop.
+
+  PRÁTICA (5 min): este exemplo já está pronto; use-o como base para a
+  página de contato real. Depois de testar em 375px e 1280px:
+    1) inverta a proporção para 7:5 e observe o que muda;
+    2) troque flex: 5 / flex: 7 por flex: 1 / flex: 1 e compare;
+    3) tire o flex-wrap de .linha-formulario e veja os campos se
+       espremerem em 375px (volte o flex-wrap em seguida).
 */
 .duas-colunas {
   display: flex;

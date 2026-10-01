@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercício — Paginação com Flexbox</title>
+<link rel="stylesheet" href="4-paginacao-flexbox.css">
+</head>
+<body>
+
+  <h1 class="titulo-pagina">Catálogo Bikcraft: paginação</h1>
+
+  <ul class="lista-produtos" id="lista-produtos"></ul>
+
+  <nav aria-label="Paginação">
+    <ul class="paginacao" id="paginacao">
+      <li><a href="#" data-pagina="1">1</a></li>
+      <li><a href="#" data-pagina="2" aria-current="page">2</a></li>
+      <li><a href="#" data-pagina="3">3</a></li>
+    </ul>
+  </nav>
+
+  <script src="4-paginacao-flexbox.js"></script>
+
+  <!--
+    GABARITO (só olhe depois de tentar!)
+
+    CSS:
+      .paginacao {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 0;
+        list-style: none;
+      }
+      .paginacao a {
+        display: block;
+        min-width: 44px;
+        padding: 10px 14px;
+        text-align: center;
+        background: #202336;
+      }
+      .paginacao a:hover { background: #2d3150; }
+      .paginacao a[aria-current="page"] { background: #ffbf00; color: #141414; }
+
+    JS (função mostrarPagina):
+      const inicio = (pagina - 1) * porPagina
+      const fim = inicio + porPagina
+      const itens = produtos.slice(inicio, fim)
+      // 14 produtos, 6 por página → Math.ceil(14 / 6) = 3 páginas (a última tem 2 itens)
+  -->
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atividade — Qual biblioteca escolher? (teoria)</title>
+<link rel="stylesheet" href="5-escolha-a-biblioteca.css">
+</head>
+<body>
+
+  <main class="folha">
+    <h1>Qual biblioteca escolher?</h1>
+    <p class="intro">
+      Atividade de <b>teoria</b> (10 min, em duplas). Nada será instalado nem programado:
+      o objetivo é justificar uma escolha usando os critérios vistos na aula
+      (prazo, equipe, design, performance, acessibilidade e manutenção).
+      Opções: <b>Bootstrap</b>, <b>Tailwind CSS</b>, <b>Material UI</b> ou <b>CSS puro</b>.
+    </p>
+
+    <table class="quadro">
+      <thead>
+        <tr>
+          <th>Cenário</th>
+          <th>Sua escolha</th>
+          <th>Justifique em uma frase (critério decisivo)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>1.</b> Landing page de uma padaria, para entregar em 1 dia, feita por uma pessoa só.</td>
+          <td class="resposta"></td>
+          <td class="resposta"></td>
+        </tr>
+        <tr>
+          <td><b>2.</b> Painel interno de uma empresa, com tabelas e formulários, sem layout definido pelo design.</td>
+          <td class="resposta"></td>
+          <td class="resposta"></td>
+        </tr>
+        <tr>
+          <td><b>3.</b> Site de uma marca de moda, com visual exclusivo e animações próprias.</td>
+          <td class="resposta"></td>
+          <td class="resposta"></td>
+        </tr>
+        <tr>
+          <td><b>4.</b> Aplicação React corporativa com dezenas de telas e vários formulários.</td>
+          <td class="resposta"></td>
+          <td class="resposta"></td>
+        </tr>
+        <tr>
+          <td><b>5.</b> A página de contato da Bikcraft que construímos nesta semana.</td>
+          <td class="resposta"></td>
+          <td class="resposta"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Perguntas para a roda de conversa</h2>
+    <ol>
+      <li>Qual a diferença entre uma biblioteca de <b>componentes prontos</b> e uma abordagem <b>utility-first</b>?</li>
+      <li>Cite um <b>ganho</b> e um <b>custo</b> de usar uma biblioteca em vez de escrever o CSS.</li>
+      <li>Por que dominar Flexbox e media queries ajuda a usar <b>qualquer</b> biblioteca?</li>
+    </ol>
+
+    <!--
+      GUIA DE CORREÇÃO (professor) — não há resposta única; o que vale é a justificativa.
+        1) Bootstrap ou CSS puro (prazo curto, página simples).
+        2) Bootstrap ou Material UI (painel interno, componentes prontos e prazo).
+        3) Tailwind ou CSS puro (design próprio, controle fino).
+        4) Material UI / Chakra / Ant Design (aplicação React com muitos componentes).
+        5) CSS puro: projeto pequeno e de aprendizado; já está pronto e leve.
+      Perguntas: 1) classes como "btn" entregam o botão inteiro; no utility-first cada classe
+      controla uma propriedade; 2) ganho: velocidade/padronização; custo: peso, curva e
+      visual "igual ao de todo mundo"; 3) o grid do Bootstrap é flex + media query por baixo.
+    -->
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5f5; padding: 24px 16px; }
+
+.titulo-pagina { font-size: 1.4rem; }
+
+.lista-produtos { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.lista-produtos li { flex: 1 1 140px; background:#161616; border-radius: 8px; padding: 16px; }
+
+/*
+  EXERCÍCIO (20 min) — componente de paginação com Flexbox
+
+  Estado atual: os links 1, 2 e 3 aparecem empilhados, com bolinha de
+  lista e sem estilo. O objetivo é montar a barra de paginação do slide
+  "PAGINAÇÃO: O COMPONENTE COM FLEXBOX".
+
+  Passo 1 — COMPLETE AQUI: transforme .paginacao em um container flex
+            centralizado, que quebra de linha se faltar espaço, com
+            gap de 8px entre os links. Tire a bolinha da lista
+            (list-style) e o padding padrão do <ul>.
+  Passo 2 — COMPLETE AQUI: cada link vira display: block com
+            min-width de 44px (alvo de toque), padding 10px 14px,
+            texto centralizado e fundo #202336.
+  Passo 3 — COMPLETE AQUI: destaque a página atual usando o seletor de
+            atributo a[aria-current="page"] (fundo #ffbf00, texto escuro).
+            Pergunta: qual a especificidade desse seletor? E por que ele
+            vence a regra ".paginacao a"?
+  Passo 4 — no arquivo .js, complete a função mostrarPagina() com o
+            cálculo de início/fim do slice.
+  Teste em 375px: com muitas páginas, os links devem quebrar de linha
+  sem estourar a tela.
+*/
+.paginacao {
+  /* COMPLETE AQUI (passo 1) */
+}
+
+.paginacao a {
+  color: #f5f5f5;
+  text-decoration: none;
+  border-radius: 8px;
+  /* COMPLETE AQUI (passo 2) */
+}
+
+/* COMPLETE AQUI (passo 3): regra da página atual */

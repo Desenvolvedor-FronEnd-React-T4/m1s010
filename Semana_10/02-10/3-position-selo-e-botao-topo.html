@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercício — position: selo, botão fixo e header sticky</title>
+<link rel="stylesheet" href="3-position-selo-e-botao-topo.css">
+</head>
+<body>
+
+  <header class="cabecalho">bikcraft</header>
+
+  <main class="conteudo">
+    <h1 class="titulo-pagina">Lançamentos</h1>
+
+    <article class="card">
+      <span class="selo">NOVO</span>
+      <h2>Bikcraft Sport</h2>
+      <p>Leve e veloz, ideal para a cidade.</p>
+    </article>
+
+    <article class="card">
+      <h2>Bikcraft Urban</h2>
+      <p>Conforto para o trabalho, com cestinha.</p>
+    </article>
+
+    <article class="card">
+      <h2>Bikcraft Cargo</h2>
+      <p>Robusta, feita para longas distâncias.</p>
+    </article>
+
+    <article class="card">
+      <h2>Bikcraft Kids</h2>
+      <p>Segura e colorida para os pequenos.</p>
+    </article>
+
+    <article class="card">
+      <h2>Bikcraft Elétrica</h2>
+      <p>Autonomia para o dia inteiro.</p>
+    </article>
+  </main>
+
+  <a class="topo" href="#" aria-label="Voltar ao topo">↑</a>
+
+  <!--
+    GABARITO (só olhe depois de tentar!)
+
+    Parte 1 — selo no canto do card:
+      .card { position: relative; }          /* o card vira a referência */
+      .selo { position: absolute; top: 8px; right: 8px; ... }
+
+    Parte 2 — botão fixo:
+      .topo { position: fixed; right: 16px; bottom: 16px; z-index: 20; ... }
+
+    Parte 3 — header que gruda ao rolar:
+      .cabecalho { position: sticky; top: 0; z-index: 10; }
+
+    Pergunta: por que, sem position: relative no card, o selo ia parar no
+    canto da PÁGINA? (O elemento absolute usa o ancestral posicionado mais
+    próximo como referência; se não houver nenhum, usa a página.)
+  -->
+
+</body>
+</html>

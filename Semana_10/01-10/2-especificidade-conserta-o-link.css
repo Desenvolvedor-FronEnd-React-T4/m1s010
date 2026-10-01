@@ -6,15 +6,22 @@ body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5
 
 /*
   EXERCÍCIO (Parte 2 — 10 min)
-  O link do rodapé deveria ficar BRANCO (#fff), mas está saindo azul
-  padrão do navegador. Antes de mudar qualquer coisa, calcule a
-  especificidade de cada regra abaixo (lembrando: inline > id >
-  classe/atributo/pseudo-classe > tag) e descubra qual delas está
-  "vencendo" e por quê.
+  O link do rodapé deveria ficar BRANCO (#fff), mas está saindo AMARELO.
+  Antes de mudar qualquer coisa, calcule a especificidade de cada regra
+  abaixo (lembrando: inline > id > classe/atributo/pseudo-classe > tag)
+  e descubra qual delas está "vencendo" e por quê.
+
+  Ferramenta: abra o DevTools (F12), inspecione o link e olhe o painel
+  Styles — a regra RISCADA é a que perdeu a disputa; a que não está
+  riscada é a que venceu.
 
   Dica: NÃO é permitido usar !important para resolver — a solução é
   escrever uma regra com especificidade suficiente (ou remover a
   concorrente, se ela estiver realmente errada).
+
+  Desafio extra: a regra "a" vem escrita ANTES e a ".rodape-teste a"
+  vem DEPOIS. Se você trocar a ordem das duas no arquivo, o resultado
+  muda? Por quê? (Pense em quando a ordem importa: só em EMPATE.)
 */
 
 a { color: blue; }                    /* especificidade: 1 (tag) */

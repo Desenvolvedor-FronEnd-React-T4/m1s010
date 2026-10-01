@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercício — Grid responsivo sem media query</title>
+<link rel="stylesheet" href="2-grid-responsivo-sem-media-query.css">
+</head>
+<body>
+
+  <h1 class="titulo-pagina">Galeria Bikcraft</h1>
+
+  <section class="galeria">
+    <article class="card-bike">Sport</article>
+    <article class="card-bike">Urban</article>
+    <article class="card-bike">Cargo</article>
+    <article class="card-bike">Kids</article>
+    <article class="card-bike">Elétrica</article>
+    <article class="card-bike">Dobrável</article>
+  </section>
+
+  <!--
+    GABARITO (só olhe depois de tentar!)
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    Como ler: "crie quantas colunas de NO MÍNIMO 220px couberem; cada uma
+    cresce (1fr) para dividir a sobra". Em 375px: 1 coluna. Em 768px: 3.
+    Em 1280px: 5 — sem nenhuma media query.
+
+    Comparação com o Flexbox:
+      .galeria { display: flex; flex-wrap: wrap; gap: 16px; }
+      .card-bike { flex: 1 1 220px; }
+    Resultado parecido, mas o Grid alinha as colunas em todas as linhas;
+    o Flexbox distribui cada linha de forma independente (a última linha
+    pode ficar com cards mais largos).
+  -->
+
+</body>
+</html>

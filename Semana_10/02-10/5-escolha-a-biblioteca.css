@@ -1,0 +1,20 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: #fff; color: #263238; line-height: 1.5; padding: 24px 16px; }
+
+.folha { max-width: 900px; margin: 0 auto; }
+h1 { color: #1b4f72; font-size: 1.6rem; margin-top: 0; }
+h2 { color: #123049; font-size: 1.1rem; margin-top: 28px; }
+.intro { background: #eef4f8; border-left: 4px solid #1b4f72; padding: 12px 14px; border-radius: 4px; }
+
+.quadro { width: 100%; border-collapse: collapse; margin-top: 16px; }
+.quadro th { background: #1b4f72; color: #fff; text-align: left; padding: 8px 10px; }
+.quadro td { border: 1px solid #cfd8dc; padding: 8px 10px; vertical-align: top; }
+.quadro td.resposta { height: 64px; min-width: 140px; }
+
+@media (max-width: 600px) {
+  .quadro td.resposta { min-width: 100px; }
+}
+
+@media print {
+  body { padding: 0; }
+}

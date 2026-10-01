@@ -7,9 +7,14 @@ h1 { font-size: 1.4rem; }
   desktop e EMPILHADOS no celular — exatamente como a faixa de recursos
   do slide "EXERCÍCIO (FLEXBOX + ESPECIFICIDADE)".
 
-  Estado atual: os cards já são um container flex, mas sem flex-wrap,
-  sem gap e sem a regra que os empilha no celular. Complete o CSS
-  marcado com "// COMPLETE AQUI" seguindo os comentários.
+  Estado atual: os cards já são um container flex, mas sem gap e sem a
+  regra que os põe lado a lado no desktop. Complete o CSS marcado com
+  "COMPLETE AQUI" seguindo os comentários.
+
+  Desafio extra (se sobrar tempo): troque a estratégia flex-direction
+  por flex-wrap + "flex: 1 1 200px" nos cards. Os cards passam a se
+  reorganizar sozinhos, sem nenhuma media query. Quando cada abordagem
+  é a melhor? (Número fixo de itens × número variável de itens.)
 */
 .faixa-metricas {
   display: flex;
