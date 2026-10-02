@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>19 — Os elementos de página, um por um</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha D · O mapa</span><span>Doc 19 de 23</span></div>
+<main class="pagina">
+  <h1>Os elementos de página, um por um</h1>
+  <p class="resumo">Ficha técnica de cada elemento estrutural: o que é, quantos pode haver, onde fica, classe típica e erro comum.</p>
+
+  <h2>Quadro-resumo</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Tag</th><th>Quantos?</th><th>Fica dentro de</th><th>Classe típica</th></tr></thead>
+    <tbody>
+      <tr><td><code>header</code></td><td>1 do site (+ 1 por article/section, se quiser)</td><td><code>body</code></td><td><code>cabecalho</code></td></tr>
+      <tr><td><code>nav</code></td><td>1 principal; outros com <code>aria-label</code></td><td><code>header</code>, <code>footer</code></td><td><code>menu</code></td></tr>
+      <tr><td><code>main</code></td><td><b>1 só</b></td><td><code>body</code></td><td>raramente precisa</td></tr>
+      <tr><td><code>section</code></td><td>Quantas precisar</td><td><code>main</code></td><td><code>hero</code>, <code>produtos</code></td></tr>
+      <tr><td><code>article</code></td><td>Quantos precisar</td><td><code>section</code>, <code>main</code></td><td><code>card</code>, <code>post</code></td></tr>
+      <tr><td><code>aside</code></td><td>Quantos precisar</td><td><code>main</code> ou ao lado</td><td><code>lateral</code></td></tr>
+      <tr><td><code>footer</code></td><td>1 do site (+ por article/section)</td><td><code>body</code></td><td><code>rodape</code></td></tr>
+      <tr><td><code>div</code></td><td>Sem limite</td><td>qualquer lugar</td><td><code>container</code>, <code>grid</code>, <code>campo</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>header</h2>
+  <p>Cabeçalho do site: logo, menu, às vezes busca. <b>Não é o &lt;head&gt;</b> (esse é invisível e fica fora do body).</p>
+  <pre><code>&lt;header class="cabecalho"&gt;
+  &lt;a class="logo" href="/"&gt;bikcraft&lt;/a&gt;
+  &lt;nav class="menu"&gt;...&lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+  <p><b>CSS típico:</b> <code>display: flex; justify-content: space-between; align-items: center;</code></p>
+
+  <h2>nav</h2>
+  <p>Somente para <b>grupos principais de links</b> (menu, paginação, índice). Nem todo link solto precisa estar num <code>nav</code>. Estrutura profissional: lista dentro:</p>
+  <pre><code>&lt;nav class="menu" aria-label="Principal"&gt;
+  &lt;ul&gt;&lt;li&gt;&lt;a href="/bikes"&gt;Bikes&lt;/a&gt;&lt;/li&gt; ...&lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+
+  <h2>main</h2>
+  <p>O coração da página: o conteúdo que <b>só existe aqui</b>. Não inclui cabeçalho, menu e rodapé repetidos em todas as páginas. Leitores de tela têm atalho que pula direto para ele.</p>
+
+  <h2>section</h2>
+  <p>Faixa temática com título. <b>Padrão da indústria:</b> <code>section</code> (faixa) + <code>div.container</code> (conteúdo).</p>
+  <pre><code>&lt;section class="lojas" aria-labelledby="titulo-lojas"&gt;
+  &lt;div class="container"&gt;
+    &lt;h2 id="titulo-lojas"&gt;Nossas lojas&lt;/h2&gt;
+    ...
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+  <h2>article</h2>
+  <p>Item autônomo. Num catálogo, cada produto é um <code>article</code>; a lista deles vive numa <code>section</code>.</p>
+
+  <h2>aside</h2>
+  <p>Conteúdo relacionado, mas dispensável: barra lateral, caixa "leia também", propaganda, biografia do autor.</p>
+
+  <h2>footer</h2>
+  <p>Fecha o site (ou um bloco). Típico: endereço, redes, copyright, links legais.</p>
+
+  <h2>div: o coringa</h2>
+  <p>Caixa sem significado. Perfeita para três usos:</p>
+  <ol>
+    <li><b>Container:</b> limitar largura.</li>
+    <li><b>Layout:</b> grid ou flex que agrupa filhos.</li>
+    <li><b>Agrupamento visual:</b> linha de formulário, par rótulo+campo.</li>
+  </ol>
+
+  <h2>Outros elementos que completam o mapa</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Tag</th><th>Para quê</th></tr></thead>
+    <tbody>
+      <tr><td><code>h1…h6</code></td><td>Títulos, com hierarquia</td></tr>
+      <tr><td><code>p</code></td><td>Parágrafo</td></tr>
+      <tr><td><code>ul</code> / <code>ol</code> / <code>li</code></td><td>Listas (inclusive menus)</td></tr>
+      <tr><td><code>figure</code> + <code>figcaption</code></td><td>Imagem com legenda</td></tr>
+      <tr><td><code>form</code>, <code>label</code>, <code>input</code>, <code>button</code></td><td>Formulários</td></tr>
+      <tr><td><code>a</code></td><td>Link (leva a outro lugar)</td></tr>
+      <tr><td><code>button</code></td><td>Ação (faz algo na página)</td></tr>
+      <tr><td><code>span</code></td><td>Trecho de texto sem significado (<code>div</code> inline)</td></tr>
+      <tr><td><code>img</code></td><td>Imagem, sempre com <code>alt</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa dica">
+    <p><b>Link ou botão?</b> Se muda de página → <code>a</code>. Se executa uma ação na página (enviar, abrir menu) → <code>button</code>. O visual pode ser idêntico: a classe cuida disso.</p>
+  </div>
+
+  <div class="nav-rodape"><a href="18-arvore-de-decisao-div-ou-semantico.html">← 18</a><a href="20-qual-classe-comeca.html">Próximo: 20 Qual classe começa? →</a></div>
+</main>
+</body>
+</html>

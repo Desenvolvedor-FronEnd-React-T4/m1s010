@@ -25,7 +25,9 @@ body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5
 */
 
 a { color: blue; }                    /* especificidade: 1 (tag) */
-.rodape-teste a { color: yellow; }     /* especificidade: 11 (classe + tag) */
+.rodape-teste a { color: yellow; }   
+
+#rodape-principal a { color: #fff; }/* especificidade: 101 (id + tag) */
 
 /* COMPLETE AQUI: escreva a regra que faz o link ficar branco (#fff)
    de verdade, com especificidade maior que ".rodape-teste a".

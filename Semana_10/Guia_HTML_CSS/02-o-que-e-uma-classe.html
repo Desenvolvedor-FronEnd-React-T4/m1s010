@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02 — O que é uma classe CSS</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha A · Classes</span><span>Doc 02 de 23</span></div>
+<main class="pagina">
+  <h1>O que é uma classe CSS</h1>
+  <p class="resumo">Uma <b>classe</b> é uma etiqueta que você cola num elemento HTML para que o CSS consiga encontrá-lo e estilizá-lo. A classe não faz nada sozinha: ela só ganha poder quando existe uma regra CSS com o mesmo nome.</p>
+
+  <h2>As três partes</h2>
+  <pre><code><span class="c">&lt;!-- HTML: o elemento recebe a etiqueta --&gt;</span>
+&lt;button class="botao"&gt;Enviar&lt;/button&gt;
+
+<span class="c">/* CSS: a regra procura a etiqueta (o ponto significa "classe") */</span>
+.botao {
+  background: #1b4f72;
+  color: #fff;
+  padding: 10px 20px;
+}</code></pre>
+  <ul>
+    <li><b>Nome:</b> <code>botao</code>. Você escolhe. O navegador não liga para o significado.</li>
+    <li><b>Ponto (<code>.</code>):</b> só aparece no CSS. No HTML escreve-se <code>class="botao"</code>, sem ponto.</li>
+    <li><b>Declarações:</b> o que está entre chaves, no formato <code>propriedade: valor;</code>.</li>
+  </ul>
+
+  <h2>Papel de uma classe</h2>
+  <p>Toda classe responde a uma de quatro perguntas. Saber qual é a pergunta é o que separa um nome bom de um nome ruim.</p>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Papel</th><th>Pergunta que responde</th><th>Exemplos</th></tr></thead>
+    <tbody>
+      <tr><td>Estrutura</td><td>Onde esse bloco fica e qual a largura dele?</td><td><code>container</code>, <code>wrapper</code>, <code>secao</code></td></tr>
+      <tr><td>Layout</td><td>Como os filhos se organizam?</td><td><code>flex</code>, <code>grid</code>, <code>row</code>, <code>col</code></td></tr>
+      <tr><td>Componente</td><td>Que peça reutilizável é essa?</td><td><code>botao</code>, <code>card</code>, <code>navbar</code></td></tr>
+      <tr><td>Utilitária</td><td>Qual ajuste pequeno e único aplico?</td><td><code>mt-2</code>, <code>text-center</code>, <code>hidden</code></td></tr>
+      <tr><td>Estado/modificador</td><td>Em que situação ou variação está?</td><td><code>ativo</code>, <code>is-open</code>, <code>botao--grande</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>Cada um desses papéis tem um documento próprio (03 a 08).</p>
+
+  <h2>Regras de sintaxe do nome</h2>
+  <ul>
+    <li>Pode ter letras, números, hífen (<code>-</code>) e sublinhado (<code>_</code>).</li>
+    <li>Não pode começar com número (<code>1coluna</code> não funciona; <code>coluna-1</code> funciona).</li>
+    <li>Diferencia maiúscula de minúscula: <code>.Botao</code> e <code>.botao</code> são classes diferentes.</li>
+    <li>Sem espaço. Espaço no atributo <code>class</code> <b>separa várias classes</b>.</li>
+  </ul>
+
+  <h2>Várias classes no mesmo elemento</h2>
+  <pre><code>&lt;button class="botao botao--grande ativo"&gt;Comprar&lt;/button&gt;</code></pre>
+  <p>São três etiquetas no mesmo botão. As regras das três valem juntas. Esse é o mecanismo que permite combinar componente, variação e estado.</p>
+
+  <h2>Classe, id ou tag?</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Seletor</th><th>Exemplo</th><th>Reutiliza?</th><th>Use para</th></tr></thead>
+    <tbody>
+      <tr><td>Tag</td><td><code>p { }</code></td><td>Em todos os <code>p</code></td><td>Base global (documento 20)</td></tr>
+      <tr><td>Classe</td><td><code>.card { }</code></td><td>Sim, quantas vezes quiser</td><td><b>Quase todo o CSS</b></td></tr>
+      <tr><td>Id</td><td><code>#topo { }</code></td><td>Não, só um por página</td><td>Âncoras e JavaScript, não estilo</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa dica">
+    <p><b>Padrão profissional:</b> estilize com <b>classes</b>. Use <code>id</code> para links de âncora (<code>href="#contato"</code>) e para o JavaScript. O motivo está no documento 14: o id pesa tanto que atrapalha quem vem depois.</p>
+  </div>
+
+  <h2>Nome bom e nome ruim</h2>
+  <table>
+    <thead><tr><th>Evite</th><th>Por quê</th><th>Prefira</th></tr></thead>
+    <tbody>
+      <tr><td><code>.azul</code></td><td>Descreve a aparência. Se a marca mudar de cor, o nome mente.</td><td><code>.botao-primario</code></td></tr>
+      <tr><td><code>.caixa2</code></td><td>Não diz nada.</td><td><code>.card-produto</code></td></tr>
+      <tr><td><code>.div-esquerda</code></td><td>Descreve posição e a tag.</td><td><code>.coluna-dados</code></td></tr>
+      <tr><td><code>.Menu_Principal</code></td><td>Mistura estilos de escrita.</td><td><code>.menu-principal</code></td></tr>
+    </tbody>
+  </table>
+  <p>Regra: o nome diz <b>o que a coisa é</b> (função), não <b>como ela se parece</b>. Escreva em minúsculas, com hífen entre as palavras (<i>kebab-case</i>).</p>
+
+  <div class="nav-rodape"><a href="01-comece-aqui.html">← Índice</a><a href="03-classes-de-estrutura.html">Próximo: 03 Classes de estrutura →</a></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula ao vivo — px, rem, em, vh e responsividade (mobile-first)</title>
+<link rel="stylesheet" href="6-aula-unidades-e-responsividade.css">
+</head>
+<body>
+
+  <!-- display: flex + justify-content + align-items + sticky (ver CSS, bloco 2) -->
+  <header class="cabecalho">
+    <span class="logo">bikcraft · aula</span>
+    <nav class="menu">
+      <a href="#unidades">Unidades</a>
+      <a href="#quando">Quando usar</a>
+      <a class="menu-extra" href="#layout">Layout</a>
+    </nav>
+  </header>
+
+  <!-- CONTAINER: ocupa a tela toda no celular e para num limite no monitor (CSS, bloco 1) -->
+  <main class="container">
+
+    <!-- ═══ HERO: altura em vh, título com clamp() ═══ -->
+    <section class="hero">
+      <p class="chamada">AULA AO VIVO</p>
+      <h1 class="titulo">px, rem, em e vh: qual escolher?</h1>
+      <p class="texto">Abra o DevTools (F12), ative o modo dispositivo (Ctrl+Shift+M) e mude entre 375px, 768px e 1280px. O que muda? O que não muda?</p>
+    </section>
+
+    <!-- ═══ 1. COMPARAÇÃO DAS UNIDADES (Grid auto-fit) ═══ -->
+    <section class="bloco" id="unidades">
+      <h2>1. Comparação das unidades</h2>
+
+      <div class="comparacao">
+
+        <article class="unidade">
+          <h3>px</h3>
+          <p class="regra">valor <b>absoluto</b></p>
+          <div class="amostra"><div class="demo demo-px">100px</div></div>
+          <p class="resultado">Sempre 100px, em qualquer tela.</p>
+          <p class="experimente"><b>Experimente:</b> mude o aparelho no DevTools. A largura não se mexe.</p>
+        </article>
+
+        <article class="unidade">
+          <h3>rem</h3>
+          <p class="regra">múltiplo da fonte da <b>raiz</b> (<code>html</code>)</p>
+          <div class="amostra"><div class="demo demo-rem">6rem</div></div>
+          <p class="resultado">6 × 16px = 96px (fonte padrão).</p>
+          <p class="experimente"><b>Experimente:</b> mude <code>html { font-size: 20px }</code>. A caixa passa a 120px.</p>
+        </article>
+
+        <article class="unidade">
+          <h3>em</h3>
+          <p class="regra">múltiplo da fonte do <b>próprio elemento</b></p>
+          <div class="amostra pai-em">
+            <div class="demo demo-em">5em</div>
+          </div>
+          <p class="resultado">O pai tem 1.25rem = 20px, então 5 × 20px = 100px.</p>
+          <p class="experimente"><b>Experimente:</b> mude o <code>font-size</code> do <code>.pai-em</code>. A caixa acompanha o pai, não a raiz.</p>
+        </article>
+
+        <article class="unidade">
+          <h3>vh</h3>
+          <p class="regra">1% da <b>altura da janela</b></p>
+          <div class="amostra"><div class="demo demo-vh">20vh</div></div>
+          <p class="resultado">Janela de 720px de altura: 20vh = 144px.</p>
+          <p class="experimente"><b>Experimente:</b> redimensione a janela na vertical. Só a altura se mexe.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ═══ 2. QUANDO USAR CADA UMA (Flexbox com wrap) ═══ -->
+    <section class="bloco" id="quando">
+      <h2>2. Quando usar cada unidade</h2>
+
+      <div class="escolhas">
+        <article class="escolha">
+          <h3><code>px</code></h3>
+          <p><span class="sim">Use</span> borda de 1px, sombra, detalhes que não devem escalar.</p>
+          <p><span class="nao">Evite</span> em fonte e espaçamentos.</p>
+        </article>
+        <article class="escolha">
+          <h3><code>rem</code></h3>
+          <p><span class="sim">Use</span> fonte, espaçamentos e tamanhos de componentes (padrão da página).</p>
+          <p><span class="nao">Evite</span> misturar com <code>px</code> sem motivo.</p>
+        </article>
+        <article class="escolha">
+          <h3><code>em</code></h3>
+          <p><span class="sim">Use</span> o padding de botões e selos, que devem acompanhar o texto.</p>
+          <p><span class="nao">Evite</span> em fonte aninhada: os valores se multiplicam.</p>
+        </article>
+        <article class="escolha">
+          <h3><code>%</code></h3>
+          <p><span class="sim">Use</span> larguras relativas ao pai: colunas e imagens.</p>
+          <p><span class="nao">Evite</span> em altura (depende do pai ter altura).</p>
+        </article>
+        <article class="escolha">
+          <h3><code>vh / dvh</code></h3>
+          <p><span class="sim">Use</span> altura de hero e telas cheias (<code>min-height</code>).</p>
+          <p><span class="nao">Evite</span> <code>100vw</code> em largura: inclui a barra de rolagem.</p>
+        </article>
+        <article class="escolha">
+          <h3><code>clamp()</code></h3>
+          <p><span class="sim">Use</span> fonte fluida: mínimo, ideal (com <code>vw</code>) e máximo.</p>
+          <p><span class="nao">Evite</span> repetir várias media queries só para a fonte.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══ 3. LAYOUT RESPONSIVO: Flexbox + Grid ═══ -->
+    <section class="bloco" id="layout">
+      <h2>3. Layout: Flexbox e Grid, mobile-first</h2>
+
+      <h3 class="sub">Flexbox: 2 colunas na proporção 5 : 7</h3>
+      <div class="duas-colunas">
+        <div class="coluna coluna-a">5 partes<br><small>flex: 5</small></div>
+        <div class="coluna coluna-b">7 partes<br><small>flex: 7</small></div>
+      </div>
+
+      <h3 class="sub">Grid: colunas que se ajustam sozinhas</h3>
+      <div class="grade">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">© Bikcraft — aula ao vivo</footer>
+
+</body>
+</html>

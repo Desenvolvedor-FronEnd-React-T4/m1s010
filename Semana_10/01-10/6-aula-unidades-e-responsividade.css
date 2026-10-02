@@ -1,0 +1,223 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   AULA AO VIVO — px, rem, em, vh + container, display, Flexbox, Grid
+   Tudo MOBILE-FIRST: o CSS fora de @media é o CELULAR; as media queries
+   (48em = 768px · 64em = 1024px) só ACRESCENTAM.
+
+   Em cada bloco:  ESCOLHA   = qual unidade/propriedade e por quê
+                   PADRÃO    = a forma correta
+                   RESULTADO = o que aparece na tela (confira no DevTools)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+
+/* ═══ 0. BASE ═══
+   ESCOLHA   box-sizing: border-box → a largura JÁ INCLUI padding e borda.
+             Fonte do body em rem (1rem) e NADA de font-size em px no html:
+             quem aumenta a fonte do navegador vê tudo em rem crescer.
+   RESULTADO 1rem = 16px por padrão, em qualquer aparelho. */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;       /* sem unidade: múltiplo da fonte do próprio elemento */
+  background: #0a0a0a;
+  color: #f5f5f5;
+}
+
+h2 { font-size: clamp(1.25rem, 3vw, 1.75rem); margin: 0 0 1rem; }
+h3 { margin: 0 0 .25rem; }
+code { background: #202336; padding: 0 .35em; border-radius: .25rem; }
+
+
+/* ═══ 1. CONTAINER ═══
+   ESCOLHA   width: 100% (cabe no celular) + max-width em REM (acompanha o
+             zoom) + margin-inline: auto (centraliza) + padding lateral em rem.
+   PADRÃO    container fluido: cresce até o limite e fica no centro.
+   RESULTADO 375px → container = 375px · 1440px → 1120px (70rem × 16px). */
+.container {
+  width: 100%;
+  max-width: 70rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+
+/* ═══ 2. CABEÇALHO: display + Flexbox + justify/align + sticky ═══
+   ESCOLHA   display: flex no PAI. justify-content: space-between joga o logo
+             e o menu para as pontas (eixo principal); align-items: center
+             alinha no meio (eixo transversal). flex-wrap + gap evitam estouro.
+             O link extra começa com display: none (celular) e só aparece
+             por min-width: mobile-first.
+   RESULTADO 375px → 2 links · 768px+ → 3 links. */
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #0a0a0a;
+  border-bottom: 1px solid #333;     /* 1px: detalhe que NÃO deve escalar → px */
+}
+
+.logo { font-weight: 700; color: #ffbf00; }
+.menu { display: flex; gap: 1rem; }
+.menu a { color: #f5f5f5; text-decoration: none; }
+.menu-extra { display: none; }       /* escondido no celular (some do fluxo) */
+
+
+/* ═══ 3. HERO: vh/dvh + clamp() + ch ═══
+   ESCOLHA   min-height em vh/dvh: a altura depende da TELA. É min-height (não
+             height) para o conteúdo nunca vazar. O dvh vem depois e ignora a
+             barra do navegador no celular.
+             Título com clamp(2rem, 6vw, 3.5rem): mínimo, ideal e máximo, sem
+             media query. Texto com max-width em ch: linha de ~65 caracteres.
+   RESULTADO janela de 720px de altura → hero ≥ 432px (60vh);
+             título: 32px em 375px, 56px (máximo) de ~933px em diante. */
+.hero {
+  min-height: 60vh;
+  min-height: 60dvh;
+  display: flex;
+  flex-direction: column;      /* eixo principal = VERTICAL */
+  justify-content: center;     /* centraliza na ALTURA */
+  align-items: flex-start;
+  gap: 1rem;
+  padding-block: 2rem;
+}
+
+.chamada { margin: 0; color: #ffbf00; font-weight: 700; }
+.titulo  { margin: 0; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; }
+.texto   { margin: 0; max-width: 65ch; }
+
+
+/* ═══ 4. COMPARAÇÃO DAS UNIDADES: Grid auto-fit + as 4 amostras ═══
+   ESCOLHA   Grid repeat(auto-fit, minmax(14rem, 1fr)): quantas colunas de NO
+             MÍNIMO 14rem couberem. Resolve o layout SEM media query.
+   RESULTADO 375px → 1 coluna · 768px → 2 · 1280px → 4 colunas. */
+.bloco { padding-block: 2rem; }
+
+.comparacao {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+
+.unidade { background: #161616; border-radius: .75rem; padding: 1.25rem; }
+.regra, .resultado, .experimente { margin: .5rem 0 0; }
+.resultado { color: #ffbf00; font-weight: 700; }
+.experimente { font-size: .875rem; color: #c8c8c8; }
+
+.amostra {
+  min-height: 7rem;
+  display: flex;
+  align-items: flex-end;     /* alinha as caixas pela base, para comparar alturas */
+  margin-top: .75rem;
+}
+
+.demo {
+  display: grid;             /* centraliza o texto da caixa nos dois eixos */
+  place-items: center;
+  background: #202336;
+  border: 1px solid #ffbf00;
+  border-radius: .5rem;
+  font-weight: 700;
+}
+
+/* px   → ABSOLUTO: nunca muda. Resultado: 100px em qualquer tela. */
+.demo-px  { width: 100px; height: 3rem; }
+
+/* rem  → múltiplo da RAIZ. Resultado: 6 × 16px = 96px.
+          Com html { font-size: 20px } → 120px. */
+.demo-rem { width: 6rem; height: 3rem; }
+
+/* em   → múltiplo da fonte do PRÓPRIO elemento (aqui, herdada do pai).
+          O pai define 1.25rem = 20px; 5em = 5 × 20px = 100px. */
+.pai-em   { font-size: 1.25rem; }
+.demo-em  { width: 5em; height: 2.5em; }
+
+/* vh   → 1% da ALTURA da janela. Resultado: janela de 720px → 20vh = 144px. */
+.demo-vh  { width: 6rem; height: 20vh; }
+
+
+/* ═══ 5. QUANDO USAR CADA UMA: Flexbox com wrap + flex-basis ═══
+   ESCOLHA   flex-wrap + flex: 1 1 14rem: cada cartão parte de 14rem, cresce
+             para preencher e quebra de linha sozinho (número variável de itens).
+   RESULTADO 375px → 1 por linha · 1280px → 3 por linha. */
+.escolhas { display: flex; flex-wrap: wrap; gap: 1rem; }
+.escolha  { flex: 1 1 14rem; background: #161616; border-radius: .75rem; padding: 1.25rem; }
+.escolha p { margin: .5rem 0 0; }
+
+.sim, .nao {
+  display: inline-block;        /* aceita padding e flui com o texto */
+  padding: .1em .6em;           /* em: o espaço interno acompanha o PRÓPRIO texto */
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 700;
+  color: #0a0a0a;
+}
+.sim { background: #78c043; }
+.nao { background: #f0616d; }
+
+
+/* ═══ 6. LAYOUT: 2 COLUNAS (Flexbox) + GRADE (Grid) ═══
+   ESCOLHA   Flexbox: column no celular, row só no desktop. flex: 5 e flex: 7
+             são PROPORÇÕES (partes do espaço), não pixels.
+             Grid: auto-fit + minmax para a grade de itens.
+   RESULTADO 375px → colunas empilhadas · 1024px+ → lado a lado, a coluna B
+             ~40% mais larga que a A (7 ÷ 5 = 1,4). */
+.sub { margin: 1.5rem 0 .75rem; color: #ffbf00; }
+
+.duas-colunas { display: flex; flex-direction: column; gap: 1rem; }
+
+.coluna {
+  display: grid;
+  place-items: center;
+  min-height: 6rem;
+  border-radius: .75rem;
+  text-align: center;
+  font-weight: 700;
+}
+.coluna-a { background: #202336; }
+.coluna-b { background: #2d3150; }
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 1rem;
+}
+.item {
+  display: grid;
+  place-items: center;
+  min-height: 5rem;
+  background: #161616;
+  border: 1px solid #333;
+  border-radius: .75rem;
+  font-weight: 700;
+}
+
+.rodape { padding: 1.5rem 1rem; border-top: 1px solid #333; text-align: center; color: #c8c8c8; }
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MEDIA QUERIES — só ACRESCENTAM, da menor para a maior.
+   Breakpoints em EM (48em = 768px · 64em = 1024px): em media query o 1em
+   vale sempre 16px e respeita a preferência de fonte do usuário.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* TABLET (768px+) */
+@media (min-width: 48em) {
+  .container  { padding-inline: 2rem; }
+  .menu-extra { display: block; }       /* o link extra aparece */
+}
+
+/* DESKTOP (1024px+) — escreva DEPOIS da de 48em */
+@media (min-width: 64em) {
+  .container    { padding-inline: 3rem; }
+  .duas-colunas { flex-direction: row; }     /* empilhado → lado a lado */
+  .coluna-a     { flex: 5; }                 /* proporção 5 : 7 */
+  .coluna-b     { flex: 7; }
+}

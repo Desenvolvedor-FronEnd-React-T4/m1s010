@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- SEMANA 10 · DIA 1 — meta viewport: sem esta linha o celular finge ser
+       uma tela larga e encolhe a página inteira. É a base de toda a
+       responsividade do site. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bikcraft — Bicicletas feitas sob medida</title>
+
+  <!-- SEMANA 10 · DIA 3 — Font Awesome, usado no rodapé e na página de contato. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SEMANA 07 — cabeçalho compartilhado por todas as páginas do site. -->
+  <header class="cabecalho">
+    <span class="logo">bikcraft</span>
+    <nav>
+      <a href="bicicletas.html">Bicicletas</a>
+      <a href="#seguros">Seguros</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+  </header>
+
+  <!-- <main>: conteúdo único desta página (só um por página). Header e footer ficam fora. -->
+  <main>
+
+    <!-- SEMANA 07 — hero da home: texto de apresentação + imagem da bike. -->
+    <section class="hero">
+      <div class="hero-texto">
+        <h1 class="hero-titulo">Bicicletas feitas sob medida<span class="ponto-destaque">.</span></h1>
+        <p class="hero-paragrafo">
+          Bicicletas elétricas de alta precisão e qualidade, feitas sob medida
+          para você. Explore o mundo na sua velocidade com a Bikcraft.
+        </p>
+        <!-- Caminho profissional para navegar entre páginas: a tag <a>, não um
+             botão + JavaScript (ver comentário completo em contato.html). -->
+        <a class="botao-destaque" href="bicicletas.html">ESCOLHA A SUA</a>
+      </div>
+      <div class="hero-imagem">
+        <img src="assets/bike-1.svg" alt="Bicicleta de estrada Bikcraft, modelo Magic Might">
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé compartilhado por todas as páginas (mesmo bloco de contato.html). -->
+  <footer class="rodape">
+    <p>&copy; 2026 Bikcraft. Todos os direitos reservados.</p>
+    <div class="redes-sociais">
+      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    </div>
+  </footer>
+
+</body>
+</html>

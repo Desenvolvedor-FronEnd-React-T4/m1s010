@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07 — Classes utilitárias</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha A · Classes</span><span>Doc 07 de 23</span></div>
+<main class="pagina">
+  <h1>Classes utilitárias</h1>
+  <p class="resumo">Uma classe <b>utilitária</b> faz <b>uma única coisa</b>, sempre a mesma, em qualquer lugar. É o contrário do componente: não entrega uma peça pronta, entrega um ajuste fino.</p>
+
+  <h2>Exemplos clássicos</h2>
+  <pre><code>.mt-2  { margin-top: 8px; }
+.mb-4  { margin-bottom: 24px; }
+.p-3   { padding: 16px; }
+.text-center { text-align: center; }
+.hidden { display: none; }
+.w-100 { width: 100%; }
+.sr-only { <span class="c">/* escondido da tela, mas lido por leitor de tela */</span>
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}</code></pre>
+
+  <h2>Por que existem</h2>
+  <p>Sem utilitárias, cada ajuste de 8px viraria uma classe nova. Com elas, você resolve um detalhe sem inventar nome:</p>
+  <pre><code>&lt;section class="secao text-center mb-4"&gt;...&lt;/section&gt;</code></pre>
+
+  <h2>Escala de espaçamento</h2>
+  <p>Profissionais não usam números aleatórios; usam uma <b>escala</b>. Assim a página inteira respira no mesmo ritmo.</p>
+  <table>
+    <thead><tr><th>Sufixo</th><th>Valor</th><th>Uso típico</th></tr></thead>
+    <tbody>
+      <tr><td><code>-1</code></td><td>4px</td><td>Espaço mínimo</td></tr>
+      <tr><td><code>-2</code></td><td>8px</td><td>Entre ícone e texto</td></tr>
+      <tr><td><code>-3</code></td><td>16px</td><td>Padding de componente</td></tr>
+      <tr><td><code>-4</code></td><td>24px</td><td>Entre blocos</td></tr>
+      <tr><td><code>-5</code></td><td>48px</td><td>Entre seções</td></tr>
+    </tbody>
+  </table>
+  <p>Leitura do nome: <code>mt</code> = margin-top, <code>mb</code> = bottom, <code>ms</code>/<code>me</code> = start/end, <code>mx</code> = eixo horizontal, <code>my</code> = vertical; <code>p…</code> = padding.</p>
+
+  <h2>Utilitárias mais comuns</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Grupo</th><th>Exemplos</th><th>Efeito</th></tr></thead>
+    <tbody>
+      <tr><td>Espaço</td><td><code>m-0</code>, <code>mt-3</code>, <code>px-4</code></td><td>margem e padding</td></tr>
+      <tr><td>Exibição</td><td><code>hidden</code>, <code>d-none</code>, <code>block</code></td><td><code>display</code></td></tr>
+      <tr><td>Tamanho</td><td><code>w-100</code>, <code>h-100</code>, <code>max-w-full</code></td><td>largura e altura</td></tr>
+      <tr><td>Texto</td><td><code>text-center</code>, <code>fw-bold</code></td><td>alinhamento e peso</td></tr>
+      <tr><td>Cor</td><td><code>text-primary</code>, <code>bg-dark</code></td><td>cor de texto e fundo</td></tr>
+      <tr><td>Acessibilidade</td><td><code>sr-only</code></td><td>só leitor de tela</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Utilitária x componente: quando usar cada uma</h2>
+  <table>
+    <thead><tr><th></th><th>Componente</th><th>Utilitária</th></tr></thead>
+    <tbody>
+      <tr><td>Faz</td><td>Uma peça inteira</td><td>Um ajuste único</td></tr>
+      <tr><td>Nome</td><td>Substantivo: <code>card</code></td><td>Ação curta: <code>mt-3</code></td></tr>
+      <tr><td>Bom para</td><td>O que se repete igual</td><td>Exceções pontuais</td></tr>
+      <tr><td>Risco</td><td>Virar CSS gigante</td><td>HTML poluído de classes</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caixa atencao">
+    <p><b>Cuidado:</b> utilitárias costumam ser escritas <b>depois</b> de tudo no CSS (documento 20) para vencer o componente em caso de empate. É assim que <code>mt-0</code> consegue anular a margem de um <code>card</code>.</p>
+  </div>
+
+  <div class="caixa exemplo">
+    <p><b>Tailwind CSS</b> leva essa ideia ao limite: <i>todo</i> o visual vem de utilitárias (<code>flex p-4 text-center</code>). É a abordagem "utility-first" citada na atividade da biblioteca.</p>
+  </div>
+
+  <div class="nav-rodape"><a href="06-classes-de-texto.html">← 06</a><a href="08-classes-de-estado-e-modificadores.html">Próximo: 08 Estado e modificadores →</a></div>
+</main>
+</body>
+</html>

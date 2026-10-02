@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12 — O efeito cascata</title>
+<link rel="stylesheet" href="guia.css">
+<style>
+  .ex-ordem { color: #1b4f72; }
+  .ex-ordem { color: #c0392b; }
+</style>
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha B · Herança e cascata</span><span>Doc 12 de 23</span></div>
+<main class="pagina">
+  <h1>O efeito cascata</h1>
+  <p class="resumo">CSS significa <b>Cascading</b> Style Sheets: folhas de estilo <b>em cascata</b>. Cascata é o algoritmo que decide <b>qual regra vence</b> quando várias regras atingem o mesmo elemento e dizem coisas diferentes sobre a mesma propriedade.</p>
+
+  <h2>O problema que a cascata resolve</h2>
+  <pre><code>p { color: blue; }
+p { color: red; }
+.aviso { color: green; }
+
+&lt;p class="aviso"&gt;De que cor eu fico?&lt;/p&gt;</code></pre>
+  <p>Três regras, três cores, um parágrafo. O navegador não pode obedecer às três. A cascata é o desempate. (Resposta: <b>verde</b>, e você vai saber por quê já já.)</p>
+
+  <h2>As três perguntas, nesta ordem</h2>
+  <p>O navegador pergunta, na sequência, e para assim que alguém vence:</p>
+  <ol class="passos">
+    <li><b>Origem e importância.</b> De onde vem a regra: estilo do navegador, do autor (você) ou do usuário? Tem <code>!important</code>?</li>
+    <li><b>Especificidade.</b> Qual seletor é <i>mais específico</i>? (Detalhado no documento 14.)</li>
+    <li><b>Ordem no código.</b> Se empatou nas duas, <b>a última escrita vence</b>.</li>
+  </ol>
+
+  <div class="fluxo">
+    <div class="pergunta">1. Há !important ou origens diferentes?</div>
+    <div class="seta">↓ não, empatou</div>
+    <div class="pergunta">2. Um seletor é mais específico?</div>
+    <div class="seta">↓ não, empatou</div>
+    <div class="pergunta">3. Qual aparece por último no CSS?</div>
+    <div class="seta">↓</div>
+    <div class="resposta">Essa vence</div>
+  </div>
+
+  <h2>1. Origem</h2>
+  <table>
+    <thead><tr><th>Origem</th><th>Quem escreve</th><th>Peso</th></tr></thead>
+    <tbody>
+      <tr><td>Navegador (user agent)</td><td>Chrome, Firefox… (azul do link, margem do <code>body</code>)</td><td>Menor</td></tr>
+      <tr><td>Autor</td><td><b>Você</b>, no seu arquivo .css</td><td>Maior que a do navegador</td></tr>
+      <tr><td>Usuário</td><td>Preferências de acessibilidade</td><td>Entre as duas</td></tr>
+    </tbody>
+  </table>
+  <p>Por isso o seu CSS sempre vence o estilo padrão do navegador, mesmo com seletores simples.</p>
+
+  <h2>3. Ordem: a última vence (em caso de empate)</h2>
+  <pre><code>.ex-ordem { color: #1b4f72; }   <span class="c">/* azul */</span>
+.ex-ordem { color: #c0392b; }   <span class="c">/* vermelho — vem depois, vence */</span></code></pre>
+  <div class="demo"><p class="demo-titulo">Duas regras com a mesma especificidade: vermelho (a última)</p>
+    <p class="ex-ordem" style="margin:0">Este texto aparece vermelho.</p>
+  </div>
+
+  <h3>Ordem também vale entre arquivos</h3>
+  <pre><code>&lt;link rel="stylesheet" href="base.css"&gt;
+&lt;link rel="stylesheet" href="pagina.css"&gt;   <span class="c">&lt;!-- vem depois: ganha os empates --&gt;</span></code></pre>
+  <p>Por isso o reset e a base vêm primeiro, e o CSS da página, depois.</p>
+
+  <h2>Por que "cascata"?</h2>
+  <p>Como uma cachoeira, o estilo desce de cima (navegador) para baixo (seu CSS, regra por regra), e <b>o que chega por último ao elemento é o que ele mostra</b>. Cada regra "sobrescreve" a anterior apenas nas propriedades em que discordam; as outras continuam valendo.</p>
+  <pre><code>p      { color: blue; font-size: 18px; }
+.aviso { color: green; }
+<span class="c">/* Resultado em &lt;p class="aviso"&gt;: cor verde (do .aviso), tamanho 18px (do p).
+   As regras se SOMAM nas propriedades diferentes e só brigam nas iguais. */</span></code></pre>
+
+  <div class="caixa exemplo">
+    <p><b>Resumo em uma frase:</b> a cascata combina todas as regras que atingem o elemento; onde elas discordam, vence a de <b>maior importância → maior especificidade → mais tarde no código</b>.</p>
+  </div>
+
+  <div class="nav-rodape"><a href="11-o-que-herda-e-o-que-nao-herda.html">← 11</a><a href="13-cascata-na-pratica.html">Próximo: 13 Cascata na prática →</a></div>
+</main>
+</body>
+</html>

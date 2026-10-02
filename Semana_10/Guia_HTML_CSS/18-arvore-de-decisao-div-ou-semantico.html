@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>18 — Árvore de decisão: div, main, section ou article?</title>
+<link rel="stylesheet" href="guia.css">
+<style>
+  .dupla { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 14px 0; }
+</style>
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha D · O mapa</span><span>Doc 18 de 23</span></div>
+<main class="pagina">
+  <h1>Árvore de decisão: div, main, section ou article?</h1>
+  <p class="resumo">Responda às perguntas <b>de cima para baixo</b>. A primeira resposta "sim" é a tag certa. A <code>div</code> é o <b>último recurso</b>: use quando nenhuma tag tem significado.</p>
+
+  <h2>O fluxograma</h2>
+  <div class="fluxo">
+    <div class="pergunta">É o topo do site (logo + menu), ou a abertura de um bloco?</div>
+    <div class="seta">sim ↓ &nbsp; <small>(não: próxima pergunta)</small></div>
+    <div class="resposta"><b>&lt;header&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">É um grupo de links de navegação?</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;nav&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">É o conteúdo principal e único desta página?</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;main&gt;</b> (só um por página)</div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">Tem sentido sozinho, poderia ser publicado em outro lugar? (notícia, produto, comentário, card)</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;article&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">É um grupo de conteúdo sobre UM tema, que deveria ter um título (h2)?</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;section&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">É um conteúdo lateral, de apoio, que pode ser removido sem perder o texto principal?</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;aside&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">É a base do site ou de um bloco (contato, direitos)?</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;footer&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">Existe uma tag que diga o que é? (<code>ul</code>, <code>p</code>, <code>button</code>, <code>form</code>, <code>figure</code>…)</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta">Use <b>essa tag</b></div>
+    <div class="seta">não ↓</div>
+    <div class="resposta" style="background:#eef4f8;border-color:#1b4f72"><b>&lt;div&gt;</b>: só agrupa para o CSS (container, grid, linha de campos)</div>
+  </div>
+
+  <h2>Pares que confundem</h2>
+  <div class="dupla">
+    <div class="card"><h3>section ou div?</h3>
+      <p><b>section:</b> o grupo tem um <b>tema e um título</b>. Se você consegue nomear no sumário da página, é section.</p>
+      <p><b>div:</b> só existe para o CSS (largura, grade, fundo).</p>
+      <p><i>Teste:</i> "Se eu tirar o CSS, essa caixa ainda faz sentido como parte do documento?" Sim → section. Não → div.</p></div>
+    <div class="card"><h3>section ou article?</h3>
+      <p><b>article:</b> peça <b>independente</b> e reaproveitável (card de produto, post, comentário).</p>
+      <p><b>section:</b> <b>pedaço</b> de algo maior.</p>
+      <p><i>Teste:</i> "Posso copiar para outro site e continua fazendo sentido?" Sim → article.</p></div>
+    <div class="card"><h3>header ou section.hero?</h3>
+      <p><b>header</b> do site: topo com logo e menu. O <b>hero</b> é a primeira <code>section</code> do <code>main</code>.</p>
+      <p>Um <code>header</code> também pode abrir um <code>article</code> (título + data do post).</p></div>
+    <div class="card"><h3>aside ou div.lateral?</h3>
+      <p><b>aside:</b> o conteúdo é <b>complementar</b> (links relacionados, anúncios, biografia).</p>
+      <p><b>div:</b> uma coluna de layout que faz parte do texto principal.</p></div>
+  </div>
+
+  <h2>Erros frequentes</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Erro</th><th>Correção</th></tr></thead>
+    <tbody>
+      <tr><td>Toda a página dentro de <code>div</code> ("divite")</td><td>Troque pela tag semântica correspondente</td></tr>
+      <tr><td>Dois <code>main</code> na mesma página</td><td>Só um. Os outros viram <code>section</code></td></tr>
+      <tr><td><code>section</code> sem título dentro</td><td>Dê um <code>h2</code> ou use <code>div</code></td></tr>
+      <tr><td><code>div</code> clicável com <code>onclick</code></td><td>Use <code>button</code> (teclado e leitor de tela funcionam de graça)</td></tr>
+      <tr><td><code>section</code> só para aplicar fundo</td><td>Isso é papel de <code>div</code> ou classe</td></tr>
+      <tr><td><code>main</code> dentro de <code>section</code></td><td><code>main</code> envolve as seções, nunca o contrário</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa exemplo">
+    <p><b>As semânticas não mudam o visual.</b> <code>section</code>, <code>article</code> e <code>div</code> são todos caixas em bloco. A diferença é <b>significado</b>: para busca, leitor de tela e outros desenvolvedores. O visual você faz com classe.</p>
+  </div>
+
+  <div class="nav-rodape"><a href="17-mapa-esqueleto-da-pagina.html">← 17</a><a href="19-elementos-de-pagina-um-por-um.html">Próximo: 19 Elementos um por um →</a></div>
+</main>
+</body>
+</html>

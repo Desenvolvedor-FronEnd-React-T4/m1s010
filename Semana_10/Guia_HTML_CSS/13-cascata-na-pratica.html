@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>13 — Cascata na prática com o DevTools</title>
+<link rel="stylesheet" href="guia.css">
+<style>
+  .t1 { color: #c0392b; }
+  .t2 { color: #1b4f72; font-size: 1.2rem; }
+  .t2.negrito { font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha B · Herança e cascata</span><span>Doc 13 de 23</span></div>
+<main class="pagina">
+  <h1>Cascata na prática com o DevTools</h1>
+  <p class="resumo">Teoria entra de verdade quando você <b>vê</b> a cascata. O DevTools mostra, para cada elemento, <b>todas</b> as regras que o atingem, quais venceram e quais foram riscadas.</p>
+
+  <h2>Passo a passo no navegador</h2>
+  <ol class="passos">
+    <li>Abra a página e aperte <b>F12</b> (ou clique com o botão direito → Inspecionar).</li>
+    <li>Clique na seta do canto da janela e depois no elemento que quer investigar.</li>
+    <li>Na aba <b>Elementos</b>, olhe o painel <b>Estilos</b> (Styles).</li>
+    <li>Leia de cima para baixo: <b>regras mais fortes ficam em cima</b>.</li>
+    <li>Propriedade <s>riscada</s> = perdeu a briga. Passe o mouse e o navegador mostra por quê.</li>
+    <li>Mais abaixo, "<i>Inherited from …</i>" mostra o que veio por herança.</li>
+    <li>Aba <b>Computed</b> (Computado): o valor <b>final</b> de cada propriedade.</li>
+  </ol>
+
+  <h2>Laboratório 1: descubra o vencedor</h2>
+  <pre><code>.t1 { color: #c0392b; }
+p   { color: #1e8449; }
+
+&lt;p class="t1"&gt;Qual cor?&lt;/p&gt;</code></pre>
+  <div class="demo"><p class="demo-titulo">Inspecione este parágrafo com F12</p><p class="t1" style="margin:0">Qual cor? (vermelha: classe vence tag)</p></div>
+  <p>No DevTools você verá <code>p { color: green }</code> riscada.</p>
+
+  <h2>Laboratório 2: regras se somam</h2>
+  <pre><code>.t2         { color: #1b4f72; font-size: 1.2rem; }
+.t2.negrito { font-weight: bold; }</code></pre>
+  <div class="demo"><p class="demo-titulo">Duas regras, zero conflito: ambas valem</p><p class="t2 negrito" style="margin:0">Azul, grande e negrito.</p></div>
+  <p>Nenhuma foi riscada, porque nenhuma discorda da outra.</p>
+
+  <h2>!important: o botão vermelho</h2>
+  <pre><code>p { color: red !important; }</code></pre>
+  <p><code>!important</code> pula as etapas 2 e 3 da cascata. Nada que o autor escrever sem ele consegue vencer.</p>
+  <div class="caixa erro">
+    <p><b>Por que evitar:</b> a única forma de vencer um <code>!important</code> é outro <code>!important</code> mais forte. A manutenção vira uma corrida armamentista. Se você precisou dele, quase sempre o problema é de especificidade (documento 15).</p>
+  </div>
+  <div class="caixa dica">
+    <p><b>Usos legítimos:</b> utilitárias que <i>precisam</i> sempre vencer (<code>.hidden { display: none !important; }</code>) e sobrescrever CSS de terceiros que você não controla.</p>
+  </div>
+
+  <h2>O atributo style no HTML</h2>
+  <pre><code>&lt;p style="color: red"&gt;</code></pre>
+  <p>Estilo <b>inline</b> vence qualquer seletor de arquivo, sem precisar de <code>!important</code>. Por isso se evita no dia a dia: ele escapa da organização do CSS e só pode ser vencido por <code>!important</code>.</p>
+
+  <h2>Checklist de investigação</h2>
+  <ul>
+    <li>☐ O seletor realmente encontra o elemento? (erro de digitação, ponto esquecido)</li>
+    <li>☐ O arquivo CSS foi carregado? (aba Network / link quebrado)</li>
+    <li>☐ Outra regra mais específica sobrescreve a minha?</li>
+    <li>☐ Duas regras empatam e a última do arquivo vence?</li>
+    <li>☐ A propriedade herda? Se não, preciso declará-la no próprio elemento.</li>
+  </ul>
+
+  <div class="nav-rodape"><a href="12-efeito-cascata.html">← 12</a><a href="14-placar-de-especificidade.html">Próximo: 14 Placar de especificidade →</a></div>
+</main>
+</body>
+</html>

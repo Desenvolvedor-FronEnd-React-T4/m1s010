@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>08 — Classes de estado e modificadores</title>
+<link rel="stylesheet" href="guia.css">
+<style>
+  .b { display:inline-block; padding:8px 16px; border-radius:6px; background:#cfd8dc; color:#263238; font-weight:bold; border:0; margin-right:6px; }
+  .b--primario { background:#1b4f72; color:#fff; }
+  .b--perigo { background:#c0392b; color:#fff; }
+  .b--grande { padding:14px 28px; font-size:1.1rem; }
+  .b.ativo { outline:3px solid #f1c40f; }
+</style>
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha A · Classes</span><span>Doc 08 de 23</span></div>
+<main class="pagina">
+  <h1>Classes de estado e modificadores</h1>
+  <p class="resumo">Duas ideias parecidas, mas diferentes. <b>Modificador</b> = uma <i>variação fixa</i> do componente (grande, perigo). <b>Estado</b> = uma <i>situação que muda</i> com o uso (aberto, ativo, desabilitado).</p>
+
+  <h2>Modificador: a variação do componente</h2>
+  <p>O componente base fica sozinho e os modificadores só <b>alteram o que for diferente</b>.</p>
+  <pre><code>.botao { padding: 8px 16px; background: #cfd8dc; }
+.botao--primario { background: #1b4f72; color: #fff; }
+.botao--perigo   { background: #c0392b; color: #fff; }
+.botao--grande   { padding: 14px 28px; }</code></pre>
+  <pre><code>&lt;button class="botao"&gt;Cancelar&lt;/button&gt;
+&lt;button class="botao botao--primario"&gt;Salvar&lt;/button&gt;
+&lt;button class="botao botao--perigo botao--grande"&gt;Excluir&lt;/button&gt;</code></pre>
+  <div class="demo"><p class="demo-titulo">Resultado</p>
+    <button class="b">Cancelar</button><button class="b b--primario">Salvar</button><button class="b b--perigo b--grande">Excluir</button>
+  </div>
+  <p>O <b>duplo hífen</b> (<code>--</code>) é a convenção BEM (documento 21) para "modificador". Quem lê sabe que <code>botao--grande</code> depende de <code>botao</code>.</p>
+
+  <h2>Estado: a situação do momento</h2>
+  <p>O estado muda por causa de uma ação do usuário, normalmente com JavaScript ligando e desligando a classe.</p>
+  <pre><code>.menu { display: none; }
+.menu.is-open { display: block; }   <span class="c">/* JS adiciona e remove is-open */</span>
+
+.botao.ativo { outline: 3px solid gold; }</code></pre>
+  <div class="demo"><p class="demo-titulo">Botão "ativo"</p><button class="b b--primario ativo">Comprar</button></div>
+
+  <h3>Nomes de estado comuns</h3>
+  <table>
+    <thead><tr><th>Classe</th><th>Significa</th></tr></thead>
+    <tbody>
+      <tr><td><code>ativo</code> / <code>active</code></td><td>Item atual (aba, link da página atual)</td></tr>
+      <tr><td><code>is-open</code> / <code>aberto</code></td><td>Menu, modal ou acordeão aberto</td></tr>
+      <tr><td><code>is-hidden</code> / <code>oculto</code></td><td>Escondido no momento</td></tr>
+      <tr><td><code>is-loading</code></td><td>Carregando</td></tr>
+      <tr><td><code>is-invalid</code> / <code>erro</code></td><td>Campo com erro</td></tr>
+      <tr><td><code>disabled</code></td><td>Desabilitado</td></tr>
+    </tbody>
+  </table>
+  <p>O prefixo <code>is-</code> / <code>has-</code> avisa à equipe: "esta classe é controlada por script, não escreva à mão no HTML".</p>
+
+  <h2>Pseudoclasses: os estados nativos do CSS</h2>
+  <p>Alguns estados o navegador já conhece. Não precisa de classe nem JavaScript.</p>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Pseudoclasse</th><th>Quando vale</th></tr></thead>
+    <tbody>
+      <tr><td><code>:hover</code></td><td>Mouse em cima</td></tr>
+      <tr><td><code>:focus</code>, <code>:focus-visible</code></td><td>Elemento selecionado pelo teclado</td></tr>
+      <tr><td><code>:active</code></td><td>No instante do clique</td></tr>
+      <tr><td><code>:disabled</code>, <code>:checked</code></td><td>Campo desabilitado, caixa marcada</td></tr>
+      <tr><td><code>:first-child</code>, <code>:nth-child(2)</code></td><td>Posição entre os irmãos</td></tr>
+    </tbody>
+  </table></div>
+  <div class="caixa atencao"><p><b>Não remova</b> o <code>:focus</code> (<code>outline: none</code>) sem colocar outro indicador no lugar. Quem navega por teclado fica perdido.</p></div>
+
+  <div class="nav-rodape"><a href="07-classes-utilitarias.html">← 07</a><a href="09-dicionario-comercial.html">Próximo: 09 Dicionário comercial →</a></div>
+</main>
+</body>
+</html>

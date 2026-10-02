@@ -1,0 +1,308 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   EXERCÍCIO INTEGRADOR (40 min) — unidades + container + display + Flexbox
+   + justify/align + Grid, tudo MOBILE-FIRST.
+
+   Como funciona: o CSS fora de qualquer @media é o CELULAR. As media
+   queries só ACRESCENTAM, da menor para a maior (48em = 768px, 64em = 1024px).
+
+   Em cada ETAPA você encontra:
+     O QUE FAZER        a tarefa (escreva no lugar de "COMPLETE AQUI")
+     POR QUE ESSA ESCOLHA   a lógica da unidade ou da propriedade
+     PADRÃO CORRETO     a forma que o mercado usa
+     RESULTADO ESPERADO o que você deve medir no DevTools / no painel da página
+
+   Já vem pronto o visual (cores, bordas, fontes). Faltam as medidas e o layout.
+   Confira o seu resultado no painel "medindo…" da página e, só DEPOIS de
+   tentar, compare com 5-integrador-unidades-e-layout-gabarito.css.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+
+/* ═══ ETAPA 0 — BASE (pronta) ═══
+   Reset: box-sizing: border-box → a largura JÁ INCLUI padding e borda.
+   Fonte do body em rem e NUNCA em px na raiz: respeita a preferência do
+   usuário (se ele aumentar a fonte do navegador, o layout em rem cresce).
+   Resultado: 1rem = 16px por padrão. */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background: #0a0a0a;
+  color: #f5f5f5;
+}
+
+h2 { font-size: clamp(1.25rem, 3vw, 1.75rem); margin-top: 0; }
+h3 { margin-top: 0; }
+code { background: #202336; padding: 0 .35em; border-radius: .25rem; }
+
+
+/* ═══ ETAPA 1 — CONTAINER ═══
+   O QUE FAZER: o .container deve ocupar a tela toda no celular e parar em
+     70rem no monitor, centralizado, com 1rem de espaço lateral.
+     (dica: width, max-width, margin-inline e padding-inline)
+   POR QUE ESSA ESCOLHA: max-width em REM acompanha o zoom e a fonte do
+     usuário; width: 100% faz o container "caber" no celular.
+   PADRÃO CORRETO: container fluido = width: 100% + max-width + margin auto.
+   RESULTADO ESPERADO: 375px → container = 375px · 1440px → 1120px (70 × 16). */
+.container {
+  /* COMPLETE AQUI */
+}
+
+
+/* ═══ ETAPA 2 — CABEÇALHO (display + Flexbox + justify/align + position) ═══
+   O QUE FAZER:
+     a) .cabecalho vira container flex: logo à esquerda e menu à direita
+        (justify-content), alinhados pelo meio (align-items), com flex-wrap
+        e gap de .5rem; padding de 1rem; grudado no topo (sticky).
+     b) .menu-extra fica escondido no celular (display: none) — a regra
+        que o MOSTRA vem na media query de 48em, lá embaixo.
+   POR QUE ESSA ESCOLHA: display: none REMOVE do fluxo (não deixa buraco,
+     ao contrário de visibility: hidden). gap e padding em REM acompanham a fonte.
+   PADRÃO CORRETO: o que só cabe em telas maiores começa escondido e é
+     ACRESCENTADO por min-width (mobile-first).
+   RESULTADO ESPERADO: 375px → 2 links no menu · 768px+ → 4 links. */
+.cabecalho {
+  background: #0a0a0a;
+  border-bottom: 1px solid #333;   /* 1px de borda: detalhe que NÃO deve escalar → px */
+  /* COMPLETE AQUI: display, justify-content, align-items, flex-wrap, gap, padding,
+     position: sticky, top: 0 e z-index */
+}
+
+.logo { font-weight: 700; font-size: 1.4rem; color: #ffbf00; }
+.menu { display: flex; gap: 1rem; }
+.menu a { color: #f5f5f5; text-decoration: none; }
+.menu a:hover { color: #ffbf00; }
+
+.menu-extra {
+  /* COMPLETE AQUI (celular: escondido) */
+}
+
+
+/* ═══ ETAPA 3 — HERO (altura em vh/dvh + Flexbox em coluna) ═══
+   O QUE FAZER: .hero com no mínimo 60% da altura da janela, conteúdo
+     empilhado e centralizado NA ALTURA, alinhado à esquerda, com gap de 1rem
+     e padding vertical de 2rem.
+     (dica: min-height em vh e depois em dvh; display: flex; flex-direction:
+     column; justify-content; align-items; gap; padding-block)
+   POR QUE ESSA ESCOLHA: a altura de um hero depende da TELA, então vh/dvh;
+     min-height (e não height) para o conteúdo nunca vazar; o dvh ignora a
+     barra do navegador no celular (escreva-o DEPOIS do vh como reforço).
+     Com column, o eixo principal é o VERTICAL: justify-content centraliza na altura.
+   PADRÃO CORRETO: min-height + vh/dvh · nunca altura fixa em px para hero.
+   RESULTADO ESPERADO: janela de 800px de altura → hero ≥ 480px · 1080px → ≥ 648px. */
+.hero {
+  /* COMPLETE AQUI */
+}
+
+.hero-chamada { color: #ffbf00; font-weight: 700; margin: 0; }
+
+
+/* ═══ ETAPA 4 — TIPOGRAFIA E BOTÃO (clamp, ch e em) ═══
+   O QUE FAZER:
+     a) .hero-titulo: fonte fluida, mínimo 2rem, ideal 6vw e máximo 3.5rem.
+     b) .hero-texto: linha de no máximo 65ch.
+     c) .botao: padding de .75em (vertical) e 1.5em (horizontal) e display que
+        aceita padding mas flui com o texto.
+   POR QUE ESSA ESCOLHA: clamp() deixa o título se virar sozinho do celular ao
+     desktop, sem media query. ch mede a LARGURA DE LINHA (leitura confortável).
+     No botão, EM faz o padding acompanhar o PRÓPRIO texto: se a fonte muda,
+     o botão cresce proporcional (veja o .botao-grande, que só troca o font-size).
+   PADRÃO CORRETO: rem para fonte e espaços gerais; em para o interior de
+     componentes; clamp() para fonte fluida.
+   RESULTADO ESPERADO: título = 32px em 375px e 56px (máximo) a partir de ~933px ·
+     .botao (16px): padding 12px/24px · .botao-grande (20px): padding 15px/30px. */
+.hero-titulo {
+  line-height: 1.1;
+  margin: 0;
+  /* COMPLETE AQUI: font-size com clamp() */
+}
+
+.hero-texto {
+  margin: 0;
+  /* COMPLETE AQUI: max-width em ch */
+}
+
+.botao {
+  background: #ffbf00;
+  color: #0a0a0a;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: .5rem;
+  /* COMPLETE AQUI: display e padding em em */
+}
+
+.botao-grande { font-size: 1.25rem; }   /* pronto: só a fonte muda, o padding acompanha */
+
+
+/* ═══ ETAPA 5 — LABORATÓRIO DE UNIDADES (px × rem × em × % × vh) ═══
+   O QUE FAZER: dê a cada caixa a sua medida, usando a unidade do nome dela:
+     .caixa-px  → 100px × 100px
+     .caixa-rem → 8rem × 8rem
+     .grupo-em  → font-size: 1.25rem (o "pai" que define a fonte)
+     .caixa-em  → 6em × 6em
+     .caixa-pct → largura 50% e altura 6rem
+     .caixa-vh  → largura 6rem e altura 20vh
+   POR QUE ESSA ESCOLHA / O QUE APRENDER:
+     px  = fixo: NUNCA muda (use para 1px de borda e sombras, não para fonte/espaço).
+     rem = acompanha a fonte da RAIZ (html): escala com a preferência do usuário.
+     em  = acompanha a fonte do PRÓPRIO elemento (aqui, herdada do .grupo-em).
+     %   = proporção do PAI (a largura do container das caixas).
+     vh  = proporção da ALTURA da janela.
+   PADRÃO CORRETO: fonte e espaçamentos em rem · detalhes mínimos em px ·
+     larguras relativas em % · alturas ligadas à tela em vh/dvh.
+   RESULTADO ESPERADO (janela 1280×720, fonte 16px): px → 100px · rem → 128px ·
+     em → 120px (6 × 20) · % → metade do container · vh → 144px.
+   Teste: aumente a fonte do navegador (Configurações → Aparência) e veja que SÓ
+     rem e em crescem; mude para o iPhone SE no DevTools e veja a caixa vh encolher. */
+.laboratorio { padding-block: 2rem; }
+.legenda { max-width: 65ch; color: #c8c8c8; }
+
+.caixas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.caixa {
+  flex: 0 0 auto;                 /* pronto: não encolhe, para ver a medida real */
+  display: grid;
+  place-items: center;
+  background: #202336;
+  border: 1px solid #ffbf00;
+  border-radius: .5rem;
+  font-weight: 700;
+}
+
+.caixa-px  { /* COMPLETE AQUI */ }
+.caixa-rem { /* COMPLETE AQUI */ }
+
+.grupo-em  { flex: 0 0 auto; /* COMPLETE AQUI: font-size em rem */ }
+.caixa-em  { /* COMPLETE AQUI */ }
+
+.caixa-pct { /* COMPLETE AQUI */ }
+.caixa-vh  { /* COMPLETE AQUI */ }
+
+.medidas {
+  display: block;
+  white-space: pre-wrap;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #161616;
+  border-radius: .5rem;
+  font-family: Consolas, Menlo, monospace;
+  font-size: .85rem;
+  overflow-x: auto;
+}
+
+
+/* ═══ ETAPA 6 — CATÁLOGO (Grid responsivo + position) ═══
+   O QUE FAZER:
+     a) .grade vira um Grid de colunas com no mínimo 14rem que se ajustam
+        sozinhas à largura (auto-fit + minmax), com gap de 1rem.
+     b) .card é a REFERÊNCIA do selo; .selo fica no canto superior direito do
+        card (.5rem de distância).
+   POR QUE ESSA ESCOLHA: Grid cuida de duas dimensões (linhas E colunas) e
+     auto-fit/minmax resolve a grade SEM media query. O mínimo em rem acompanha a
+     fonte. O selo precisa de um pai com position: relative; sem isso ele iria
+     para o canto da PÁGINA.
+   PADRÃO CORRETO: Grid para grades; Flexbox para uma direção; position:
+     relative no pai de um elemento absolute.
+   RESULTADO ESPERADO: 375px → 1 coluna · 768px → 2 a 3 · 1280px → 4 a 5 colunas. */
+.catalogo { padding-block: 2rem; }
+
+.grade {
+  /* COMPLETE AQUI: display: grid, grid-template-columns, gap */
+}
+
+.card {
+  background: #161616;
+  border-radius: .75rem;
+  padding: 1.25rem;
+  /* COMPLETE AQUI: o card é a referência do selo */
+}
+
+.selo {
+  padding: .25em .75em;           /* pronto: em acompanha o tamanho do próprio selo */
+  background: #ffbf00;
+  color: #0a0a0a;
+  font-size: .75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  /* COMPLETE AQUI: position, top e right */
+}
+
+
+/* ═══ ETAPA 7 — CONTATO: 2 COLUNAS (Flexbox + proporção) ═══
+   O QUE FAZER:
+     a) .duas-colunas: container flex, EMPILHADO no celular (column), gap de 1.5rem.
+     b) .linha-formulario .campo: Nome | Telefone na mesma linha, quebrando
+        sozinhos quando faltar espaço (flex: 1 1 10rem).
+     c) Na media query de 64em (lá embaixo): .duas-colunas vira row e as colunas
+        usam flex: 5 (dados) e flex: 7 (formulário).
+   POR QUE ESSA ESCOLHA: flex: 5 e flex: 7 são PROPORÇÕES (partes do espaço),
+     não pixels: a divisão se mantém em qualquer largura. flex: 1 1 10rem diz
+     "parta de 10rem, cresça e encolha se precisar" e, com flex-wrap, quebra
+     de linha sozinho.
+   PADRÃO CORRETO: column na base, row só no desktop (mobile-first).
+   RESULTADO ESPERADO: 375px → dados acima do formulário · 1280px → lado a lado,
+     formulário ~40% mais largo que os dados (7 ÷ 5 = 1,4). */
+.contato { padding-block: 2rem; }
+
+.duas-colunas {
+  /* COMPLETE AQUI: display: flex, flex-direction, gap */
+}
+
+.coluna { background: #161616; border-radius: .75rem; padding: 1.25rem; }
+
+.linha-formulario { display: flex; flex-wrap: wrap; gap: 1rem; }
+.linha-formulario .campo { /* COMPLETE AQUI: flex 1 1 10rem */ }
+
+.campo { display: flex; flex-direction: column; gap: .5rem; }
+.campo input {
+  width: 100%;
+  padding: .75rem;
+  background: #0a0a0a;
+  color: #f5f5f5;
+  border: 1px solid #555;
+  border-radius: .5rem;
+}
+
+
+/* ═══ GUIA DE DECISÃO e RODAPÉ (prontos) ═══
+   A tabela é larga: o wrapper rola na horizontal no celular em vez de
+   estourar a página (overflow-x: auto). */
+.guia { padding-block: 2rem; overflow-x: auto; }
+.tabela { width: 100%; min-width: 40rem; border-collapse: collapse; font-size: .85rem; }
+.tabela th { background: #202336; text-align: left; padding: .5rem .75rem; }
+.tabela td { padding: .5rem .75rem; border-bottom: 1px solid #333; vertical-align: top; }
+
+.rodape { padding: 1.5rem 1rem; border-top: 1px solid #333; text-align: center; color: #c8c8c8; }
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ETAPA 8 — MEDIA QUERIES (só ACRESCENTAM, da menor para a maior)
+   Breakpoints em EM: 48em = 768px · 64em = 1024px. Em media query, 1em vale
+   sempre 16px (o padrão do navegador) e respeita a preferência de fonte do
+   usuário melhor que o px.
+
+   O QUE FAZER:
+     a) @media (min-width: 48em): .container com padding-inline de 2rem e
+        .menu-extra visível (display: block).
+     b) @media (min-width: 64em) — DEPOIS da anterior: .container com
+        padding-inline de 3rem; .duas-colunas em row; .coluna-dados com
+        flex: 5 e .coluna-formulario com flex: 7.
+     c) DESAFIO — @media (min-width: 90em): html { font-size: 112.5%; }.
+        Como tudo está em rem, o layout INTEIRO escala (18px × 8rem = 144px na
+        .caixa-rem). Só o que está em px (a .caixa-px e as bordas de 1px) não muda.
+   RESULTADO ESPERADO: 375px → menu com 2 links, 1 coluna · 768px → 4 links ·
+     1024px → contato em 2 colunas · 1440px → .caixa-rem passa de 128px para 144px.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* COMPLETE AQUI: media query de 48em */
+
+/* COMPLETE AQUI: media query de 64em */
+
+/* DESAFIO: media query de 90em */

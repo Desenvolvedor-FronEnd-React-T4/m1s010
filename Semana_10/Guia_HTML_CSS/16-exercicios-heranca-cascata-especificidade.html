@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16 — Exercícios: herança, cascata e especificidade</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilhas B e C · Exercícios</span><span>Doc 16 de 23</span></div>
+<main class="pagina">
+  <h1>Exercícios: herança, cascata e especificidade</h1>
+  <p class="resumo">Faça <b>sem abrir o navegador</b>, no papel ou em dupla. Depois confira clicando em "Ver gabarito" e confirme no DevTools.</p>
+
+  <h2>Parte 1 — Herança</h2>
+  <h3>Exercício 1</h3>
+  <pre><code>body { color: navy; border: 2px solid black; }
+
+&lt;body&gt;&lt;p&gt;Texto&lt;/p&gt;&lt;/body&gt;</code></pre>
+  <p>O <code>p</code> terá cor azul-marinho? E borda?</p>
+  <details><summary>Ver gabarito</summary><p>Cor: <b>sim</b> (<code>color</code> herda). Borda: <b>não</b> (<code>border</code> não herda). A borda aparece só no <code>body</code>.</p></details>
+
+  <h3>Exercício 2</h3>
+  <pre><code>body { color: navy; }
+&lt;body&gt;&lt;a href="#"&gt;Link&lt;/a&gt;&lt;/body&gt;</code></pre>
+  <p>De que cor é o link? Como faria para ele acompanhar o texto?</p>
+  <details><summary>Ver gabarito</summary><p>O link fica na <b>cor padrão do navegador (azul)</b>, pois o navegador define uma cor própria para <code>a</code>. Solução: <code>a { color: inherit; }</code>.</p></details>
+
+  <h2>Parte 2 — Cascata (ordem)</h2>
+  <h3>Exercício 3</h3>
+  <pre><code>.titulo { color: red; }
+.titulo { color: green; }
+&lt;h1 class="titulo"&gt;Oi&lt;/h1&gt;</code></pre>
+  <details><summary>Ver gabarito</summary><p><b>Verde.</b> Empate de especificidade; vence a última.</p></details>
+
+  <h3>Exercício 4</h3>
+  <pre><code>p { color: blue; font-size: 20px; }
+p { color: red; }
+&lt;p&gt;Oi&lt;/p&gt;</code></pre>
+  <p>Cor e tamanho?</p>
+  <details><summary>Ver gabarito</summary><p>Cor <b>vermelha</b> (a última vence), tamanho <b>20px</b> (ninguém discordou; a regra anterior continua valendo).</p></details>
+
+  <h2>Parte 3 — Especificidade</h2>
+  <h3>Exercício 5: calcule o placar</h3>
+  <table>
+    <thead><tr><th>Seletor</th><th>Placar (A-B-C-D)</th></tr></thead>
+    <tbody>
+      <tr><td><code>h2</code></td><td></td></tr>
+      <tr><td><code>.card h2</code></td><td></td></tr>
+      <tr><td><code>#lojas .card h2</code></td><td></td></tr>
+      <tr><td><code>a:hover</code></td><td></td></tr>
+      <tr><td><code>ul li.ativo a</code></td><td></td></tr>
+    </tbody>
+  </table>
+  <details><summary>Ver gabarito</summary>
+    <p><code>h2</code> = 0-0-0-1 · <code>.card h2</code> = 0-0-1-1 · <code>#lojas .card h2</code> = 0-1-1-1 · <code>a:hover</code> = 0-0-1-1 · <code>ul li.ativo a</code> = 0-0-1-3.</p></details>
+
+  <h3>Exercício 6: quem vence?</h3>
+  <pre><code>.menu a    { color: white; }
+.destaque  { color: gold; }
+&lt;nav class="menu"&gt;&lt;a class="destaque" href="#"&gt;Loja&lt;/a&gt;&lt;/nav&gt;</code></pre>
+  <details><summary>Ver gabarito</summary><p><b>Branco.</b> <code>.menu a</code> = 0-0-1-1 contra <code>.destaque</code> = 0-0-1-0. Correção: <code>.menu .destaque</code> (0-0-2-0).</p></details>
+
+  <h3>Exercício 7: id contra classes</h3>
+  <pre><code>#topo { color: red; }
+.a.b.c.d.e.f { color: blue; }
+&lt;p id="topo" class="a b c d e f"&gt;Oi&lt;/p&gt;</code></pre>
+  <details><summary>Ver gabarito</summary><p><b>Vermelho.</b> 0-1-0-0 vence 0-0-6-0: a coluna B pesa mais que qualquer número na coluna C.</p></details>
+
+  <h3>Exercício 8: o atalho do inline</h3>
+  <pre><code>.botao { background: blue !important; }
+&lt;button class="botao" style="background: red"&gt;Clique&lt;/button&gt;</code></pre>
+  <details><summary>Ver gabarito</summary><p><b>Azul.</b> O <code>!important</code> do autor vence até o estilo inline comum.</p></details>
+
+  <h2>Parte 4 — Desafio de equipe</h2>
+  <p>O CSS abaixo tem 3 problemas de predominância. Encontre e corrija sem usar <code>!important</code>.</p>
+  <pre><code>#cabecalho .menu ul li a { color: white; }
+.botao { background: gray; }
+.botao--primario { background: blue; }   <span class="c">/* vem antes de .botao no arquivo real */</span>
+body main section div.container p { font-size: 14px; }
+.texto-grande { font-size: 24px; }</code></pre>
+  <details><summary>Ver gabarito</summary>
+    <ol>
+      <li>Seletor longo com id (0-1-1-3): troque por <code>.menu-link { color: white; }</code>.</li>
+      <li>Ordem: <code>.botao--primario</code> deve ser escrito <b>depois</b> de <code>.botao</code>.</li>
+      <li>Seletor longo (0-0-1-5) impede <code>.texto-grande</code> de vencer: troque por <code>.paragrafo { font-size: 14px; }</code> e coloque <code>.texto-grande</code> depois.</li>
+    </ol>
+  </details>
+
+  <div class="nav-rodape"><a href="15-conflitos-e-como-resolver.html">← 15</a><a href="17-mapa-esqueleto-da-pagina.html">Próximo: 17 O mapa do HTML profissional →</a></div>
+</main>
+</body>
+</html>

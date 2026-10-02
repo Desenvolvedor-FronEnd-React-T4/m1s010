@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14 — O placar de especificidade</title>
+<link rel="stylesheet" href="guia.css">
+<style>
+  .x1 { color: #c0392b; }
+  #x1 { color: #1b4f72; }
+  .placar { display: flex; gap: 8px; margin: 14px 0; flex-wrap: wrap; }
+  .placar div { flex: 1 1 150px; text-align: center; border: 2px solid #1b4f72; border-radius: 8px; padding: 10px; background: #eef4f8; }
+  .placar b { display: block; font-size: 1.6rem; color: #1b4f72; }
+</style>
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha C · Predominância</span><span>Doc 14 de 23</span></div>
+<main class="pagina">
+  <h1>O placar de especificidade</h1>
+  <p class="resumo"><b>Especificidade</b> é a nota que o navegador dá a cada seletor. Entre duas regras que brigam, <b>a de maior nota vence</b>, independentemente da ordem no arquivo. É assim que se decide a predominância entre classes, ids e tags.</p>
+
+  <h2>O placar tem 4 colunas</h2>
+  <p>Pense num placar <b>A – B – C – D</b>. Compara-se coluna por coluna, da esquerda para a direita. <b>A primeira coluna que tiver número maior ganha</b>, e as demais nem são olhadas.</p>
+  <div class="placar">
+    <div><b>A</b>estilo inline<br><code>style="…"</code></div>
+    <div><b>B</b>ids<br><code>#topo</code></div>
+    <div><b>C</b>classes, atributos, pseudoclasses<br><code>.card</code> <code>[type]</code> <code>:hover</code></div>
+    <div><b>D</b>tags e pseudoelementos<br><code>p</code> <code>h1</code> <code>::before</code></div>
+  </div>
+
+  <h2>Tabela de pontuação</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Seletor</th><th>A</th><th>B</th><th>C</th><th>D</th><th>Leitura</th></tr></thead>
+    <tbody>
+      <tr><td><code>p</code></td><td>0</td><td>0</td><td>0</td><td>1</td><td>0-0-0-1</td></tr>
+      <tr><td><code>p.aviso</code></td><td>0</td><td>0</td><td>1</td><td>1</td><td>0-0-1-1</td></tr>
+      <tr><td><code>.card</code></td><td>0</td><td>0</td><td>1</td><td>0</td><td>0-0-1-0</td></tr>
+      <tr><td><code>.card .titulo</code></td><td>0</td><td>0</td><td>2</td><td>0</td><td>0-0-2-0</td></tr>
+      <tr><td><code>nav ul li a</code></td><td>0</td><td>0</td><td>0</td><td>4</td><td>0-0-0-4</td></tr>
+      <tr><td><code>a:hover</code></td><td>0</td><td>0</td><td>1</td><td>1</td><td>0-0-1-1</td></tr>
+      <tr><td><code>#topo</code></td><td>0</td><td>1</td><td>0</td><td>0</td><td>0-1-0-0</td></tr>
+      <tr><td><code>#topo .menu a</code></td><td>0</td><td>1</td><td>1</td><td>1</td><td>0-1-1-1</td></tr>
+      <tr><td><code>style="…"</code></td><td>1</td><td>0</td><td>0</td><td>0</td><td>1-0-0-0</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Como comparar: o exemplo mais importante da trilha</h2>
+  <p>Uma classe vence <b>onze tags empilhadas</b>, porque a coluna C pesa mais do que qualquer quantidade na coluna D:</p>
+  <pre><code>.botao        { color: red; }      <span class="c">/* 0-0-1-0 */</span>
+html body main section div p a { color: blue; }  <span class="c">/* 0-0-0-7 */</span>
+<span class="c">/* Vence .botao: 1 na coluna C ganha de 7 na coluna D */</span></code></pre>
+  <p>A mesma lógica vale um nível acima: <b>um id vence cem classes</b>.</p>
+
+  <div class="demo"><p class="demo-titulo">Mesmo elemento, class + id. A ordem no CSS é .x1 depois #x1; quem aparece azul?</p>
+    <p id="x1" class="x1" style="margin:0">Azul: o id (0-1-0-0) vence a classe (0-0-1-0), mesmo se a classe viesse por último.</p>
+  </div>
+
+  <h2>O que NÃO conta pontos</h2>
+  <ul>
+    <li>O seletor universal <code>*</code>.</li>
+    <li>Combinadores: espaço, <code>&gt;</code>, <code>+</code>, <code>~</code>.</li>
+    <li><code>:where( )</code> → sempre zero. <code>:is( )</code> e <code>:not( )</code> → valem o item mais forte lá dentro.</li>
+  </ul>
+
+  <h2>Empate: volta a regra da ordem</h2>
+  <p>Se o placar é igual nas quatro colunas, <b>vence a regra que vem por último</b> no código (documento 12).</p>
+
+  <div class="caixa atencao">
+    <p><b>Pegadinha de herança:</b> um valor <b>herdado</b> perde para <b>qualquer</b> regra direta no elemento, mesmo a de especificidade <code>0-0-0-1</code>. Herança não entra no placar: ela só preenche o que ninguém declarou.</p>
+  </div>
+
+  <div class="nav-rodape"><a href="13-cascata-na-pratica.html">← 13</a><a href="15-conflitos-e-como-resolver.html">Próximo: 15 Conflitos e como resolver →</a></div>
+</main>
+</body>
+</html>

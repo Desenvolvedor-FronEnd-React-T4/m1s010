@@ -47,7 +47,7 @@ m1s010/
 │   ├── Ponte_Semana07_para_Semana10.html/.pdf             (conecta os fundamentos da S07 ao CSS avançado)
 │   ├── Ferramentas_de_Apoio_M1S10.html/.pdf               (extensões VS Code + vídeo-aulas recomendadas)
 │   ├── 29-09/                                             (exercícios de responsividade)
-│   ├── 01-10/                                             (exercícios de display/box model, Flexbox, especificidade e paginação)
+│   ├── 01-10/                                             (exercícios de display/box model, Flexbox, especificidade, paginação e o integrador de unidades e layout)
 │   └── 02-10/                                             (exercícios de tamanhos de tela, Grid, position, página final e escolha de biblioteca)
 │
 └── Bikcraft_Gabarito/                                     ← gabarito completo do projeto (Semanas 07 a 10)

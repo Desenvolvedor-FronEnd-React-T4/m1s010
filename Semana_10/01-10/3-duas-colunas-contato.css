@@ -29,11 +29,11 @@ body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5
   /* flex: 5 e flex: 7 → proporção 5:7 do espaço disponível.
      Não são pixels — são "partes" do espaço total, como um sistema de
      fatias de bolo desiguais. */
-  .coluna-dados      { flex: 5; }
-  .coluna-formulario { flex: 7; }
+  .coluna-dados      { flex: 1; }
+  .coluna-formulario { flex: 1; }
 }
 
-.coluna-dados, .coluna-formulario { background:#161616; border-radius:8px; padding:20px; }
+.coluna-dados, .coluna-formulario { background:#b0b0b0; border-radius:8px; padding:20px; }
 
 /* Dentro do formulário, Nome e Telefone ficam na mesma linha com
    flex-wrap: quebram para duas linhas sozinhos se não houver espaço. */

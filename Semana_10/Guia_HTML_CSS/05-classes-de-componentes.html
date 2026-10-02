@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05 — Classes de componentes</title>
+<link rel="stylesheet" href="guia.css">
+<style>
+  .ex-btn { display:inline-block; background:#1b4f72; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; border:0; }
+  .ex-card { border:1px solid #cfd8dc; border-radius:8px; padding:14px; max-width:260px; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  .ex-badge { display:inline-block; background:#1e8449; color:#fff; font-size:.75rem; padding:2px 10px; border-radius:99px; }
+</style>
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha A · Classes</span><span>Doc 05 de 23</span></div>
+<main class="pagina">
+  <h1>Classes de componentes</h1>
+  <p class="resumo">Um <b>componente</b> é uma peça reutilizável da interface, com visual completo: botão, card, menu, formulário. A classe de componente entrega a peça <b>inteira</b>. É a classe mais comum em projetos reais.</p>
+
+  <h2>Anatomia de um componente</h2>
+  <p>Um componente tem um <b>bloco</b> (a peça) e <b>partes</b> (o que existe dentro dela). Os nomes das partes começam pelo nome do bloco.</p>
+
+  <h3>botao</h3>
+  <pre><code>.botao {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background: #1b4f72; color: #fff;
+  text-decoration: none; font-weight: bold;
+}
+.botao:hover { background: #123049; }</code></pre>
+  <div class="demo"><p class="demo-titulo">Resultado</p><a href="#" class="ex-btn">Enviar mensagem</a></div>
+  <p>Serve para <code>&lt;button&gt;</code> e para <code>&lt;a&gt;</code> que parece botão. Escolha a tag pelo <b>comportamento</b> (ação → button; navegação → a) e a classe pelo <b>visual</b>.</p>
+
+  <h3>card</h3>
+  <pre><code>&lt;article class="card"&gt;
+  &lt;img class="card-imagem" src="bike.svg" alt="Bike urbana"&gt;
+  &lt;h3 class="card-titulo"&gt;Urbana&lt;/h3&gt;
+  &lt;p class="card-texto"&gt;Leve e prática.&lt;/p&gt;
+  &lt;a class="botao" href="#"&gt;Ver&lt;/a&gt;
+&lt;/article&gt;</code></pre>
+  <div class="demo"><p class="demo-titulo">Resultado</p>
+    <div class="ex-card"><h3 style="margin-top:0">Urbana</h3><p style="margin:0 0 10px">Leve e prática.</p><a href="#" class="ex-btn">Ver</a></div>
+  </div>
+  <p>Note os nomes: <code>card-imagem</code>, <code>card-titulo</code>, <code>card-texto</code>. Quem lê o HTML entende o dono de cada pedaço.</p>
+
+  <h3>badge</h3>
+  <div class="demo"><p class="demo-titulo">Resultado</p>Entrega rápida <span class="ex-badge">novo</span></div>
+  <p>Selo pequeno que rotula algo: "novo", "promoção", contador de notificações.</p>
+
+  <h2>Tabela dos componentes mais comuns do mercado</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Classe</th><th>Função</th><th>Tag usada</th></tr></thead>
+    <tbody>
+      <tr><td><code>botao</code> / <code>btn</code></td><td>Ação ou chamada principal</td><td><code>button</code>, <code>a</code></td></tr>
+      <tr><td><code>card</code></td><td>Cartão de produto, notícia, perfil</td><td><code>article</code>, <code>div</code></td></tr>
+      <tr><td><code>navbar</code> / <code>menu</code></td><td>Barra de navegação</td><td><code>nav</code></td></tr>
+      <tr><td><code>logo</code></td><td>Marca no topo</td><td><code>a</code>, <code>span</code>, <code>img</code></td></tr>
+      <tr><td><code>hero</code></td><td>Faixa de destaque da página</td><td><code>section</code></td></tr>
+      <tr><td><code>badge</code> / <code>tag</code></td><td>Selo pequeno de rótulo</td><td><code>span</code></td></tr>
+      <tr><td><code>alert</code> / <code>aviso</code></td><td>Mensagem de sucesso, erro, atenção</td><td><code>div</code> com <code>role="alert"</code></td></tr>
+      <tr><td><code>campo</code> / <code>form-group</code></td><td>Rótulo + entrada de formulário</td><td><code>div</code> com <code>label</code> e <code>input</code></td></tr>
+      <tr><td><code>modal</code></td><td>Janela sobre a página</td><td><code>dialog</code>, <code>div</code></td></tr>
+      <tr><td><code>lista</code>, <code>tabela</code></td><td>Listagem e dados</td><td><code>ul</code>, <code>table</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa dica"><p><b>Teste do bom componente:</b> se eu copiar este HTML para outra página, ele continua bonito sem eu mexer no CSS? Se sim, é um componente de verdade.</p></div>
+
+  <div class="nav-rodape"><a href="04-classes-de-layout.html">← 04</a><a href="06-classes-de-texto.html">Próximo: 06 Classes de texto →</a></div>
+</main>
+</body>
+</html>

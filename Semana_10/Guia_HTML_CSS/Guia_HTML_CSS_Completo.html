@@ -1,0 +1,1700 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Guia HTML e CSS — completo</title>
+<style>/* Guia HTML & CSS — estilo compartilhado pelos 23 documentos */
+* { box-sizing: border-box; }
+:root {
+  --azul: #1b4f72; --azul-escuro: #123049; --azul-claro: #eef4f8;
+  --verde: #1e8449; --verde-claro: #e9f7ef;
+  --laranja: #b9770e; --laranja-claro: #fef5e7;
+  --vermelho: #c0392b; --vermelho-claro: #fdedec;
+  --cinza: #cfd8dc; --texto: #263238;
+}
+body { margin: 0; font-family: Arial, sans-serif; color: var(--texto); background: #f6f8fa; line-height: 1.6; }
+
+.barra { background: var(--azul-escuro); color: #fff; padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; font-size: .85rem; }
+.barra a { color: #cfe3f1; text-decoration: none; }
+.barra a:hover { text-decoration: underline; }
+.etiqueta { background: var(--azul); padding: 2px 10px; border-radius: 99px; font-weight: bold; }
+
+.pagina { max-width: 900px; margin: 0 auto; background: #fff; padding: 28px 24px 40px; min-height: 100vh; }
+h1 { color: var(--azul); font-size: 1.8rem; margin: 0 0 8px; line-height: 1.25; }
+h2 { color: var(--azul-escuro); font-size: 1.25rem; margin: 36px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--azul-claro); }
+h3 { color: var(--azul); font-size: 1.05rem; margin: 24px 0 6px; }
+.resumo { background: var(--azul-claro); border-left: 4px solid var(--azul); padding: 12px 14px; border-radius: 4px; margin: 14px 0 20px; }
+
+code { background: #eceff1; padding: 1px 6px; border-radius: 4px; font-family: Consolas, monospace; font-size: .9em; }
+pre { background: #1e2a33; color: #e8eef2; padding: 14px 16px; border-radius: 6px; overflow-x: auto; font-size: .85rem; line-height: 1.5; }
+pre code { background: none; padding: 0; color: inherit; }
+pre .c { color: #8fa6b5; }
+
+.caixa { border-left: 4px solid; padding: 10px 14px; border-radius: 4px; margin: 16px 0; }
+.caixa > :first-child { margin-top: 0; } .caixa > :last-child { margin-bottom: 0; }
+.dica { background: var(--verde-claro); border-color: var(--verde); }
+.atencao { background: var(--laranja-claro); border-color: var(--laranja); }
+.erro { background: var(--vermelho-claro); border-color: var(--vermelho); }
+.exemplo { background: var(--azul-claro); border-color: var(--azul); }
+
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .92rem; }
+th { background: var(--azul); color: #fff; text-align: left; padding: 8px 10px; }
+td { border: 1px solid var(--cinza); padding: 8px 10px; vertical-align: top; }
+tbody tr:nth-child(even) { background: #fafcfd; }
+.tabela-rolagem { overflow-x: auto; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 16px 0; }
+.card { border: 1px solid var(--cinza); border-radius: 8px; padding: 12px 14px; background: #fff; }
+.card h3 { margin-top: 0; }
+
+.passos { counter-reset: passo; list-style: none; padding: 0; }
+.passos li { counter-increment: passo; position: relative; padding: 8px 8px 8px 46px; margin: 8px 0; background: #fafcfd; border: 1px solid var(--cinza); border-radius: 6px; }
+.passos li::before { content: counter(passo); position: absolute; left: 10px; top: 8px; width: 26px; height: 26px; background: var(--azul); color: #fff; border-radius: 50%; text-align: center; line-height: 26px; font-weight: bold; }
+
+/* Mapa de caixas aninhadas (estrutura do HTML) */
+.mapa { font-family: Consolas, monospace; font-size: .85rem; }
+.no { border: 2px solid var(--azul); border-radius: 6px; padding: 8px 10px 10px; margin: 8px 0; background: #fff; }
+.no > .rotulo { display: block; font-weight: bold; color: var(--azul-escuro); margin-bottom: 4px; }
+.no .nota { display: block; font-family: Arial, sans-serif; font-size: .8rem; color: #546e7a; font-weight: normal; }
+.no.n1 { background: #f4f9fc; } .no.n2 { background: #e9f2f8; border-color: #2e86c1; } .no.n3 { background: #fff; border-color: #5dade2; border-style: dashed; }
+.no.verde { border-color: var(--verde); background: var(--verde-claro); }
+.no.laranja { border-color: var(--laranja); background: var(--laranja-claro); }
+.lado { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+
+/* Fluxograma vertical (árvore de decisão) */
+.fluxo { display: flex; flex-direction: column; align-items: center; gap: 0; margin: 18px 0; }
+.fluxo .pergunta { background: var(--laranja-claro); border: 2px solid var(--laranja); padding: 10px 16px; border-radius: 8px; text-align: center; max-width: 560px; width: 100%; font-weight: bold; }
+.fluxo .resposta { background: var(--verde-claro); border: 2px solid var(--verde); padding: 8px 16px; border-radius: 8px; text-align: center; max-width: 560px; width: 100%; }
+.fluxo .seta { color: var(--azul); font-size: 1.1rem; line-height: 1.5; text-align: center; }
+
+/* Demonstração ao vivo */
+.demo { border: 1px dashed var(--azul); border-radius: 6px; padding: 12px; margin: 12px 0; background: #fff; }
+.demo-titulo { font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--azul); font-weight: bold; margin: 0 0 6px; }
+
+.nav-rodape { display: flex; justify-content: space-between; gap: 12px; margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--cinza); flex-wrap: wrap; }
+.nav-rodape a { color: var(--azul); text-decoration: none; font-weight: bold; }
+.nav-rodape a:hover { text-decoration: underline; }
+
+details { border: 1px solid var(--cinza); border-radius: 6px; padding: 8px 12px; margin: 10px 0; }
+summary { cursor: pointer; font-weight: bold; color: var(--azul); }
+
+@media (max-width: 600px) {
+  .pagina { padding: 20px 14px 32px; }
+  h1 { font-size: 1.5rem; }
+}
+@media print {
+  body { background: #fff; }
+  .barra, .nav-rodape { display: none; }
+  .pagina { padding: 0; max-width: none; }
+  pre { white-space: pre-wrap; }
+}
+
+  .ex-btn { display:inline-block; background:#1b4f72; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; border:0; }
+  .ex-card { border:1px solid #cfd8dc; border-radius:8px; padding:14px; max-width:260px; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+  .ex-badge { display:inline-block; background:#1e8449; color:#fff; font-size:.75rem; padding:2px 10px; border-radius:99px; }
+
+  .b { display:inline-block; padding:8px 16px; border-radius:6px; background:#cfd8dc; color:#263238; font-weight:bold; border:0; margin-right:6px; }
+  .b--primario { background:#1b4f72; color:#fff; }
+  .b--perigo { background:#c0392b; color:#fff; }
+  .b--grande { padding:14px 28px; font-size:1.1rem; }
+  .b.ativo { outline:3px solid #f1c40f; }
+
+  .ex-pai { font-family: Georgia, serif; color: #1b4f72; font-size: 1.1rem; border: 1px solid #cfd8dc; padding: 10px 14px; border-radius: 6px; }
+
+  .ex-borda { border: 3px solid #1b4f72; padding: 10px; color: #1e8449; }
+
+  .ex-ordem { color: #1b4f72; }
+  .ex-ordem { color: #c0392b; }
+
+  .t1 { color: #c0392b; }
+  .t2 { color: #1b4f72; font-size: 1.2rem; }
+  .t2.negrito { font-weight: bold; }
+
+  .x1 { color: #c0392b; }
+  #x1 { color: #1b4f72; }
+  .placar { display: flex; gap: 8px; margin: 14px 0; flex-wrap: wrap; }
+  .placar div { flex: 1 1 150px; text-align: center; border: 2px solid #1b4f72; border-radius: 8px; padding: 10px; background: #eef4f8; }
+  .placar b { display: block; font-size: 1.6rem; color: #1b4f72; }
+
+  .dupla { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 14px 0; }
+
+.doc{break-before:page;padding:0;min-height:0} .capa{break-before:auto;padding-top:220px;text-align:center}
+.capa h1{font-size:2.4rem} .capa .etq{color:#1b4f72;font-weight:bold;letter-spacing:.1em} .capa .sub{font-size:1.2rem;color:#546e7a}
+body{background:#fff} h2,h3{break-after:avoid} table,.card,.caixa{break-inside:avoid}
+@page{size:A4;margin:16mm}</style></head><body><section class="doc capa"><p class="etq">SENAI · M1S10 · Semana 10</p><h1>Guia de HTML &amp; CSS profissional</h1>
+<p class="sub">Classes CSS · Herança e cascata · Predominância · O mapa do HTML profissional</p><p>23 documentos reunidos em um único PDF.</p></section><section class="doc" id="doc01"><h1>Guia de HTML &amp; CSS profissional</h1>
+  <p class="resumo">23 documentos, da raiz ao avançado, para responder quatro perguntas: <b>o que cada classe faz</b>, <b>como funcionam herança e cascata</b>, <b>quem vence quando duas regras brigam</b> e <b>como se organiza um HTML de nível profissional</b>.</p>
+
+  <h2>Como estudar</h2>
+  <ol class="passos">
+    <li><b>Leia na ordem.</b> Cada documento usa o que o anterior ensinou.</li>
+    <li><b>Abra o DevTools (F12)</b> em cada exemplo. Ver o CSS sendo aplicado vale mais que ler sobre ele.</li>
+    <li><b>Faça os exercícios do documento 16</b> antes de passar para a trilha D.</li>
+    <li><b>Volte ao mapa (documentos 17 a 19)</b> sempre que não souber que tag usar.</li>
+  </ol>
+
+  <h2>Trilha A — Classes CSS: nome, papel e função</h2>
+  <table>
+    <thead><tr><th>Doc</th><th>Assunto</th></tr></thead>
+    <tbody>
+      <tr><td>02</td><td><a href="#doc02">O que é uma classe e como nomeá-la</a></td></tr>
+      <tr><td>03</td><td><a href="#doc03">Classes de estrutura: container, wrapper, section</a></td></tr>
+      <tr><td>04</td><td><a href="#doc04">Classes de layout: flex, grid, row, col</a></td></tr>
+      <tr><td>05</td><td><a href="#doc05">Classes de componentes: botão, card, navbar, badge</a></td></tr>
+      <tr><td>06</td><td><a href="#doc06">Classes de texto e tipografia</a></td></tr>
+      <tr><td>07</td><td><a href="#doc07">Classes utilitárias (margem, cor, visibilidade)</a></td></tr>
+      <tr><td>08</td><td><a href="#doc08">Classes de estado e modificadores</a></td></tr>
+      <tr><td>09</td><td><a href="#doc09">Dicionário comercial: Bootstrap, Tailwind e CSS puro</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Trilha B — Herança e efeito cascata</h2>
+  <table>
+    <thead><tr><th>Doc</th><th>Assunto</th></tr></thead>
+    <tbody>
+      <tr><td>10</td><td><a href="#doc10">O que é herança</a></td></tr>
+      <tr><td>11</td><td><a href="#doc11">O que herda, o que não herda, e inherit/initial/unset</a></td></tr>
+      <tr><td>12</td><td><a href="#doc12">O efeito cascata: as três perguntas</a></td></tr>
+      <tr><td>13</td><td><a href="#doc13">Cascata na prática com o DevTools</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Trilha C — Predominância (especificidade)</h2>
+  <table>
+    <thead><tr><th>Doc</th><th>Assunto</th></tr></thead>
+    <tbody>
+      <tr><td>14</td><td><a href="#doc14">O placar de especificidade</a></td></tr>
+      <tr><td>15</td><td><a href="#doc15">Conflitos reais e como resolvê-los (sem !important)</a></td></tr>
+      <tr><td>16</td><td><a href="#doc16">Exercícios com gabarito (trilhas B e C)</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Trilha D — O mapa do HTML profissional</h2>
+  <table>
+    <thead><tr><th>Doc</th><th>Assunto</th></tr></thead>
+    <tbody>
+      <tr><td>17</td><td><a href="#doc17">O mapa: esqueleto de uma página profissional</a></td></tr>
+      <tr><td>18</td><td><a href="#doc18">Árvore de decisão: div, main, section ou article?</a></td></tr>
+      <tr><td>19</td><td><a href="#doc19">Os elementos de página, um por um</a></td></tr>
+      <tr><td>20</td><td><a href="#doc20">Qual classe começa? A ordem de escrita do CSS</a></td></tr>
+      <tr><td>21</td><td><a href="#doc21">Nomenclatura (BEM) e organização de arquivos</a></td></tr>
+      <tr><td>22</td><td><a href="#doc22">Página completa anotada (Bikcraft)</a></td></tr>
+      <tr><td>23</td><td><a href="#doc23">Do básico ao avançado e checklist profissional</a></td></tr>
+    </tbody>
+  </table>
+
+  <div class="caixa dica">
+    <p><b>Regra de ouro do guia:</b> HTML diz <i>o que a coisa é</i>. CSS diz <i>como ela parece</i>. A classe é a ponte entre os dois.</p>
+  </div>
+
+  </section>
+<section class="doc" id="doc02"><h1>O que é uma classe CSS</h1>
+  <p class="resumo">Uma <b>classe</b> é uma etiqueta que você cola num elemento HTML para que o CSS consiga encontrá-lo e estilizá-lo. A classe não faz nada sozinha: ela só ganha poder quando existe uma regra CSS com o mesmo nome.</p>
+
+  <h2>As três partes</h2>
+  <pre><code><span class="c">&lt;!-- HTML: o elemento recebe a etiqueta --&gt;</span>
+&lt;button class="botao"&gt;Enviar&lt;/button&gt;
+
+<span class="c">/* CSS: a regra procura a etiqueta (o ponto significa "classe") */</span>
+.botao {
+  background: #1b4f72;
+  color: #fff;
+  padding: 10px 20px;
+}</code></pre>
+  <ul>
+    <li><b>Nome:</b> <code>botao</code>. Você escolhe. O navegador não liga para o significado.</li>
+    <li><b>Ponto (<code>.</code>):</b> só aparece no CSS. No HTML escreve-se <code>class="botao"</code>, sem ponto.</li>
+    <li><b>Declarações:</b> o que está entre chaves, no formato <code>propriedade: valor;</code>.</li>
+  </ul>
+
+  <h2>Papel de uma classe</h2>
+  <p>Toda classe responde a uma de quatro perguntas. Saber qual é a pergunta é o que separa um nome bom de um nome ruim.</p>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Papel</th><th>Pergunta que responde</th><th>Exemplos</th></tr></thead>
+    <tbody>
+      <tr><td>Estrutura</td><td>Onde esse bloco fica e qual a largura dele?</td><td><code>container</code>, <code>wrapper</code>, <code>secao</code></td></tr>
+      <tr><td>Layout</td><td>Como os filhos se organizam?</td><td><code>flex</code>, <code>grid</code>, <code>row</code>, <code>col</code></td></tr>
+      <tr><td>Componente</td><td>Que peça reutilizável é essa?</td><td><code>botao</code>, <code>card</code>, <code>navbar</code></td></tr>
+      <tr><td>Utilitária</td><td>Qual ajuste pequeno e único aplico?</td><td><code>mt-2</code>, <code>text-center</code>, <code>hidden</code></td></tr>
+      <tr><td>Estado/modificador</td><td>Em que situação ou variação está?</td><td><code>ativo</code>, <code>is-open</code>, <code>botao--grande</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>Cada um desses papéis tem um documento próprio (03 a 08).</p>
+
+  <h2>Regras de sintaxe do nome</h2>
+  <ul>
+    <li>Pode ter letras, números, hífen (<code>-</code>) e sublinhado (<code>_</code>).</li>
+    <li>Não pode começar com número (<code>1coluna</code> não funciona; <code>coluna-1</code> funciona).</li>
+    <li>Diferencia maiúscula de minúscula: <code>.Botao</code> e <code>.botao</code> são classes diferentes.</li>
+    <li>Sem espaço. Espaço no atributo <code>class</code> <b>separa várias classes</b>.</li>
+  </ul>
+
+  <h2>Várias classes no mesmo elemento</h2>
+  <pre><code>&lt;button class="botao botao--grande ativo"&gt;Comprar&lt;/button&gt;</code></pre>
+  <p>São três etiquetas no mesmo botão. As regras das três valem juntas. Esse é o mecanismo que permite combinar componente, variação e estado.</p>
+
+  <h2>Classe, id ou tag?</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Seletor</th><th>Exemplo</th><th>Reutiliza?</th><th>Use para</th></tr></thead>
+    <tbody>
+      <tr><td>Tag</td><td><code>p { }</code></td><td>Em todos os <code>p</code></td><td>Base global (documento 20)</td></tr>
+      <tr><td>Classe</td><td><code>.card { }</code></td><td>Sim, quantas vezes quiser</td><td><b>Quase todo o CSS</b></td></tr>
+      <tr><td>Id</td><td><code>#topo { }</code></td><td>Não, só um por página</td><td>Âncoras e JavaScript, não estilo</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa dica">
+    <p><b>Padrão profissional:</b> estilize com <b>classes</b>. Use <code>id</code> para links de âncora (<code>href="#contato"</code>) e para o JavaScript. O motivo está no documento 14: o id pesa tanto que atrapalha quem vem depois.</p>
+  </div>
+
+  <h2>Nome bom e nome ruim</h2>
+  <table>
+    <thead><tr><th>Evite</th><th>Por quê</th><th>Prefira</th></tr></thead>
+    <tbody>
+      <tr><td><code>.azul</code></td><td>Descreve a aparência. Se a marca mudar de cor, o nome mente.</td><td><code>.botao-primario</code></td></tr>
+      <tr><td><code>.caixa2</code></td><td>Não diz nada.</td><td><code>.card-produto</code></td></tr>
+      <tr><td><code>.div-esquerda</code></td><td>Descreve posição e a tag.</td><td><code>.coluna-dados</code></td></tr>
+      <tr><td><code>.Menu_Principal</code></td><td>Mistura estilos de escrita.</td><td><code>.menu-principal</code></td></tr>
+    </tbody>
+  </table>
+  <p>Regra: o nome diz <b>o que a coisa é</b> (função), não <b>como ela se parece</b>. Escreva em minúsculas, com hífen entre as palavras (<i>kebab-case</i>).</p>
+
+  </section>
+<section class="doc" id="doc03"><h1>Classes de estrutura</h1>
+  <p class="resumo">São as classes que definem <b>largura, centralização e ritmo vertical</b> da página. Quase todo site profissional começa por elas. A mais famosa é a <code>container</code>.</p>
+
+  <h2>container</h2>
+  <p><b>Função:</b> limitar a largura do conteúdo e centralizá-lo. Sem ele, em monitor grande o texto estica de ponta a ponta e fica ilegível.</p>
+  <pre><code>.container {
+  width: 100%;
+  max-width: 1100px;   <span class="c">/* nunca passa disso */</span>
+  margin: 0 auto;      <span class="c">/* auto dos lados = centraliza */</span>
+  padding: 0 16px;     <span class="c">/* respiro nas bordas do celular */</span>
+}</code></pre>
+  <div class="demo"><p class="demo-titulo">Como se comporta</p>
+    <div style="background:#eef4f8;padding:8px 0;">
+      <div style="max-width:420px;margin:0 auto;padding:10px 16px;background:#1b4f72;color:#fff;text-align:center;">conteúdo centralizado, no máximo 420px (exemplo)</div>
+    </div>
+  </div>
+  <div class="caixa atencao"><p><b>Detalhe importante:</b> o fundo pode ocupar a tela inteira (na <code>section</code>) enquanto o conteúdo fica no <code>container</code> dentro dela. Veja o padrão abaixo.</p></div>
+
+  <h2>O padrão "faixa + container"</h2>
+  <pre><code>&lt;section class="secao secao-escura"&gt;      <span class="c">&lt;!-- faixa de fundo: 100% da largura --&gt;</span>
+  &lt;div class="container"&gt;                 <span class="c">&lt;!-- conteúdo: largura limitada --&gt;</span>
+    &lt;h2&gt;Nossas bikes&lt;/h2&gt;
+    ...
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  <p>É o padrão mais comum do mercado. A faixa pinta a tela toda; o container alinha o conteúdo.</p>
+
+  <h2>Tabela das classes de estrutura</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Classe</th><th>Papel</th><th>CSS típico</th></tr></thead>
+    <tbody>
+      <tr><td><code>container</code></td><td>Limita e centraliza a largura</td><td><code>max-width; margin: 0 auto</code></td></tr>
+      <tr><td><code>container-fluid</code></td><td>Container que ocupa 100% (Bootstrap)</td><td><code>width: 100%</code></td></tr>
+      <tr><td><code>wrapper</code> / <code>wrap</code></td><td>Envelope que agrupa um bloco maior (às vezes a página inteira)</td><td><code>min-height: 100vh</code> ou <code>max-width</code></td></tr>
+      <tr><td><code>secao</code> / <code>section</code></td><td>Faixa horizontal com espaçamento vertical</td><td><code>padding: 64px 0</code></td></tr>
+      <tr><td><code>hero</code></td><td>Primeira faixa, de destaque</td><td><code>min-height</code>, imagem de fundo</td></tr>
+      <tr><td><code>conteudo</code> / <code>content</code></td><td>Miolo da página ou de um bloco</td><td>depende do projeto</td></tr>
+      <tr><td><code>sidebar</code> / <code>lateral</code></td><td>Coluna lateral</td><td><code>width</code> fixa + <code>flex-shrink: 0</code></td></tr>
+      <tr><td><code>cabecalho</code> / <code>header</code>, <code>rodape</code> / <code>footer</code></td><td>Topo e base</td><td>fundo, padding, às vezes <code>position</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Container x wrapper: qual a diferença?</h2>
+  <p>Na prática os dois fazem parte da mesma família, e equipes diferentes usam nomes diferentes. A convenção mais útil para a sala:</p>
+  <ul>
+    <li><b>container</b> = controla <b>largura horizontal</b> do conteúdo.</li>
+    <li><b>wrapper</b> = embrulha um grupo para dar-lhe <b>comportamento próprio</b> (altura mínima, posição relativa, overflow).</li>
+  </ul>
+  <p>O importante é <b>escolher uma convenção e repetir</b> no projeto inteiro.</p>
+
+  <div class="caixa dica"><p><b>Pergunta de revisão:</b> por que o <code>container</code> usa <code>max-width</code> e não <code>width</code>? Resposta: <code>width</code> fixa estoura o celular; <code>max-width</code> encolhe junto com a tela e só limita o teto.</p></div>
+
+  </section>
+<section class="doc" id="doc04"><h1>Classes de layout</h1>
+  <p class="resumo">Classes de layout dizem <b>como os filhos de um elemento se organizam</b>: em linha, em coluna, em grade. A regra mental: a classe vai no <b>pai</b>, e quem se organiza são os <b>filhos</b>.</p>
+
+  <h2>Flexbox: organizar em uma direção</h2>
+  <pre><code>.flex { display: flex; }
+.flex-coluna { flex-direction: column; }
+.centralizado { justify-content: center; align-items: center; }
+.espaco-entre { justify-content: space-between; }
+.quebra { flex-wrap: wrap; }
+.gap { gap: 16px; }</code></pre>
+  <div class="demo"><p class="demo-titulo">flex + gap + espaco-entre</p>
+    <div style="display:flex;gap:10px;justify-content:space-between;">
+      <div style="background:#1b4f72;color:#fff;padding:10px 16px;">A</div>
+      <div style="background:#2e86c1;color:#fff;padding:10px 16px;">B</div>
+      <div style="background:#5dade2;color:#fff;padding:10px 16px;">C</div>
+    </div>
+  </div>
+  <p><b>Quando usar:</b> menu, barra de botões, cabeçalho, centralizar algo, linha de cards que podem quebrar.</p>
+
+  <h2>Grid: organizar em linhas e colunas ao mesmo tempo</h2>
+  <pre><code>.grid { display: grid; gap: 16px; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-auto { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }</code></pre>
+  <div class="demo"><p class="demo-titulo">grid-auto: redimensione a janela e veja as colunas mudarem sozinhas</p>
+    <div style="display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));">
+      <div style="background:#1e8449;color:#fff;padding:14px;text-align:center;">1</div>
+      <div style="background:#1e8449;color:#fff;padding:14px;text-align:center;">2</div>
+      <div style="background:#1e8449;color:#fff;padding:14px;text-align:center;">3</div>
+      <div style="background:#1e8449;color:#fff;padding:14px;text-align:center;">4</div>
+    </div>
+  </div>
+  <p><b>Quando usar:</b> galeria, catálogo de produtos, layout de página inteira, qualquer coisa em "grade".</p>
+
+  <div class="caixa exemplo"><p><b>Regra prática:</b> uma dimensão (linha <i>ou</i> coluna) → <b>flex</b>. Duas dimensões (linhas <i>e</i> colunas) → <b>grid</b>.</p></div>
+
+  <h2>row e col (Bootstrap) e colunas do projeto</h2>
+  <p>Em frameworks, o layout vira vocabulário pronto:</p>
+  <pre><code>&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;Dados&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;Formulário&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <ul>
+    <li><code>row</code>: a linha (por baixo é <code>display: flex; flex-wrap: wrap</code>).</li>
+    <li><code>col-md-6</code>: "a partir da tela média, ocupe 6 de 12 partes (metade)".</li>
+  </ul>
+  <p>Em CSS puro você cria o mesmo com nome por função, como a <code>coluna-dados</code> e a <code>coluna-formulario</code> da página de contato da Bikcraft.</p>
+
+  <h2>Tabela das classes de layout</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Classe</th><th>O que faz</th><th>Vai em</th></tr></thead>
+    <tbody>
+      <tr><td><code>flex</code> / <code>d-flex</code></td><td>Liga o flexbox</td><td>o pai</td></tr>
+      <tr><td><code>grid</code> / <code>d-grid</code></td><td>Liga o grid</td><td>o pai</td></tr>
+      <tr><td><code>row</code></td><td>Linha de colunas</td><td>o pai</td></tr>
+      <tr><td><code>col</code>, <code>col-6</code></td><td>Coluna e sua largura</td><td>o filho</td></tr>
+      <tr><td><code>gap</code></td><td>Espaço entre os filhos</td><td>o pai</td></tr>
+      <tr><td><code>justify-*</code>, <code>items-*</code></td><td>Alinha no eixo principal / cruzado</td><td>o pai</td></tr>
+      <tr><td><code>stack</code></td><td>Pilha vertical com espaço regular</td><td>o pai</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa atencao"><p><b>Erro clássico:</b> colocar <code>display: flex</code> no filho e esperar que os irmãos se alinhem. O flex só organiza os <b>filhos diretos</b> de quem o recebe.</p></div>
+
+  </section>
+<section class="doc" id="doc05"><h1>Classes de componentes</h1>
+  <p class="resumo">Um <b>componente</b> é uma peça reutilizável da interface, com visual completo: botão, card, menu, formulário. A classe de componente entrega a peça <b>inteira</b>. É a classe mais comum em projetos reais.</p>
+
+  <h2>Anatomia de um componente</h2>
+  <p>Um componente tem um <b>bloco</b> (a peça) e <b>partes</b> (o que existe dentro dela). Os nomes das partes começam pelo nome do bloco.</p>
+
+  <h3>botao</h3>
+  <pre><code>.botao {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background: #1b4f72; color: #fff;
+  text-decoration: none; font-weight: bold;
+}
+.botao:hover { background: #123049; }</code></pre>
+  <div class="demo"><p class="demo-titulo">Resultado</p><a href="#" class="ex-btn">Enviar mensagem</a></div>
+  <p>Serve para <code>&lt;button&gt;</code> e para <code>&lt;a&gt;</code> que parece botão. Escolha a tag pelo <b>comportamento</b> (ação → button; navegação → a) e a classe pelo <b>visual</b>.</p>
+
+  <h3>card</h3>
+  <pre><code>&lt;article class="card"&gt;
+  &lt;img class="card-imagem" src="bike.svg" alt="Bike urbana"&gt;
+  &lt;h3 class="card-titulo"&gt;Urbana&lt;/h3&gt;
+  &lt;p class="card-texto"&gt;Leve e prática.&lt;/p&gt;
+  &lt;a class="botao" href="#"&gt;Ver&lt;/a&gt;
+&lt;/article&gt;</code></pre>
+  <div class="demo"><p class="demo-titulo">Resultado</p>
+    <div class="ex-card"><h3 style="margin-top:0">Urbana</h3><p style="margin:0 0 10px">Leve e prática.</p><a href="#" class="ex-btn">Ver</a></div>
+  </div>
+  <p>Note os nomes: <code>card-imagem</code>, <code>card-titulo</code>, <code>card-texto</code>. Quem lê o HTML entende o dono de cada pedaço.</p>
+
+  <h3>badge</h3>
+  <div class="demo"><p class="demo-titulo">Resultado</p>Entrega rápida <span class="ex-badge">novo</span></div>
+  <p>Selo pequeno que rotula algo: "novo", "promoção", contador de notificações.</p>
+
+  <h2>Tabela dos componentes mais comuns do mercado</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Classe</th><th>Função</th><th>Tag usada</th></tr></thead>
+    <tbody>
+      <tr><td><code>botao</code> / <code>btn</code></td><td>Ação ou chamada principal</td><td><code>button</code>, <code>a</code></td></tr>
+      <tr><td><code>card</code></td><td>Cartão de produto, notícia, perfil</td><td><code>article</code>, <code>div</code></td></tr>
+      <tr><td><code>navbar</code> / <code>menu</code></td><td>Barra de navegação</td><td><code>nav</code></td></tr>
+      <tr><td><code>logo</code></td><td>Marca no topo</td><td><code>a</code>, <code>span</code>, <code>img</code></td></tr>
+      <tr><td><code>hero</code></td><td>Faixa de destaque da página</td><td><code>section</code></td></tr>
+      <tr><td><code>badge</code> / <code>tag</code></td><td>Selo pequeno de rótulo</td><td><code>span</code></td></tr>
+      <tr><td><code>alert</code> / <code>aviso</code></td><td>Mensagem de sucesso, erro, atenção</td><td><code>div</code> com <code>role="alert"</code></td></tr>
+      <tr><td><code>campo</code> / <code>form-group</code></td><td>Rótulo + entrada de formulário</td><td><code>div</code> com <code>label</code> e <code>input</code></td></tr>
+      <tr><td><code>modal</code></td><td>Janela sobre a página</td><td><code>dialog</code>, <code>div</code></td></tr>
+      <tr><td><code>lista</code>, <code>tabela</code></td><td>Listagem e dados</td><td><code>ul</code>, <code>table</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa dica"><p><b>Teste do bom componente:</b> se eu copiar este HTML para outra página, ele continua bonito sem eu mexer no CSS? Se sim, é um componente de verdade.</p></div>
+
+  </section>
+<section class="doc" id="doc06"><h1>Classes de texto e tipografia</h1>
+  <p class="resumo">Tipografia é o que mais pesa na aparência de um site. As classes de texto controlam <b>tamanho, peso, alinhamento e cor</b>. Há uma regra que vale para todas: a <b>tag diz o nível</b> do texto; a <b>classe diz o visual</b>.</p>
+
+  <h2>Tag para significado, classe para aparência</h2>
+  <div class="caixa erro">
+    <p><b>Errado:</b> <code>&lt;p class="titulo-grande"&gt;</code> só para parecer título. Leitor de tela e Google não reconhecem como título.</p>
+  </div>
+  <div class="caixa dica">
+    <p><b>Certo:</b> <code>&lt;h2 class="titulo-secao"&gt;</code>. A tag dá o nível correto; a classe ajusta o tamanho.</p>
+  </div>
+  <p>Também vale o contrário: se um <code>&lt;h3&gt;</code> precisa parecer pequeno, mantenha o <code>h3</code> e reduza com classe. Nunca troque o nível só pelo tamanho.</p>
+
+  <h2>Classes de texto mais usadas</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Classe</th><th>Função</th><th>CSS típico</th></tr></thead>
+    <tbody>
+      <tr><td><code>titulo</code>, <code>titulo-secao</code></td><td>Título de página ou seção</td><td><code>font-size: 2rem; line-height: 1.2</code></td></tr>
+      <tr><td><code>subtitulo</code></td><td>Linha de apoio ao título</td><td><code>font-size: 1.1rem; color: #546e7a</code></td></tr>
+      <tr><td><code>lead</code> / <code>intro</code></td><td>Parágrafo de abertura, maior que o normal</td><td><code>font-size: 1.15rem</code></td></tr>
+      <tr><td><code>texto-pequeno</code> / <code>small</code></td><td>Legendas, avisos legais</td><td><code>font-size: .85rem</code></td></tr>
+      <tr><td><code>texto-destaque</code></td><td>Palavra ou frase que chama atenção</td><td><code>font-weight: bold; color</code></td></tr>
+      <tr><td><code>text-center</code></td><td>Centraliza o texto</td><td><code>text-align: center</code></td></tr>
+      <tr><td><code>text-uppercase</code></td><td>Tudo em maiúsculas</td><td><code>text-transform: uppercase</code></td></tr>
+      <tr><td><code>text-truncate</code></td><td>Corta com "…" se não couber</td><td><code>overflow: hidden; text-overflow: ellipsis; white-space: nowrap</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Propriedades de texto que precisam estar no seu vocabulário</h2>
+  <ul>
+    <li><code>font-family</code>: a fonte (sempre com alternativas: <code>"Inter", Arial, sans-serif</code>).</li>
+    <li><code>font-size</code>: use <code>rem</code> para respeitar a configuração do usuário.</li>
+    <li><code>font-weight</code>: <code>400</code> normal, <code>700</code> negrito.</li>
+    <li><code>line-height</code>: altura da linha; <code>1.5</code> a <code>1.7</code> é ótimo para parágrafos.</li>
+    <li><code>text-align</code>, <code>letter-spacing</code>, <code>text-decoration</code>.</li>
+  </ul>
+
+  <div class="caixa exemplo">
+    <p><b>Onde declarar a fonte?</b> Uma vez só, no <code>body</code>. Todo o resto <b>herda</b> (documento 10). Quem repete <code>font-family</code> em dez classes está lutando contra o CSS.</p>
+  </div>
+
+  <h2>Hierarquia de título: a "escada"</h2>
+  <pre><code>&lt;h1&gt;  um por página (o assunto da página)
+  &lt;h2&gt;  cada seção
+    &lt;h3&gt;  subtítulos dentro da seção
+      &lt;h4&gt;  detalhes (raro)</code></pre>
+  <p>Não pule degraus (de <code>h1</code> direto para <code>h4</code>) e use <b>um único h1</b> por página.</p>
+
+  </section>
+<section class="doc" id="doc07"><h1>Classes utilitárias</h1>
+  <p class="resumo">Uma classe <b>utilitária</b> faz <b>uma única coisa</b>, sempre a mesma, em qualquer lugar. É o contrário do componente: não entrega uma peça pronta, entrega um ajuste fino.</p>
+
+  <h2>Exemplos clássicos</h2>
+  <pre><code>.mt-2  { margin-top: 8px; }
+.mb-4  { margin-bottom: 24px; }
+.p-3   { padding: 16px; }
+.text-center { text-align: center; }
+.hidden { display: none; }
+.w-100 { width: 100%; }
+.sr-only { <span class="c">/* escondido da tela, mas lido por leitor de tela */</span>
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}</code></pre>
+
+  <h2>Por que existem</h2>
+  <p>Sem utilitárias, cada ajuste de 8px viraria uma classe nova. Com elas, você resolve um detalhe sem inventar nome:</p>
+  <pre><code>&lt;section class="secao text-center mb-4"&gt;...&lt;/section&gt;</code></pre>
+
+  <h2>Escala de espaçamento</h2>
+  <p>Profissionais não usam números aleatórios; usam uma <b>escala</b>. Assim a página inteira respira no mesmo ritmo.</p>
+  <table>
+    <thead><tr><th>Sufixo</th><th>Valor</th><th>Uso típico</th></tr></thead>
+    <tbody>
+      <tr><td><code>-1</code></td><td>4px</td><td>Espaço mínimo</td></tr>
+      <tr><td><code>-2</code></td><td>8px</td><td>Entre ícone e texto</td></tr>
+      <tr><td><code>-3</code></td><td>16px</td><td>Padding de componente</td></tr>
+      <tr><td><code>-4</code></td><td>24px</td><td>Entre blocos</td></tr>
+      <tr><td><code>-5</code></td><td>48px</td><td>Entre seções</td></tr>
+    </tbody>
+  </table>
+  <p>Leitura do nome: <code>mt</code> = margin-top, <code>mb</code> = bottom, <code>ms</code>/<code>me</code> = start/end, <code>mx</code> = eixo horizontal, <code>my</code> = vertical; <code>p…</code> = padding.</p>
+
+  <h2>Utilitárias mais comuns</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Grupo</th><th>Exemplos</th><th>Efeito</th></tr></thead>
+    <tbody>
+      <tr><td>Espaço</td><td><code>m-0</code>, <code>mt-3</code>, <code>px-4</code></td><td>margem e padding</td></tr>
+      <tr><td>Exibição</td><td><code>hidden</code>, <code>d-none</code>, <code>block</code></td><td><code>display</code></td></tr>
+      <tr><td>Tamanho</td><td><code>w-100</code>, <code>h-100</code>, <code>max-w-full</code></td><td>largura e altura</td></tr>
+      <tr><td>Texto</td><td><code>text-center</code>, <code>fw-bold</code></td><td>alinhamento e peso</td></tr>
+      <tr><td>Cor</td><td><code>text-primary</code>, <code>bg-dark</code></td><td>cor de texto e fundo</td></tr>
+      <tr><td>Acessibilidade</td><td><code>sr-only</code></td><td>só leitor de tela</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Utilitária x componente: quando usar cada uma</h2>
+  <table>
+    <thead><tr><th></th><th>Componente</th><th>Utilitária</th></tr></thead>
+    <tbody>
+      <tr><td>Faz</td><td>Uma peça inteira</td><td>Um ajuste único</td></tr>
+      <tr><td>Nome</td><td>Substantivo: <code>card</code></td><td>Ação curta: <code>mt-3</code></td></tr>
+      <tr><td>Bom para</td><td>O que se repete igual</td><td>Exceções pontuais</td></tr>
+      <tr><td>Risco</td><td>Virar CSS gigante</td><td>HTML poluído de classes</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caixa atencao">
+    <p><b>Cuidado:</b> utilitárias costumam ser escritas <b>depois</b> de tudo no CSS (documento 20) para vencer o componente em caso de empate. É assim que <code>mt-0</code> consegue anular a margem de um <code>card</code>.</p>
+  </div>
+
+  <div class="caixa exemplo">
+    <p><b>Tailwind CSS</b> leva essa ideia ao limite: <i>todo</i> o visual vem de utilitárias (<code>flex p-4 text-center</code>). É a abordagem "utility-first" citada na atividade da biblioteca.</p>
+  </div>
+
+  </section>
+<section class="doc" id="doc08"><h1>Classes de estado e modificadores</h1>
+  <p class="resumo">Duas ideias parecidas, mas diferentes. <b>Modificador</b> = uma <i>variação fixa</i> do componente (grande, perigo). <b>Estado</b> = uma <i>situação que muda</i> com o uso (aberto, ativo, desabilitado).</p>
+
+  <h2>Modificador: a variação do componente</h2>
+  <p>O componente base fica sozinho e os modificadores só <b>alteram o que for diferente</b>.</p>
+  <pre><code>.botao { padding: 8px 16px; background: #cfd8dc; }
+.botao--primario { background: #1b4f72; color: #fff; }
+.botao--perigo   { background: #c0392b; color: #fff; }
+.botao--grande   { padding: 14px 28px; }</code></pre>
+  <pre><code>&lt;button class="botao"&gt;Cancelar&lt;/button&gt;
+&lt;button class="botao botao--primario"&gt;Salvar&lt;/button&gt;
+&lt;button class="botao botao--perigo botao--grande"&gt;Excluir&lt;/button&gt;</code></pre>
+  <div class="demo"><p class="demo-titulo">Resultado</p>
+    <button class="b">Cancelar</button><button class="b b--primario">Salvar</button><button class="b b--perigo b--grande">Excluir</button>
+  </div>
+  <p>O <b>duplo hífen</b> (<code>--</code>) é a convenção BEM (documento 21) para "modificador". Quem lê sabe que <code>botao--grande</code> depende de <code>botao</code>.</p>
+
+  <h2>Estado: a situação do momento</h2>
+  <p>O estado muda por causa de uma ação do usuário, normalmente com JavaScript ligando e desligando a classe.</p>
+  <pre><code>.menu { display: none; }
+.menu.is-open { display: block; }   <span class="c">/* JS adiciona e remove is-open */</span>
+
+.botao.ativo { outline: 3px solid gold; }</code></pre>
+  <div class="demo"><p class="demo-titulo">Botão "ativo"</p><button class="b b--primario ativo">Comprar</button></div>
+
+  <h3>Nomes de estado comuns</h3>
+  <table>
+    <thead><tr><th>Classe</th><th>Significa</th></tr></thead>
+    <tbody>
+      <tr><td><code>ativo</code> / <code>active</code></td><td>Item atual (aba, link da página atual)</td></tr>
+      <tr><td><code>is-open</code> / <code>aberto</code></td><td>Menu, modal ou acordeão aberto</td></tr>
+      <tr><td><code>is-hidden</code> / <code>oculto</code></td><td>Escondido no momento</td></tr>
+      <tr><td><code>is-loading</code></td><td>Carregando</td></tr>
+      <tr><td><code>is-invalid</code> / <code>erro</code></td><td>Campo com erro</td></tr>
+      <tr><td><code>disabled</code></td><td>Desabilitado</td></tr>
+    </tbody>
+  </table>
+  <p>O prefixo <code>is-</code> / <code>has-</code> avisa à equipe: "esta classe é controlada por script, não escreva à mão no HTML".</p>
+
+  <h2>Pseudoclasses: os estados nativos do CSS</h2>
+  <p>Alguns estados o navegador já conhece. Não precisa de classe nem JavaScript.</p>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Pseudoclasse</th><th>Quando vale</th></tr></thead>
+    <tbody>
+      <tr><td><code>:hover</code></td><td>Mouse em cima</td></tr>
+      <tr><td><code>:focus</code>, <code>:focus-visible</code></td><td>Elemento selecionado pelo teclado</td></tr>
+      <tr><td><code>:active</code></td><td>No instante do clique</td></tr>
+      <tr><td><code>:disabled</code>, <code>:checked</code></td><td>Campo desabilitado, caixa marcada</td></tr>
+      <tr><td><code>:first-child</code>, <code>:nth-child(2)</code></td><td>Posição entre os irmãos</td></tr>
+    </tbody>
+  </table></div>
+  <div class="caixa atencao"><p><b>Não remova</b> o <code>:focus</code> (<code>outline: none</code>) sem colocar outro indicador no lugar. Quem navega por teclado fica perdido.</p></div>
+
+  </section>
+<section class="doc" id="doc09"><h1>Dicionário comercial: Bootstrap, Tailwind e CSS puro</h1>
+  <p class="resumo">No mercado você vai encontrar três "sotaques" de classes. Este documento é a <b>tabela de tradução</b>: o mesmo resultado escrito nos três estilos.</p>
+
+  <h2>Três filosofias</h2>
+  <div class="cards">
+    <div class="card"><h3>Bootstrap</h3><p><b>Componentes prontos.</b> <code>btn btn-primary</code> entrega o botão inteiro. Rápido, padronizado, visual conhecido.</p></div>
+    <div class="card"><h3>Tailwind</h3><p><b>Utility-first.</b> Cada classe é uma propriedade. Controle fino, HTML cheio de classes.</p></div>
+    <div class="card"><h3>CSS puro</h3><p><b>Você nomeia tudo.</b> <code>botao botao--primario</code>. Máximo controle, mais trabalho. É o que usamos na Bikcraft.</p></div>
+  </div>
+
+  <h2>Tabela de tradução</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Quero…</th><th>CSS puro</th><th>Bootstrap</th><th>Tailwind</th></tr></thead>
+    <tbody>
+      <tr><td>Limitar e centralizar a largura</td><td><code>container</code></td><td><code>container</code></td><td><code>mx-auto max-w-6xl px-4</code></td></tr>
+      <tr><td>Ligar flexbox</td><td><code>flex</code></td><td><code>d-flex</code></td><td><code>flex</code></td></tr>
+      <tr><td>Centralizar com flex</td><td><code>centralizado</code></td><td><code>d-flex justify-content-center align-items-center</code></td><td><code>flex justify-center items-center</code></td></tr>
+      <tr><td>Espaço entre filhos</td><td><code>gap</code></td><td><code>gap-3</code></td><td><code>gap-4</code></td></tr>
+      <tr><td>Metade da largura</td><td><code>coluna-metade</code></td><td><code>col-md-6</code></td><td><code>md:w-1/2</code></td></tr>
+      <tr><td>Botão principal</td><td><code>botao botao--primario</code></td><td><code>btn btn-primary</code></td><td><code>bg-blue-700 text-white px-4 py-2 rounded</code></td></tr>
+      <tr><td>Card</td><td><code>card</code></td><td><code>card</code></td><td><code>border rounded-lg p-4 shadow</code></td></tr>
+      <tr><td>Texto centralizado</td><td><code>text-center</code></td><td><code>text-center</code></td><td><code>text-center</code></td></tr>
+      <tr><td>Margem de cima</td><td><code>mt-3</code></td><td><code>mt-3</code></td><td><code>mt-4</code></td></tr>
+      <tr><td>Esconder</td><td><code>hidden</code></td><td><code>d-none</code></td><td><code>hidden</code></td></tr>
+      <tr><td>Esconder só no celular</td><td>media query</td><td><code>d-none d-md-block</code></td><td><code>hidden md:block</code></td></tr>
+      <tr><td>Só leitor de tela</td><td><code>sr-only</code></td><td><code>visually-hidden</code></td><td><code>sr-only</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Vocabulário de breakpoints</h2>
+  <table>
+    <thead><tr><th>Prefixo</th><th>Começa em</th><th>Dispositivo típico</th></tr></thead>
+    <tbody>
+      <tr><td>(nenhum)</td><td>0</td><td>Celular (mobile-first)</td></tr>
+      <tr><td><code>sm</code></td><td>576px (BS) / 640px (TW)</td><td>Celular grande</td></tr>
+      <tr><td><code>md</code></td><td>768px</td><td>Tablet</td></tr>
+      <tr><td><code>lg</code></td><td>992px (BS) / 1024px (TW)</td><td>Notebook</td></tr>
+      <tr><td><code>xl</code></td><td>1200px (BS) / 1280px (TW)</td><td>Desktop</td></tr>
+    </tbody>
+  </table>
+  <p>Todos seguem <b>mobile-first</b>: <code>md:w-1/2</code> significa "de 768px para cima".</p>
+
+  <div class="caixa dica">
+    <p><b>Por que aprender CSS puro primeiro?</b> Porque o <code>row</code> do Bootstrap é flex + <code>flex-wrap</code>, o <code>col-md-6</code> é <code>flex: 0 0 50%</code> dentro de uma media query, e o <code>p-4</code> do Tailwind é <code>padding: 1rem</code>. Quem entende a base lê qualquer framework.</p>
+  </div>
+
+  </section>
+<section class="doc" id="doc10"><h1>O que é herança</h1>
+  <p class="resumo"><b>Herança</b> é quando um elemento <b>filho recebe automaticamente</b> certos valores do elemento <b>pai</b>, sem que você escreva nada para ele. É o motivo de bastar declarar a fonte uma vez no <code>body</code>.</p>
+
+  <h2>A árvore do HTML</h2>
+  <p>Todo HTML é uma árvore de elementos aninhados. Quem está dentro é <b>filho</b>; quem envolve é <b>pai</b>; quem está acima de todos é <b>ancestral</b>.</p>
+  <div class="mapa">
+    <div class="no n1"><span class="rotulo">body <span class="nota">font-family e color definidos aqui</span></span>
+      <div class="no n2"><span class="rotulo">main</span>
+        <div class="no n3"><span class="rotulo">section</span>
+          <div class="no n3"><span class="rotulo">p <span class="nota">herda a fonte e a cor de body, sem ninguém pedir</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Exemplo mínimo</h2>
+  <pre><code>body { font-family: Arial, sans-serif; color: #263238; }
+
+<span class="c">/* Não existe regra de fonte para h1, p, li, a... e mesmo assim todos usam Arial */</span></code></pre>
+  <div class="demo"><p class="demo-titulo">Pai com cor e fonte; filhos sem regra nenhuma</p>
+    <div class="ex-pai">
+      Eu sou o pai (Georgia, azul).
+      <p style="margin:8px 0 0;">Eu sou um <b>p</b> filho, sem CSS próprio: herdei a fonte e a cor.</p>
+      <ul style="margin:8px 0 0;"><li>Item de lista, também herdou.</li></ul>
+    </div>
+  </div>
+
+  <h2>Por que a herança existe</h2>
+  <ul>
+    <li><b>Economia:</b> uma declaração no ancestral vale para centenas de filhos.</li>
+    <li><b>Consistência:</b> a página inteira fala a mesma "língua" visual.</li>
+    <li><b>Manutenção:</b> mudar a fonte do site é mexer em <b>uma linha</b>.</li>
+  </ul>
+
+  <h2>Herança x cascata: não confunda</h2>
+  <table>
+    <thead><tr><th></th><th>Herança</th><th>Cascata</th></tr></thead>
+    <tbody>
+      <tr><td>Pergunta</td><td>"De quem este elemento recebe o valor?"</td><td>"Quando duas regras dizem coisas diferentes, qual vale?"</td></tr>
+      <tr><td>Direção</td><td>Do pai para o filho</td><td>Entre regras que atingem o <b>mesmo</b> elemento</td></tr>
+      <tr><td>Documento</td><td>10 e 11</td><td>12, 13 e 14</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caixa exemplo">
+    <p><b>Analogia:</b> herança é o <b>sobrenome da família</b>: você recebe sem pedir. Se você disser "meu nome é outro", o que <b>você mesmo declarou</b> vence o que herdou. Uma regra direta no filho sempre ganha da herança.</p>
+  </div>
+
+  <pre><code>body { color: #263238; }
+.aviso { color: #c0392b; }   <span class="c">/* o .aviso não herda mais a cor: usa a própria */</span></code></pre>
+
+  <div class="caixa atencao">
+    <p><b>Atenção:</b> nem tudo é herdado. Borda, margem e fundo, por exemplo, <b>não</b> passam do pai para o filho. É o assunto do próximo documento.</p>
+  </div>
+
+  </section>
+<section class="doc" id="doc11"><h1>O que herda e o que não herda</h1>
+  <p class="resumo">A regra geral: <b>propriedades de texto são herdadas</b>; propriedades de caixa (tamanho, borda, fundo, espaço) <b>não são</b>. Faz sentido: se toda <code>div</code> herdasse a borda do pai, a página viraria uma cebola de molduras.</p>
+
+  <h2>Tabela de referência</h2>
+  <div class="cards">
+    <div class="card"><h3>✅ Herdam</h3>
+      <ul>
+        <li><code>color</code></li>
+        <li><code>font-family</code>, <code>font-size</code>, <code>font-weight</code>, <code>font-style</code></li>
+        <li><code>line-height</code></li>
+        <li><code>text-align</code>, <code>letter-spacing</code></li>
+        <li><code>visibility</code></li>
+        <li><code>cursor</code></li>
+        <li><code>list-style</code></li>
+      </ul>
+    </div>
+    <div class="card"><h3>❌ Não herdam</h3>
+      <ul>
+        <li><code>margin</code>, <code>padding</code></li>
+        <li><code>border</code></li>
+        <li><code>background</code></li>
+        <li><code>width</code>, <code>height</code></li>
+        <li><code>display</code>, <code>position</code></li>
+        <li><code>overflow</code></li>
+        <li><code>box-shadow</code>, <code>opacity</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="demo"><p class="demo-titulo">Pai com borda + cor verde. Quem herdou o quê?</p>
+    <div class="ex-borda">
+      Pai: tem borda e texto verde.
+      <p style="margin:8px 0 0;">Filho <b>p</b>: o texto ficou <b>verde</b> (herdou), mas <b>sem borda</b> (não herda).</p>
+    </div>
+  </div>
+
+  <h2>Casos que pegam todo mundo</h2>
+  <h3>1. Links não herdam a cor do pai</h3>
+  <p>O navegador dá ao <code>&lt;a&gt;</code> uma cor própria (azul). Para o link acompanhar o texto ao redor:</p>
+  <pre><code>a { color: inherit; text-decoration: none; }</code></pre>
+
+  <h3>2. Campos de formulário não herdam a fonte</h3>
+  <p><code>input</code>, <code>button</code>, <code>select</code> e <code>textarea</code> usam a fonte do sistema. Reset profissional:</p>
+  <pre><code>input, button, select, textarea { font: inherit; }</code></pre>
+
+  <h3>3. line-height herda como número, não como valor calculado</h3>
+  <p><code>line-height: 1.5</code> (sem unidade) é recalculado em cada filho conforme o tamanho da fonte dele. <code>line-height: 24px</code> passa fixo. Prefira o número sem unidade.</p>
+
+  <h2>Palavras-chave que controlam a herança</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Valor</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+    <tbody>
+      <tr><td><code>inherit</code></td><td><b>Força</b> herdar do pai, mesmo em propriedade que normalmente não herda</td><td><code>border: inherit;</code>, <code>color: inherit;</code></td></tr>
+      <tr><td><code>initial</code></td><td>Volta ao valor <b>padrão da especificação CSS</b></td><td><code>display: initial;</code></td></tr>
+      <tr><td><code>unset</code></td><td>Se a propriedade herda → <code>inherit</code>; se não → <code>initial</code></td><td><code>all: unset;</code></td></tr>
+      <tr><td><code>revert</code></td><td>Volta ao estilo padrão <b>do navegador</b></td><td><code>color: revert;</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa dica">
+    <p><b>Receita profissional para a base do site:</b></p>
+    <pre><code>body { font-family: Arial, sans-serif; line-height: 1.6; color: #263238; }
+a { color: inherit; }
+input, button, textarea, select { font: inherit; }</code></pre>
+    <p>Três linhas de herança bem usada evitam dezenas de classes repetidas.</p>
+  </div>
+
+  </section>
+<section class="doc" id="doc12"><h1>O efeito cascata</h1>
+  <p class="resumo">CSS significa <b>Cascading</b> Style Sheets: folhas de estilo <b>em cascata</b>. Cascata é o algoritmo que decide <b>qual regra vence</b> quando várias regras atingem o mesmo elemento e dizem coisas diferentes sobre a mesma propriedade.</p>
+
+  <h2>O problema que a cascata resolve</h2>
+  <pre><code>p { color: blue; }
+p { color: red; }
+.aviso { color: green; }
+
+&lt;p class="aviso"&gt;De que cor eu fico?&lt;/p&gt;</code></pre>
+  <p>Três regras, três cores, um parágrafo. O navegador não pode obedecer às três. A cascata é o desempate. (Resposta: <b>verde</b>, e você vai saber por quê já já.)</p>
+
+  <h2>As três perguntas, nesta ordem</h2>
+  <p>O navegador pergunta, na sequência, e para assim que alguém vence:</p>
+  <ol class="passos">
+    <li><b>Origem e importância.</b> De onde vem a regra: estilo do navegador, do autor (você) ou do usuário? Tem <code>!important</code>?</li>
+    <li><b>Especificidade.</b> Qual seletor é <i>mais específico</i>? (Detalhado no documento 14.)</li>
+    <li><b>Ordem no código.</b> Se empatou nas duas, <b>a última escrita vence</b>.</li>
+  </ol>
+
+  <div class="fluxo">
+    <div class="pergunta">1. Há !important ou origens diferentes?</div>
+    <div class="seta">↓ não, empatou</div>
+    <div class="pergunta">2. Um seletor é mais específico?</div>
+    <div class="seta">↓ não, empatou</div>
+    <div class="pergunta">3. Qual aparece por último no CSS?</div>
+    <div class="seta">↓</div>
+    <div class="resposta">Essa vence</div>
+  </div>
+
+  <h2>1. Origem</h2>
+  <table>
+    <thead><tr><th>Origem</th><th>Quem escreve</th><th>Peso</th></tr></thead>
+    <tbody>
+      <tr><td>Navegador (user agent)</td><td>Chrome, Firefox… (azul do link, margem do <code>body</code>)</td><td>Menor</td></tr>
+      <tr><td>Autor</td><td><b>Você</b>, no seu arquivo .css</td><td>Maior que a do navegador</td></tr>
+      <tr><td>Usuário</td><td>Preferências de acessibilidade</td><td>Entre as duas</td></tr>
+    </tbody>
+  </table>
+  <p>Por isso o seu CSS sempre vence o estilo padrão do navegador, mesmo com seletores simples.</p>
+
+  <h2>3. Ordem: a última vence (em caso de empate)</h2>
+  <pre><code>.ex-ordem { color: #1b4f72; }   <span class="c">/* azul */</span>
+.ex-ordem { color: #c0392b; }   <span class="c">/* vermelho — vem depois, vence */</span></code></pre>
+  <div class="demo"><p class="demo-titulo">Duas regras com a mesma especificidade: vermelho (a última)</p>
+    <p class="ex-ordem" style="margin:0">Este texto aparece vermelho.</p>
+  </div>
+
+  <h3>Ordem também vale entre arquivos</h3>
+  <pre><code>&lt;link rel="stylesheet" href="base.css"&gt;
+&lt;link rel="stylesheet" href="pagina.css"&gt;   <span class="c">&lt;!-- vem depois: ganha os empates --&gt;</span></code></pre>
+  <p>Por isso o reset e a base vêm primeiro, e o CSS da página, depois.</p>
+
+  <h2>Por que "cascata"?</h2>
+  <p>Como uma cachoeira, o estilo desce de cima (navegador) para baixo (seu CSS, regra por regra), e <b>o que chega por último ao elemento é o que ele mostra</b>. Cada regra "sobrescreve" a anterior apenas nas propriedades em que discordam; as outras continuam valendo.</p>
+  <pre><code>p      { color: blue; font-size: 18px; }
+.aviso { color: green; }
+<span class="c">/* Resultado em &lt;p class="aviso"&gt;: cor verde (do .aviso), tamanho 18px (do p).
+   As regras se SOMAM nas propriedades diferentes e só brigam nas iguais. */</span></code></pre>
+
+  <div class="caixa exemplo">
+    <p><b>Resumo em uma frase:</b> a cascata combina todas as regras que atingem o elemento; onde elas discordam, vence a de <b>maior importância → maior especificidade → mais tarde no código</b>.</p>
+  </div>
+
+  </section>
+<section class="doc" id="doc13"><h1>Cascata na prática com o DevTools</h1>
+  <p class="resumo">Teoria entra de verdade quando você <b>vê</b> a cascata. O DevTools mostra, para cada elemento, <b>todas</b> as regras que o atingem, quais venceram e quais foram riscadas.</p>
+
+  <h2>Passo a passo no navegador</h2>
+  <ol class="passos">
+    <li>Abra a página e aperte <b>F12</b> (ou clique com o botão direito → Inspecionar).</li>
+    <li>Clique na seta do canto da janela e depois no elemento que quer investigar.</li>
+    <li>Na aba <b>Elementos</b>, olhe o painel <b>Estilos</b> (Styles).</li>
+    <li>Leia de cima para baixo: <b>regras mais fortes ficam em cima</b>.</li>
+    <li>Propriedade <s>riscada</s> = perdeu a briga. Passe o mouse e o navegador mostra por quê.</li>
+    <li>Mais abaixo, "<i>Inherited from …</i>" mostra o que veio por herança.</li>
+    <li>Aba <b>Computed</b> (Computado): o valor <b>final</b> de cada propriedade.</li>
+  </ol>
+
+  <h2>Laboratório 1: descubra o vencedor</h2>
+  <pre><code>.t1 { color: #c0392b; }
+p   { color: #1e8449; }
+
+&lt;p class="t1"&gt;Qual cor?&lt;/p&gt;</code></pre>
+  <div class="demo"><p class="demo-titulo">Inspecione este parágrafo com F12</p><p class="t1" style="margin:0">Qual cor? (vermelha: classe vence tag)</p></div>
+  <p>No DevTools você verá <code>p { color: green }</code> riscada.</p>
+
+  <h2>Laboratório 2: regras se somam</h2>
+  <pre><code>.t2         { color: #1b4f72; font-size: 1.2rem; }
+.t2.negrito { font-weight: bold; }</code></pre>
+  <div class="demo"><p class="demo-titulo">Duas regras, zero conflito: ambas valem</p><p class="t2 negrito" style="margin:0">Azul, grande e negrito.</p></div>
+  <p>Nenhuma foi riscada, porque nenhuma discorda da outra.</p>
+
+  <h2>!important: o botão vermelho</h2>
+  <pre><code>p { color: red !important; }</code></pre>
+  <p><code>!important</code> pula as etapas 2 e 3 da cascata. Nada que o autor escrever sem ele consegue vencer.</p>
+  <div class="caixa erro">
+    <p><b>Por que evitar:</b> a única forma de vencer um <code>!important</code> é outro <code>!important</code> mais forte. A manutenção vira uma corrida armamentista. Se você precisou dele, quase sempre o problema é de especificidade (documento 15).</p>
+  </div>
+  <div class="caixa dica">
+    <p><b>Usos legítimos:</b> utilitárias que <i>precisam</i> sempre vencer (<code>.hidden { display: none !important; }</code>) e sobrescrever CSS de terceiros que você não controla.</p>
+  </div>
+
+  <h2>O atributo style no HTML</h2>
+  <pre><code>&lt;p style="color: red"&gt;</code></pre>
+  <p>Estilo <b>inline</b> vence qualquer seletor de arquivo, sem precisar de <code>!important</code>. Por isso se evita no dia a dia: ele escapa da organização do CSS e só pode ser vencido por <code>!important</code>.</p>
+
+  <h2>Checklist de investigação</h2>
+  <ul>
+    <li>☐ O seletor realmente encontra o elemento? (erro de digitação, ponto esquecido)</li>
+    <li>☐ O arquivo CSS foi carregado? (aba Network / link quebrado)</li>
+    <li>☐ Outra regra mais específica sobrescreve a minha?</li>
+    <li>☐ Duas regras empatam e a última do arquivo vence?</li>
+    <li>☐ A propriedade herda? Se não, preciso declará-la no próprio elemento.</li>
+  </ul>
+
+  </section>
+<section class="doc" id="doc14"><h1>O placar de especificidade</h1>
+  <p class="resumo"><b>Especificidade</b> é a nota que o navegador dá a cada seletor. Entre duas regras que brigam, <b>a de maior nota vence</b>, independentemente da ordem no arquivo. É assim que se decide a predominância entre classes, ids e tags.</p>
+
+  <h2>O placar tem 4 colunas</h2>
+  <p>Pense num placar <b>A – B – C – D</b>. Compara-se coluna por coluna, da esquerda para a direita. <b>A primeira coluna que tiver número maior ganha</b>, e as demais nem são olhadas.</p>
+  <div class="placar">
+    <div><b>A</b>estilo inline<br><code>style="…"</code></div>
+    <div><b>B</b>ids<br><code>#topo</code></div>
+    <div><b>C</b>classes, atributos, pseudoclasses<br><code>.card</code> <code>[type]</code> <code>:hover</code></div>
+    <div><b>D</b>tags e pseudoelementos<br><code>p</code> <code>h1</code> <code>::before</code></div>
+  </div>
+
+  <h2>Tabela de pontuação</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Seletor</th><th>A</th><th>B</th><th>C</th><th>D</th><th>Leitura</th></tr></thead>
+    <tbody>
+      <tr><td><code>p</code></td><td>0</td><td>0</td><td>0</td><td>1</td><td>0-0-0-1</td></tr>
+      <tr><td><code>p.aviso</code></td><td>0</td><td>0</td><td>1</td><td>1</td><td>0-0-1-1</td></tr>
+      <tr><td><code>.card</code></td><td>0</td><td>0</td><td>1</td><td>0</td><td>0-0-1-0</td></tr>
+      <tr><td><code>.card .titulo</code></td><td>0</td><td>0</td><td>2</td><td>0</td><td>0-0-2-0</td></tr>
+      <tr><td><code>nav ul li a</code></td><td>0</td><td>0</td><td>0</td><td>4</td><td>0-0-0-4</td></tr>
+      <tr><td><code>a:hover</code></td><td>0</td><td>0</td><td>1</td><td>1</td><td>0-0-1-1</td></tr>
+      <tr><td><code>#topo</code></td><td>0</td><td>1</td><td>0</td><td>0</td><td>0-1-0-0</td></tr>
+      <tr><td><code>#topo .menu a</code></td><td>0</td><td>1</td><td>1</td><td>1</td><td>0-1-1-1</td></tr>
+      <tr><td><code>style="…"</code></td><td>1</td><td>0</td><td>0</td><td>0</td><td>1-0-0-0</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Como comparar: o exemplo mais importante da trilha</h2>
+  <p>Uma classe vence <b>onze tags empilhadas</b>, porque a coluna C pesa mais do que qualquer quantidade na coluna D:</p>
+  <pre><code>.botao        { color: red; }      <span class="c">/* 0-0-1-0 */</span>
+html body main section div p a { color: blue; }  <span class="c">/* 0-0-0-7 */</span>
+<span class="c">/* Vence .botao: 1 na coluna C ganha de 7 na coluna D */</span></code></pre>
+  <p>A mesma lógica vale um nível acima: <b>um id vence cem classes</b>.</p>
+
+  <div class="demo"><p class="demo-titulo">Mesmo elemento, class + id. A ordem no CSS é .x1 depois #x1; quem aparece azul?</p>
+    <p id="x1" class="x1" style="margin:0">Azul: o id (0-1-0-0) vence a classe (0-0-1-0), mesmo se a classe viesse por último.</p>
+  </div>
+
+  <h2>O que NÃO conta pontos</h2>
+  <ul>
+    <li>O seletor universal <code>*</code>.</li>
+    <li>Combinadores: espaço, <code>&gt;</code>, <code>+</code>, <code>~</code>.</li>
+    <li><code>:where( )</code> → sempre zero. <code>:is( )</code> e <code>:not( )</code> → valem o item mais forte lá dentro.</li>
+  </ul>
+
+  <h2>Empate: volta a regra da ordem</h2>
+  <p>Se o placar é igual nas quatro colunas, <b>vence a regra que vem por último</b> no código (documento 12).</p>
+
+  <div class="caixa atencao">
+    <p><b>Pegadinha de herança:</b> um valor <b>herdado</b> perde para <b>qualquer</b> regra direta no elemento, mesmo a de especificidade <code>0-0-0-1</code>. Herança não entra no placar: ela só preenche o que ninguém declarou.</p>
+  </div>
+
+  </section>
+<section class="doc" id="doc15"><h1>Conflitos reais e como resolvê-los</h1>
+  <p class="resumo">Esta é a parte prática: "o meu CSS não funciona". Quase sempre a causa é um desses cinco casos. Cada um tem a <b>solução profissional</b>, que raramente é usar <code>!important</code>.</p>
+
+  <h2>Caso 1: o link que não muda de cor</h2>
+  <pre><code>.menu a  { color: #fff; }        <span class="c">/* 0-0-1-1 */</span>
+.destaque { color: gold; }       <span class="c">/* 0-0-1-0 — perde! */</span>
+
+&lt;nav class="menu"&gt;&lt;a class="destaque" href="#"&gt;Contato&lt;/a&gt;&lt;/nav&gt;</code></pre>
+  <p><b>Diagnóstico:</b> <code>.menu a</code> pesa 0-0-1-1; <code>.destaque</code> pesa 0-0-1-0. A mais pesada vence, mesmo vindo antes.</p>
+  <p><b>Solução profissional:</b> igualar ou superar o peso <b>com seletor</b>, não com força bruta.</p>
+  <pre><code>.menu .destaque { color: gold; }   <span class="c">/* 0-0-2-0 — vence */</span></code></pre>
+
+  <h2>Caso 2: o seletor muito longo</h2>
+  <pre><code>body main section.hero div.container h1.titulo { ... }   <span class="c">/* 0-0-3-4 */</span></code></pre>
+  <p>Quem for sobrescrever precisará de um seletor ainda maior. Cada seletor longo "contamina" o projeto.</p>
+  <p><b>Solução:</b> uma classe, só uma, direto no elemento.</p>
+  <pre><code>.hero-titulo { ... }   <span class="c">/* 0-0-1-0 */</span></code></pre>
+
+  <h2>Caso 3: o id no CSS</h2>
+  <pre><code>#topo { background: navy; }      <span class="c">/* 0-1-0-0: nenhuma classe consegue vencer */</span></code></pre>
+  <p><b>Solução:</b> troque por classe. Mantenha o <code>id</code> para âncora e JavaScript.</p>
+
+  <h2>Caso 4: a ordem dos arquivos</h2>
+  <p>Seu componente não pega porque o CSS do framework está <b>depois</b> do seu.</p>
+  <pre><code>&lt;link rel="stylesheet" href="meu.css"&gt;
+&lt;link rel="stylesheet" href="bootstrap.css"&gt;   <span class="c">&lt;!-- vem depois: ganha os empates --&gt;</span></code></pre>
+  <p><b>Solução:</b> framework primeiro, o seu depois.</p>
+
+  <h2>Caso 5: modificador que não "pega"</h2>
+  <pre><code>.botao--perigo { background: red; }   <span class="c">/* escrito ANTES de .botao */</span>
+.botao         { background: gray; }  <span class="c">/* mesmo peso, vem depois: vence */</span></code></pre>
+  <p><b>Solução:</b> base primeiro, modificadores e estados depois. Documento 20.</p>
+
+  <h2>Resumo das armas, da mais saudável à pior</h2>
+  <table>
+    <thead><tr><th>#</th><th>Ferramenta</th><th>Avaliação</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Reordenar o CSS</td><td>✅ Grátis, não cria dívida</td></tr>
+      <tr><td>2</td><td>Trocar para uma classe simples</td><td>✅ Melhor correção de raiz</td></tr>
+      <tr><td>3</td><td>Acrescentar uma classe ao seletor (<code>.menu .destaque</code>)</td><td>🟡 Aceitável, cuidado com a escalada</td></tr>
+      <tr><td>4</td><td><code>:where()</code> para zerar o peso de base</td><td>🟡 Avançado e elegante</td></tr>
+      <tr><td>5</td><td><code>!important</code></td><td>🔴 Último recurso</td></tr>
+      <tr><td>6</td><td><code>id</code> ou <code>style</code> inline</td><td>🔴 Evitar</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Predominância semântica: o princípio por trás de tudo</h2>
+  <p>Para a pergunta <i>"que classe predomina?"</i>, a resposta de projeto é uma <b>hierarquia de poder deliberada</b>:</p>
+  <div class="mapa">
+    <div class="no n1"><span class="rotulo">Tags (base)<span class="nota">0-0-0-1: o piso. Define o padrão do site.</span></span>
+      <div class="no n2"><span class="rotulo">Classes de componente<span class="nota">0-0-1-0: a regra geral de cada peça.</span></span>
+        <div class="no n3"><span class="rotulo">Modificadores e estados<span class="nota">vêm depois e vencem o componente.</span></span>
+          <div class="no laranja"><span class="rotulo">Utilitárias<span class="nota">por último: precisam vencer tudo (às vezes com !important).</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>Quanto mais "específico em significado" o ajuste, mais tarde ele entra no CSS. Assim, a vontade do desenvolvedor ("este botão é perigoso", "esta margem é zero") sempre prevalece sobre o padrão genérico, <b>sem recorrer a briga de peso</b>.</p>
+
+  <div class="caixa dica"><p><b>Mantra:</b> baixa especificidade, ordem organizada. Se você escreve seletores de peso 0-0-1-0 na ordem certa, nunca precisará lutar com a cascata.</p></div>
+
+  </section>
+<section class="doc" id="doc16"><h1>Exercícios: herança, cascata e especificidade</h1>
+  <p class="resumo">Faça <b>sem abrir o navegador</b>, no papel ou em dupla. Depois confira clicando em "Ver gabarito" e confirme no DevTools.</p>
+
+  <h2>Parte 1 — Herança</h2>
+  <h3>Exercício 1</h3>
+  <pre><code>body { color: navy; border: 2px solid black; }
+
+&lt;body&gt;&lt;p&gt;Texto&lt;/p&gt;&lt;/body&gt;</code></pre>
+  <p>O <code>p</code> terá cor azul-marinho? E borda?</p>
+  <details open><summary>Ver gabarito</summary><p>Cor: <b>sim</b> (<code>color</code> herda). Borda: <b>não</b> (<code>border</code> não herda). A borda aparece só no <code>body</code>.</p></details>
+
+  <h3>Exercício 2</h3>
+  <pre><code>body { color: navy; }
+&lt;body&gt;&lt;a href="#"&gt;Link&lt;/a&gt;&lt;/body&gt;</code></pre>
+  <p>De que cor é o link? Como faria para ele acompanhar o texto?</p>
+  <details open><summary>Ver gabarito</summary><p>O link fica na <b>cor padrão do navegador (azul)</b>, pois o navegador define uma cor própria para <code>a</code>. Solução: <code>a { color: inherit; }</code>.</p></details>
+
+  <h2>Parte 2 — Cascata (ordem)</h2>
+  <h3>Exercício 3</h3>
+  <pre><code>.titulo { color: red; }
+.titulo { color: green; }
+&lt;h1 class="titulo"&gt;Oi&lt;/h1&gt;</code></pre>
+  <details open><summary>Ver gabarito</summary><p><b>Verde.</b> Empate de especificidade; vence a última.</p></details>
+
+  <h3>Exercício 4</h3>
+  <pre><code>p { color: blue; font-size: 20px; }
+p { color: red; }
+&lt;p&gt;Oi&lt;/p&gt;</code></pre>
+  <p>Cor e tamanho?</p>
+  <details open><summary>Ver gabarito</summary><p>Cor <b>vermelha</b> (a última vence), tamanho <b>20px</b> (ninguém discordou; a regra anterior continua valendo).</p></details>
+
+  <h2>Parte 3 — Especificidade</h2>
+  <h3>Exercício 5: calcule o placar</h3>
+  <table>
+    <thead><tr><th>Seletor</th><th>Placar (A-B-C-D)</th></tr></thead>
+    <tbody>
+      <tr><td><code>h2</code></td><td></td></tr>
+      <tr><td><code>.card h2</code></td><td></td></tr>
+      <tr><td><code>#lojas .card h2</code></td><td></td></tr>
+      <tr><td><code>a:hover</code></td><td></td></tr>
+      <tr><td><code>ul li.ativo a</code></td><td></td></tr>
+    </tbody>
+  </table>
+  <details open><summary>Ver gabarito</summary>
+    <p><code>h2</code> = 0-0-0-1 · <code>.card h2</code> = 0-0-1-1 · <code>#lojas .card h2</code> = 0-1-1-1 · <code>a:hover</code> = 0-0-1-1 · <code>ul li.ativo a</code> = 0-0-1-3.</p></details>
+
+  <h3>Exercício 6: quem vence?</h3>
+  <pre><code>.menu a    { color: white; }
+.destaque  { color: gold; }
+&lt;nav class="menu"&gt;&lt;a class="destaque" href="#"&gt;Loja&lt;/a&gt;&lt;/nav&gt;</code></pre>
+  <details open><summary>Ver gabarito</summary><p><b>Branco.</b> <code>.menu a</code> = 0-0-1-1 contra <code>.destaque</code> = 0-0-1-0. Correção: <code>.menu .destaque</code> (0-0-2-0).</p></details>
+
+  <h3>Exercício 7: id contra classes</h3>
+  <pre><code>#topo { color: red; }
+.a.b.c.d.e.f { color: blue; }
+&lt;p id="topo" class="a b c d e f"&gt;Oi&lt;/p&gt;</code></pre>
+  <details open><summary>Ver gabarito</summary><p><b>Vermelho.</b> 0-1-0-0 vence 0-0-6-0: a coluna B pesa mais que qualquer número na coluna C.</p></details>
+
+  <h3>Exercício 8: o atalho do inline</h3>
+  <pre><code>.botao { background: blue !important; }
+&lt;button class="botao" style="background: red"&gt;Clique&lt;/button&gt;</code></pre>
+  <details open><summary>Ver gabarito</summary><p><b>Azul.</b> O <code>!important</code> do autor vence até o estilo inline comum.</p></details>
+
+  <h2>Parte 4 — Desafio de equipe</h2>
+  <p>O CSS abaixo tem 3 problemas de predominância. Encontre e corrija sem usar <code>!important</code>.</p>
+  <pre><code>#cabecalho .menu ul li a { color: white; }
+.botao { background: gray; }
+.botao--primario { background: blue; }   <span class="c">/* vem antes de .botao no arquivo real */</span>
+body main section div.container p { font-size: 14px; }
+.texto-grande { font-size: 24px; }</code></pre>
+  <details open><summary>Ver gabarito</summary>
+    <ol>
+      <li>Seletor longo com id (0-1-1-3): troque por <code>.menu-link { color: white; }</code>.</li>
+      <li>Ordem: <code>.botao--primario</code> deve ser escrito <b>depois</b> de <code>.botao</code>.</li>
+      <li>Seletor longo (0-0-1-5) impede <code>.texto-grande</code> de vencer: troque por <code>.paragrafo { font-size: 14px; }</code> e coloque <code>.texto-grande</code> depois.</li>
+    </ol>
+  </details>
+
+  </section>
+<section class="doc" id="doc17"><h1>O mapa: esqueleto de uma página profissional</h1>
+  <p class="resumo">Este é o documento central da trilha. Ele responde: <b>o que vem primeiro, o que fica dentro de quê, e por quê</b>. Leia o mapa de fora para dentro: <b>documento → body → blocos da página → seções → componentes</b>.</p>
+
+  <h2>Mapa geral (de fora para dentro)</h2>
+  <div class="mapa">
+    <div class="no n1"><span class="rotulo">① &lt;!DOCTYPE html&gt; + &lt;html lang="pt-BR"&gt;<span class="nota">O documento. Sempre a primeira linha. O lang ajuda leitor de tela e tradutor.</span></span>
+
+      <div class="no n2"><span class="rotulo">② &lt;head&gt;<span class="nota">Invisível. Informações sobre a página: charset, viewport, title, link do CSS.</span></span></div>
+
+      <div class="no n2"><span class="rotulo">③ &lt;body&gt;<span class="nota">Tudo o que o usuário vê. Aqui entram a fonte base (herança!) e o fundo.</span></span>
+
+        <div class="no n3"><span class="rotulo">④ &lt;header&gt;<span class="nota">Topo do SITE: logo + &lt;nav&gt;. Aparece em todas as páginas.</span></span>
+          <div class="lado">
+            <div class="no verde"><span class="rotulo">&lt;a class="logo"&gt;</span></div>
+            <div class="no verde"><span class="rotulo">&lt;nav class="menu"&gt;<span class="nota">&lt;ul&gt; &lt;li&gt; &lt;a&gt;</span></span></div>
+          </div>
+        </div>
+
+        <div class="no n3"><span class="rotulo">⑤ &lt;main&gt;<span class="nota">O conteúdo ÚNICO desta página. Só UM por página.</span></span>
+
+          <div class="no n3"><span class="rotulo">⑥ &lt;section class="hero"&gt;<span class="nota">Faixa temática 1. Tem um título (h1 aqui).</span></span>
+            <div class="no verde"><span class="rotulo">&lt;div class="container"&gt;<span class="nota">limita a largura (doc 03)</span></span>
+              <div class="no laranja"><span class="rotulo">h1 · p · a.botao <span class="nota">⑦ componentes e texto</span></span></div>
+            </div>
+          </div>
+
+          <div class="no n3"><span class="rotulo">⑥ &lt;section class="secao-produtos"&gt;<span class="nota">Faixa temática 2. Título h2.</span></span>
+            <div class="no verde"><span class="rotulo">&lt;div class="container"&gt;</span>
+              <div class="no verde"><span class="rotulo">&lt;div class="grid"&gt;<span class="nota">layout (doc 04)</span></span>
+                <div class="lado">
+                  <div class="no laranja"><span class="rotulo">&lt;article class="card"&gt;</span></div>
+                  <div class="no laranja"><span class="rotulo">&lt;article class="card"&gt;</span></div>
+                  <div class="no laranja"><span class="rotulo">&lt;article class="card"&gt;</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="no n3"><span class="rotulo">&lt;aside&gt; <span class="nota">(opcional) conteúdo de apoio ao lado</span></span></div>
+        </div>
+
+        <div class="no n3"><span class="rotulo">⑧ &lt;footer class="rodape"&gt;<span class="nota">Base do SITE: contatos, redes, direitos.</span></span></div>
+        <div class="no n3"><span class="rotulo">&lt;script src="..."&gt;<span class="nota">Por último, para não travar a exibição.</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>O mesmo mapa em código</h2>
+  <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Bikcraft — Bikes sob medida&lt;/title&gt;
+  &lt;link rel="stylesheet" href="estilo.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header class="cabecalho"&gt;
+    &lt;a class="logo" href="index.html"&gt;bikcraft&lt;/a&gt;
+    &lt;nav class="menu" aria-label="Principal"&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="bikes.html"&gt;Bikes&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="contato.html"&gt;Contato&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;section class="hero"&gt;
+      &lt;div class="container"&gt;
+        &lt;h1 class="hero-titulo"&gt;Sua bike, do seu jeito.&lt;/h1&gt;
+        &lt;a class="botao botao--primario" href="#produtos"&gt;Ver bikes&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class="produtos" id="produtos"&gt;
+      &lt;div class="container"&gt;
+        &lt;h2&gt;Nossas bikes&lt;/h2&gt;
+        &lt;div class="grid"&gt;
+          &lt;article class="card"&gt;...&lt;/article&gt;
+          &lt;article class="card"&gt;...&lt;/article&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer class="rodape"&gt;
+    &lt;div class="container"&gt;© 2026 Bikcraft&lt;/div&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+  <h2>As 5 camadas, resumidas</h2>
+  <table>
+    <thead><tr><th>Camada</th><th>Elementos</th><th>Pergunta que responde</th></tr></thead>
+    <tbody>
+      <tr><td>1. Documento</td><td><code>html</code>, <code>head</code>, <code>body</code></td><td>É uma página? Como o navegador a lê?</td></tr>
+      <tr><td>2. Moldura do site</td><td><code>header</code>, <code>main</code>, <code>footer</code></td><td>Quais as 3 grandes áreas?</td></tr>
+      <tr><td>3. Seções</td><td><code>section</code>, <code>article</code>, <code>aside</code></td><td>Quais os assuntos dentro do conteúdo?</td></tr>
+      <tr><td>4. Estrutura e layout</td><td><code>div.container</code>, <code>div.grid</code></td><td>Como organizo largura e colunas?</td></tr>
+      <tr><td>5. Conteúdo e componentes</td><td><code>h1…h6</code>, <code>p</code>, <code>a</code>, <code>img</code>, <code>.botao</code>, <code>.card</code></td><td>O que o usuário lê e clica?</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caixa dica">
+    <p><b>Regra do mapa:</b> as camadas 1 a 3 usam <b>tags semânticas</b> (dizem o que é). A camada 4 é o reino da <b>div</b> (só organiza). A camada 5 mistura os dois. Quem entende essa divisão nunca mais fica na dúvida entre div e section.</p>
+  </div>
+
+  </section>
+<section class="doc" id="doc18"><h1>Árvore de decisão: div, main, section ou article?</h1>
+  <p class="resumo">Responda às perguntas <b>de cima para baixo</b>. A primeira resposta "sim" é a tag certa. A <code>div</code> é o <b>último recurso</b>: use quando nenhuma tag tem significado.</p>
+
+  <h2>O fluxograma</h2>
+  <div class="fluxo">
+    <div class="pergunta">É o topo do site (logo + menu), ou a abertura de um bloco?</div>
+    <div class="seta">sim ↓ &nbsp; <small>(não: próxima pergunta)</small></div>
+    <div class="resposta"><b>&lt;header&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">É um grupo de links de navegação?</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;nav&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">É o conteúdo principal e único desta página?</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;main&gt;</b> (só um por página)</div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">Tem sentido sozinho, poderia ser publicado em outro lugar? (notícia, produto, comentário, card)</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;article&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">É um grupo de conteúdo sobre UM tema, que deveria ter um título (h2)?</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;section&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">É um conteúdo lateral, de apoio, que pode ser removido sem perder o texto principal?</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;aside&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">É a base do site ou de um bloco (contato, direitos)?</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta"><b>&lt;footer&gt;</b></div>
+    <div class="seta">&nbsp;</div>
+    <div class="pergunta">Existe uma tag que diga o que é? (<code>ul</code>, <code>p</code>, <code>button</code>, <code>form</code>, <code>figure</code>…)</div>
+    <div class="seta">sim ↓</div>
+    <div class="resposta">Use <b>essa tag</b></div>
+    <div class="seta">não ↓</div>
+    <div class="resposta" style="background:#eef4f8;border-color:#1b4f72"><b>&lt;div&gt;</b>: só agrupa para o CSS (container, grid, linha de campos)</div>
+  </div>
+
+  <h2>Pares que confundem</h2>
+  <div class="dupla">
+    <div class="card"><h3>section ou div?</h3>
+      <p><b>section:</b> o grupo tem um <b>tema e um título</b>. Se você consegue nomear no sumário da página, é section.</p>
+      <p><b>div:</b> só existe para o CSS (largura, grade, fundo).</p>
+      <p><i>Teste:</i> "Se eu tirar o CSS, essa caixa ainda faz sentido como parte do documento?" Sim → section. Não → div.</p></div>
+    <div class="card"><h3>section ou article?</h3>
+      <p><b>article:</b> peça <b>independente</b> e reaproveitável (card de produto, post, comentário).</p>
+      <p><b>section:</b> <b>pedaço</b> de algo maior.</p>
+      <p><i>Teste:</i> "Posso copiar para outro site e continua fazendo sentido?" Sim → article.</p></div>
+    <div class="card"><h3>header ou section.hero?</h3>
+      <p><b>header</b> do site: topo com logo e menu. O <b>hero</b> é a primeira <code>section</code> do <code>main</code>.</p>
+      <p>Um <code>header</code> também pode abrir um <code>article</code> (título + data do post).</p></div>
+    <div class="card"><h3>aside ou div.lateral?</h3>
+      <p><b>aside:</b> o conteúdo é <b>complementar</b> (links relacionados, anúncios, biografia).</p>
+      <p><b>div:</b> uma coluna de layout que faz parte do texto principal.</p></div>
+  </div>
+
+  <h2>Erros frequentes</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Erro</th><th>Correção</th></tr></thead>
+    <tbody>
+      <tr><td>Toda a página dentro de <code>div</code> ("divite")</td><td>Troque pela tag semântica correspondente</td></tr>
+      <tr><td>Dois <code>main</code> na mesma página</td><td>Só um. Os outros viram <code>section</code></td></tr>
+      <tr><td><code>section</code> sem título dentro</td><td>Dê um <code>h2</code> ou use <code>div</code></td></tr>
+      <tr><td><code>div</code> clicável com <code>onclick</code></td><td>Use <code>button</code> (teclado e leitor de tela funcionam de graça)</td></tr>
+      <tr><td><code>section</code> só para aplicar fundo</td><td>Isso é papel de <code>div</code> ou classe</td></tr>
+      <tr><td><code>main</code> dentro de <code>section</code></td><td><code>main</code> envolve as seções, nunca o contrário</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa exemplo">
+    <p><b>As semânticas não mudam o visual.</b> <code>section</code>, <code>article</code> e <code>div</code> são todos caixas em bloco. A diferença é <b>significado</b>: para busca, leitor de tela e outros desenvolvedores. O visual você faz com classe.</p>
+  </div>
+
+  </section>
+<section class="doc" id="doc19"><h1>Os elementos de página, um por um</h1>
+  <p class="resumo">Ficha técnica de cada elemento estrutural: o que é, quantos pode haver, onde fica, classe típica e erro comum.</p>
+
+  <h2>Quadro-resumo</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Tag</th><th>Quantos?</th><th>Fica dentro de</th><th>Classe típica</th></tr></thead>
+    <tbody>
+      <tr><td><code>header</code></td><td>1 do site (+ 1 por article/section, se quiser)</td><td><code>body</code></td><td><code>cabecalho</code></td></tr>
+      <tr><td><code>nav</code></td><td>1 principal; outros com <code>aria-label</code></td><td><code>header</code>, <code>footer</code></td><td><code>menu</code></td></tr>
+      <tr><td><code>main</code></td><td><b>1 só</b></td><td><code>body</code></td><td>raramente precisa</td></tr>
+      <tr><td><code>section</code></td><td>Quantas precisar</td><td><code>main</code></td><td><code>hero</code>, <code>produtos</code></td></tr>
+      <tr><td><code>article</code></td><td>Quantos precisar</td><td><code>section</code>, <code>main</code></td><td><code>card</code>, <code>post</code></td></tr>
+      <tr><td><code>aside</code></td><td>Quantos precisar</td><td><code>main</code> ou ao lado</td><td><code>lateral</code></td></tr>
+      <tr><td><code>footer</code></td><td>1 do site (+ por article/section)</td><td><code>body</code></td><td><code>rodape</code></td></tr>
+      <tr><td><code>div</code></td><td>Sem limite</td><td>qualquer lugar</td><td><code>container</code>, <code>grid</code>, <code>campo</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>header</h2>
+  <p>Cabeçalho do site: logo, menu, às vezes busca. <b>Não é o &lt;head&gt;</b> (esse é invisível e fica fora do body).</p>
+  <pre><code>&lt;header class="cabecalho"&gt;
+  &lt;a class="logo" href="/"&gt;bikcraft&lt;/a&gt;
+  &lt;nav class="menu"&gt;...&lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+  <p><b>CSS típico:</b> <code>display: flex; justify-content: space-between; align-items: center;</code></p>
+
+  <h2>nav</h2>
+  <p>Somente para <b>grupos principais de links</b> (menu, paginação, índice). Nem todo link solto precisa estar num <code>nav</code>. Estrutura profissional: lista dentro:</p>
+  <pre><code>&lt;nav class="menu" aria-label="Principal"&gt;
+  &lt;ul&gt;&lt;li&gt;&lt;a href="/bikes"&gt;Bikes&lt;/a&gt;&lt;/li&gt; ...&lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+
+  <h2>main</h2>
+  <p>O coração da página: o conteúdo que <b>só existe aqui</b>. Não inclui cabeçalho, menu e rodapé repetidos em todas as páginas. Leitores de tela têm atalho que pula direto para ele.</p>
+
+  <h2>section</h2>
+  <p>Faixa temática com título. <b>Padrão da indústria:</b> <code>section</code> (faixa) + <code>div.container</code> (conteúdo).</p>
+  <pre><code>&lt;section class="lojas" aria-labelledby="titulo-lojas"&gt;
+  &lt;div class="container"&gt;
+    &lt;h2 id="titulo-lojas"&gt;Nossas lojas&lt;/h2&gt;
+    ...
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+  <h2>article</h2>
+  <p>Item autônomo. Num catálogo, cada produto é um <code>article</code>; a lista deles vive numa <code>section</code>.</p>
+
+  <h2>aside</h2>
+  <p>Conteúdo relacionado, mas dispensável: barra lateral, caixa "leia também", propaganda, biografia do autor.</p>
+
+  <h2>footer</h2>
+  <p>Fecha o site (ou um bloco). Típico: endereço, redes, copyright, links legais.</p>
+
+  <h2>div: o coringa</h2>
+  <p>Caixa sem significado. Perfeita para três usos:</p>
+  <ol>
+    <li><b>Container:</b> limitar largura.</li>
+    <li><b>Layout:</b> grid ou flex que agrupa filhos.</li>
+    <li><b>Agrupamento visual:</b> linha de formulário, par rótulo+campo.</li>
+  </ol>
+
+  <h2>Outros elementos que completam o mapa</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Tag</th><th>Para quê</th></tr></thead>
+    <tbody>
+      <tr><td><code>h1…h6</code></td><td>Títulos, com hierarquia</td></tr>
+      <tr><td><code>p</code></td><td>Parágrafo</td></tr>
+      <tr><td><code>ul</code> / <code>ol</code> / <code>li</code></td><td>Listas (inclusive menus)</td></tr>
+      <tr><td><code>figure</code> + <code>figcaption</code></td><td>Imagem com legenda</td></tr>
+      <tr><td><code>form</code>, <code>label</code>, <code>input</code>, <code>button</code></td><td>Formulários</td></tr>
+      <tr><td><code>a</code></td><td>Link (leva a outro lugar)</td></tr>
+      <tr><td><code>button</code></td><td>Ação (faz algo na página)</td></tr>
+      <tr><td><code>span</code></td><td>Trecho de texto sem significado (<code>div</code> inline)</td></tr>
+      <tr><td><code>img</code></td><td>Imagem, sempre com <code>alt</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa dica">
+    <p><b>Link ou botão?</b> Se muda de página → <code>a</code>. Se executa uma ação na página (enviar, abrir menu) → <code>button</code>. O visual pode ser idêntico: a classe cuida disso.</p>
+  </div>
+
+  </section>
+<section class="doc" id="doc20"><h1>Qual classe começa? A ordem de escrita do CSS</h1>
+  <p class="resumo">A pergunta clássica: "por onde eu começo o CSS?". A resposta profissional é uma <b>ordem em camadas</b>, do mais geral ao mais específico. É a mesma lógica da cascata: <b>o que vem depois vence os empates</b>, então o mais genérico vem antes.</p>
+
+  <h2>A escada das 8 camadas</h2>
+  <ol class="passos">
+    <li><b>Reset / normalização.</b> Zera diferenças entre navegadores: <code>* { box-sizing: border-box; }</code>, margens do <code>body</code>.</li>
+    <li><b>Variáveis (tokens).</b> Cores, fontes, espaços em um só lugar: <code>:root { --azul: #1b4f72; }</code></li>
+    <li><b>Base (tags).</b> <code>body</code>, <code>h1…h6</code>, <code>p</code>, <code>a</code>, <code>img</code>. Aqui entra a herança: fonte, cor, line-height.</li>
+    <li><b>Estrutura.</b> <code>.container</code>, <code>.secao</code>. O esqueleto de largura e respiro.</li>
+    <li><b>Layout.</b> <code>.grid</code>, <code>.flex</code>, colunas. Como os blocos se organizam.</li>
+    <li><b>Componentes.</b> <code>.botao</code>, <code>.card</code>, <code>.menu</code>, <code>.rodape</code>, na ordem em que aparecem na página.</li>
+    <li><b>Modificadores e estados.</b> <code>.botao--primario</code>, <code>.is-open</code>. Depois do componente que alteram.</li>
+    <li><b>Utilitárias e media queries.</b> <code>.text-center</code>, <code>.hidden</code> e, por último, as media queries que ajustam tudo para telas maiores.</li>
+  </ol>
+
+  <h2>Mapa da ordem num único arquivo</h2>
+  <pre><code><span class="c">/* 1. RESET */</span>
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+<span class="c">/* 2. TOKENS */</span>
+:root { --azul: #1b4f72; --espaco: 16px; }
+
+<span class="c">/* 3. BASE (tags) */</span>
+body { font-family: Arial, sans-serif; line-height: 1.6; color: #263238; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+
+<span class="c">/* 4. ESTRUTURA */</span>
+.container { max-width: 1100px; margin: 0 auto; padding: 0 var(--espaco); }
+.secao { padding: 64px 0; }
+
+<span class="c">/* 5. LAYOUT */</span>
+.grid { display: grid; gap: var(--espaco); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+<span class="c">/* 6. COMPONENTES */</span>
+.cabecalho { ... }
+.botao { ... }
+.card { ... }
+.rodape { ... }
+
+<span class="c">/* 7. MODIFICADORES E ESTADOS */</span>
+.botao--primario { ... }
+.menu.is-open { ... }
+
+<span class="c">/* 8. UTILITÁRIAS E RESPONSIVO */</span>
+.text-center { text-align: center; }
+.hidden { display: none; }
+@media (min-width: 768px) { ... }</code></pre>
+
+  <h2>Por que nesta ordem?</h2>
+  <table>
+    <thead><tr><th>Camada</th><th>Motivo de vir nessa posição</th></tr></thead>
+    <tbody>
+      <tr><td>Reset e base primeiro</td><td>São o piso. Qualquer classe precisa vencê-los sem esforço.</td></tr>
+      <tr><td>Estrutura antes dos componentes</td><td>Quase todo componente vive dentro de um container.</td></tr>
+      <tr><td>Modificador depois do componente</td><td>Mesmo peso 0-0-1-0, vence quem vem por último.</td></tr>
+      <tr><td>Utilitárias no fim</td><td>São a "palavra final" do desenvolvedor.</td></tr>
+      <tr><td>Media queries no fim</td><td>Mesmo peso que a regra base; precisam vir depois para sobrescrevê-la.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Mobile-first: a base é o celular</h2>
+  <p>As regras fora de media query descrevem o <b>celular</b>. Telas maiores entram por <code>min-width</code>:</p>
+  <pre><code>.grid { grid-template-columns: 1fr; }              <span class="c">/* celular */</span>
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(3, 1fr); } <span class="c">/* tablet para cima */</span>
+}</code></pre>
+
+  <h2>E no HTML, qual classe aparece primeiro?</h2>
+  <p>Escreva as classes em ordem de <b>geral → específico</b>. A ordem no atributo <code>class</code> <b>não</b> muda a cascata (quem manda é a ordem no CSS), mas é uma convenção que facilita a leitura:</p>
+  <pre><code>&lt;button class="<b>botao</b> <b>botao--primario</b> <b>botao--grande</b> <b>mt-3</b>"&gt;
+         componente  variação      variação   utilitária</code></pre>
+
+  <div class="caixa atencao">
+    <p><b>Pegadinha:</b> a ordem das classes dentro do <code>class="..."</code> do HTML <b>não importa</b> para quem vence. Quem decide é a <b>posição da regra no arquivo CSS</b>, depois da especificidade.</p>
+  </div>
+
+  </section>
+<section class="doc" id="doc21"><h1>Nomenclatura (BEM) e organização de arquivos</h1>
+  <p class="resumo">Nomes ruins causam conflitos; nomes bons se explicam sozinhos. <b>BEM</b> é a convenção mais usada do mercado para nomear classes. Junto com uma estrutura de pastas simples, é o que faz um projeto crescer sem virar bagunça.</p>
+
+  <h2>BEM: Bloco, Elemento, Modificador</h2>
+  <table>
+    <thead><tr><th>Parte</th><th>Sintaxe</th><th>Exemplo</th><th>Significa</th></tr></thead>
+    <tbody>
+      <tr><td><b>B</b>loco</td><td><code>bloco</code></td><td><code>card</code></td><td>A peça independente</td></tr>
+      <tr><td><b>E</b>lemento</td><td><code>bloco__elemento</code></td><td><code>card__titulo</code></td><td>Uma parte que só existe dentro do bloco</td></tr>
+      <tr><td><b>M</b>odificador</td><td><code>bloco--variacao</code></td><td><code>card--destaque</code></td><td>Uma variação ou estado</td></tr>
+    </tbody>
+  </table>
+
+  <pre><code>&lt;article class="card card--destaque"&gt;
+  &lt;img class="card__imagem" src="bike.svg" alt="Bike"&gt;
+  &lt;h3 class="card__titulo"&gt;Urbana&lt;/h3&gt;
+  &lt;a class="card__link botao" href="#"&gt;Ver&lt;/a&gt;
+&lt;/article&gt;</code></pre>
+  <pre><code>.card { ... }
+.card__imagem { ... }
+.card__titulo { ... }
+.card--destaque { border-color: gold; }</code></pre>
+
+  <h2>Por que BEM resolve problema de predominância</h2>
+  <ul>
+    <li>Todo seletor é <b>uma classe só</b> (0-0-1-0): nunca há briga de peso.</li>
+    <li>Sem seletores aninhados como <code>.card h3</code>, mexer em um componente não quebra outro.</li>
+    <li>O nome <b>informa a hierarquia</b>: <code>card__titulo</code> pertence ao <code>card</code>.</li>
+  </ul>
+  <div class="caixa atencao"><p><b>Não aninhe os nomes:</b> escreva <code>card__titulo</code>, não <code>card__corpo__titulo</code>. Elemento é sempre filho do bloco, mesmo que esteja no meio de outras divs.</p></div>
+
+  <h2>Seu projeto, sem BEM rígido</h2>
+  <p>Na sala usamos a versão leve: <code>hero</code>, <code>hero-titulo</code>, <code>card-loja</code>, <code>coluna-dados</code>. A ideia é a mesma: <b>prefixo = dono</b>. Importante é ser <b>consistente</b>.</p>
+
+  <h2>Regras gerais de nomeação</h2>
+  <ol class="passos">
+    <li><b>Minúsculas e hífens</b> (<i>kebab-case</i>), nunca espaço ou acento.</li>
+    <li><b>Nome por função, não por aparência</b>: <code>botao-primario</code>, não <code>botao-azul</code>.</li>
+    <li><b>Português ou inglês, mas um só</b> em todo o projeto.</li>
+    <li><b>Nada de numeração</b> (<code>caixa2</code>, <code>div3</code>): o nome deve dizer o conteúdo.</li>
+    <li><b>Prefixo para estado</b>: <code>is-</code> / <code>has-</code> (controlados por JS).</li>
+    <li><b>Prefixo para JS</b>: <code>js-</code> quando a classe existe só para script, nunca para estilo.</li>
+  </ol>
+
+  <h2>Organização de arquivos</h2>
+  <h3>Projeto pequeno (o nosso caso)</h3>
+  <pre><code>projeto/
+├── index.html
+├── contato.html
+├── estilo.css          <span class="c">← tudo, na ordem do documento 20</span>
+├── script.js
+└── assets/
+    ├── bike-1.svg
+    └── logo.svg</code></pre>
+
+  <h3>Projeto médio</h3>
+  <pre><code>projeto/
+├── index.html
+├── css/
+│   ├── 1-reset.css
+│   ├── 2-variaveis.css
+│   ├── 3-base.css
+│   ├── 4-layout.css
+│   ├── 5-componentes.css
+│   └── 6-utilitarias.css
+├── js/
+└── assets/
+    ├── img/
+    └── fonts/</code></pre>
+  <p>Os números no nome dos arquivos refletem a <b>ordem do documento 20</b>. No HTML, os <code>&lt;link&gt;</code> seguem essa ordem.</p>
+
+  <h2>Padrão de comentários</h2>
+  <pre><code><span class="c">/* ============================
+   COMPONENTE: CARD
+   Usado em: catálogo, lojas
+   ============================ */</span>
+.card { ... }</code></pre>
+
+  <div class="caixa dica"><p><b>Teste de legibilidade:</b> um colega consegue achar, em 10 segundos, onde mudar a cor do botão principal? Se sim, sua organização está boa.</p></div>
+
+  </section>
+<section class="doc" id="doc22"><h1>Página completa anotada (Bikcraft)</h1>
+  <p class="resumo">Juntando tudo: uma página inteira comentada <b>linha a linha</b>, com a justificativa de cada escolha. É a estrutura da página de contato que a turma construiu em <code>02-10/4-pagina-contato-final-gabarito.html</code>. <b>Este é o padrão correto</b>: <code>header</code>, <code>main</code> com as seções dentro, <code>footer</code>. Os arquivos da atividade 4 seguem exatamente esse esqueleto.</p>
+
+  <h2>1. HTML anotado</h2>
+  <pre><code>&lt;!DOCTYPE html&gt;                              <span class="c">&lt;!-- avisa: HTML5 moderno --&gt;</span>
+&lt;html lang="pt-BR"&gt;                         <span class="c">&lt;!-- idioma: leitor de tela e tradutor --&gt;</span>
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;                     <span class="c">&lt;!-- acentos corretos --&gt;</span>
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                              <span class="c">&lt;!-- sem isto o celular finge ser desktop --&gt;</span>
+  &lt;title&gt;Contato — Bikcraft&lt;/title&gt;           <span class="c">&lt;!-- aba do navegador e Google --&gt;</span>
+  &lt;link rel="stylesheet" href="estilo.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  <span class="c">&lt;!-- CAMADA 2: moldura --&gt;</span>
+  &lt;header class="cabecalho"&gt;                  <span class="c">&lt;!-- topo do SITE --&gt;</span>
+    &lt;a class="logo" href="index.html"&gt;bikcraft&lt;/a&gt;
+    &lt;nav class="menu" aria-label="Principal"&gt;
+      &lt;a href="index.html"&gt;Home&lt;/a&gt;
+      &lt;a href="bikes.html"&gt;Bikes&lt;/a&gt;
+      &lt;a href="contato.html" aria-current="page"&gt;Contato&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;                                      <span class="c">&lt;!-- conteúdo ÚNICO desta página --&gt;</span>
+
+    <span class="c">&lt;!-- CAMADA 3: seção hero --&gt;</span>
+    &lt;section class="hero"&gt;                    <span class="c">&lt;!-- faixa de destaque --&gt;</span>
+      &lt;p class="hero-chamada"&gt;Respostas em até 24h&lt;/p&gt;
+      &lt;h1 class="hero-titulo"&gt;Nosso contato&lt;/h1&gt;   <span class="c">&lt;!-- UM h1 por página --&gt;</span>
+    &lt;/section&gt;
+
+    <span class="c">&lt;!-- seção de duas colunas --&gt;</span>
+    &lt;section class="secao-contato"&gt;
+      &lt;div class="coluna-dados"&gt; ... &lt;/div&gt;    <span class="c">&lt;!-- div: só organiza layout --&gt;</span>
+      &lt;form class="coluna-formulario"&gt;          <span class="c">&lt;!-- form: tag certa, não div --&gt;</span>
+        &lt;div class="campo"&gt;
+          &lt;label for="nome"&gt;Nome&lt;/label&gt;
+          &lt;input id="nome" type="text" required&gt;  <span class="c">&lt;!-- label ligado por for/id --&gt;</span>
+        &lt;/div&gt;
+        &lt;button class="botao" type="submit"&gt;Enviar&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/section&gt;
+
+    <span class="c">&lt;!-- lista de cards: article dentro de section --&gt;</span>
+    &lt;section class="lojas"&gt;
+      &lt;article class="card-loja"&gt; ... &lt;/article&gt;
+      &lt;article class="card-loja"&gt; ... &lt;/article&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer class="rodape"&gt; ... &lt;/footer&gt;       <span class="c">&lt;!-- base do SITE --&gt;</span>
+
+  &lt;a class="topo" href="#" aria-label="Voltar ao topo"&gt;↑&lt;/a&gt;
+  &lt;script src="script.js"&gt;&lt;/script&gt;           <span class="c">&lt;!-- último: não trava a página --&gt;</span>
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+  <h2>2. CSS anotado (na ordem do documento 20)</h2>
+  <pre><code><span class="c">/* RESET + TOKENS */</span>
+* { box-sizing: border-box; }
+:root { --azul: #1b4f72; --gap: 16px; }
+
+<span class="c">/* BASE: herança trabalhando — fonte e cor declaradas UMA vez */</span>
+body { margin: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #263238; }
+a { color: inherit; }
+input, button { font: inherit; }
+
+<span class="c">/* ESTRUTURA / LAYOUT */</span>
+.secao-contato { display: flex; flex-direction: column; gap: var(--gap); padding: 40px 16px; }
+@media (min-width: 768px) {
+  .secao-contato { flex-direction: row; }       <span class="c">/* mobile-first: duas colunas só no tablet */</span>
+  .coluna-dados, .coluna-formulario { flex: 1; }
+}
+
+<span class="c">/* COMPONENTES (classe simples, peso 0-0-1-0) */</span>
+.cabecalho { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; }
+.campo { display: flex; flex-direction: column; margin-bottom: var(--gap); }
+.botao { padding: 10px 20px; background: var(--azul); color: #fff; border: 0; border-radius: 6px; }
+.card-loja { border: 1px solid #cfd8dc; border-radius: 8px; padding: 16px; }
+
+<span class="c">/* ESTADOS */</span>
+.botao:hover { background: #123049; }
+.menu a[aria-current="page"] { font-weight: bold; }</code></pre>
+
+  <h2>3. Mapa das decisões</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Escolha</th><th>Regra aplicada</th><th>Doc</th></tr></thead>
+    <tbody>
+      <tr><td><code>header</code>, <code>main</code>, <code>footer</code> como moldura</td><td>Camada 2 do mapa</td><td>17</td></tr>
+      <tr><td><code>section</code> para hero, contato, lojas</td><td>Cada faixa tem um tema</td><td>18</td></tr>
+      <tr><td><code>article</code> para cada loja</td><td>Peça independente</td><td>18</td></tr>
+      <tr><td><code>div.campo</code></td><td>Agrupa só para o CSS</td><td>18</td></tr>
+      <tr><td><code>form</code>, <code>label</code>, <code>button</code></td><td>Existe tag com significado</td><td>19</td></tr>
+      <tr><td>Fonte só no <code>body</code></td><td>Herança</td><td>10</td></tr>
+      <tr><td><code>a { color: inherit }</code></td><td>Link não herda a cor sozinho</td><td>11</td></tr>
+      <tr><td>Tudo com classe, sem id no CSS</td><td>Baixa especificidade</td><td>14, 15</td></tr>
+      <tr><td>Media query depois da regra base</td><td>Mesmo peso, vence a última</td><td>12, 20</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa dica"><p><b>Confira você mesmo:</b> abra <code>02-10/4-pagina-contato-final-gabarito.html</code> ao lado deste documento e localize, na página da turma, cada camada do mapa: <code>header</code>, <code>main</code>, as três <code>section</code>, os <code>article</code>, o <code>footer</code>. Todas estão lá, na mesma ordem.</p></div>
+
+  </section>
+<section class="doc" id="doc23"><h1>Do básico ao avançado e checklist profissional</h1>
+  <p class="resumo">Para fechar: a <b>escada de evolução</b> (onde você está, qual o próximo degrau) e um <b>checklist</b> para revisar qualquer página antes de entregar.</p>
+
+  <h2>A escada em 5 níveis</h2>
+
+  <h3>Nível 1 — Raiz: a página funciona</h3>
+  <div class="caixa exemplo">
+    <p><b>Sabe:</b> <code>html/head/body</code>, títulos, parágrafos, links, imagens, listas. Cria classes e aplica cor e fonte.</p>
+    <p><b>Típico:</b> usa só <code>div</code> e <code>span</code>. Estiliza por tag.</p>
+    <p><b>Próximo degrau:</b> trocar div por tags semânticas (docs 17–19).</p>
+  </div>
+
+  <h3>Nível 2 — Estrutura: a página tem esqueleto</h3>
+  <div class="caixa exemplo">
+    <p><b>Sabe:</b> <code>header / main / section / footer</code>, container, uma classe por função, hierarquia h1→h2→h3.</p>
+    <p><b>Próximo degrau:</b> dominar layout (flex, grid) e herança (docs 04, 10, 11).</p>
+  </div>
+
+  <h3>Nível 3 — Layout: a página se adapta</h3>
+  <div class="caixa exemplo">
+    <p><b>Sabe:</b> flexbox e grid, <code>rem</code>/<code>%</code>/<code>vw</code>, mobile-first com <code>min-width</code>, imagens fluidas.</p>
+    <p><b>Próximo degrau:</b> entender a cascata a fundo e sair do "tentativa e erro" (docs 12–15).</p>
+  </div>
+
+  <h3>Nível 4 — Cascata: o CSS é previsível</h3>
+  <div class="caixa exemplo">
+    <p><b>Sabe:</b> calcula especificidade de cabeça, não usa <code>id</code> nem <code>!important</code> para estilizar, ordena o CSS em camadas, depura com DevTools.</p>
+    <p><b>Próximo degrau:</b> nomenclatura e arquitetura (doc 21).</p>
+  </div>
+
+  <h3>Nível 5 — Arquitetura: o projeto escala</h3>
+  <div class="caixa exemplo">
+    <p><b>Sabe:</b> BEM, variáveis CSS (tokens), componentes reutilizáveis, arquivos organizados, acessibilidade (rótulos, foco, contraste, <code>alt</code>), escolhe biblioteca (Bootstrap/Tailwind) por critério.</p>
+    <p><b>Depois disso:</b> <code>@layer</code>, <code>:where()</code>, <code>clamp()</code>, container queries, CSS com JavaScript e frameworks (React).</p>
+  </div>
+
+  <h2>Checklist de revisão profissional</h2>
+  <h3>HTML</h3>
+  <ul>
+    <li>☐ Começa com <code>&lt;!DOCTYPE html&gt;</code> e <code>&lt;html lang="pt-BR"&gt;</code></li>
+    <li>☐ <code>charset</code>, <code>viewport</code> e <code>title</code> presentes no <code>head</code></li>
+    <li>☐ Exatamente <b>um</b> <code>&lt;main&gt;</code> e <b>um</b> <code>&lt;h1&gt;</code></li>
+    <li>☐ Títulos em ordem (h1 → h2 → h3), sem pular nível</li>
+    <li>☐ Moldura com <code>header / main / footer</code></li>
+    <li>☐ <code>section</code> só com tema e título; <code>article</code> só para peça independente</li>
+    <li>☐ <code>div</code> usada apenas quando nenhuma tag serve</li>
+    <li>☐ Toda <code>img</code> tem <code>alt</code>; todo <code>input</code> tem <code>label</code></li>
+    <li>☐ Link para navegar, <code>button</code> para agir</li>
+    <li>☐ Indentação consistente, tags fechadas</li>
+  </ul>
+
+  <h3>CSS</h3>
+  <ul>
+    <li>☐ Reset e base primeiro; componentes no meio; utilitárias e media queries no fim</li>
+    <li>☐ Fonte e cor definidas <b>uma vez</b> no <code>body</code> (herança)</li>
+    <li>☐ Seletores curtos: quase tudo é uma classe só</li>
+    <li>☐ Sem <code>id</code> no CSS, sem <code>style=""</code> inline, <code>!important</code> só justificado</li>
+    <li>☐ Nomes por função, minúsculas com hífen, língua única</li>
+    <li>☐ Valores repetidos viraram variável (<code>--azul</code>)</li>
+    <li>☐ Mobile-first (<code>min-width</code>)</li>
+    <li>☐ Nenhum <code>outline: none</code> sem substituto de foco</li>
+  </ul>
+
+  <h3>Teste final (2 minutos)</h3>
+  <ol class="passos">
+    <li>Reduza a janela até 320px. Nada sai da tela? Sem barra de rolagem horizontal?</li>
+    <li>Navegue só com a tecla <b>Tab</b>. Dá para ver onde está o foco?</li>
+    <li>Aumente o zoom do navegador para 200%. O layout aguenta?</li>
+    <li>Abra o DevTools no elemento mais complexo. Quantas propriedades riscadas? <b>Quanto menos, melhor.</b></li>
+  </ol>
+
+  <h2>Cola de bolso: perguntas que resolvem 90% das dúvidas</h2>
+  <div class="cards">
+    <div class="card"><h3>"Qual tag uso?"</h3><p>Existe uma tag com o significado? Use. Senão, <code>div</code>. (doc 18)</p></div>
+    <div class="card"><h3>"Meu estilo não aparece"</h3><p>Seletor acha o elemento? Alguém mais específico? Empate com ordem errada? (docs 13–15)</p></div>
+    <div class="card"><h3>"Onde declaro a fonte?"</h3><p>No <code>body</code>. Os filhos herdam. (docs 10–11)</p></div>
+    <div class="card"><h3>"Qual classe escrevo primeiro?"</h3><p>Do geral para o específico: base → estrutura → componente → modificador → utilitária. (doc 20)</p></div>
+    <div class="card"><h3>"Como nomeio?"</h3><p>O que é, não como parece. Prefixo = dono. (docs 02, 21)</p></div>
+    <div class="card"><h3>"Flex ou grid?"</h3><p>Uma dimensão: flex. Duas: grid. (doc 04)</p></div>
+  </div>
+
+  <div class="caixa dica"><p><b>Parabéns!</b> Quem domina esses 23 documentos escreve HTML e CSS que outro profissional consegue ler, manter e expandir. Esse é o critério que o mercado usa.</p></div>
+
+  </section>
+</body></html>

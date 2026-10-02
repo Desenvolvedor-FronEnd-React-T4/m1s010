@@ -1,0 +1,498 @@
+/* ==========================================================================
+   BIKCRAFT — folha de estilos única, compartilhada pelas 3 páginas do site.
+   Este arquivo é CUMULATIVO: cada bloco traz um comentário indicando em que
+   semana da trilha aquele trecho foi construído. É o "gabarito" do projeto
+   condutor das Semanas 07 a 10.
+   ========================================================================== */
+
+/* SEMANA 10 · DIA 1 (29/09) — Fontes do Google (Poppins + Roboto).
+   Antes desta semana o projeto usava apenas fontes do sistema. */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500&display=swap');
+
+/* SEMANA 07 — variáveis de cor e tipografia da marca Bikcraft.
+   Fundo quase preto + destaque dourado, extraídos por observação do layout
+   de referência (em um projeto real, aqui entraria a inspeção via Figma). */
+:root {
+  --cor-fundo-escura: #0a0a0a;
+  --cor-fundo-card-escura: #161616;
+  --cor-texto-claro: #f5f5f5;
+  --cor-texto-secundario-claro: #a8a8a8;
+  --cor-destaque: #ffbf00;
+  --cor-destaque-escuro: #cc9900;
+
+  --cor-fundo-clara: #ffffff;
+  --cor-texto-escuro: #111111;
+  --cor-texto-secundario-escuro: #6b6b6b;
+  --cor-borda-clara: #e5e5e5;
+  --cor-borda-escura: #262626;
+
+  --fonte-titulo: 'Poppins', Arial, sans-serif;
+  --fonte-corpo: 'Roboto', Arial, sans-serif;
+}
+
+/* SEMANA 07 — reset básico e tipografia padrão do corpo. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-corpo);
+  background: var(--cor-fundo-escura);
+  color: var(--cor-texto-claro);
+}
+
+img {
+  /* SEMANA 10 · DIA 1 — imagem fluida: nunca estoura o container do pai. */
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   CABEÇALHO (compartilhado pelas 3 páginas)
+   ========================================================================== */
+
+/* SEMANA 07 — cabeçalho original, com padding lateral FIXO (100px).
+   Ficava perfeito no monitor, mas espremia logo e menu no celular. */
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--cor-fundo-escura);
+  padding: 16px 16px; /* SEMANA 10 · DIA 1 — base mobile-first (era "16px 100px" fixo) */
+}
+
+.cabecalho .logo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--cor-texto-claro);
+}
+
+.cabecalho nav {
+  display: flex;
+  gap: 20px;
+}
+
+.cabecalho nav a {
+  font-size: 0.95rem;
+  color: var(--cor-texto-claro);
+}
+
+.cabecalho nav a:hover {
+  color: var(--cor-destaque);
+}
+
+/* SEMANA 10 · DIA 1 — media query mobile-first: só a partir de telas
+   grandes (64em ≈ 1024px) o cabeçalho ganha o respiro lateral de 100px. */
+@media (min-width: 64em) {
+  .cabecalho {
+    padding: 16px 100px;
+  }
+}
+
+/* ==========================================================================
+   PÁGINA INICIAL (index.html) — tema escuro
+   ========================================================================== */
+
+/* SEMANA 07 — hero da home: empilhado no celular por padrão (mobile-first),
+   texto de um lado e imagem da bike do outro a partir do desktop. */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 40px 16px;
+}
+
+@media (min-width: 64em) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: 60px 100px;
+    gap: 48px;
+  }
+}
+
+.hero-texto {
+  flex: 1;
+}
+
+/* SEMANA 10 · DIA 1 — clamp(): o título nunca fica menor que 2.25rem nem
+   maior que 3.75rem, e acompanha a largura da tela no meio do caminho. */
+.hero-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 6vw, 3.75rem);
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+
+.hero-titulo .ponto-destaque {
+  color: var(--cor-destaque);
+}
+
+.hero-paragrafo {
+  color: var(--cor-texto-secundario-claro);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 42ch;
+  margin: 0 0 24px;
+}
+
+/* SEMANA 07 — botão de destaque em dourado, reaproveitado em toda a página. */
+.botao-destaque {
+  display: inline-block;
+  background: var(--cor-destaque);
+  color: #1a1300;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: 4px;
+  padding: 14px 28px;
+  cursor: pointer;
+}
+
+.botao-destaque:hover {
+  background: var(--cor-destaque-escuro);
+}
+
+.hero-imagem {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-imagem img {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ==========================================================================
+   PÁGINA "ESCOLHA A SUA" (bicicletas.html) — tema claro
+   ========================================================================== */
+
+/* SEMANA 07/08 — seção de catálogo em fundo claro, como no layout de
+   referência (o cabeçalho continua escuro e compartilhado). */
+.pagina-bicicletas main {
+  background: var(--cor-fundo-clara);
+  color: var(--cor-texto-escuro);
+  padding: 32px 16px 64px;
+}
+
+.titulo-secao {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: lowercase;
+  margin: 0 0 24px;
+}
+
+/* SEMANA 07 — grade de bicicletas: empilhada no celular (mobile-first). */
+.grade-bicicletas {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* SEMANA 10 · DIA 1 — a partir do desktop, os cards ficam lado a lado e
+   quebram linha sozinhos com flex-wrap, sem precisar contar quantos cabem. */
+@media (min-width: 64em) {
+  .grade-bicicletas {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .card-bicicleta {
+    flex: 1 1 220px;
+  }
+}
+
+.card-bicicleta {
+  border: 1px solid var(--cor-borda-clara);
+  border-radius: 6px;
+  overflow: hidden;
+  /* SEMANA 10 · DIA 3 — transição suave para o efeito de hover abaixo. */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-bicicleta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-bicicleta img {
+  background: #f2f2f2;
+  width: 100%;
+}
+
+.card-bicicleta .info-card {
+  padding: 12px 14px 18px;
+}
+
+.card-bicicleta .nome-bike {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin: 0 0 4px;
+}
+
+.card-bicicleta .preco-bike {
+  color: var(--cor-texto-secundario-escuro);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ==========================================================================
+   PÁGINA DE CONTATO (contato.html) — tema escuro, projeto da Semana 10
+   ========================================================================== */
+
+/* SEMANA 09 — faixa do hero de contato ("RESPOSTAS EM ATÉ 24H" + h1). */
+.hero-contato {
+  padding: 40px 16px 24px;
+  text-align: left;
+}
+
+.hero-contato .selo {
+  display: inline-block;
+  color: var(--cor-destaque);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+/* SEMANA 10 · DIA 1 — mesmo truque de clamp() do título da home, aplicado
+   ao "nosso contato." (era font-size: 4rem fixo, e estourava no celular). */
+.hero-contato h1 {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin: 0;
+}
+
+@media (min-width: 64em) {
+  .hero-contato {
+    padding: 56px 100px 32px;
+  }
+}
+
+/* SEMANA 10 · DIA 2 — as duas colunas do contato: dados (Loja Online) e
+   formulário, na proporção 5:7. Empilhadas no celular (mobile-first). */
+.secao-contato {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 16px 16px 48px;
+}
+
+@media (min-width: 64em) {
+  .secao-contato {
+    flex-direction: row;
+    padding: 16px 100px 64px;
+    gap: 56px;
+  }
+  .coluna-dados {
+    flex: 5;
+  }
+  .coluna-formulario {
+    flex: 7;
+  }
+}
+
+.coluna-dados h2,
+.coluna-formulario h2 {
+  font-family: var(--fonte-titulo);
+  font-size: 1.3rem;
+  margin: 0 0 16px;
+}
+
+/* SEMANA 10 · DIA 3 — cada linha de dado de contato usa Flexbox + gap para
+   alinhar o ícone do Font Awesome com o texto, sem margin manual. */
+.linha-dado {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: var(--cor-texto-secundario-claro);
+}
+
+.linha-dado i {
+  color: var(--cor-destaque);
+  width: 18px;
+  text-align: center;
+}
+
+/* SEMANA 09 — cada campo do formulário em sua própria div, sem required
+   (a validação de campo vazio é feita pelo nosso JavaScript). */
+.formulario-contato {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* SEMANA 10 · DIA 2 — Nome e Telefone lado a lado com flex-wrap: quebram
+   para duas linhas sozinhos se a tela for estreita demais. */
+.linha-formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.linha-formulario .campo {
+  flex: 1 1 200px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo label {
+  font-size: 0.85rem;
+  color: var(--cor-texto-secundario-claro);
+}
+
+.campo input,
+.campo textarea {
+  background: var(--cor-fundo-card-escura);
+  border: 1px solid var(--cor-borda-escura);
+  border-radius: 4px;
+  padding: 10px 12px;
+  color: var(--cor-texto-claro);
+  font-family: var(--fonte-corpo);
+  font-size: 0.95rem;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 1px;
+}
+
+/* SEMANA 09 · bônus — aviso de campo vazio em vermelho, antes da
+   confirmação (classe ligada/desligada pelo JavaScript). */
+.campo.campo-invalido input,
+.campo.campo-invalido textarea {
+  border-color: #e35d5d;
+}
+
+.mensagem-erro {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.mensagem-confirmacao {
+  background: var(--cor-fundo-card-escura);
+  border-left: 4px solid var(--cor-destaque);
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+
+/* Classe compartilhada: o JavaScript liga/desliga "escondida" tanto nos
+   avisos de erro (.mensagem-erro) quanto na confirmação. */
+.escondida {
+  display: none;
+}
+
+/* SEMANA 10 · DIA 3 — botão customizado do Bootstrap: nosso CSS entra
+   DEPOIS do bootstrap.min.css e com especificidade suficiente (uma classe
+   nossa por cima de ".btn"), então vence sem precisar de !important. */
+.btn-bikcraft {
+  background-color: var(--cor-destaque);
+  border: none;
+  color: #1a1300;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+}
+
+.btn-bikcraft:hover {
+  background-color: var(--cor-destaque-escuro);
+  color: #1a1300;
+}
+
+/* SEMANA 10 · DIA 2 — seção das lojas (RJ e SP): flex-wrap + flex-basis,
+   cada card com no mínimo 320px antes de quebrar linha. */
+.secao-lojas {
+  padding: 0 16px 48px;
+}
+
+@media (min-width: 64em) {
+  .secao-lojas {
+    padding: 0 100px 64px;
+  }
+}
+
+.grade-lojas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.card-loja {
+  flex: 1 1 320px;
+  background: var(--cor-fundo-card-escura);
+  border: 1px solid var(--cor-borda-escura);
+  border-radius: 6px;
+  padding: 20px;
+  /* SEMANA 10 · DIA 3 — transição + :hover (polish final da página). */
+  transition: transform 0.2s ease;
+}
+
+.card-loja:hover {
+  transform: scale(1.03);
+}
+
+.card-loja h3 {
+  font-family: var(--fonte-titulo);
+  margin: 0 0 10px;
+}
+
+/* SEMANA 10 · DIA 3 — rodapé com redes sociais em ícones do Font Awesome,
+   alinhados com Flexbox + gap; :hover muda a cor para o dourado da marca. */
+.rodape {
+  padding: 24px 16px;
+  border-top: 1px solid var(--cor-borda-escura);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  color: var(--cor-texto-secundario-claro);
+  font-size: 0.85rem;
+}
+
+@media (min-width: 64em) {
+  .rodape {
+    padding: 24px 100px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.redes-sociais {
+  display: flex;
+  gap: 18px;
+}
+
+.redes-sociais a {
+  font-size: 1.2rem;
+  color: var(--cor-texto-claro);
+  transition: color 0.2s ease;
+}
+
+.redes-sociais a:hover {
+  color: var(--cor-destaque);
+}

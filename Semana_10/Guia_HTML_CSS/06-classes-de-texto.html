@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06 — Classes de texto e tipografia</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha A · Classes</span><span>Doc 06 de 23</span></div>
+<main class="pagina">
+  <h1>Classes de texto e tipografia</h1>
+  <p class="resumo">Tipografia é o que mais pesa na aparência de um site. As classes de texto controlam <b>tamanho, peso, alinhamento e cor</b>. Há uma regra que vale para todas: a <b>tag diz o nível</b> do texto; a <b>classe diz o visual</b>.</p>
+
+  <h2>Tag para significado, classe para aparência</h2>
+  <div class="caixa erro">
+    <p><b>Errado:</b> <code>&lt;p class="titulo-grande"&gt;</code> só para parecer título. Leitor de tela e Google não reconhecem como título.</p>
+  </div>
+  <div class="caixa dica">
+    <p><b>Certo:</b> <code>&lt;h2 class="titulo-secao"&gt;</code>. A tag dá o nível correto; a classe ajusta o tamanho.</p>
+  </div>
+  <p>Também vale o contrário: se um <code>&lt;h3&gt;</code> precisa parecer pequeno, mantenha o <code>h3</code> e reduza com classe. Nunca troque o nível só pelo tamanho.</p>
+
+  <h2>Classes de texto mais usadas</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Classe</th><th>Função</th><th>CSS típico</th></tr></thead>
+    <tbody>
+      <tr><td><code>titulo</code>, <code>titulo-secao</code></td><td>Título de página ou seção</td><td><code>font-size: 2rem; line-height: 1.2</code></td></tr>
+      <tr><td><code>subtitulo</code></td><td>Linha de apoio ao título</td><td><code>font-size: 1.1rem; color: #546e7a</code></td></tr>
+      <tr><td><code>lead</code> / <code>intro</code></td><td>Parágrafo de abertura, maior que o normal</td><td><code>font-size: 1.15rem</code></td></tr>
+      <tr><td><code>texto-pequeno</code> / <code>small</code></td><td>Legendas, avisos legais</td><td><code>font-size: .85rem</code></td></tr>
+      <tr><td><code>texto-destaque</code></td><td>Palavra ou frase que chama atenção</td><td><code>font-weight: bold; color</code></td></tr>
+      <tr><td><code>text-center</code></td><td>Centraliza o texto</td><td><code>text-align: center</code></td></tr>
+      <tr><td><code>text-uppercase</code></td><td>Tudo em maiúsculas</td><td><code>text-transform: uppercase</code></td></tr>
+      <tr><td><code>text-truncate</code></td><td>Corta com "…" se não couber</td><td><code>overflow: hidden; text-overflow: ellipsis; white-space: nowrap</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Propriedades de texto que precisam estar no seu vocabulário</h2>
+  <ul>
+    <li><code>font-family</code>: a fonte (sempre com alternativas: <code>"Inter", Arial, sans-serif</code>).</li>
+    <li><code>font-size</code>: use <code>rem</code> para respeitar a configuração do usuário.</li>
+    <li><code>font-weight</code>: <code>400</code> normal, <code>700</code> negrito.</li>
+    <li><code>line-height</code>: altura da linha; <code>1.5</code> a <code>1.7</code> é ótimo para parágrafos.</li>
+    <li><code>text-align</code>, <code>letter-spacing</code>, <code>text-decoration</code>.</li>
+  </ul>
+
+  <div class="caixa exemplo">
+    <p><b>Onde declarar a fonte?</b> Uma vez só, no <code>body</code>. Todo o resto <b>herda</b> (documento 10). Quem repete <code>font-family</code> em dez classes está lutando contra o CSS.</p>
+  </div>
+
+  <h2>Hierarquia de título: a "escada"</h2>
+  <pre><code>&lt;h1&gt;  um por página (o assunto da página)
+  &lt;h2&gt;  cada seção
+    &lt;h3&gt;  subtítulos dentro da seção
+      &lt;h4&gt;  detalhes (raro)</code></pre>
+  <p>Não pule degraus (de <code>h1</code> direto para <code>h4</code>) e use <b>um único h1</b> por página.</p>
+
+  <div class="nav-rodape"><a href="05-classes-de-componentes.html">← 05</a><a href="07-classes-utilitarias.html">Próximo: 07 Classes utilitárias →</a></div>
+</main>
+</body>
+</html>

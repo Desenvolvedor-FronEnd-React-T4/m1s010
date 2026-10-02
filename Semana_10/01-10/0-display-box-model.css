@@ -22,8 +22,8 @@ body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5
   padding: 12px 20px;
   width: 120px;
   text-align: center;
-  margin-right: 8px;
-  /* COMPLETE AQUI */
+  margin-right: 8px;  
+  display: inline-block;
 }
 
 /*
@@ -43,5 +43,9 @@ body { margin:0; font-family: Arial, sans-serif; background:#0a0a0a; color:#f5f5
   margin-bottom: 12px;
 }
 
-.caixa-a { /* content-box: o padrão do navegador */ }
-.caixa-b { /* COMPLETE AQUI */ }
+.caixa-a {  box-sizing: content-box; }
+.caixa-b {  box-sizing: border-box; }
+/* Reset geral para incluir box-sizing: border-box em todos os elementos */
+*, *::before, *::after {
+  box-sizing: border-box;
+}

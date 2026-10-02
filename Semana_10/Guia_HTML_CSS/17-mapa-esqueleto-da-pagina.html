@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17 — O mapa: esqueleto de uma página profissional</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha D · O mapa</span><span>Doc 17 de 23</span></div>
+<main class="pagina">
+  <h1>O mapa: esqueleto de uma página profissional</h1>
+  <p class="resumo">Este é o documento central da trilha. Ele responde: <b>o que vem primeiro, o que fica dentro de quê, e por quê</b>. Leia o mapa de fora para dentro: <b>documento → body → blocos da página → seções → componentes</b>.</p>
+
+  <h2>Mapa geral (de fora para dentro)</h2>
+  <div class="mapa">
+    <div class="no n1"><span class="rotulo">① &lt;!DOCTYPE html&gt; + &lt;html lang="pt-BR"&gt;<span class="nota">O documento. Sempre a primeira linha. O lang ajuda leitor de tela e tradutor.</span></span>
+
+      <div class="no n2"><span class="rotulo">② &lt;head&gt;<span class="nota">Invisível. Informações sobre a página: charset, viewport, title, link do CSS.</span></span></div>
+
+      <div class="no n2"><span class="rotulo">③ &lt;body&gt;<span class="nota">Tudo o que o usuário vê. Aqui entram a fonte base (herança!) e o fundo.</span></span>
+
+        <div class="no n3"><span class="rotulo">④ &lt;header&gt;<span class="nota">Topo do SITE: logo + &lt;nav&gt;. Aparece em todas as páginas.</span></span>
+          <div class="lado">
+            <div class="no verde"><span class="rotulo">&lt;a class="logo"&gt;</span></div>
+            <div class="no verde"><span class="rotulo">&lt;nav class="menu"&gt;<span class="nota">&lt;ul&gt; &lt;li&gt; &lt;a&gt;</span></span></div>
+          </div>
+        </div>
+
+        <div class="no n3"><span class="rotulo">⑤ &lt;main&gt;<span class="nota">O conteúdo ÚNICO desta página. Só UM por página.</span></span>
+
+          <div class="no n3"><span class="rotulo">⑥ &lt;section class="hero"&gt;<span class="nota">Faixa temática 1. Tem um título (h1 aqui).</span></span>
+            <div class="no verde"><span class="rotulo">&lt;div class="container"&gt;<span class="nota">limita a largura (doc 03)</span></span>
+              <div class="no laranja"><span class="rotulo">h1 · p · a.botao <span class="nota">⑦ componentes e texto</span></span></div>
+            </div>
+          </div>
+
+          <div class="no n3"><span class="rotulo">⑥ &lt;section class="secao-produtos"&gt;<span class="nota">Faixa temática 2. Título h2.</span></span>
+            <div class="no verde"><span class="rotulo">&lt;div class="container"&gt;</span>
+              <div class="no verde"><span class="rotulo">&lt;div class="grid"&gt;<span class="nota">layout (doc 04)</span></span>
+                <div class="lado">
+                  <div class="no laranja"><span class="rotulo">&lt;article class="card"&gt;</span></div>
+                  <div class="no laranja"><span class="rotulo">&lt;article class="card"&gt;</span></div>
+                  <div class="no laranja"><span class="rotulo">&lt;article class="card"&gt;</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="no n3"><span class="rotulo">&lt;aside&gt; <span class="nota">(opcional) conteúdo de apoio ao lado</span></span></div>
+        </div>
+
+        <div class="no n3"><span class="rotulo">⑧ &lt;footer class="rodape"&gt;<span class="nota">Base do SITE: contatos, redes, direitos.</span></span></div>
+        <div class="no n3"><span class="rotulo">&lt;script src="..."&gt;<span class="nota">Por último, para não travar a exibição.</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>O mesmo mapa em código</h2>
+  <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Bikcraft — Bikes sob medida&lt;/title&gt;
+  &lt;link rel="stylesheet" href="estilo.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header class="cabecalho"&gt;
+    &lt;a class="logo" href="index.html"&gt;bikcraft&lt;/a&gt;
+    &lt;nav class="menu" aria-label="Principal"&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="bikes.html"&gt;Bikes&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="contato.html"&gt;Contato&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;section class="hero"&gt;
+      &lt;div class="container"&gt;
+        &lt;h1 class="hero-titulo"&gt;Sua bike, do seu jeito.&lt;/h1&gt;
+        &lt;a class="botao botao--primario" href="#produtos"&gt;Ver bikes&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class="produtos" id="produtos"&gt;
+      &lt;div class="container"&gt;
+        &lt;h2&gt;Nossas bikes&lt;/h2&gt;
+        &lt;div class="grid"&gt;
+          &lt;article class="card"&gt;...&lt;/article&gt;
+          &lt;article class="card"&gt;...&lt;/article&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer class="rodape"&gt;
+    &lt;div class="container"&gt;© 2026 Bikcraft&lt;/div&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+  <h2>As 5 camadas, resumidas</h2>
+  <table>
+    <thead><tr><th>Camada</th><th>Elementos</th><th>Pergunta que responde</th></tr></thead>
+    <tbody>
+      <tr><td>1. Documento</td><td><code>html</code>, <code>head</code>, <code>body</code></td><td>É uma página? Como o navegador a lê?</td></tr>
+      <tr><td>2. Moldura do site</td><td><code>header</code>, <code>main</code>, <code>footer</code></td><td>Quais as 3 grandes áreas?</td></tr>
+      <tr><td>3. Seções</td><td><code>section</code>, <code>article</code>, <code>aside</code></td><td>Quais os assuntos dentro do conteúdo?</td></tr>
+      <tr><td>4. Estrutura e layout</td><td><code>div.container</code>, <code>div.grid</code></td><td>Como organizo largura e colunas?</td></tr>
+      <tr><td>5. Conteúdo e componentes</td><td><code>h1…h6</code>, <code>p</code>, <code>a</code>, <code>img</code>, <code>.botao</code>, <code>.card</code></td><td>O que o usuário lê e clica?</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caixa dica">
+    <p><b>Regra do mapa:</b> as camadas 1 a 3 usam <b>tags semânticas</b> (dizem o que é). A camada 4 é o reino da <b>div</b> (só organiza). A camada 5 mistura os dois. Quem entende essa divisão nunca mais fica na dúvida entre div e section.</p>
+  </div>
+
+  <div class="nav-rodape"><a href="16-exercicios-heranca-cascata-especificidade.html">← 16</a><a href="18-arvore-de-decisao-div-ou-semantico.html">Próximo: 18 Árvore de decisão →</a></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- SEMANA 10 · DIA 1 — meta viewport (sem ela, header e hero desta
+       página quebravam no celular: padding lateral fixo + fonte de 4rem). -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bikcraft — nosso contato</title>
+
+  <!-- SEMANA 10 · DIA 3 — Bootstrap (CDN, sem instalar nada). Usado aqui só
+       no botão de envio (.btn) e no grid das lojas, como prática do dia;
+       o restante da página é CSS nosso, em style.css. -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- O nosso CSS entra DEPOIS do Bootstrap: por especificidade + ordem,
+       .btn-bikcraft vence .btn sem precisar de !important. -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="cabecalho">
+    <span class="logo">bikcraft</span>
+    <nav>
+      <a href="bicicletas.html">Bicicletas</a>
+      <a href="#seguros">Seguros</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+  </header>
+
+  <!-- <main>: conteúdo único desta página (só um por página). Header e footer ficam fora. -->
+  <main>
+
+  <!-- SEMANA 09 — faixa do hero de contato.
+       SEMANA 10 · DIA 1 — font-size do h1 trocado de "4rem" fixo para
+       clamp(2.5rem, 6vw, 4rem): não estoura mais no celular. -->
+  <section class="hero-contato">
+    <span class="selo">RESPOSTAS EM ATÉ 24H</span>
+    <h1>nosso contato.</h1>
+  </section>
+
+  <!-- SEMANA 10 · DIA 2 — as duas colunas do contato: dados (flex: 5) e
+       formulário (flex: 7). Empilhadas no celular, lado a lado a partir de
+       telas grandes (ver .secao-contato em style.css). -->
+  <section class="secao-contato">
+
+    <div class="coluna-dados">
+      <h2>Loja Online</h2>
+      <p class="linha-dado"><i class="fa-solid fa-location-dot"></i> Rua das Engrenagens, 123 — Florianópolis/SC</p>
+      <p class="linha-dado"><i class="fa-solid fa-envelope"></i> contato@bikcraft.com.br</p>
+      <p class="linha-dado"><i class="fa-solid fa-phone"></i> (48) 99999-0000</p>
+    </div>
+
+    <div class="coluna-formulario">
+      <h2>Fale com a gente</h2>
+
+      <!--
+        SEMANA 09 — formulário de contato: nome, telefone, e-mail e
+        mensagem, cada campo com <label> ligado por for/id, sem "required"
+        (o aviso de campo vazio é responsabilidade do nosso JavaScript).
+        SEMANA 10 · DIA 2 — Nome e Telefone entram na mesma linha com
+        flex-wrap (.linha-formulario); e-mail e mensagem ficam em linha própria.
+      -->
+      <form id="form-contato" class="formulario-contato" novalidate>
+
+        <div class="linha-formulario">
+          <div class="campo" id="grupo-nome">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome">
+            <p class="mensagem-erro escondida" id="erro-nome">Preencha o nome.</p>
+          </div>
+
+          <div class="campo" id="grupo-telefone">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone">
+            <p class="mensagem-erro escondida" id="erro-telefone">Preencha o telefone.</p>
+          </div>
+        </div>
+
+        <div class="campo" id="grupo-email">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email">
+          <p class="mensagem-erro escondida" id="erro-email">Preencha o e-mail.</p>
+        </div>
+
+        <div class="campo" id="grupo-mensagem">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="4"></textarea>
+          <p class="mensagem-erro escondida" id="erro-mensagem">Escreva sua mensagem.</p>
+        </div>
+
+        <!-- SEMANA 10 · DIA 3 — botão do Bootstrap (.btn) customizado com a
+             nossa classe .btn-bikcraft, sem !important (ver style.css). -->
+        <button type="submit" class="btn btn-bikcraft">Enviar mensagem</button>
+
+        <p class="mensagem-confirmacao escondida" id="mensagem-confirmacao"></p>
+      </form>
+    </div>
+
+  </section>
+
+  <!-- SEMANA 10 · DIA 2 — seção das lojas físicas: flex-wrap + flex-basis
+       (cada card com no mínimo 320px). Ícone fa-clock nos dois cards. -->
+  <section class="secao-lojas">
+    <h2>Nossas lojas</h2>
+    <div class="grade-lojas">
+      <article class="card-loja">
+        <h3>Rio de Janeiro</h3>
+        <p class="linha-dado"><i class="fa-solid fa-clock"></i> Seg a Dom, 08h às 18h.</p>
+        <p class="linha-dado"><i class="fa-solid fa-location-dot"></i> Av. Atlântica, 500 — Copacabana</p>
+      </article>
+      <article class="card-loja">
+        <h3>São Paulo</h3>
+        <p class="linha-dado"><i class="fa-solid fa-clock"></i> Seg a Sáb, 09h às 19h.</p>
+        <p class="linha-dado"><i class="fa-solid fa-location-dot"></i> Av. Paulista, 1000 — Bela Vista</p>
+      </article>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- SEMANA 10 · DIA 3 — rodapé com redes sociais em Font Awesome,
+       alinhadas com Flexbox + gap; a cor muda no :hover (ver style.css). -->
+  <footer class="rodape">
+    <p>&copy; 2026 Bikcraft. Todos os direitos reservados.</p>
+    <div class="redes-sociais">
+      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle (JS) só é necessário se usarmos componentes com
+       comportamento (modal, dropdown...). Aqui usamos só o CSS do botão,
+       mas deixamos o link comentado como referência de como incluir:
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  -->
+  <script src="script.js"></script>
+</body>
+</html>

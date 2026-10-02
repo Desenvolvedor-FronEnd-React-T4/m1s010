@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>23 — Do básico ao avançado e checklist profissional</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha D · O mapa</span><span>Doc 23 de 23</span></div>
+<main class="pagina">
+  <h1>Do básico ao avançado e checklist profissional</h1>
+  <p class="resumo">Para fechar: a <b>escada de evolução</b> (onde você está, qual o próximo degrau) e um <b>checklist</b> para revisar qualquer página antes de entregar.</p>
+
+  <h2>A escada em 5 níveis</h2>
+
+  <h3>Nível 1 — Raiz: a página funciona</h3>
+  <div class="caixa exemplo">
+    <p><b>Sabe:</b> <code>html/head/body</code>, títulos, parágrafos, links, imagens, listas. Cria classes e aplica cor e fonte.</p>
+    <p><b>Típico:</b> usa só <code>div</code> e <code>span</code>. Estiliza por tag.</p>
+    <p><b>Próximo degrau:</b> trocar div por tags semânticas (docs 17–19).</p>
+  </div>
+
+  <h3>Nível 2 — Estrutura: a página tem esqueleto</h3>
+  <div class="caixa exemplo">
+    <p><b>Sabe:</b> <code>header / main / section / footer</code>, container, uma classe por função, hierarquia h1→h2→h3.</p>
+    <p><b>Próximo degrau:</b> dominar layout (flex, grid) e herança (docs 04, 10, 11).</p>
+  </div>
+
+  <h3>Nível 3 — Layout: a página se adapta</h3>
+  <div class="caixa exemplo">
+    <p><b>Sabe:</b> flexbox e grid, <code>rem</code>/<code>%</code>/<code>vw</code>, mobile-first com <code>min-width</code>, imagens fluidas.</p>
+    <p><b>Próximo degrau:</b> entender a cascata a fundo e sair do "tentativa e erro" (docs 12–15).</p>
+  </div>
+
+  <h3>Nível 4 — Cascata: o CSS é previsível</h3>
+  <div class="caixa exemplo">
+    <p><b>Sabe:</b> calcula especificidade de cabeça, não usa <code>id</code> nem <code>!important</code> para estilizar, ordena o CSS em camadas, depura com DevTools.</p>
+    <p><b>Próximo degrau:</b> nomenclatura e arquitetura (doc 21).</p>
+  </div>
+
+  <h3>Nível 5 — Arquitetura: o projeto escala</h3>
+  <div class="caixa exemplo">
+    <p><b>Sabe:</b> BEM, variáveis CSS (tokens), componentes reutilizáveis, arquivos organizados, acessibilidade (rótulos, foco, contraste, <code>alt</code>), escolhe biblioteca (Bootstrap/Tailwind) por critério.</p>
+    <p><b>Depois disso:</b> <code>@layer</code>, <code>:where()</code>, <code>clamp()</code>, container queries, CSS com JavaScript e frameworks (React).</p>
+  </div>
+
+  <h2>Checklist de revisão profissional</h2>
+  <h3>HTML</h3>
+  <ul>
+    <li>☐ Começa com <code>&lt;!DOCTYPE html&gt;</code> e <code>&lt;html lang="pt-BR"&gt;</code></li>
+    <li>☐ <code>charset</code>, <code>viewport</code> e <code>title</code> presentes no <code>head</code></li>
+    <li>☐ Exatamente <b>um</b> <code>&lt;main&gt;</code> e <b>um</b> <code>&lt;h1&gt;</code></li>
+    <li>☐ Títulos em ordem (h1 → h2 → h3), sem pular nível</li>
+    <li>☐ Moldura com <code>header / main / footer</code></li>
+    <li>☐ <code>section</code> só com tema e título; <code>article</code> só para peça independente</li>
+    <li>☐ <code>div</code> usada apenas quando nenhuma tag serve</li>
+    <li>☐ Toda <code>img</code> tem <code>alt</code>; todo <code>input</code> tem <code>label</code></li>
+    <li>☐ Link para navegar, <code>button</code> para agir</li>
+    <li>☐ Indentação consistente, tags fechadas</li>
+  </ul>
+
+  <h3>CSS</h3>
+  <ul>
+    <li>☐ Reset e base primeiro; componentes no meio; utilitárias e media queries no fim</li>
+    <li>☐ Fonte e cor definidas <b>uma vez</b> no <code>body</code> (herança)</li>
+    <li>☐ Seletores curtos: quase tudo é uma classe só</li>
+    <li>☐ Sem <code>id</code> no CSS, sem <code>style=""</code> inline, <code>!important</code> só justificado</li>
+    <li>☐ Nomes por função, minúsculas com hífen, língua única</li>
+    <li>☐ Valores repetidos viraram variável (<code>--azul</code>)</li>
+    <li>☐ Mobile-first (<code>min-width</code>)</li>
+    <li>☐ Nenhum <code>outline: none</code> sem substituto de foco</li>
+  </ul>
+
+  <h3>Teste final (2 minutos)</h3>
+  <ol class="passos">
+    <li>Reduza a janela até 320px. Nada sai da tela? Sem barra de rolagem horizontal?</li>
+    <li>Navegue só com a tecla <b>Tab</b>. Dá para ver onde está o foco?</li>
+    <li>Aumente o zoom do navegador para 200%. O layout aguenta?</li>
+    <li>Abra o DevTools no elemento mais complexo. Quantas propriedades riscadas? <b>Quanto menos, melhor.</b></li>
+  </ol>
+
+  <h2>Cola de bolso: perguntas que resolvem 90% das dúvidas</h2>
+  <div class="cards">
+    <div class="card"><h3>"Qual tag uso?"</h3><p>Existe uma tag com o significado? Use. Senão, <code>div</code>. (doc 18)</p></div>
+    <div class="card"><h3>"Meu estilo não aparece"</h3><p>Seletor acha o elemento? Alguém mais específico? Empate com ordem errada? (docs 13–15)</p></div>
+    <div class="card"><h3>"Onde declaro a fonte?"</h3><p>No <code>body</code>. Os filhos herdam. (docs 10–11)</p></div>
+    <div class="card"><h3>"Qual classe escrevo primeiro?"</h3><p>Do geral para o específico: base → estrutura → componente → modificador → utilitária. (doc 20)</p></div>
+    <div class="card"><h3>"Como nomeio?"</h3><p>O que é, não como parece. Prefixo = dono. (docs 02, 21)</p></div>
+    <div class="card"><h3>"Flex ou grid?"</h3><p>Uma dimensão: flex. Duas: grid. (doc 04)</p></div>
+  </div>
+
+  <div class="caixa dica"><p><b>Parabéns!</b> Quem domina esses 23 documentos escreve HTML e CSS que outro profissional consegue ler, manter e expandir. Esse é o critério que o mercado usa.</p></div>
+
+  <div class="nav-rodape"><a href="22-pagina-completa-anotada.html">← 22</a><a href="01-comece-aqui.html">Voltar ao índice ↑</a></div>
+</main>
+</body>
+</html>

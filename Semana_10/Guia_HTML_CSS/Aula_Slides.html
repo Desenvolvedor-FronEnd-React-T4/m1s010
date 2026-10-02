@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula — HTML & CSS profissional (slides)</title>
+<style>
+* { box-sizing: border-box; }
+:root { --azul:#1b4f72; --escuro:#123049; --claro:#eef4f8; --verde:#1e8449; --vclaro:#e9f7ef; --laranja:#b9770e; --lclaro:#fef5e7; --verm:#c0392b; --cinza:#cfd8dc; --texto:#263238; }
+html, body { margin:0; height:100%; background:#0b1a24; font-family:Arial,sans-serif; color:var(--texto); overflow:hidden; }
+#palco { position:absolute; left:50%; top:50%; width:1280px; height:720px; transform-origin:center; }
+.slide { position:absolute; inset:0; background:#fff; padding:54px 72px 60px; display:none; flex-direction:column; overflow:hidden; }
+.slide.ativo { display:flex; }
+.slide::before { content:""; position:absolute; left:0; top:0; right:0; height:10px; background:var(--azul); }
+.rodape { position:absolute; left:72px; right:72px; bottom:18px; display:flex; justify-content:space-between; font-size:14px; color:#78909c; }
+.etq { display:inline-block; align-self:flex-start; background:var(--claro); color:var(--azul); font-weight:bold; font-size:16px; padding:4px 14px; border-radius:99px; margin-bottom:12px; letter-spacing:.04em; }
+h1 { font-size:54px; color:var(--azul); margin:0 0 14px; line-height:1.15; }
+h2 { font-size:38px; color:var(--escuro); margin:0 0 20px; line-height:1.2; }
+h3 { font-size:24px; color:var(--azul); margin:0 0 8px; }
+p, li { font-size:24px; line-height:1.45; margin:0 0 10px; }
+ul { margin:0; padding-left:28px; }
+code { background:#eceff1; padding:1px 8px; border-radius:5px; font-family:Consolas,monospace; font-size:.9em; }
+pre { background:#1e2a33; color:#e8eef2; padding:16px 22px; border-radius:8px; font-size:21px; line-height:1.5; margin:0 0 14px; font-family:Consolas,monospace; }
+pre .c { color:#8fa6b5; }
+.capa { background:linear-gradient(135deg,#123049,#1b4f72); color:#fff; justify-content:center; }
+.capa::before { background:#5dade2; }
+.capa h1 { color:#fff; font-size:64px; } .capa p { color:#cfe3f1; font-size:28px; }
+.secao { background:var(--escuro); color:#fff; justify-content:center; }
+.secao::before { background:#5dade2; }
+.secao h2 { color:#fff; font-size:56px; } .secao p { color:#cfe3f1; font-size:28px; }
+.secao .etq { background:#1b4f72; color:#fff; }
+.cols { display:grid; grid-template-columns:1fr 1fr; gap:24px; flex:1; align-content:start; }
+.cols3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-content:start; }
+.card { border:2px solid var(--cinza); border-radius:12px; padding:16px 20px; background:#fff; }
+.card p, .card li { font-size:21px; }
+.card.v { border-color:var(--verde); background:var(--vclaro); } .card.l { border-color:var(--laranja); background:var(--lclaro); } .card.a { border-color:var(--azul); background:var(--claro); } .card.r { border-color:var(--verm); background:#fdedec; }
+.dest { background:var(--claro); border-left:6px solid var(--azul); padding:12px 20px; border-radius:6px; font-size:24px; margin-top:auto; }
+.dest p { margin:0; }
+table { width:100%; border-collapse:collapse; font-size:21px; }
+th { background:var(--azul); color:#fff; text-align:left; padding:9px 12px; }
+td { border:1px solid var(--cinza); padding:8px 12px; }
+tbody tr:nth-child(even) { background:#fafcfd; }
+.mapa .no { border:3px solid var(--azul); border-radius:10px; padding:8px 14px; margin:6px 0; background:#f4f9fc; font-family:Consolas,monospace; font-size:20px; font-weight:bold; color:var(--escuro); }
+.mapa .no small { font-family:Arial,sans-serif; font-weight:normal; font-size:16px; color:#546e7a; margin-left:10px; }
+.mapa .no .no { background:#e9f2f8; border-color:#2e86c1; } .mapa .no .no .no { background:#fff; border-style:dashed; border-color:#5dade2; }
+.mapa .no.v { background:var(--vclaro) !important; border-color:var(--verde) !important; } .mapa .no.l { background:var(--lclaro) !important; border-color:var(--laranja) !important; }
+.linha { display:flex; gap:10px; } .linha > * { flex:1; }
+.passo { display:flex; align-items:center; gap:14px; margin-bottom:10px; font-size:23px; }
+.passo b.n { flex:none; width:40px; height:40px; background:var(--azul); color:#fff; border-radius:50%; text-align:center; line-height:40px; font-size:22px; }
+.placar { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:6px 0 16px; }
+.placar div { border:3px solid var(--azul); border-radius:12px; background:var(--claro); text-align:center; padding:14px 8px; font-size:20px; }
+.placar b { display:block; font-size:44px; color:var(--azul); }
+.grande { font-size:30px; }
+#barra { position:fixed; left:0; bottom:0; height:5px; background:#5dade2; transition:width .2s; z-index:9; }
+#dica { position:fixed; right:14px; top:10px; color:#78909c; font-size:13px; z-index:9; }
+@media print {
+  @page { size:1280px 720px; margin:0; }
+  html, body { overflow:visible; height:auto; background:#fff; }
+  #palco { position:static; transform:none !important; width:1280px; height:auto; }
+  .slide { display:flex !important; position:relative; width:1280px; height:720px; break-after:page; }
+  #barra, #dica { display:none; }
+}
+</style>
+</head>
+<body>
+<div id="palco">
+
+<!-- 1 -->
+<section class="slide capa">
+  <span class="etq" style="background:#1b4f72;color:#fff">SENAI · M1S10 · Semana 10</span>
+  <h1>HTML &amp; CSS profissional</h1>
+  <p>Classes · Herança e cascata · Predominância · O mapa da página</p>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <h2>Roteiro da aula</h2>
+  <div class="cols">
+    <div class="card a"><h3>A. Classes CSS</h3><p>O que cada uma faz: container, layout, componente, utilitária, estado.</p></div>
+    <div class="card a"><h3>B. Herança e cascata</h3><p>Quem recebe de quem. Quem vence quando duas regras brigam.</p></div>
+    <div class="card a"><h3>C. Predominância</h3><p>O placar de especificidade e como resolver conflitos.</p></div>
+    <div class="card a"><h3>D. O mapa do HTML</h3><p>Div, main, section, article. Qual classe começa. Padrão profissional.</p></div>
+  </div>
+  <div class="dest"><p><b>Regra de ouro:</b> HTML diz <i>o que a coisa é</i>. CSS diz <i>como ela parece</i>. A classe é a ponte.</p></div>
+</section>
+
+<!-- 3 -->
+<section class="slide secao">
+  <span class="etq">TRILHA A</span>
+  <h2>Classes CSS</h2>
+  <p>Nome, papel e função de cada uma</p>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <span class="etq">A · Classes</span>
+  <h2>O que é uma classe</h2>
+<pre><span class="c">&lt;!-- HTML: etiqueta no elemento (sem ponto) --&gt;</span>
+&lt;button class="botao"&gt;Enviar&lt;/button&gt;
+
+<span class="c">/* CSS: a regra procura a etiqueta (com ponto) */</span>
+.botao { background:#1b4f72; color:#fff; padding:10px 20px; }</pre>
+  <ul>
+    <li>Pode ter <b>várias classes</b> no mesmo elemento: <code>class="botao botao--grande"</code></li>
+    <li>Nome por <b>função</b>, não aparência: <code>botao-primario</code>, não <code>botao-azul</code></li>
+    <li>Minúsculas com hífen: <code>card-produto</code></li>
+  </ul>
+  <div class="dest"><p>Estilize com <b>classe</b>. Reserve o <code>id</code> para âncora e JavaScript.</p></div>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <span class="etq">A · Classes</span>
+  <h2>Os 5 papéis de uma classe</h2>
+  <table>
+    <thead><tr><th>Papel</th><th>Pergunta que responde</th><th>Exemplos</th></tr></thead>
+    <tbody>
+      <tr><td><b>Estrutura</b></td><td>Largura e ritmo da página?</td><td><code>container</code> <code>secao</code></td></tr>
+      <tr><td><b>Layout</b></td><td>Como os filhos se organizam?</td><td><code>flex</code> <code>grid</code> <code>row</code></td></tr>
+      <tr><td><b>Componente</b></td><td>Qual peça reutilizável?</td><td><code>botao</code> <code>card</code> <code>navbar</code></td></tr>
+      <tr><td><b>Utilitária</b></td><td>Qual ajuste único?</td><td><code>mt-3</code> <code>text-center</code> <code>hidden</code></td></tr>
+      <tr><td><b>Estado / modificador</b></td><td>Qual variação ou situação?</td><td><code>is-open</code> <code>botao--grande</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <span class="etq">A · Classes</span>
+  <h2>container: o padrão "faixa + container"</h2>
+<pre>.container {
+  max-width: 1100px;  <span class="c">/* teto, nunca estoura o celular */</span>
+  margin: 0 auto;     <span class="c">/* centraliza */</span>
+  padding: 0 16px;
+}</pre>
+<pre>&lt;section class="secao"&gt;        <span class="c">&lt;!-- faixa: fundo 100% --&gt;</span>
+  &lt;div class="container"&gt;      <span class="c">&lt;!-- conteúdo: largura limitada --&gt;</span>
+    ...
+  &lt;/div&gt;
+&lt;/section&gt;</pre>
+  <div class="dest"><p>Por que <code>max-width</code> e não <code>width</code>? Largura fixa estoura o celular.</p></div>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <span class="etq">A · Classes</span>
+  <h2>Layout: flex ou grid?</h2>
+  <div class="cols">
+    <div class="card a"><h3>Flexbox: uma dimensão</h3><p>Menu, barra de botões, centralizar, linha de cards.</p><pre style="font-size:19px">.flex { display:flex; gap:16px; }</pre></div>
+    <div class="card v"><h3>Grid: duas dimensões</h3><p>Galeria, catálogo, layout de página.</p><pre style="font-size:19px">.grid { display:grid; gap:16px;
+ grid-template-columns:
+  repeat(auto-fit,minmax(240px,1fr)); }</pre></div>
+  </div>
+  <div class="dest"><p>A classe de layout vai no <b>pai</b>. Quem se organiza são os <b>filhos diretos</b>.</p></div>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <span class="etq">A · Classes</span>
+  <h2>Componente, utilitária e estado</h2>
+  <div class="cols3">
+    <div class="card a"><h3>Componente</h3><p>Entrega a <b>peça inteira</b>.</p><code>.card</code> <code>.botao</code></div>
+    <div class="card l"><h3>Utilitária</h3><p>Faz <b>uma coisa só</b>, em qualquer lugar.</p><code>.mt-3</code> <code>.hidden</code></div>
+    <div class="card v"><h3>Estado</h3><p>Situação que <b>muda</b> com o uso (JS liga/desliga).</p><code>.is-open</code> <code>.ativo</code></div>
+  </div>
+<pre style="margin-top:20px">&lt;button class="botao botao--primario botao--grande mt-3"&gt;
+        componente  variação        variação      utilitária</pre>
+  <div class="dest"><p><b>BEM:</b> <code>card</code> (bloco) · <code>card__titulo</code> (parte) · <code>card--destaque</code> (variação)</p></div>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <span class="etq">A · Classes</span>
+  <h2>Dicionário comercial</h2>
+  <table>
+    <thead><tr><th>Quero…</th><th>CSS puro</th><th>Bootstrap</th><th>Tailwind</th></tr></thead>
+    <tbody>
+      <tr><td>Centralizar a largura</td><td><code>container</code></td><td><code>container</code></td><td><code>mx-auto max-w-6xl</code></td></tr>
+      <tr><td>Ligar flex</td><td><code>flex</code></td><td><code>d-flex</code></td><td><code>flex</code></td></tr>
+      <tr><td>Metade da largura</td><td><code>coluna-metade</code></td><td><code>col-md-6</code></td><td><code>md:w-1/2</code></td></tr>
+      <tr><td>Botão principal</td><td><code>botao botao--primario</code></td><td><code>btn btn-primary</code></td><td><code>bg-blue-700 px-4 py-2</code></td></tr>
+      <tr><td>Esconder</td><td><code>hidden</code></td><td><code>d-none</code></td><td><code>hidden</code></td></tr>
+    </tbody>
+  </table>
+  <div class="dest" style="margin-top:20px"><p>Quem entende a base lê qualquer framework: o <code>row</code> do Bootstrap é flex + wrap por baixo.</p></div>
+</section>
+
+<!-- 10 -->
+<section class="slide secao">
+  <span class="etq">TRILHA B</span>
+  <h2>Herança e efeito cascata</h2>
+  <p>De quem o elemento recebe? Quem vence a briga?</p>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <span class="etq">B · Herança</span>
+  <h2>O que é herança</h2>
+  <div class="mapa">
+    <div class="no">body <small>font-family e color declarados aqui, uma vez</small>
+      <div class="no">main
+        <div class="no">section
+          <div class="no l">p <small>herda fonte e cor sem ninguém pedir</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul style="margin-top:12px">
+    <li>O <b>filho recebe do pai</b> certos valores, automaticamente.</li>
+    <li>Declaração <b>direta</b> no filho sempre vence a herdada.</li>
+  </ul>
+</section>
+
+<!-- 12 -->
+<section class="slide">
+  <span class="etq">B · Herança</span>
+  <h2>O que herda e o que não herda</h2>
+  <div class="cols">
+    <div class="card v"><h3>✅ Herdam (texto)</h3><ul><li><code>color</code></li><li><code>font-*</code></li><li><code>line-height</code></li><li><code>text-align</code></li><li><code>cursor</code>, <code>visibility</code></li></ul></div>
+    <div class="card r"><h3>❌ Não herdam (caixa)</h3><ul><li><code>margin</code>, <code>padding</code></li><li><code>border</code></li><li><code>background</code></li><li><code>width</code>, <code>height</code></li><li><code>display</code>, <code>position</code></li></ul></div>
+  </div>
+  <div class="dest"><p>Se toda <code>div</code> herdasse a borda do pai, a página viraria uma cebola de molduras.</p></div>
+</section>
+
+<!-- 13 -->
+<section class="slide">
+  <span class="etq">B · Herança</span>
+  <h2>Receita profissional da base</h2>
+<pre>body { font-family: Arial, sans-serif;
+       line-height: 1.6; color: #263238; }
+a { color: inherit; }                          <span class="c">/* link não herda sozinho */</span>
+input, button, textarea, select { font: inherit; }</pre>
+  <table>
+    <thead><tr><th>Valor</th><th>Faz</th></tr></thead>
+    <tbody>
+      <tr><td><code>inherit</code></td><td>Força herdar do pai</td></tr>
+      <tr><td><code>initial</code></td><td>Volta ao padrão do CSS</td></tr>
+      <tr><td><code>unset</code></td><td>inherit se herda, initial se não</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 14 -->
+<section class="slide">
+  <span class="etq">B · Cascata</span>
+  <h2>Efeito cascata: as 3 perguntas, nesta ordem</h2>
+  <div class="passo"><b class="n">1</b><span><b>Origem e importância</b> — navegador &lt; autor? Tem <code>!important</code>?</span></div>
+  <div class="passo"><b class="n">2</b><span><b>Especificidade</b> — qual seletor é mais forte?</span></div>
+  <div class="passo"><b class="n">3</b><span><b>Ordem no código</b> — empatou? <b>A última vence.</b></span></div>
+<pre style="margin-top:14px">p      { color: blue; font-size: 18px; }
+.aviso { color: green; }
+<span class="c">/* &lt;p class="aviso"&gt; → verde (da classe) e 18px (do p).
+   Regras se somam; só brigam onde discordam. */</span></pre>
+</section>
+
+<!-- 15 -->
+<section class="slide">
+  <span class="etq">B · Cascata</span>
+  <h2>Veja a cascata no DevTools</h2>
+  <div class="cols">
+    <div>
+      <div class="passo"><b class="n">1</b><span>Aperte <b>F12</b></span></div>
+      <div class="passo"><b class="n">2</b><span>Clique no elemento</span></div>
+      <div class="passo"><b class="n">3</b><span>Painel <b>Estilos</b></span></div>
+    </div>
+    <div>
+      <div class="card l"><p><s>Riscada</s> = perdeu a briga.</p></div><br>
+      <div class="card a"><p>"Inherited from…" = veio por herança.</p></div><br>
+      <div class="card v"><p>Aba <b>Computed</b> = valor final.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 -->
+<section class="slide secao">
+  <span class="etq">TRILHA C</span>
+  <h2>Predominância</h2>
+  <p>Quem vence: classe, id ou tag?</p>
+</section>
+
+<!-- 17 -->
+<section class="slide">
+  <span class="etq">C · Especificidade</span>
+  <h2>O placar tem 4 colunas</h2>
+  <div class="placar">
+    <div><b>A</b>inline<br><code>style=""</code></div>
+    <div><b>B</b>ids<br><code>#topo</code></div>
+    <div><b>C</b>classes · [attr] · :hover<br><code>.card</code></div>
+    <div><b>D</b>tags<br><code>p</code> <code>h1</code></div>
+  </div>
+  <p>Compara da <b>esquerda para a direita</b>. A primeira coluna maior ganha; as outras nem são olhadas.</p>
+  <table>
+    <tbody>
+      <tr><td><code>p</code></td><td>0-0-0-1</td><td><code>.card h2</code></td><td>0-0-1-1</td></tr>
+      <tr><td><code>.card</code></td><td>0-0-1-0</td><td><code>#lojas .card h2</code></td><td>0-1-1-1</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 18 -->
+<section class="slide">
+  <span class="etq">C · Especificidade</span>
+  <h2>Uma classe vence 7 tags empilhadas</h2>
+<pre>.botao { color: red; }                             <span class="c">/* 0-0-1-0 */</span>
+html body main section div p a { color: blue; }    <span class="c">/* 0-0-0-7 */</span>
+<span class="c">/* vermelho: 1 na coluna C ganha de 7 na coluna D */</span></pre>
+  <div class="cols">
+    <div class="card r"><h3>Um id vence 100 classes</h3><p><code>#topo</code> (0-1-0-0) &gt; <code>.a.b.c…</code> (0-0-N-0)</p></div>
+    <div class="card l"><h3>Herança não entra no placar</h3><p>Valor herdado perde para <b>qualquer</b> regra direta.</p></div>
+  </div>
+  <div class="dest"><p>Empate nas 4 colunas? <b>Vence a última</b> escrita no CSS.</p></div>
+</section>
+
+<!-- 19 -->
+<section class="slide">
+  <span class="etq">C · Conflitos</span>
+  <h2>O link que não muda de cor</h2>
+<pre>.menu a   { color: white; }   <span class="c">/* 0-0-1-1 */</span>
+.destaque { color: gold; }    <span class="c">/* 0-0-1-0 → perde! */</span></pre>
+<pre>.menu .destaque { color: gold; }   <span class="c">/* 0-0-2-0 → vence, sem !important */</span></pre>
+  <h3>Armas, da mais saudável à pior</h3>
+  <p>1 Reordenar · 2 Classe simples · 3 Mais uma classe no seletor · 4 <code>:where()</code> · 5 <code>!important</code> · 6 id / inline</p>
+</section>
+
+<!-- 20 -->
+<section class="slide">
+  <span class="etq">C · Predominância semântica</span>
+  <h2>Hierarquia de poder, de propósito</h2>
+  <div class="mapa">
+    <div class="no">Tags (base) <small>0-0-0-1 · o piso do site</small>
+      <div class="no">Classes de componente <small>0-0-1-0 · a regra de cada peça</small>
+        <div class="no">Modificadores e estados <small>vêm depois do componente e vencem</small>
+          <div class="no l">Utilitárias <small>por último · a palavra final do dev</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dest" style="margin-top:14px"><p><b>Mantra:</b> baixa especificidade + ordem organizada = nunca lutar com a cascata.</p></div>
+</section>
+
+<!-- 21 -->
+<section class="slide">
+  <span class="etq">C · Atividade</span>
+  <h2>Quiz rápido: quem vence?</h2>
+  <div class="cols">
+    <div class="card a"><pre style="font-size:19px">.titulo { color: red; }
+.titulo { color: green; }</pre><p>→ ?</p></div>
+    <div class="card a"><pre style="font-size:19px">#topo { color: red; }
+.a.b.c.d.e.f { color: blue; }</pre><p>→ ?</p></div>
+    <div class="card a"><pre style="font-size:19px">.menu a { color: white; }
+.destaque { color: gold; }</pre><p>→ ?</p></div>
+    <div class="card a"><pre style="font-size:19px">.btn { background:blue !important; }
+&lt;button style="background:red"&gt;</pre><p>→ ?</p></div>
+  </div>
+  <p style="color:#78909c;font-size:18px;margin-top:10px">Respostas: verde (última) · vermelho (id) · branco (0-0-1-1 &gt; 0-0-1-0) · azul (!important)</p>
+</section>
+
+<!-- 22 -->
+<section class="slide secao">
+  <span class="etq">TRILHA D</span>
+  <h2>O mapa do HTML profissional</h2>
+  <p>Da raiz ao avançado: o que vem primeiro, o que vai dentro de quê</p>
+</section>
+
+<!-- 23 -->
+<section class="slide">
+  <span class="etq">D · O mapa</span>
+  <h2>Esqueleto de uma página profissional</h2>
+  <div class="mapa">
+    <div class="no">&lt;html lang="pt-BR"&gt; <small>① documento</small>
+      <div class="no">&lt;head&gt; <small>② invisível: charset · viewport · title · link do CSS</small></div>
+      <div class="no">&lt;body&gt; <small>③ o que o usuário vê · fonte base (herança)</small>
+        <div class="linha">
+          <div class="no v">&lt;header&gt; <small>④ topo do site</small></div>
+          <div class="no v">&lt;main&gt; <small>⑤ conteúdo único · só 1</small></div>
+          <div class="no v">&lt;footer&gt; <small>⑧ base</small></div>
+        </div>
+        <div class="no l" style="margin-left:33%">section → div.container → h1 · p · .card <small>⑥ ⑦ dentro do main</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 24 -->
+<section class="slide">
+  <span class="etq">D · O mapa</span>
+  <h2>As 5 camadas</h2>
+  <table>
+    <thead><tr><th>Camada</th><th>Elementos</th><th>Pergunta</th></tr></thead>
+    <tbody>
+      <tr><td>1 Documento</td><td><code>html head body</code></td><td>Como o navegador lê?</td></tr>
+      <tr><td>2 Moldura</td><td><code>header main footer</code></td><td>Quais as 3 grandes áreas?</td></tr>
+      <tr><td>3 Seções</td><td><code>section article aside</code></td><td>Quais os assuntos?</td></tr>
+      <tr><td>4 Layout</td><td><code>div.container div.grid</code></td><td>Largura e colunas?</td></tr>
+      <tr><td>5 Conteúdo</td><td><code>h1 p a img .card .botao</code></td><td>O que se lê e se clica?</td></tr>
+    </tbody>
+  </table>
+  <div class="dest" style="margin-top:20px"><p>Camadas 1–3: <b>tags semânticas</b>. Camada 4: reino da <b>div</b>. Camada 5: mistura.</p></div>
+</section>
+
+<!-- 25 -->
+<section class="slide">
+  <span class="etq">D · Decisão</span>
+  <h2>Div, main, section ou article?</h2>
+  <div class="cols3">
+    <div class="card v"><h3>&lt;main&gt;</h3><p>Conteúdo principal e único da página. <b>Só um.</b></p></div>
+    <div class="card v"><h3>&lt;section&gt;</h3><p>Grupo sobre <b>um tema, com título</b> (h2).</p></div>
+    <div class="card v"><h3>&lt;article&gt;</h3><p>Peça <b>independente</b>: produto, post, card.</p></div>
+    <div class="card a"><h3>&lt;aside&gt;</h3><p>Apoio, dispensável: lateral, "leia também".</p></div>
+    <div class="card a"><h3>&lt;nav&gt;</h3><p>Grupo principal de links.</p></div>
+    <div class="card l"><h3>&lt;div&gt;</h3><p><b>Último recurso.</b> Só agrupa para o CSS.</p></div>
+  </div>
+  <div class="dest" style="margin-top:20px"><p>Existe tag com o significado? Use. Senão, <code>div</code>.</p></div>
+</section>
+
+<!-- 26 -->
+<section class="slide">
+  <span class="etq">D · Decisão</span>
+  <h2>Os pares que confundem</h2>
+  <div class="cols">
+    <div class="card a"><h3>section ou div?</h3><p>Tirando o CSS, a caixa ainda faz sentido no documento? <b>Sim → section.</b> Não → div.</p></div>
+    <div class="card a"><h3>section ou article?</h3><p>Posso copiar para outro site e continua fazendo sentido? <b>Sim → article.</b></p></div>
+    <div class="card a"><h3>link ou botão?</h3><p>Muda de página → <code>a</code>. Executa ação → <code>button</code>.</p></div>
+    <div class="card r"><h3>Erros clássicos</h3><p>Dois <code>main</code> · "divite" · div com onclick · section só para pintar fundo.</p></div>
+  </div>
+</section>
+
+<!-- 27 -->
+<section class="slide">
+  <span class="etq">D · Qual classe começa?</span>
+  <h2>A ordem de escrita do CSS</h2>
+  <div class="cols">
+    <div>
+      <div class="passo"><b class="n">1</b><span>Reset</span></div>
+      <div class="passo"><b class="n">2</b><span>Variáveis (<code>:root</code>)</span></div>
+      <div class="passo"><b class="n">3</b><span>Base (tags + herança)</span></div>
+      <div class="passo"><b class="n">4</b><span>Estrutura (<code>.container</code>)</span></div>
+    </div>
+    <div>
+      <div class="passo"><b class="n">5</b><span>Layout (<code>.grid</code>, <code>.flex</code>)</span></div>
+      <div class="passo"><b class="n">6</b><span>Componentes</span></div>
+      <div class="passo"><b class="n">7</b><span>Modificadores e estados</span></div>
+      <div class="passo"><b class="n">8</b><span>Utilitárias e media queries</span></div>
+    </div>
+  </div>
+  <div class="dest"><p>Do <b>geral ao específico</b>: em empate, o que vem depois vence. A ordem no atributo <code>class=""</code> do HTML <b>não</b> importa.</p></div>
+</section>
+
+<!-- 28 -->
+<section class="slide">
+  <span class="etq">D · Avançado</span>
+  <h2>Nomenclatura BEM e organização</h2>
+  <div class="cols">
+<pre style="font-size:19px">.card              <span class="c">/* Bloco */</span>
+.card__titulo      <span class="c">/* Elemento */</span>
+.card--destaque    <span class="c">/* Modificador */</span></pre>
+<pre style="font-size:19px">projeto/
+├── index.html
+├── estilo.css
+├── script.js
+└── assets/</pre>
+  </div>
+  <ul>
+    <li>Todo seletor é <b>uma classe só</b> (0-0-1-0): sem briga de peso.</li>
+    <li>Prefixo = dono: <code>hero-titulo</code>, <code>card-loja</code>, <code>coluna-dados</code>.</li>
+    <li>Um idioma só, sem numeração (<code>caixa2</code>).</li>
+  </ul>
+</section>
+
+<!-- 29 -->
+<section class="slide">
+  <span class="etq">Fechamento</span>
+  <h2>Os 5 níveis: onde você está?</h2>
+  <table>
+    <tbody>
+      <tr><td><b>1 Raiz</b></td><td>A página funciona (tags básicas, classes, cor e fonte)</td></tr>
+      <tr><td><b>2 Estrutura</b></td><td>header / main / section / footer, container</td></tr>
+      <tr><td><b>3 Layout</b></td><td>Flex, grid, rem, mobile-first</td></tr>
+      <tr><td><b>4 Cascata</b></td><td>Calcula especificidade, sem id nem !important</td></tr>
+      <tr><td><b>5 Arquitetura</b></td><td>BEM, variáveis, acessibilidade, escolha de biblioteca</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 30 -->
+<section class="slide">
+  <span class="etq">Fechamento</span>
+  <h2>Cola de bolso</h2>
+  <div class="cols3">
+    <div class="card a"><h3>Qual tag?</h3><p>Tem tag com o significado? Use. Senão, div.</p></div>
+    <div class="card a"><h3>Estilo não aparece?</h3><p>Seletor acha? Alguém mais específico? Empate na ordem?</p></div>
+    <div class="card a"><h3>Onde a fonte?</h3><p>No <code>body</code>. Os filhos herdam.</p></div>
+    <div class="card a"><h3>Qual classe primeiro?</h3><p>Base → estrutura → componente → modificador → utilitária.</p></div>
+    <div class="card a"><h3>Como nomear?</h3><p>O que é, não como parece.</p></div>
+    <div class="card a"><h3>Flex ou grid?</h3><p>Uma dimensão: flex. Duas: grid.</p></div>
+  </div>
+  <div class="dest" style="margin-top:20px"><p><b>Para casa:</b> abra a página de contato da Bikcraft e localize cada camada do mapa: <code>header</code>, <code>main</code>, <code>section</code>, <code>article</code>, <code>footer</code>.</p></div>
+</section>
+
+</div>
+<div id="barra"></div>
+<div id="dica">← → navegar · F tela cheia · Home/End</div>
+
+<script>
+(function () {
+  var slides = document.querySelectorAll('.slide'), palco = document.getElementById('palco'), barra = document.getElementById('barra'), i = 0;
+  function mostrar(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, k) {
+      s.classList.toggle('ativo', k === i);
+      var r = s.querySelector('.rodape'); if (r) r.remove();
+      if (k === i && !s.classList.contains('capa')) {
+        var f = document.createElement('div'); f.className = 'rodape';
+        f.innerHTML = '<span>HTML &amp; CSS profissional · SENAI M1S10</span><span>' + (i + 1) + ' / ' + slides.length + '</span>';
+        s.appendChild(f);
+      }
+    });
+    barra.style.width = ((i + 1) / slides.length * 100) + '%';
+    try { location.hash = i + 1; } catch (e) {}
+  }
+  function ajustar() {
+    var e = Math.min(innerWidth / 1280, innerHeight / 720);
+    palco.style.transform = 'translate(-50%,-50%) scale(' + e + ')';
+  }
+  addEventListener('resize', ajustar); ajustar();
+  addEventListener('beforeprint', function () { document.querySelectorAll('.rodape').forEach(function (r) { r.remove(); }); });
+  addEventListener('afterprint', function () { mostrar(i); });
+  addEventListener('keydown', function (e) {
+    if (['ArrowRight', 'PageDown', ' ', 'Enter'].indexOf(e.key) > -1) { e.preventDefault(); mostrar(i + 1); }
+    else if (['ArrowLeft', 'PageUp', 'Backspace'].indexOf(e.key) > -1) { e.preventDefault(); mostrar(i - 1); }
+    else if (e.key === 'Home') mostrar(0);
+    else if (e.key === 'End') mostrar(slides.length - 1);
+    else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+  });
+  addEventListener('click', function (e) { mostrar(e.clientX > innerWidth / 3 ? i + 1 : i - 1); });
+  mostrar((parseInt(location.hash.slice(1), 10) || 1) - 1);
+})();
+</script>
+</body>
+</html>

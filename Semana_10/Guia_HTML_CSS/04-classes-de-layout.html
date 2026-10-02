@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04 — Classes de layout</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha A · Classes</span><span>Doc 04 de 23</span></div>
+<main class="pagina">
+  <h1>Classes de layout</h1>
+  <p class="resumo">Classes de layout dizem <b>como os filhos de um elemento se organizam</b>: em linha, em coluna, em grade. A regra mental: a classe vai no <b>pai</b>, e quem se organiza são os <b>filhos</b>.</p>
+
+  <h2>Flexbox: organizar em uma direção</h2>
+  <pre><code>.flex { display: flex; }
+.flex-coluna { flex-direction: column; }
+.centralizado { justify-content: center; align-items: center; }
+.espaco-entre { justify-content: space-between; }
+.quebra { flex-wrap: wrap; }
+.gap { gap: 16px; }</code></pre>
+  <div class="demo"><p class="demo-titulo">flex + gap + espaco-entre</p>
+    <div style="display:flex;gap:10px;justify-content:space-between;">
+      <div style="background:#1b4f72;color:#fff;padding:10px 16px;">A</div>
+      <div style="background:#2e86c1;color:#fff;padding:10px 16px;">B</div>
+      <div style="background:#5dade2;color:#fff;padding:10px 16px;">C</div>
+    </div>
+  </div>
+  <p><b>Quando usar:</b> menu, barra de botões, cabeçalho, centralizar algo, linha de cards que podem quebrar.</p>
+
+  <h2>Grid: organizar em linhas e colunas ao mesmo tempo</h2>
+  <pre><code>.grid { display: grid; gap: 16px; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-auto { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }</code></pre>
+  <div class="demo"><p class="demo-titulo">grid-auto: redimensione a janela e veja as colunas mudarem sozinhas</p>
+    <div style="display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));">
+      <div style="background:#1e8449;color:#fff;padding:14px;text-align:center;">1</div>
+      <div style="background:#1e8449;color:#fff;padding:14px;text-align:center;">2</div>
+      <div style="background:#1e8449;color:#fff;padding:14px;text-align:center;">3</div>
+      <div style="background:#1e8449;color:#fff;padding:14px;text-align:center;">4</div>
+    </div>
+  </div>
+  <p><b>Quando usar:</b> galeria, catálogo de produtos, layout de página inteira, qualquer coisa em "grade".</p>
+
+  <div class="caixa exemplo"><p><b>Regra prática:</b> uma dimensão (linha <i>ou</i> coluna) → <b>flex</b>. Duas dimensões (linhas <i>e</i> colunas) → <b>grid</b>.</p></div>
+
+  <h2>row e col (Bootstrap) e colunas do projeto</h2>
+  <p>Em frameworks, o layout vira vocabulário pronto:</p>
+  <pre><code>&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;Dados&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;Formulário&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <ul>
+    <li><code>row</code>: a linha (por baixo é <code>display: flex; flex-wrap: wrap</code>).</li>
+    <li><code>col-md-6</code>: "a partir da tela média, ocupe 6 de 12 partes (metade)".</li>
+  </ul>
+  <p>Em CSS puro você cria o mesmo com nome por função, como a <code>coluna-dados</code> e a <code>coluna-formulario</code> da página de contato da Bikcraft.</p>
+
+  <h2>Tabela das classes de layout</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Classe</th><th>O que faz</th><th>Vai em</th></tr></thead>
+    <tbody>
+      <tr><td><code>flex</code> / <code>d-flex</code></td><td>Liga o flexbox</td><td>o pai</td></tr>
+      <tr><td><code>grid</code> / <code>d-grid</code></td><td>Liga o grid</td><td>o pai</td></tr>
+      <tr><td><code>row</code></td><td>Linha de colunas</td><td>o pai</td></tr>
+      <tr><td><code>col</code>, <code>col-6</code></td><td>Coluna e sua largura</td><td>o filho</td></tr>
+      <tr><td><code>gap</code></td><td>Espaço entre os filhos</td><td>o pai</td></tr>
+      <tr><td><code>justify-*</code>, <code>items-*</code></td><td>Alinha no eixo principal / cruzado</td><td>o pai</td></tr>
+      <tr><td><code>stack</code></td><td>Pilha vertical com espaço regular</td><td>o pai</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa atencao"><p><b>Erro clássico:</b> colocar <code>display: flex</code> no filho e esperar que os irmãos se alinhem. O flex só organiza os <b>filhos diretos</b> de quem o recebe.</p></div>
+
+  <div class="nav-rodape"><a href="03-classes-de-estrutura.html">← 03</a><a href="05-classes-de-componentes.html">Próximo: 05 Classes de componentes →</a></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 — O que é herança</title>
+<link rel="stylesheet" href="guia.css">
+<style>
+  .ex-pai { font-family: Georgia, serif; color: #1b4f72; font-size: 1.1rem; border: 1px solid #cfd8dc; padding: 10px 14px; border-radius: 6px; }
+</style>
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha B · Herança e cascata</span><span>Doc 10 de 23</span></div>
+<main class="pagina">
+  <h1>O que é herança</h1>
+  <p class="resumo"><b>Herança</b> é quando um elemento <b>filho recebe automaticamente</b> certos valores do elemento <b>pai</b>, sem que você escreva nada para ele. É o motivo de bastar declarar a fonte uma vez no <code>body</code>.</p>
+
+  <h2>A árvore do HTML</h2>
+  <p>Todo HTML é uma árvore de elementos aninhados. Quem está dentro é <b>filho</b>; quem envolve é <b>pai</b>; quem está acima de todos é <b>ancestral</b>.</p>
+  <div class="mapa">
+    <div class="no n1"><span class="rotulo">body <span class="nota">font-family e color definidos aqui</span></span>
+      <div class="no n2"><span class="rotulo">main</span>
+        <div class="no n3"><span class="rotulo">section</span>
+          <div class="no n3"><span class="rotulo">p <span class="nota">herda a fonte e a cor de body, sem ninguém pedir</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Exemplo mínimo</h2>
+  <pre><code>body { font-family: Arial, sans-serif; color: #263238; }
+
+<span class="c">/* Não existe regra de fonte para h1, p, li, a... e mesmo assim todos usam Arial */</span></code></pre>
+  <div class="demo"><p class="demo-titulo">Pai com cor e fonte; filhos sem regra nenhuma</p>
+    <div class="ex-pai">
+      Eu sou o pai (Georgia, azul).
+      <p style="margin:8px 0 0;">Eu sou um <b>p</b> filho, sem CSS próprio: herdei a fonte e a cor.</p>
+      <ul style="margin:8px 0 0;"><li>Item de lista, também herdou.</li></ul>
+    </div>
+  </div>
+
+  <h2>Por que a herança existe</h2>
+  <ul>
+    <li><b>Economia:</b> uma declaração no ancestral vale para centenas de filhos.</li>
+    <li><b>Consistência:</b> a página inteira fala a mesma "língua" visual.</li>
+    <li><b>Manutenção:</b> mudar a fonte do site é mexer em <b>uma linha</b>.</li>
+  </ul>
+
+  <h2>Herança x cascata: não confunda</h2>
+  <table>
+    <thead><tr><th></th><th>Herança</th><th>Cascata</th></tr></thead>
+    <tbody>
+      <tr><td>Pergunta</td><td>"De quem este elemento recebe o valor?"</td><td>"Quando duas regras dizem coisas diferentes, qual vale?"</td></tr>
+      <tr><td>Direção</td><td>Do pai para o filho</td><td>Entre regras que atingem o <b>mesmo</b> elemento</td></tr>
+      <tr><td>Documento</td><td>10 e 11</td><td>12, 13 e 14</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caixa exemplo">
+    <p><b>Analogia:</b> herança é o <b>sobrenome da família</b>: você recebe sem pedir. Se você disser "meu nome é outro", o que <b>você mesmo declarou</b> vence o que herdou. Uma regra direta no filho sempre ganha da herança.</p>
+  </div>
+
+  <pre><code>body { color: #263238; }
+.aviso { color: #c0392b; }   <span class="c">/* o .aviso não herda mais a cor: usa a própria */</span></code></pre>
+
+  <div class="caixa atencao">
+    <p><b>Atenção:</b> nem tudo é herdado. Borda, margem e fundo, por exemplo, <b>não</b> passam do pai para o filho. É o assunto do próximo documento.</p>
+  </div>
+
+  <div class="nav-rodape"><a href="09-dicionario-comercial.html">← 09</a><a href="11-o-que-herda-e-o-que-nao-herda.html">Próximo: 11 O que herda e o que não herda →</a></div>
+</main>
+</body>
+</html>

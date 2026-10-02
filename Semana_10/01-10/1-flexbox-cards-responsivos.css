@@ -19,6 +19,9 @@ h1 { font-size: 1.4rem; }
 .faixa-metricas {
   display: flex;
   flex-direction: column; /* base = celular: empilhado */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   /* COMPLETE AQUI: adicione um "gap" para separar os cards (ex.: 16px) */
 }
 
@@ -26,10 +29,11 @@ h1 { font-size: 1.4rem; }
    .faixa-metricas para flex-direction: row (lado a lado no desktop) */
 
 .card-metrica {
-  background:#161616;
+  background: #b0b0b0;
   border-radius: 8px;
   padding: 20px;
   text-align: center;
+  flex: 1;
   /* COMPLETE AQUI: adicione "flex: 1" para os 3 cards dividirem o
      espaço igualmente quando estiverem em linha */
 }
@@ -40,3 +44,7 @@ h1 { font-size: 1.4rem; }
   font-weight: bold;
   color: #ffbf00;
 }
+
+ @media (min-width: 64em) {
+    .faixa-metricas { flex-direction: row; }
+  }

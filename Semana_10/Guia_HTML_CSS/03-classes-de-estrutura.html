@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>03 — Classes de estrutura</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha A · Classes</span><span>Doc 03 de 23</span></div>
+<main class="pagina">
+  <h1>Classes de estrutura</h1>
+  <p class="resumo">São as classes que definem <b>largura, centralização e ritmo vertical</b> da página. Quase todo site profissional começa por elas. A mais famosa é a <code>container</code>.</p>
+
+  <h2>container</h2>
+  <p><b>Função:</b> limitar a largura do conteúdo e centralizá-lo. Sem ele, em monitor grande o texto estica de ponta a ponta e fica ilegível.</p>
+  <pre><code>.container {
+  width: 100%;
+  max-width: 1100px;   <span class="c">/* nunca passa disso */</span>
+  margin: 0 auto;      <span class="c">/* auto dos lados = centraliza */</span>
+  padding: 0 16px;     <span class="c">/* respiro nas bordas do celular */</span>
+}</code></pre>
+  <div class="demo"><p class="demo-titulo">Como se comporta</p>
+    <div style="background:#eef4f8;padding:8px 0;">
+      <div style="max-width:420px;margin:0 auto;padding:10px 16px;background:#1b4f72;color:#fff;text-align:center;">conteúdo centralizado, no máximo 420px (exemplo)</div>
+    </div>
+  </div>
+  <div class="caixa atencao"><p><b>Detalhe importante:</b> o fundo pode ocupar a tela inteira (na <code>section</code>) enquanto o conteúdo fica no <code>container</code> dentro dela. Veja o padrão abaixo.</p></div>
+
+  <h2>O padrão "faixa + container"</h2>
+  <pre><code>&lt;section class="secao secao-escura"&gt;      <span class="c">&lt;!-- faixa de fundo: 100% da largura --&gt;</span>
+  &lt;div class="container"&gt;                 <span class="c">&lt;!-- conteúdo: largura limitada --&gt;</span>
+    &lt;h2&gt;Nossas bikes&lt;/h2&gt;
+    ...
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+  <p>É o padrão mais comum do mercado. A faixa pinta a tela toda; o container alinha o conteúdo.</p>
+
+  <h2>Tabela das classes de estrutura</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Classe</th><th>Papel</th><th>CSS típico</th></tr></thead>
+    <tbody>
+      <tr><td><code>container</code></td><td>Limita e centraliza a largura</td><td><code>max-width; margin: 0 auto</code></td></tr>
+      <tr><td><code>container-fluid</code></td><td>Container que ocupa 100% (Bootstrap)</td><td><code>width: 100%</code></td></tr>
+      <tr><td><code>wrapper</code> / <code>wrap</code></td><td>Envelope que agrupa um bloco maior (às vezes a página inteira)</td><td><code>min-height: 100vh</code> ou <code>max-width</code></td></tr>
+      <tr><td><code>secao</code> / <code>section</code></td><td>Faixa horizontal com espaçamento vertical</td><td><code>padding: 64px 0</code></td></tr>
+      <tr><td><code>hero</code></td><td>Primeira faixa, de destaque</td><td><code>min-height</code>, imagem de fundo</td></tr>
+      <tr><td><code>conteudo</code> / <code>content</code></td><td>Miolo da página ou de um bloco</td><td>depende do projeto</td></tr>
+      <tr><td><code>sidebar</code> / <code>lateral</code></td><td>Coluna lateral</td><td><code>width</code> fixa + <code>flex-shrink: 0</code></td></tr>
+      <tr><td><code>cabecalho</code> / <code>header</code>, <code>rodape</code> / <code>footer</code></td><td>Topo e base</td><td>fundo, padding, às vezes <code>position</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Container x wrapper: qual a diferença?</h2>
+  <p>Na prática os dois fazem parte da mesma família, e equipes diferentes usam nomes diferentes. A convenção mais útil para a sala:</p>
+  <ul>
+    <li><b>container</b> = controla <b>largura horizontal</b> do conteúdo.</li>
+    <li><b>wrapper</b> = embrulha um grupo para dar-lhe <b>comportamento próprio</b> (altura mínima, posição relativa, overflow).</li>
+  </ul>
+  <p>O importante é <b>escolher uma convenção e repetir</b> no projeto inteiro.</p>
+
+  <div class="caixa dica"><p><b>Pergunta de revisão:</b> por que o <code>container</code> usa <code>max-width</code> e não <code>width</code>? Resposta: <code>width</code> fixa estoura o celular; <code>max-width</code> encolhe junto com a tela e só limita o teto.</p></div>
+
+  <div class="nav-rodape"><a href="02-o-que-e-uma-classe.html">← 02</a><a href="04-classes-de-layout.html">Próximo: 04 Classes de layout →</a></div>
+</main>
+</body>
+</html>

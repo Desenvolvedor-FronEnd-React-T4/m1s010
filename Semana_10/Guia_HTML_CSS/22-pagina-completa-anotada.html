@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>22 — Página completa anotada (Bikcraft)</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha D · O mapa</span><span>Doc 22 de 23</span></div>
+<main class="pagina">
+  <h1>Página completa anotada (Bikcraft)</h1>
+  <p class="resumo">Juntando tudo: uma página inteira comentada <b>linha a linha</b>, com a justificativa de cada escolha. É a estrutura da página de contato que a turma construiu em <code>02-10/4-pagina-contato-final-gabarito.html</code>. <b>Este é o padrão correto</b>: <code>header</code>, <code>main</code> com as seções dentro, <code>footer</code>. Os arquivos da atividade 4 seguem exatamente esse esqueleto.</p>
+
+  <h2>1. HTML anotado</h2>
+  <pre><code>&lt;!DOCTYPE html&gt;                              <span class="c">&lt;!-- avisa: HTML5 moderno --&gt;</span>
+&lt;html lang="pt-BR"&gt;                         <span class="c">&lt;!-- idioma: leitor de tela e tradutor --&gt;</span>
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;                     <span class="c">&lt;!-- acentos corretos --&gt;</span>
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                              <span class="c">&lt;!-- sem isto o celular finge ser desktop --&gt;</span>
+  &lt;title&gt;Contato — Bikcraft&lt;/title&gt;           <span class="c">&lt;!-- aba do navegador e Google --&gt;</span>
+  &lt;link rel="stylesheet" href="estilo.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  <span class="c">&lt;!-- CAMADA 2: moldura --&gt;</span>
+  &lt;header class="cabecalho"&gt;                  <span class="c">&lt;!-- topo do SITE --&gt;</span>
+    &lt;a class="logo" href="index.html"&gt;bikcraft&lt;/a&gt;
+    &lt;nav class="menu" aria-label="Principal"&gt;
+      &lt;a href="index.html"&gt;Home&lt;/a&gt;
+      &lt;a href="bikes.html"&gt;Bikes&lt;/a&gt;
+      &lt;a href="contato.html" aria-current="page"&gt;Contato&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;                                      <span class="c">&lt;!-- conteúdo ÚNICO desta página --&gt;</span>
+
+    <span class="c">&lt;!-- CAMADA 3: seção hero --&gt;</span>
+    &lt;section class="hero"&gt;                    <span class="c">&lt;!-- faixa de destaque --&gt;</span>
+      &lt;p class="hero-chamada"&gt;Respostas em até 24h&lt;/p&gt;
+      &lt;h1 class="hero-titulo"&gt;Nosso contato&lt;/h1&gt;   <span class="c">&lt;!-- UM h1 por página --&gt;</span>
+    &lt;/section&gt;
+
+    <span class="c">&lt;!-- seção de duas colunas --&gt;</span>
+    &lt;section class="secao-contato"&gt;
+      &lt;div class="coluna-dados"&gt; ... &lt;/div&gt;    <span class="c">&lt;!-- div: só organiza layout --&gt;</span>
+      &lt;form class="coluna-formulario"&gt;          <span class="c">&lt;!-- form: tag certa, não div --&gt;</span>
+        &lt;div class="campo"&gt;
+          &lt;label for="nome"&gt;Nome&lt;/label&gt;
+          &lt;input id="nome" type="text" required&gt;  <span class="c">&lt;!-- label ligado por for/id --&gt;</span>
+        &lt;/div&gt;
+        &lt;button class="botao" type="submit"&gt;Enviar&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/section&gt;
+
+    <span class="c">&lt;!-- lista de cards: article dentro de section --&gt;</span>
+    &lt;section class="lojas"&gt;
+      &lt;article class="card-loja"&gt; ... &lt;/article&gt;
+      &lt;article class="card-loja"&gt; ... &lt;/article&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer class="rodape"&gt; ... &lt;/footer&gt;       <span class="c">&lt;!-- base do SITE --&gt;</span>
+
+  &lt;a class="topo" href="#" aria-label="Voltar ao topo"&gt;↑&lt;/a&gt;
+  &lt;script src="script.js"&gt;&lt;/script&gt;           <span class="c">&lt;!-- último: não trava a página --&gt;</span>
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+  <h2>2. CSS anotado (na ordem do documento 20)</h2>
+  <pre><code><span class="c">/* RESET + TOKENS */</span>
+* { box-sizing: border-box; }
+:root { --azul: #1b4f72; --gap: 16px; }
+
+<span class="c">/* BASE: herança trabalhando — fonte e cor declaradas UMA vez */</span>
+body { margin: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #263238; }
+a { color: inherit; }
+input, button { font: inherit; }
+
+<span class="c">/* ESTRUTURA / LAYOUT */</span>
+.secao-contato { display: flex; flex-direction: column; gap: var(--gap); padding: 40px 16px; }
+@media (min-width: 768px) {
+  .secao-contato { flex-direction: row; }       <span class="c">/* mobile-first: duas colunas só no tablet */</span>
+  .coluna-dados, .coluna-formulario { flex: 1; }
+}
+
+<span class="c">/* COMPONENTES (classe simples, peso 0-0-1-0) */</span>
+.cabecalho { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; }
+.campo { display: flex; flex-direction: column; margin-bottom: var(--gap); }
+.botao { padding: 10px 20px; background: var(--azul); color: #fff; border: 0; border-radius: 6px; }
+.card-loja { border: 1px solid #cfd8dc; border-radius: 8px; padding: 16px; }
+
+<span class="c">/* ESTADOS */</span>
+.botao:hover { background: #123049; }
+.menu a[aria-current="page"] { font-weight: bold; }</code></pre>
+
+  <h2>3. Mapa das decisões</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Escolha</th><th>Regra aplicada</th><th>Doc</th></tr></thead>
+    <tbody>
+      <tr><td><code>header</code>, <code>main</code>, <code>footer</code> como moldura</td><td>Camada 2 do mapa</td><td>17</td></tr>
+      <tr><td><code>section</code> para hero, contato, lojas</td><td>Cada faixa tem um tema</td><td>18</td></tr>
+      <tr><td><code>article</code> para cada loja</td><td>Peça independente</td><td>18</td></tr>
+      <tr><td><code>div.campo</code></td><td>Agrupa só para o CSS</td><td>18</td></tr>
+      <tr><td><code>form</code>, <code>label</code>, <code>button</code></td><td>Existe tag com significado</td><td>19</td></tr>
+      <tr><td>Fonte só no <code>body</code></td><td>Herança</td><td>10</td></tr>
+      <tr><td><code>a { color: inherit }</code></td><td>Link não herda a cor sozinho</td><td>11</td></tr>
+      <tr><td>Tudo com classe, sem id no CSS</td><td>Baixa especificidade</td><td>14, 15</td></tr>
+      <tr><td>Media query depois da regra base</td><td>Mesmo peso, vence a última</td><td>12, 20</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa dica"><p><b>Confira você mesmo:</b> abra <code>02-10/4-pagina-contato-final-gabarito.html</code> ao lado deste documento e localize, na página da turma, cada camada do mapa: <code>header</code>, <code>main</code>, as três <code>section</code>, os <code>article</code>, o <code>footer</code>. Todas estão lá, na mesma ordem.</p></div>
+
+  <div class="nav-rodape"><a href="21-nomenclatura-bem-e-organizacao.html">← 21</a><a href="23-niveis-e-checklist-profissional.html">Próximo: 23 Níveis e checklist →</a></div>
+</main>
+</body>
+</html>

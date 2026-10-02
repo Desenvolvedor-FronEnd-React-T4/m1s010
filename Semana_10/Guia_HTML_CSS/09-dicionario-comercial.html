@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>09 — Dicionário comercial de classes</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha A · Classes</span><span>Doc 09 de 23</span></div>
+<main class="pagina">
+  <h1>Dicionário comercial: Bootstrap, Tailwind e CSS puro</h1>
+  <p class="resumo">No mercado você vai encontrar três "sotaques" de classes. Este documento é a <b>tabela de tradução</b>: o mesmo resultado escrito nos três estilos.</p>
+
+  <h2>Três filosofias</h2>
+  <div class="cards">
+    <div class="card"><h3>Bootstrap</h3><p><b>Componentes prontos.</b> <code>btn btn-primary</code> entrega o botão inteiro. Rápido, padronizado, visual conhecido.</p></div>
+    <div class="card"><h3>Tailwind</h3><p><b>Utility-first.</b> Cada classe é uma propriedade. Controle fino, HTML cheio de classes.</p></div>
+    <div class="card"><h3>CSS puro</h3><p><b>Você nomeia tudo.</b> <code>botao botao--primario</code>. Máximo controle, mais trabalho. É o que usamos na Bikcraft.</p></div>
+  </div>
+
+  <h2>Tabela de tradução</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Quero…</th><th>CSS puro</th><th>Bootstrap</th><th>Tailwind</th></tr></thead>
+    <tbody>
+      <tr><td>Limitar e centralizar a largura</td><td><code>container</code></td><td><code>container</code></td><td><code>mx-auto max-w-6xl px-4</code></td></tr>
+      <tr><td>Ligar flexbox</td><td><code>flex</code></td><td><code>d-flex</code></td><td><code>flex</code></td></tr>
+      <tr><td>Centralizar com flex</td><td><code>centralizado</code></td><td><code>d-flex justify-content-center align-items-center</code></td><td><code>flex justify-center items-center</code></td></tr>
+      <tr><td>Espaço entre filhos</td><td><code>gap</code></td><td><code>gap-3</code></td><td><code>gap-4</code></td></tr>
+      <tr><td>Metade da largura</td><td><code>coluna-metade</code></td><td><code>col-md-6</code></td><td><code>md:w-1/2</code></td></tr>
+      <tr><td>Botão principal</td><td><code>botao botao--primario</code></td><td><code>btn btn-primary</code></td><td><code>bg-blue-700 text-white px-4 py-2 rounded</code></td></tr>
+      <tr><td>Card</td><td><code>card</code></td><td><code>card</code></td><td><code>border rounded-lg p-4 shadow</code></td></tr>
+      <tr><td>Texto centralizado</td><td><code>text-center</code></td><td><code>text-center</code></td><td><code>text-center</code></td></tr>
+      <tr><td>Margem de cima</td><td><code>mt-3</code></td><td><code>mt-3</code></td><td><code>mt-4</code></td></tr>
+      <tr><td>Esconder</td><td><code>hidden</code></td><td><code>d-none</code></td><td><code>hidden</code></td></tr>
+      <tr><td>Esconder só no celular</td><td>media query</td><td><code>d-none d-md-block</code></td><td><code>hidden md:block</code></td></tr>
+      <tr><td>Só leitor de tela</td><td><code>sr-only</code></td><td><code>visually-hidden</code></td><td><code>sr-only</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Vocabulário de breakpoints</h2>
+  <table>
+    <thead><tr><th>Prefixo</th><th>Começa em</th><th>Dispositivo típico</th></tr></thead>
+    <tbody>
+      <tr><td>(nenhum)</td><td>0</td><td>Celular (mobile-first)</td></tr>
+      <tr><td><code>sm</code></td><td>576px (BS) / 640px (TW)</td><td>Celular grande</td></tr>
+      <tr><td><code>md</code></td><td>768px</td><td>Tablet</td></tr>
+      <tr><td><code>lg</code></td><td>992px (BS) / 1024px (TW)</td><td>Notebook</td></tr>
+      <tr><td><code>xl</code></td><td>1200px (BS) / 1280px (TW)</td><td>Desktop</td></tr>
+    </tbody>
+  </table>
+  <p>Todos seguem <b>mobile-first</b>: <code>md:w-1/2</code> significa "de 768px para cima".</p>
+
+  <div class="caixa dica">
+    <p><b>Por que aprender CSS puro primeiro?</b> Porque o <code>row</code> do Bootstrap é flex + <code>flex-wrap</code>, o <code>col-md-6</code> é <code>flex: 0 0 50%</code> dentro de uma media query, e o <code>p-4</code> do Tailwind é <code>padding: 1rem</code>. Quem entende a base lê qualquer framework.</p>
+  </div>
+
+  <div class="nav-rodape"><a href="08-classes-de-estado-e-modificadores.html">← 08</a><a href="10-heranca.html">Próximo: 10 Herança →</a></div>
+</main>
+</body>
+</html>

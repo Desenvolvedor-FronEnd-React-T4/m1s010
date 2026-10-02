@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 — Qual classe começa? A ordem de escrita do CSS</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha D · O mapa</span><span>Doc 20 de 23</span></div>
+<main class="pagina">
+  <h1>Qual classe começa? A ordem de escrita do CSS</h1>
+  <p class="resumo">A pergunta clássica: "por onde eu começo o CSS?". A resposta profissional é uma <b>ordem em camadas</b>, do mais geral ao mais específico. É a mesma lógica da cascata: <b>o que vem depois vence os empates</b>, então o mais genérico vem antes.</p>
+
+  <h2>A escada das 8 camadas</h2>
+  <ol class="passos">
+    <li><b>Reset / normalização.</b> Zera diferenças entre navegadores: <code>* { box-sizing: border-box; }</code>, margens do <code>body</code>.</li>
+    <li><b>Variáveis (tokens).</b> Cores, fontes, espaços em um só lugar: <code>:root { --azul: #1b4f72; }</code></li>
+    <li><b>Base (tags).</b> <code>body</code>, <code>h1…h6</code>, <code>p</code>, <code>a</code>, <code>img</code>. Aqui entra a herança: fonte, cor, line-height.</li>
+    <li><b>Estrutura.</b> <code>.container</code>, <code>.secao</code>. O esqueleto de largura e respiro.</li>
+    <li><b>Layout.</b> <code>.grid</code>, <code>.flex</code>, colunas. Como os blocos se organizam.</li>
+    <li><b>Componentes.</b> <code>.botao</code>, <code>.card</code>, <code>.menu</code>, <code>.rodape</code>, na ordem em que aparecem na página.</li>
+    <li><b>Modificadores e estados.</b> <code>.botao--primario</code>, <code>.is-open</code>. Depois do componente que alteram.</li>
+    <li><b>Utilitárias e media queries.</b> <code>.text-center</code>, <code>.hidden</code> e, por último, as media queries que ajustam tudo para telas maiores.</li>
+  </ol>
+
+  <h2>Mapa da ordem num único arquivo</h2>
+  <pre><code><span class="c">/* 1. RESET */</span>
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+<span class="c">/* 2. TOKENS */</span>
+:root { --azul: #1b4f72; --espaco: 16px; }
+
+<span class="c">/* 3. BASE (tags) */</span>
+body { font-family: Arial, sans-serif; line-height: 1.6; color: #263238; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+
+<span class="c">/* 4. ESTRUTURA */</span>
+.container { max-width: 1100px; margin: 0 auto; padding: 0 var(--espaco); }
+.secao { padding: 64px 0; }
+
+<span class="c">/* 5. LAYOUT */</span>
+.grid { display: grid; gap: var(--espaco); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+<span class="c">/* 6. COMPONENTES */</span>
+.cabecalho { ... }
+.botao { ... }
+.card { ... }
+.rodape { ... }
+
+<span class="c">/* 7. MODIFICADORES E ESTADOS */</span>
+.botao--primario { ... }
+.menu.is-open { ... }
+
+<span class="c">/* 8. UTILITÁRIAS E RESPONSIVO */</span>
+.text-center { text-align: center; }
+.hidden { display: none; }
+@media (min-width: 768px) { ... }</code></pre>
+
+  <h2>Por que nesta ordem?</h2>
+  <table>
+    <thead><tr><th>Camada</th><th>Motivo de vir nessa posição</th></tr></thead>
+    <tbody>
+      <tr><td>Reset e base primeiro</td><td>São o piso. Qualquer classe precisa vencê-los sem esforço.</td></tr>
+      <tr><td>Estrutura antes dos componentes</td><td>Quase todo componente vive dentro de um container.</td></tr>
+      <tr><td>Modificador depois do componente</td><td>Mesmo peso 0-0-1-0, vence quem vem por último.</td></tr>
+      <tr><td>Utilitárias no fim</td><td>São a "palavra final" do desenvolvedor.</td></tr>
+      <tr><td>Media queries no fim</td><td>Mesmo peso que a regra base; precisam vir depois para sobrescrevê-la.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Mobile-first: a base é o celular</h2>
+  <p>As regras fora de media query descrevem o <b>celular</b>. Telas maiores entram por <code>min-width</code>:</p>
+  <pre><code>.grid { grid-template-columns: 1fr; }              <span class="c">/* celular */</span>
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(3, 1fr); } <span class="c">/* tablet para cima */</span>
+}</code></pre>
+
+  <h2>E no HTML, qual classe aparece primeiro?</h2>
+  <p>Escreva as classes em ordem de <b>geral → específico</b>. A ordem no atributo <code>class</code> <b>não</b> muda a cascata (quem manda é a ordem no CSS), mas é uma convenção que facilita a leitura:</p>
+  <pre><code>&lt;button class="<b>botao</b> <b>botao--primario</b> <b>botao--grande</b> <b>mt-3</b>"&gt;
+         componente  variação      variação   utilitária</code></pre>
+
+  <div class="caixa atencao">
+    <p><b>Pegadinha:</b> a ordem das classes dentro do <code>class="..."</code> do HTML <b>não importa</b> para quem vence. Quem decide é a <b>posição da regra no arquivo CSS</b>, depois da especificidade.</p>
+  </div>
+
+  <div class="nav-rodape"><a href="19-elementos-de-pagina-um-por-um.html">← 19</a><a href="21-nomenclatura-bem-e-organizacao.html">Próximo: 21 Nomenclatura e organização →</a></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>21 — Nomenclatura (BEM) e organização de arquivos</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha D · O mapa</span><span>Doc 21 de 23</span></div>
+<main class="pagina">
+  <h1>Nomenclatura (BEM) e organização de arquivos</h1>
+  <p class="resumo">Nomes ruins causam conflitos; nomes bons se explicam sozinhos. <b>BEM</b> é a convenção mais usada do mercado para nomear classes. Junto com uma estrutura de pastas simples, é o que faz um projeto crescer sem virar bagunça.</p>
+
+  <h2>BEM: Bloco, Elemento, Modificador</h2>
+  <table>
+    <thead><tr><th>Parte</th><th>Sintaxe</th><th>Exemplo</th><th>Significa</th></tr></thead>
+    <tbody>
+      <tr><td><b>B</b>loco</td><td><code>bloco</code></td><td><code>card</code></td><td>A peça independente</td></tr>
+      <tr><td><b>E</b>lemento</td><td><code>bloco__elemento</code></td><td><code>card__titulo</code></td><td>Uma parte que só existe dentro do bloco</td></tr>
+      <tr><td><b>M</b>odificador</td><td><code>bloco--variacao</code></td><td><code>card--destaque</code></td><td>Uma variação ou estado</td></tr>
+    </tbody>
+  </table>
+
+  <pre><code>&lt;article class="card card--destaque"&gt;
+  &lt;img class="card__imagem" src="bike.svg" alt="Bike"&gt;
+  &lt;h3 class="card__titulo"&gt;Urbana&lt;/h3&gt;
+  &lt;a class="card__link botao" href="#"&gt;Ver&lt;/a&gt;
+&lt;/article&gt;</code></pre>
+  <pre><code>.card { ... }
+.card__imagem { ... }
+.card__titulo { ... }
+.card--destaque { border-color: gold; }</code></pre>
+
+  <h2>Por que BEM resolve problema de predominância</h2>
+  <ul>
+    <li>Todo seletor é <b>uma classe só</b> (0-0-1-0): nunca há briga de peso.</li>
+    <li>Sem seletores aninhados como <code>.card h3</code>, mexer em um componente não quebra outro.</li>
+    <li>O nome <b>informa a hierarquia</b>: <code>card__titulo</code> pertence ao <code>card</code>.</li>
+  </ul>
+  <div class="caixa atencao"><p><b>Não aninhe os nomes:</b> escreva <code>card__titulo</code>, não <code>card__corpo__titulo</code>. Elemento é sempre filho do bloco, mesmo que esteja no meio de outras divs.</p></div>
+
+  <h2>Seu projeto, sem BEM rígido</h2>
+  <p>Na sala usamos a versão leve: <code>hero</code>, <code>hero-titulo</code>, <code>card-loja</code>, <code>coluna-dados</code>. A ideia é a mesma: <b>prefixo = dono</b>. Importante é ser <b>consistente</b>.</p>
+
+  <h2>Regras gerais de nomeação</h2>
+  <ol class="passos">
+    <li><b>Minúsculas e hífens</b> (<i>kebab-case</i>), nunca espaço ou acento.</li>
+    <li><b>Nome por função, não por aparência</b>: <code>botao-primario</code>, não <code>botao-azul</code>.</li>
+    <li><b>Português ou inglês, mas um só</b> em todo o projeto.</li>
+    <li><b>Nada de numeração</b> (<code>caixa2</code>, <code>div3</code>): o nome deve dizer o conteúdo.</li>
+    <li><b>Prefixo para estado</b>: <code>is-</code> / <code>has-</code> (controlados por JS).</li>
+    <li><b>Prefixo para JS</b>: <code>js-</code> quando a classe existe só para script, nunca para estilo.</li>
+  </ol>
+
+  <h2>Organização de arquivos</h2>
+  <h3>Projeto pequeno (o nosso caso)</h3>
+  <pre><code>projeto/
+├── index.html
+├── contato.html
+├── estilo.css          <span class="c">← tudo, na ordem do documento 20</span>
+├── script.js
+└── assets/
+    ├── bike-1.svg
+    └── logo.svg</code></pre>
+
+  <h3>Projeto médio</h3>
+  <pre><code>projeto/
+├── index.html
+├── css/
+│   ├── 1-reset.css
+│   ├── 2-variaveis.css
+│   ├── 3-base.css
+│   ├── 4-layout.css
+│   ├── 5-componentes.css
+│   └── 6-utilitarias.css
+├── js/
+└── assets/
+    ├── img/
+    └── fonts/</code></pre>
+  <p>Os números no nome dos arquivos refletem a <b>ordem do documento 20</b>. No HTML, os <code>&lt;link&gt;</code> seguem essa ordem.</p>
+
+  <h2>Padrão de comentários</h2>
+  <pre><code><span class="c">/* ============================
+   COMPONENTE: CARD
+   Usado em: catálogo, lojas
+   ============================ */</span>
+.card { ... }</code></pre>
+
+  <div class="caixa dica"><p><b>Teste de legibilidade:</b> um colega consegue achar, em 10 segundos, onde mudar a cor do botão principal? Se sim, sua organização está boa.</p></div>
+
+  <div class="nav-rodape"><a href="20-qual-classe-comeca.html">← 20</a><a href="22-pagina-completa-anotada.html">Próximo: 22 Página completa anotada →</a></div>
+</main>
+</body>
+</html>

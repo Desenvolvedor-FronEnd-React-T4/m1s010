@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15 — Conflitos reais e como resolvê-los</title>
+<link rel="stylesheet" href="guia.css">
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha C · Predominância</span><span>Doc 15 de 23</span></div>
+<main class="pagina">
+  <h1>Conflitos reais e como resolvê-los</h1>
+  <p class="resumo">Esta é a parte prática: "o meu CSS não funciona". Quase sempre a causa é um desses cinco casos. Cada um tem a <b>solução profissional</b>, que raramente é usar <code>!important</code>.</p>
+
+  <h2>Caso 1: o link que não muda de cor</h2>
+  <pre><code>.menu a  { color: #fff; }        <span class="c">/* 0-0-1-1 */</span>
+.destaque { color: gold; }       <span class="c">/* 0-0-1-0 — perde! */</span>
+
+&lt;nav class="menu"&gt;&lt;a class="destaque" href="#"&gt;Contato&lt;/a&gt;&lt;/nav&gt;</code></pre>
+  <p><b>Diagnóstico:</b> <code>.menu a</code> pesa 0-0-1-1; <code>.destaque</code> pesa 0-0-1-0. A mais pesada vence, mesmo vindo antes.</p>
+  <p><b>Solução profissional:</b> igualar ou superar o peso <b>com seletor</b>, não com força bruta.</p>
+  <pre><code>.menu .destaque { color: gold; }   <span class="c">/* 0-0-2-0 — vence */</span></code></pre>
+
+  <h2>Caso 2: o seletor muito longo</h2>
+  <pre><code>body main section.hero div.container h1.titulo { ... }   <span class="c">/* 0-0-3-4 */</span></code></pre>
+  <p>Quem for sobrescrever precisará de um seletor ainda maior. Cada seletor longo "contamina" o projeto.</p>
+  <p><b>Solução:</b> uma classe, só uma, direto no elemento.</p>
+  <pre><code>.hero-titulo { ... }   <span class="c">/* 0-0-1-0 */</span></code></pre>
+
+  <h2>Caso 3: o id no CSS</h2>
+  <pre><code>#topo { background: navy; }      <span class="c">/* 0-1-0-0: nenhuma classe consegue vencer */</span></code></pre>
+  <p><b>Solução:</b> troque por classe. Mantenha o <code>id</code> para âncora e JavaScript.</p>
+
+  <h2>Caso 4: a ordem dos arquivos</h2>
+  <p>Seu componente não pega porque o CSS do framework está <b>depois</b> do seu.</p>
+  <pre><code>&lt;link rel="stylesheet" href="meu.css"&gt;
+&lt;link rel="stylesheet" href="bootstrap.css"&gt;   <span class="c">&lt;!-- vem depois: ganha os empates --&gt;</span></code></pre>
+  <p><b>Solução:</b> framework primeiro, o seu depois.</p>
+
+  <h2>Caso 5: modificador que não "pega"</h2>
+  <pre><code>.botao--perigo { background: red; }   <span class="c">/* escrito ANTES de .botao */</span>
+.botao         { background: gray; }  <span class="c">/* mesmo peso, vem depois: vence */</span></code></pre>
+  <p><b>Solução:</b> base primeiro, modificadores e estados depois. Documento 20.</p>
+
+  <h2>Resumo das armas, da mais saudável à pior</h2>
+  <table>
+    <thead><tr><th>#</th><th>Ferramenta</th><th>Avaliação</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Reordenar o CSS</td><td>✅ Grátis, não cria dívida</td></tr>
+      <tr><td>2</td><td>Trocar para uma classe simples</td><td>✅ Melhor correção de raiz</td></tr>
+      <tr><td>3</td><td>Acrescentar uma classe ao seletor (<code>.menu .destaque</code>)</td><td>🟡 Aceitável, cuidado com a escalada</td></tr>
+      <tr><td>4</td><td><code>:where()</code> para zerar o peso de base</td><td>🟡 Avançado e elegante</td></tr>
+      <tr><td>5</td><td><code>!important</code></td><td>🔴 Último recurso</td></tr>
+      <tr><td>6</td><td><code>id</code> ou <code>style</code> inline</td><td>🔴 Evitar</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Predominância semântica: o princípio por trás de tudo</h2>
+  <p>Para a pergunta <i>"que classe predomina?"</i>, a resposta de projeto é uma <b>hierarquia de poder deliberada</b>:</p>
+  <div class="mapa">
+    <div class="no n1"><span class="rotulo">Tags (base)<span class="nota">0-0-0-1: o piso. Define o padrão do site.</span></span>
+      <div class="no n2"><span class="rotulo">Classes de componente<span class="nota">0-0-1-0: a regra geral de cada peça.</span></span>
+        <div class="no n3"><span class="rotulo">Modificadores e estados<span class="nota">vêm depois e vencem o componente.</span></span>
+          <div class="no laranja"><span class="rotulo">Utilitárias<span class="nota">por último: precisam vencer tudo (às vezes com !important).</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>Quanto mais "específico em significado" o ajuste, mais tarde ele entra no CSS. Assim, a vontade do desenvolvedor ("este botão é perigoso", "esta margem é zero") sempre prevalece sobre o padrão genérico, <b>sem recorrer a briga de peso</b>.</p>
+
+  <div class="caixa dica"><p><b>Mantra:</b> baixa especificidade, ordem organizada. Se você escreve seletores de peso 0-0-1-0 na ordem certa, nunca precisará lutar com a cascata.</p></div>
+
+  <div class="nav-rodape"><a href="14-placar-de-especificidade.html">← 14</a><a href="16-exercicios-heranca-cascata-especificidade.html">Próximo: 16 Exercícios →</a></div>
+</main>
+</body>
+</html>

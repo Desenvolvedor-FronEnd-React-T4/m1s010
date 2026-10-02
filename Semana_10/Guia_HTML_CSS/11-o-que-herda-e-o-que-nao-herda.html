@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11 — O que herda e o que não herda</title>
+<link rel="stylesheet" href="guia.css">
+<style>
+  .ex-borda { border: 3px solid #1b4f72; padding: 10px; color: #1e8449; }
+</style>
+</head>
+<body>
+<div class="barra"><a href="01-comece-aqui.html">☰ Índice</a><span class="etiqueta">Trilha B · Herança e cascata</span><span>Doc 11 de 23</span></div>
+<main class="pagina">
+  <h1>O que herda e o que não herda</h1>
+  <p class="resumo">A regra geral: <b>propriedades de texto são herdadas</b>; propriedades de caixa (tamanho, borda, fundo, espaço) <b>não são</b>. Faz sentido: se toda <code>div</code> herdasse a borda do pai, a página viraria uma cebola de molduras.</p>
+
+  <h2>Tabela de referência</h2>
+  <div class="cards">
+    <div class="card"><h3>✅ Herdam</h3>
+      <ul>
+        <li><code>color</code></li>
+        <li><code>font-family</code>, <code>font-size</code>, <code>font-weight</code>, <code>font-style</code></li>
+        <li><code>line-height</code></li>
+        <li><code>text-align</code>, <code>letter-spacing</code></li>
+        <li><code>visibility</code></li>
+        <li><code>cursor</code></li>
+        <li><code>list-style</code></li>
+      </ul>
+    </div>
+    <div class="card"><h3>❌ Não herdam</h3>
+      <ul>
+        <li><code>margin</code>, <code>padding</code></li>
+        <li><code>border</code></li>
+        <li><code>background</code></li>
+        <li><code>width</code>, <code>height</code></li>
+        <li><code>display</code>, <code>position</code></li>
+        <li><code>overflow</code></li>
+        <li><code>box-shadow</code>, <code>opacity</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="demo"><p class="demo-titulo">Pai com borda + cor verde. Quem herdou o quê?</p>
+    <div class="ex-borda">
+      Pai: tem borda e texto verde.
+      <p style="margin:8px 0 0;">Filho <b>p</b>: o texto ficou <b>verde</b> (herdou), mas <b>sem borda</b> (não herda).</p>
+    </div>
+  </div>
+
+  <h2>Casos que pegam todo mundo</h2>
+  <h3>1. Links não herdam a cor do pai</h3>
+  <p>O navegador dá ao <code>&lt;a&gt;</code> uma cor própria (azul). Para o link acompanhar o texto ao redor:</p>
+  <pre><code>a { color: inherit; text-decoration: none; }</code></pre>
+
+  <h3>2. Campos de formulário não herdam a fonte</h3>
+  <p><code>input</code>, <code>button</code>, <code>select</code> e <code>textarea</code> usam a fonte do sistema. Reset profissional:</p>
+  <pre><code>input, button, select, textarea { font: inherit; }</code></pre>
+
+  <h3>3. line-height herda como número, não como valor calculado</h3>
+  <p><code>line-height: 1.5</code> (sem unidade) é recalculado em cada filho conforme o tamanho da fonte dele. <code>line-height: 24px</code> passa fixo. Prefira o número sem unidade.</p>
+
+  <h2>Palavras-chave que controlam a herança</h2>
+  <div class="tabela-rolagem"><table>
+    <thead><tr><th>Valor</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+    <tbody>
+      <tr><td><code>inherit</code></td><td><b>Força</b> herdar do pai, mesmo em propriedade que normalmente não herda</td><td><code>border: inherit;</code>, <code>color: inherit;</code></td></tr>
+      <tr><td><code>initial</code></td><td>Volta ao valor <b>padrão da especificação CSS</b></td><td><code>display: initial;</code></td></tr>
+      <tr><td><code>unset</code></td><td>Se a propriedade herda → <code>inherit</code>; se não → <code>initial</code></td><td><code>all: unset;</code></td></tr>
+      <tr><td><code>revert</code></td><td>Volta ao estilo padrão <b>do navegador</b></td><td><code>color: revert;</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="caixa dica">
+    <p><b>Receita profissional para a base do site:</b></p>
+    <pre><code>body { font-family: Arial, sans-serif; line-height: 1.6; color: #263238; }
+a { color: inherit; }
+input, button, textarea, select { font: inherit; }</code></pre>
+    <p>Três linhas de herança bem usada evitam dezenas de classes repetidas.</p>
+  </div>
+
+  <div class="nav-rodape"><a href="10-heranca.html">← 10</a><a href="12-efeito-cascata.html">Próximo: 12 Efeito cascata →</a></div>
+</main>
+</body>
+</html>

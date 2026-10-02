@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GABARITO — Exercício integrador — unidades, container, Flexbox e Grid (mobile-first)</title>
+<link rel="stylesheet" href="5-integrador-unidades-e-layout-gabarito.css">
+</head>
+<body>
+
+  <header class="cabecalho">
+    <span class="logo">bikcraft</span>
+    <nav class="menu">
+      <a href="#unidades">Unidades</a>
+      <a href="#catalogo">Catálogo</a>
+      <a class="menu-extra" href="#contato">Contato</a>
+      <a class="menu-extra" href="#guia">Guia</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- ETAPA 3 e 4: hero -->
+    <section class="hero">
+      <p class="hero-chamada">EXERCÍCIO INTEGRADOR</p>
+      <h1 class="hero-titulo">escolha a unidade certa.</h1>
+      <p class="hero-texto">Mobile-first: o CSS base é o celular; as media queries só acrescentam.</p>
+      <a class="botao" href="#unidades">Ver o laboratório</a>
+      <a class="botao botao-grande" href="#unidades">Botão maior (só o font-size mudou)</a>
+    </section>
+
+    <!-- ETAPA 5: laboratório de unidades -->
+    <section class="laboratorio" id="unidades">
+      <h2>Laboratório de unidades</h2>
+      <p class="legenda">Redimensione a janela, mude o aparelho no DevTools e aumente a fonte do navegador. Observe o que muda e o que não muda.</p>
+
+      <div class="caixas">
+        <div class="caixa caixa-px">px</div>
+        <div class="caixa caixa-rem">rem</div>
+        <div class="grupo-em">
+          <div class="caixa caixa-em">em</div>
+        </div>
+        <div class="caixa caixa-pct">%</div>
+        <div class="caixa caixa-vh">vh</div>
+      </div>
+
+      <output class="medidas" id="medidas">medindo…</output>
+    </section>
+
+    <!-- ETAPA 6: catálogo em Grid -->
+    <section class="catalogo" id="catalogo">
+      <h2>Catálogo (Grid)</h2>
+      <div class="grade">
+        <article class="card"><span class="selo">NOVO</span><h3>Sport</h3><p>Leve e veloz.</p></article>
+        <article class="card"><h3>Urban</h3><p>Conforto na cidade.</p></article>
+        <article class="card"><h3>Cargo</h3><p>Feita para carga.</p></article>
+        <article class="card"><h3>Kids</h3><p>Segura e colorida.</p></article>
+        <article class="card"><h3>Elétrica</h3><p>Autonomia de sobra.</p></article>
+        <article class="card"><h3>Dobrável</h3><p>Cabe no armário.</p></article>
+      </div>
+    </section>
+
+    <!-- ETAPA 7: 2 colunas em Flexbox -->
+    <section class="contato" id="contato">
+      <h2>Contato (Flexbox)</h2>
+      <div class="duas-colunas">
+        <div class="coluna coluna-dados">
+          <h3>Loja Online</h3>
+          <p>Rua das Engrenagens, 123 — Florianópolis/SC</p>
+          <p>contato@bikcraft.com.br</p>
+        </div>
+        <div class="coluna coluna-formulario">
+          <h3>Fale com a gente</h3>
+          <div class="linha-formulario">
+            <div class="campo"><label for="nome">Nome</label><input id="nome" type="text"></div>
+            <div class="campo"><label for="telefone">Telefone</label><input id="telefone" type="tel"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guia de decisão: o PADRÃO CORRETO, para consulta -->
+    <section class="guia" id="guia">
+      <h2>Guia de decisão: qual unidade usar?</h2>
+      <table class="tabela">
+        <thead><tr><th>Unidade</th><th>Relativa a…</th><th>Use para…</th><th>Evite para…</th></tr></thead>
+        <tbody>
+          <tr><td><code>px</code></td><td>nada (valor absoluto)</td><td>borda de 1px, sombra, detalhes que não devem escalar</td><td>fonte e espaçamentos</td></tr>
+          <tr><td><code>rem</code></td><td>fonte da raiz (<code>html</code>)</td><td>fonte, espaçamentos, tamanhos de componentes</td><td>nada de relevante</td></tr>
+          <tr><td><code>em</code></td><td>fonte do próprio elemento (ou do pai, na fonte)</td><td>padding de botão e selo que devem acompanhar o texto</td><td>fonte aninhada (os valores se multiplicam)</td></tr>
+          <tr><td><code>%</code></td><td>medida do elemento pai</td><td>largura de colunas e imagens</td><td>altura (depende do pai ter altura)</td></tr>
+          <tr><td><code>vw / vh / dvh</code></td><td>largura / altura da janela</td><td>altura de hero (<code>vh</code>/<code>dvh</code>) e fonte fluida (<code>clamp</code> com <code>vw</code>)</td><td><code>100vw</code> em largura (inclui a barra de rolagem)</td></tr>
+          <tr><td><code>clamp()</code></td><td>mínimo, ideal e máximo</td><td>título e espaçamentos fluidos</td><td>—</td></tr>
+          <tr><td><code>ch</code></td><td>largura do caractere "0"</td><td>largura de linha de texto (<code>65ch</code>)</td><td>layout geral</td></tr>
+          <tr><td><code>fr / minmax()</code></td><td>sobra do grid</td><td>colunas que se ajustam sozinhas</td><td>fora do Grid</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p>© Bikcraft — exercício integrador</p>
+  </footer>
+
+  <script src="5-integrador-unidades-e-layout.js"></script>
+
+</body>
+</html>
